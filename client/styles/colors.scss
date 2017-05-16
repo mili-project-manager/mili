@@ -1,0 +1,14 @@
+$colors: (
+  white: #ffffff,
+  translucent-black: rgba(0, 0, 0, 0.3),
+);
+
+@each $name, $color in $colors {
+  .#{$name} {
+    background: $color;
+  }
+
+  .#{$name}-text {
+    color: $color;
+  }
+}
