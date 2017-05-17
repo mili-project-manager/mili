@@ -15,7 +15,7 @@ module.exports = {
       },
     },
     {
-      name: APP_NAME,
+      name: `${APP_NAME}-staging`,
       script: './bin/server.dev.js',
       source_map_support: true,
 
@@ -58,7 +58,7 @@ module.exports = {
       ref: 'origin/dev',
       repo: 'https://github.com/Val-istar-Guo/vue-boilerplate.git',
       path: path.join('/home/docker', APP_NAME, 'staging'),
-      'post-deploy': `yarn; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME} --env staging`,
+      'post-deploy': `yarn; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-staging --env staging`,
     },
 
     env: {
