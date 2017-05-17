@@ -1,5 +1,7 @@
 // PM2 Config
-
+const path = require('path');
+const { name: APP_NAME } = require('./package.json');
+console.log(path.join('/home/docker', APP_NAME, 'production'));
 module.exports = {
   apps: [
     {
@@ -13,23 +15,26 @@ module.exports = {
       },
     },
     {
-      name: 'staging-app',
+      name: APP_NAME,
       script: './bin/server.dev.js',
       source_map_support: true,
 
       env: {
-        NODE_ENV: 'develop',
+        NODE_ENV: 'staging',
       },
       env_staging: {
-        NODE_ENV: 'staging',
-        PORT: 8001,
+        PORT: 7001,
       },
     },
     {
-      name: 'app',
+      name: APP_NAME,
       script: './dist/server/bundle.js',
+
       env: {
         NODE_ENV: 'production',
+      },
+      env_production: {
+        PORT: 9001,
       },
     },
   ],
@@ -39,17 +44,25 @@ module.exports = {
       user: 'docker',
       host: 'docker',
       ref: 'origin/master',
-      repo: 'https://github.com/Val-istar-Guo/ab_test_config_server.git',
-      path: '/home/docker/app/production',
-      'post-deploy': 'yarn && npm run build && pm2 startOrRestart ecosystem.config.js --only abtest-config-server --env production',
+      repo: 'https://github.com/Val-istar-Guo/vue-boilerplate.git',
+      path: path.join('/home/docker', APP_NAME, 'production'),
+      'post-deploy': `yarn; npm run build; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME} --env production`,
+
+      env: {
+        NODE_ENV: 'production',
+      },
     },
     staging: {
       user: 'docker',
       host: 'docker',
       ref: 'origin/dev',
-      repo: 'https://github.com/Val-istar-Guo/ab_test_config_server.git',
-      path: '/home/docker/app/staging',
-      'post-deploy': 'yarn; pm2 startOrRestart ecosystem.config.js --only dev-abtest-config-server --env staging',
+      repo: 'https://github.com/Val-istar-Guo/vue-boilerplate.git',
+      path: path.join('/home/docker', APP_NAME, 'staging'),
+      'post-deploy': `yarn; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME} --env staging`,
+    },
+
+    env: {
+      NODE_ENV: 'staging',
     },
   },
 };
