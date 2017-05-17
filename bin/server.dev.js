@@ -1,6 +1,7 @@
 // NOTE Node babel source map support
 require('source-map-support').install();
 
+require('app-module-path').addPath(process.cwd());
 // NOTE Javascript require hook
 require('babel-register')({
   presets: ['es2015'],
@@ -17,9 +18,8 @@ const chalk = require('chalk');
 
 const webpack = require('webpack');
 const MemoryFileSystem = require('memory-fs');
-// const devMiddleware = require('koa-webpack-dev-middleware');
-// const hotMiddleware = require('koa-webpack-hot-middleware');
 const webpackMiddleware = require('koa-webpack');
+const HTML_FILE_NAME = require('../contants/html-file-name');
 
 const vueServerRender = require('../server/middleware/vue-server-render');
 const server = require('../server/server.js');
@@ -37,10 +37,8 @@ let isWriteTemplate = false;
  * NOTE devConfig used to make template
  *      and make webpack dev middleware
  */
-const {
-  default: devConfig,
-  htmlFileName } = require('../webpack/webpack.config.dev');
-
+const devConfig = require('../webpack/webpack.config.dev');
+console.log('devConfig', devConfig);
 const devCompiler = webpack(devConfig);
 
 /**
@@ -48,7 +46,7 @@ const devCompiler = webpack(devConfig);
  *      due to server render
  */
 devCompiler.plugin('emit', ({ assets }, cb) => {
-  const filePath = Object.keys(assets).find(key => key.includes(htmlFileName));
+  const filePath = Object.keys(assets).find(key => key.includes(HTML_FILE_NAME));
 
   if (filePath) {
     const data = assets[filePath].source();

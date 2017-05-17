@@ -1,7 +1,6 @@
 <template lang="html">
   <article>
-    23333333333
-    youyoyo
+    <h1>EXAMPLATE PAGE</h1>
   </article>
 </template>
 
@@ -12,6 +11,11 @@ export default {
 
 <style lang="scss" scoped>
   article {
-    background: blue;
+    width: 1080px;
+
+    margin: 30px 0;
+    padding: 20px;
+
+    background: white;
   }
 </style>

@@ -21,6 +21,7 @@
     "deploy:prod": "pm2 deploy ecosystem.config.js prod"
   },
   "devDependencies": {
+    "app-module-path": "^2.2.0",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
