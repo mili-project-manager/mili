@@ -8,14 +8,17 @@ import HTML_FILE_NAME from '../contants/html-file-name';
 export default {
   ...base,
   devtool: 'source-map',
-
   entry: {
-    bundle: [
-      ...base.entry.bundle,
-      'webpack-hot-middleware/client',
-    ],
+    ...base.entry,
 
     lib: LIB,
+  },
+
+  output: {
+    path: path.resolve(__dirname, '../dist/client'),
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: 'chunk.[name].[chunkhash:8].js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -28,14 +31,15 @@ export default {
 
   plugins: [
     ...base.plugins,
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: 'lib',
-      filename: '[name].js',
+      filename: '[name].[chunkhash:8].js',
     }),
     new HtmlWebpackPlugin({
       filename: path.join('../views/', HTML_FILE_NAME),
       template: './views/index.html',
     }),
+
+    new webpack.optimize.UglifyJsPlugin(),
   ],
 };

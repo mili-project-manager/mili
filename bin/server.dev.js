@@ -27,7 +27,6 @@ const server = require('../server/server.js');
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
 
-const info = (str) => console.log(chalk.green(str));
 
 let renderer = null;
 let bundleJson = null;
@@ -139,7 +138,7 @@ server
 //   })
 //   .listen(PORT, HOST);
 
-console.log(chalk.green('🌏 Server Start at 0.0.0.0:8888'));
+console.log(chalk.green(`🌏 Server Start at ${HOST}:${PORT}`));
 if (renderer === null) {
   console.log(chalk.green('⌛️ Waiting For Cpmpliation!'));
 }

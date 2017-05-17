@@ -1,31 +1,50 @@
 /**
- * webpack base config is the Duplicate code
- * in webpack.config.ssr.js and webpack.config.client.js
+ * NOTE webpack base config is the Duplicate code
+ *      in webpack.config.ssr.js and webpack.config.client.js
  */
 import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 
-// remove DeprecationWarning
+// NOTE remove DeprecationWarning
 process.noDeprecation = true;
 
-// const extractSCSS = new ExtractTextPlugin('styles/[name]-style.css');
+// NOTE const extractSCSS = new ExtractTextPlugin('styles/[name]-style.css');
 const extractCSS = new ExtractTextPlugin('styles/lib.css');
 
 
-// non-isomorphic package
+// NOTE non-isomorphic package
 export const NON_ISOMORPHIC_NODE_MODULES = {
   // chart: 'chart.js',
 };
 
 
 /**
- * modules should be packing by webpack for ssr
- * like json, css, and more file could not be
- * import by nodejs
+ * NOTE modules should be packing by webpack for ssr
+ *      like json, css, and more file could not be
+ *      import by nodejs
  */
 export const NON_JS_NODE_MODULES = ['normalize.css'];
+
+
+// NOTE commonality alias
+export const ALIAS = {
+  utils: path.resolve(__dirname, '../utils'),
+  contants: path.resolve(__dirname, '../contants'),
+};
+
+
+// NOTE commonality node modules used by client
+export const LIB =  [
+  'vue',
+  'vuex',
+  'vue-router',
+
+  'detect-env',
+  'material-design-icons',
+  'superagent',
+];
 
 
 // base client config
@@ -125,10 +144,7 @@ export const base = {
   },
 
   resolve: {
-    alias: {
-      utils: path.resolve(__dirname, '../client/utils'),
-      contants: path.resolve(__dirname, '../client/contants'),
-    },
+    alias: ALIAS,
     extensions: ['.js', '.vue'],
   },
 

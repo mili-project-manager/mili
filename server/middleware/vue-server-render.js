@@ -1,4 +1,5 @@
 import { createBundleRenderer } from 'vue-server-renderer';
+import HTML_FILE_NAME from 'contants/html-file-name';
 
 function renderToString(renderer, url) {
   return new Promise((res, rej) => {
@@ -13,9 +14,7 @@ export default function (bundle) {
   const renderer = createBundleRenderer(bundle);
 
   return async (ctx, next) => {
-    console.log('aaaaa');
-    console.log(renderer);
     const html = await renderToString(renderer, ctx.url);
-    await ctx.render('index.dev.html', { app: html });
+    await ctx.render(HTML_FILE_NAME, { app: html });
   };
 }
