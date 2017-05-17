@@ -46,7 +46,7 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/Val-istar-Guo/vue-boilerplate.git',
       path: path.join('/home/docker', APP_NAME, 'production'),
-      'post-deploy': `yarn; npm run build; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME} --env production`,
+      'post-deploy': `yarn; npm run build:prod; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME} --env production`,
 
       env: {
         NODE_ENV: 'production',

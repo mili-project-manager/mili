@@ -1,6 +1,6 @@
 {
   "name": "vue-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vue isomorphic boilerplate",
   "main": "index.js",
   "repository": "git@github.com:Val-istar-Guo/vue-boilerplate.git",
@@ -9,6 +9,7 @@
   "scripts": {
     "test": "jest",
     "build": "npm run clean & webpack",
+    "build:prod": "NODE_ENV=production npm run build",
     "clean": "rm -rf ./dist/*",
     "start": "pm2 start ecosystem.config.js --only dev-app; pm2 log",
     "start:prod": "NODE_ENV=production npm run build;NODE_ENV=production node dist/server/bundle.js",
