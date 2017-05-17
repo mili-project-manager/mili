@@ -4,7 +4,6 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { base, NON_ISOMORPHIC_PACKAGE, LIB } from './webpack.config.base';
 import HTML_FILE_NAME from '../contants/html-file-name';
 
-console.log('base', base);
 export default {
   ...base,
   devtool: 'source-map',

@@ -38,7 +38,6 @@ let isWriteTemplate = false;
  *      and make webpack dev middleware
  */
 const devConfig = require('../webpack/webpack.config.dev');
-console.log('devConfig', devConfig);
 const devCompiler = webpack(devConfig);
 
 /**

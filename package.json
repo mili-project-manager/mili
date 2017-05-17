@@ -11,6 +11,7 @@
     "build": "npm run clean & webpack",
     "clean": "rm -rf ./dist/*",
     "start": "pm2 start ecosystem.config.js --only dev-app; pm2 log",
+    "start:prod": "NODE_ENV=production npm run build;NODE_ENV=production node dist/server/bundle.js",
     "restart": "pm2 restart ecosystem.config.js --only dev-app",
     "stop": "pm2 delete dev-app",
     "setup": "pm2 deploy ecosystem.config.js staging setup",
