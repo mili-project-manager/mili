@@ -1,7 +1,7 @@
 // PM2 Config
 const path = require('path');
 const { name: APP_NAME } = require('./package.json');
-console.log(path.join('/home/docker', APP_NAME, 'production'));
+
 module.exports = {
   apps: [
     {
