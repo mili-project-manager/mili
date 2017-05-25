@@ -12,5 +12,7 @@
 
 ## 版本迭代说明
 
+* v 1.0.1
+  * [+] Add "History.md".
+  * [-] remove unuseful file.
 * v 1.0.0
-    * [+] Your Description
