@@ -12,6 +12,8 @@
 
 ## 版本迭代说明
 
+* v 1.0.2
+  * [^] upgrade node-sass to version 4.5.3
 * v 1.0.1
   * [+] Add "History.md".
   * [-] remove unuseful file.
