@@ -12,6 +12,9 @@
 
 ## 版本迭代说明
 
+* v 1.0.4
+  * [+] .gitignore add \*.swp file which generate by vim
+  * [#] remove unexpect string 'lr' in client/app.vue file
 * v 1.0.3
   * [^] unified repo configuration(package.json & ecosystem.config.js)
 * v 1.0.2
