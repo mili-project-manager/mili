@@ -6,6 +6,7 @@ import App from './app';
 import router from './router';
 import store from './store';
 import './styles/index.scss';
+import './components';
 
 
 export default new Vue({
@@ -17,3 +18,4 @@ export default new Vue({
     return h(App);
   },
 });
+

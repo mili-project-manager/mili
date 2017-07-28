@@ -5,3 +5,4 @@ export default detectEnv({
   production: 'index.prod.html',
   default: 'index.dev.html',
 });
+
