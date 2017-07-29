@@ -12,6 +12,8 @@
 
 ## 版本迭代说明
 
+* v 1.0.5
+  * [#] remove some unuseful code and adjust the document structure without updates
 * v 1.0.4
   * [+] .gitignore add \*.swp file which generate by vim
   * [#] remove unexpect string 'lr' in client/app.vue file
