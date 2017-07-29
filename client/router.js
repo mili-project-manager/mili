@@ -3,13 +3,11 @@ import VueRouter from 'vue-router';
 
 import Example from './pages/example';
 
+
 Vue.use(VueRouter);
 
 const routes = [
   { path: '/', component: Example, alias: ['/home'] },
-  // { path: '/tests/:filter?', component: Tests, alias: ['/home', '/'] },
-  // { path: '/test', component: Test },
-  // { path: '/setting', component: Setting },
 ];
 
 export default new VueRouter({
@@ -17,3 +15,4 @@ export default new VueRouter({
   linkActiveClass: 'active',
   routes,
 });
+

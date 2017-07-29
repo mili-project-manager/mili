@@ -1,8 +1,10 @@
 <template lang="html">
-  <article>
-    <h1>EXAMPLATE PAGE OF VUE-KOA BOILERPLATE</h1>
-    <p>Now, do everything you want!</p>
-  </article>
+  <div class='flexbox'>
+     <article>
+      <h1>EXAMPLATE PAGE OF VUE-KOA BOILERPLATE</h1>
+      <p>It's time to start doing what you want to do.</p>
+    </article>
+  </div>
 </template>
 
 <script>
@@ -11,25 +13,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  article {
-    width: 1080px;
+.flexbox {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content:center;
+  align-items: center;
 
-    margin: 60px auto 30px auto;
-    padding: 20px;
+  overflow-y: auto;
+}
 
-    background: white;
+article {
+  height: 30%;
+}
 
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-      0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  }
+h1 {
+  text-align: center;
 
-  h1 {
-    text-align: center;
+  margin-bottom: 50px;
+}
 
-    margin-bottom: 50px;
-  }
-
-  p {
-    text-align: center;
-  }
+p {
+  text-align: center;
+}
 </style>
+
