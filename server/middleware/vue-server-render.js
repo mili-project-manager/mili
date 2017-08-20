@@ -1,20 +1,30 @@
+import fs from 'fs';
+import path from 'path';
 import { createBundleRenderer } from 'vue-server-renderer';
-import HTML_FILE_NAME from 'contants/html-file-name';
+
 
 function renderToString(renderer, url) {
-  return new Promise((res, rej) => {
+
+  return new Promise((resolve, reject) => {
     renderer.renderToString({ url }, (err, html) => {
-      if (err) rej(err);
-      res(html ? html : '');
+      if (err) reject(err);
+      resolve(html ? html : '');
     });
   });
 }
 
-export default function (bundle) {
-  const renderer = createBundleRenderer(bundle);
+export default function ({ bundle, manifest: clientManifest }) {
+  const template = fs.readFileSync('./client/index.html', 'utf8');
+
+  const renderer = createBundleRenderer(bundle, {
+    runInNewContext: false,
+    template,
+    clientManifest,
+  });
 
   return async (ctx, next) => {
     const html = await renderToString(renderer, ctx.url);
-    await ctx.render(HTML_FILE_NAME, { app: html });
+    ctx.body = html;
   };
 }
+

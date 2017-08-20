@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 import { dependencies } from '../package.json';
-import { ALIAS } from './webpack.config.base';
+import config from './webpack.config.expand';
 
 function getExternals() {
   return Object.keys(dependencies);
@@ -44,15 +44,17 @@ export default {
   output: {
     path: path.resolve(__dirname, '../dist/server'),
     filename: '[name].js',
+    // publicPath: path.resolve(__dirname, '../dist/server'),
     chunkFilename: 'chunk.[name].js',
     libraryTarget: 'commonjs2',
   },
 
-  // resolve: {
-  //   alias: {
-  //     vue: 'vue/dist/vue.common',
-  //   },
-  // },
+  resolve: {
+    alias: {
+      // vue: 'vue/dist/vue.common',
+      ...config.alias,
+    },
+  },
 
   module: {
     rules: [
@@ -66,7 +68,6 @@ export default {
               // presets: [['es2015', { modules: false }]],
               plugins: [
                 ['transform-object-rest-spread'],
-                ['transform-export-extensions'],
               ],
             },
           },
@@ -74,9 +75,4 @@ export default {
       },
     ],
   },
-
-  resolve: {
-    alias: ALIAS,
-  },
-
 };

@@ -3,8 +3,11 @@
  *      in webpack.config.ssr.js and webpack.config.client.js
  */
 import path from 'path';
+import env from 'detect-env';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+import config from './webpack.config.expand';
 
 
 // NOTE remove DeprecationWarning
@@ -14,46 +17,10 @@ process.noDeprecation = true;
 const extractCSS = new ExtractTextPlugin('styles/lib.css');
 
 
-// NOTE non-isomorphic package
-export const NON_ISOMORPHIC_NODE_MODULES = {
-  // chart: 'chart.js',
-};
-
-
-/**
- * NOTE modules should be packing by webpack for ssr
- *      like json, css, and more file could not be
- *      import by nodejs
- */
-export const NON_JS_NODE_MODULES = ['normalize.css'];
-
-
-// NOTE commonality alias
-export const ALIAS = {
-  utils: path.resolve(__dirname, '../utils'),
-  contants: path.resolve(__dirname, '../contants'),
-};
-
-
-// NOTE commonality node modules used by client
-export const LIB =  [
-  'vue',
-  'vuex',
-  'vue-router',
-
-  'detect-env',
-  'material-design-icons',
-  'superagent',
-];
-
-
 // base client config
-export const base = {
+export default {
   context: path.resolve(__dirname, '..'),
-
-  entry: {
-    bundle: ['./client'],
-  },
+  devtool: env.isProd ? 'nosources-source-map' : 'inline-source-map',
 
   output: {
     path: path.resolve(__dirname, '../dist/client'),
@@ -80,6 +47,7 @@ export const base = {
           {
             loader: 'vue-loader',
             options: {
+              // extractCSS: true,
               loaders: {
                 scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
               },
@@ -118,7 +86,6 @@ export const base = {
               plugins: [
                 ['transform-runtime', { polyfill: false, helpers: false }],
                 ['transform-object-rest-spread'],
-                ['transform-export-extensions'],
               ],
             },
           },
@@ -144,14 +111,12 @@ export const base = {
   },
 
   resolve: {
-    alias: ALIAS,
+    alias: config.alias,
     extensions: ['.js', '.vue'],
   },
 
   plugins: [
     extractCSS,
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    // new ProgressBarPlugin({ summary: false }),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

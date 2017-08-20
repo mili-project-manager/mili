@@ -1,14 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import detectEnv from 'detect-env';
+import env from 'detect-env';
 
 import * as MUTATIONS from '../contants/mutations';
 
 
-Vue.use(Vuex);
-
-const store = new Vuex.Store({
-  strict: detectEnv({ production: false, default: true }),
+export default {
+  strict: env.isProd ? false : true,
 
   modules: {
   },
@@ -33,7 +29,6 @@ const store = new Vuex.Store({
       };
     },
   },
-});
 
-export default store;
+};
 
