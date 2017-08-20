@@ -12,6 +12,8 @@
 
 ## 版本迭代说明
 
+* v 1.1.1
+  * [#] Add .gitkeep under framework/utils/, in order to prevent the folder from being ignored on push
 * v 1.1.0
   * [#] fixbug: ssr return empty content html page
   * [^] move folder named utils and contants to framework
