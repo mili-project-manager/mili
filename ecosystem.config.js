@@ -58,7 +58,7 @@ module.exports = {
       ref: 'origin/dev',
       repo: REPO,
       path: path.join('/home/docker', APP_NAME, 'stage'),
-      'post-deploy': `yarn; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-stage--env stage`,
+      'post-deploy': `yarn; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-stage --env stage`,
     },
 
     env: {
