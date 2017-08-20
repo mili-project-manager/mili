@@ -18,6 +18,10 @@
 - babel
 - pm2
 
+## Introduction
+
+Reference linking: [Vue-Koa 同构开发环境](http://miaooo.me/article/Vue-Koa%E5%90%8C%E6%9E%84%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83)
+
 ## NPM Script
 
 ### npm start
@@ -42,8 +46,9 @@ pm2 setup before first deploy
 
 ### npm run deploy
 
-Deploy to staging
+Deploy to stage
 
 ### npm run deploy:prod
 
 Deploy to prodction
+

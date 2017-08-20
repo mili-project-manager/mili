@@ -12,6 +12,10 @@
 
 ## 版本迭代说明
 
+* v 1.1.0
+  * [#] fixbug: ssr return empty content html page
+  * [^] move folder named utils and contants to framework
+  * [^] move html template to client/index.html from view/index.html(remove folder named views)
 * v 1.0.5
   * [#] remove some unuseful code and adjust the document structure without updates
   * [^] upgrade dependencies
