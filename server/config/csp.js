@@ -1,7 +1,7 @@
-import detectEnv from 'detect-env';
+import env from 'detect-env';
 
-export default detectEnv({
-  production: undefined,
+export default env.detect({
+  prod: undefined,
 
   default: {
     policy: {

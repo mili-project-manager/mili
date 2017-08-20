@@ -1,11 +1,10 @@
 import path from 'path';
-
+import merge from 'webpack-merge';
 import { VueSSRServerPlugin } from 'vue-ssr-webpack-plugin';
 import { dependencies } from '../package.json';
-import { base, NON_ISOMORPHIC_NODE_MODULES, NON_JS_NODE_MODULES } from './webpack.config.base';
+import base from './webpack.config.base';
+import config from './webpack.config.expand';
 
-
-export const ssrFileName = 'vue-ssr-bundle.json';
 
 function emptyPackage(list) {
   return Object.keys(list).reduce((emptyList, alias) => ({
@@ -16,32 +15,30 @@ function emptyPackage(list) {
 
 function getExternals() {
   return Object.keys(dependencies).filter(key => (
-    !NON_JS_NODE_MODULES.includes(key)
+    !config.nonJsModule.includes(key)
   ));
 }
 
-export default {
-  ...base,
-  devtool: 'source-map',
+export default merge(base, {
+  entry: './client/entry-ssr',
   target: 'node',
 
   externals: getExternals(),
 
   output: {
-    ...base.output,
     libraryTarget: 'commonjs2',
   },
 
   resolve: {
-    ...base.resolve,
     alias: {
-      ...base.resolve.alias,
-      ...emptyPackage(NON_ISOMORPHIC_NODE_MODULES),
+      ...emptyPackage(config.nonIsomorphicModule),
     },
   },
 
   plugins: [
-    ...base.plugins,
-    new VueSSRServerPlugin(),
+    new VueSSRServerPlugin({
+      filename: config.ssrFileName,
+    }),
   ],
-};
+});
+
