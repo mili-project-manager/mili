@@ -3,7 +3,7 @@
   "version": "1.0.5",
   "description": "vue isomorphic boilerplate",
   "main": "index.js",
-  "repository": "git@github.com:Val-istar-Guo/vue-boilerplate.git",
+  "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
   "author": "Val.istar.Guo <Val.istar.Guo@gmail.com>",
   "license": "MIT",
   "scripts": {
