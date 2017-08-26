@@ -10,7 +10,9 @@ export default {
    * 会被默认替代为empty.js
    * 需要在代码中进行兼容处理
    */
-  nonIsomorphicModule: [],
+  nonIsomorphicModule: {
+    // chart: 'chart.js',
+  },
 
   // 非JS模块，不可用于ssr, ssr代码需要在nodejs中运行
   nonJsModule: [

@@ -12,6 +12,8 @@
 
 ## 版本迭代说明
 
+* v 1.1.2
+  * [#] nonIsomorphicModule config of webpack should be an object rather than array, and give an example that show usage
 * v 1.1.1
   * [#] Add .gitkeep under framework/utils/, in order to prevent the folder from being ignored on push
 * v 1.1.0
