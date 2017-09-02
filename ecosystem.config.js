@@ -7,7 +7,7 @@ module.exports = {
     {
       name: 'dev-app',
       script: './build/server.dev.js',
-      watch: ['server', 'build', 'framework'],
+      watch: ['./server', './build', './framework'],
       source_map_support: true,
 
       env: {

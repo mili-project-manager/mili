@@ -20,6 +20,10 @@ const plugins = [
   new VueSSRClientPlugin({
     filename: config.manifestFileName,
   }),
+
+  new webpack.DefinePlugin({
+    'process.env.VUE_ENV': JSON.stringify('client'),
+  }),
 ];
 
 if (env.isProd) plugins.push(new webpack.optimize.UglifyJsPlugin());
