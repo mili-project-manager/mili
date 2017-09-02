@@ -26,5 +26,3 @@ export default process.env.VUE_ENV === 'server'
   ? ssrTitleMixin
   : clientTitleMixin;
 
-// export default ssrTitleMixin;
-

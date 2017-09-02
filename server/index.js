@@ -20,3 +20,4 @@ server
   .listen(PORT, HOST);
 
 console.log(chalk.green(`🌏  Server Start at ${HOST}:${PORT}`));
+
