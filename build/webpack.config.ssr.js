@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 import merge from 'webpack-merge';
 import { VueSSRServerPlugin } from 'vue-ssr-webpack-plugin';
 import { dependencies } from '../package.json';
@@ -36,6 +37,10 @@ export default merge(base, {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.VUE_ENV': JSON.stringify('server'),
+    }),
+
     new VueSSRServerPlugin({
       filename: config.ssrFileName,
     }),
