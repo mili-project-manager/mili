@@ -3,10 +3,11 @@ import path from 'path';
 import { createBundleRenderer } from 'vue-server-renderer';
 
 
+const title = 'Vue-Koa Boilerplate';
 function renderToString(renderer, url) {
 
   return new Promise((resolve, reject) => {
-    renderer.renderToString({ url }, (err, html) => {
+    renderer.renderToString({ url, title }, (err, html) => {
       if (err) reject(err);
       resolve(html ? html : '');
     });

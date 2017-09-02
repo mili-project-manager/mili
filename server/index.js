@@ -6,6 +6,7 @@ import staticServer from 'koa-static';
 import server from './server';
 import ssr from './middleware/vue-server-render';
 
+
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
 
@@ -19,3 +20,4 @@ server
   .listen(PORT, HOST);
 
 console.log(chalk.green(`🌏  Server Start at ${HOST}:${PORT}`));
+

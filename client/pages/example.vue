@@ -8,7 +8,12 @@
 </template>
 
 <script>
+import titleMixin from 'framework/utils/titleMixin';
+
+
 export default {
+  mixins: [titleMixin],
+  title: 'Vue-Koa Boilerplate',
 }
 </script>
 
@@ -37,3 +42,4 @@ p {
   text-align: center;
 }
 </style>
+
