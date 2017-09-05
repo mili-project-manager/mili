@@ -12,6 +12,10 @@
 
 ## 版本迭代说明
 
+* v 1.1.4
+  * [^] support favicon
+  * [#] remove unuseful dependences
+  * [^] upgrade dependences
 * v 1.1.3
   * [^] can set title on component
 * v 1.1.2
