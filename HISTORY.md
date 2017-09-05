@@ -1,5 +1,7 @@
 # HISTORY
 
+每个版本相对上个版本的变更明细会写入`git tag`中，如果想了解每个版本的差异，可以查看对应版本`tag`的`message`。
+
 ## 版本号说明
 
 |          第一位          |              第二位             |            第三位           |
@@ -10,33 +12,3 @@
 
 [+] 添加  [-] 删除  [#] 修复  [^] 升级
 
-## 版本迭代说明
-
-* v 1.1.4
-  * [^] support favicon
-  * [#] remove unuseful dependences
-  * [^] upgrade dependences
-* v 1.1.3
-  * [^] can set title on component
-* v 1.1.2
-  * [#] nonIsomorphicModule config of webpack should be an object rather than array, and give an example that show usage
-* v 1.1.1
-  * [#] Add .gitkeep under framework/utils/, in order to prevent the folder from being ignored on push
-* v 1.1.0
-  * [#] fixbug: ssr return empty content html page
-  * [^] move folder named utils and contants to framework
-  * [^] move html template to client/index.html from view/index.html(remove folder named views)
-* v 1.0.5
-  * [#] remove some unuseful code and adjust the document structure without updates
-  * [^] upgrade dependencies
-* v 1.0.4
-  * [+] .gitignore add \*.swp file which generate by vim
-  * [#] remove unexpect string 'lr' in client/app.vue file
-* v 1.0.3
-  * [^] unified repo configuration(package.json & ecosystem.config.js)
-* v 1.0.2
-  * [^] upgrade node-sass to version 4.5.3
-* v 1.0.1
-  * [+] Add "History.md".
-  * [-] remove unuseful file.
-* v 1.0.0
