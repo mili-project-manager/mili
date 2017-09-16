@@ -2,9 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 import env from 'detect-env';
 import merge from 'webpack-merge';
-import config from './webpack.config.expand';
+import config from './config';
 import base from './webpack.config.base';
 import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 
 const plugins = [
@@ -18,12 +19,17 @@ const plugins = [
   }),
 
   new VueSSRClientPlugin({
-    filename: config.manifestFileName,
+    filename: config.manifestFilename,
   }),
 
   new webpack.DefinePlugin({
     'process.env.VUE_ENV': JSON.stringify('client'),
   }),
+
+  new CopyWebpackPlugin([{
+    from: './client/template.html',
+    to: 'template.html',
+  }]),
 ];
 
 if (env.isProd) plugins.push(new webpack.optimize.UglifyJsPlugin());

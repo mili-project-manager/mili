@@ -7,14 +7,15 @@ import env from 'detect-env';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import config from './webpack.config.expand';
+
+import config from './config';
 
 
 // NOTE remove DeprecationWarning
 process.noDeprecation = true;
-
-// NOTE const extractSCSS = new ExtractTextPlugin('styles/[name]-style.css');
-const extractCSS = new ExtractTextPlugin('styles/lib.css');
+ 
+const extractSCSS = new ExtractTextPlugin('styles/[name]-sass.css');
+const extractCSS = new ExtractTextPlugin('styles/[name]-css.css');
 
 
 // base client config
@@ -57,23 +58,12 @@ export default {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ['vue-style-loader', 'css-loader', 'sass-loader'],
-        // use: extractSCSS.extract({
-        //   fallback: 'vue-style-loader',
-        //   use: [
-        //     {
-        //       loader: 'css-loader',
-        //       // options: {
-        //       //   modules: true,
-        //       //   localIdentName: '[name]__[local]-[hash:base64:5]',
-        //       // },
-        //     },
-        //     {
-        //       loader: 'sass-loader',
-        //     },
-        //   ],
-        // }),
+        // exclude: /node_modules/,
+        // use: ['vue-style-loader', 'css-loader', 'sass-loader'],
+        use: extractSCSS.extract({
+          fallback: 'vue-style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.js$/,
@@ -85,7 +75,7 @@ export default {
               presets: [['es2015', { modules: false }]],
               plugins: [
                 ['transform-runtime', { polyfill: false, helpers: false }],
-                ['transform-object-rest-spread'],
+                // ['transform-object-rest-spread'],
               ],
             },
           },

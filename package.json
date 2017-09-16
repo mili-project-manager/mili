@@ -1,6 +1,6 @@
 {
   "name": "vue-boilerplate",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "vue isomorphic boilerplate",
   "main": "index.js",
   "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
@@ -52,6 +52,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "chalk": "^2.1.0",
+    "copy-webpack-plugin": "^4.0.1",
     "detect-env": "^2.0.3",
     "koa": "^2.3.0",
     "koa-csp": "^1.0.11",
