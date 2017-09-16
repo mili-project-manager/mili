@@ -7,7 +7,7 @@ import env from 'detect-env';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import config from './webpack.config.expand';
+import config from './config';
 
 
 // NOTE remove DeprecationWarning
