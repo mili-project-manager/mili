@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 
 import { dependencies } from '../package.json';
-import config from './webpack.config.expand';
+import config from './config';
 
 function getExternals() {
   return Object.keys(dependencies);

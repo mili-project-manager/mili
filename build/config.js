@@ -1,10 +1,11 @@
-import path from 'path';
+// Unified build configuration
+import { resolve } from 'path';
 
 
 // 扩展配置
 export default {
-  ssrFileName: 'vue-ssr-bundle.json',
-  manifestFileName: 'vue-ssr-manifest.json',
+  ssrFilename: 'vue-ssr-bundle.json',
+  manifestFilename: 'vue-ssr-manifest.json',
   /**
    * 非同构模块, 不可用于ssr在server端运行
    * 会被默认替代为empty.js
@@ -29,6 +30,6 @@ export default {
   ],
 
   alias: {
-    framework: path.resolve(__dirname, '../framework'),
+    framework: resolve(__dirname, '../framework'),
   },
 }

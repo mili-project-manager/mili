@@ -1,6 +1,6 @@
 const fs = require('fs');
 const vm = require('vm');
-const path = require('path');
+const { resolve, join } = require('path');
 const chalk = require('chalk');
 const Module = require('module');
 const webpack = require('webpack');
@@ -11,7 +11,7 @@ require('source-map-support').install();
 
 // Babel require hook
 const babelConfig = JSON.parse(fs.readFileSync(
-  path.resolve(__dirname, '../.babelrc'),
+  resolve(__dirname, '../.babelrc'),
   'utf8'));
 babelConfig.plugins.push('add-module-exports');
 
@@ -19,11 +19,12 @@ require('babel-register')(babelConfig);
 const {
   setBundle,
   setManifest,
+  setTemplate,
   createServer,
   readFile } = require('./helper');
 
 // init compiler
-const { ssrFileName, manifestFileName } = require('./webpack.config.expand');
+const { ssrFilename, manifestFilename } = require('./config');
 
 
 /**
@@ -44,12 +45,20 @@ devCompiler.plugin('done', stats => {
   info.warnings.forEach(warn => console.log(chalk.yellow(warn)));
   if (info.errors.length) return;
 
-  manifest = JSON.parse(readFile(
+  const manifest = JSON.parse(readFile(
     devCompiler.outputFileSystem,
-    path.resolve(devConfig.output.path, manifestFileName),
+    resolve(devConfig.output.path, manifestFilename),
   ));
 
+  const template = readFile(
+    devCompiler.outputFileSystem,
+    resolve(devConfig.output.path, 'template.html'),
+  );
+
+  console.log(template);
+
   setManifest(manifest);
+  setTemplate(template);
 });
 
 
@@ -76,7 +85,7 @@ ssrCompiler.watch({}, (err, stats) => {
 
   bundle = JSON.parse(readFile(
     ssrMfs,
-    path.join(ssrConfig.output.path, ssrFileName),
+    join(ssrConfig.output.path, ssrFilename),
   ));
 
   setBundle(bundle);
@@ -106,7 +115,7 @@ serverCompiler.run((err, stats) => {
 
   const code = readFile(
     serverMfs,
-    path.resolve(serverConfig.output.path, chunkName),
+    resolve(serverConfig.output.path, chunkName),
   );
 
   const server = requireFromString(code, chunkName).default;

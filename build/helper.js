@@ -7,21 +7,30 @@ import vueServerRender from '../server/middleware/vue-server-render';
 let renderer = null;
 let bundle = null;
 let manifest = null;
+let template = null;
 
 export const setBundle = (value) => {
   bundle = value;
-  if (manifest) {
-    renderer = vueServerRender({ bundle, manifest });
+  if (manifest && template) {
+    renderer = vueServerRender({ template, bundle, manifest });
   }
 };
 
 export const setManifest = (value) => {
   manifest = value;
 
-  if (bundle) {
-    renderer = vueServerRender({ bundle, manifest });
+  if (bundle && template) {
+    renderer = vueServerRender({ template, bundle, manifest });
   }
 };
+
+export const setTemplate = (value) => {
+  template = value;
+
+  if (bundle && manifest) {
+    renderer = vueServerRender({ template, bundle, manifest });
+  }
+}
 
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || '0.0.0.0';

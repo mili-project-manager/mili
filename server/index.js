@@ -1,23 +1,24 @@
 import fs from 'fs';
-import path from 'path';
+import { resolve, join } from 'path';
 import chalk from 'chalk';
 import staticServer from 'koa-static';
 
 import server from './server';
+import buildConfig from '../build/config';
 import ssr from './middleware/vue-server-render';
 
 
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
+const clientDir = resolve(__dirname, '../client');
 
-console.log(path.resolve(__dirname, '../client'));
 server
   .use(staticServer(path.resolve(__dirname, '../client')))
   .use(ssr({
-    bundle: path.resolve(__dirname, '../client/vue-ssr-bundle.json'),
-    manifest: JSON.parse(fs.readFileSync(path.resolve(__dirname, '../client/vue-ssr-manifest.json'), 'utf8')),
+    template: join(clientDir, 'template.html'),
+    bundle: join(clientDir, buildConfig.ssrFilename),
+    manifest: JSON.parse(fs.readFileSync(join(clientDir, buildConfig.manifestFilename), 'utf8')),
   }))
   .listen(PORT, HOST);
 
 console.log(chalk.green(`🌏  Server Start at ${HOST}:${PORT}`));
-

@@ -4,7 +4,7 @@ import merge from 'webpack-merge';
 import { VueSSRServerPlugin } from 'vue-ssr-webpack-plugin';
 import { dependencies } from '../package.json';
 import base from './webpack.config.base';
-import config from './webpack.config.expand';
+import config from './config';
 
 
 function emptyPackage(list) {
@@ -42,7 +42,7 @@ export default merge(base, {
     }),
 
     new VueSSRServerPlugin({
-      filename: config.ssrFileName,
+      filename: config.ssrFilename,
     }),
   ],
 });
