@@ -14,6 +14,10 @@ import titleMixin from 'framework/utils/titleMixin';
 export default {
   mixins: [titleMixin],
   title: 'Vue-Koa Boilerplate',
+  mounted: () => {
+    const a = { a: 'a' };
+    const b = { ...a };
+  }
 }
 </script>
 
