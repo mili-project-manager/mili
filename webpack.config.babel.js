@@ -4,6 +4,3 @@ import ssr from './build/webpack.config.ssr.js';
 
 
 export default [server, ssr, client];
-// export default [ssr, client];
-// export default client;
-

@@ -9,13 +9,20 @@ const requireFromString = require('require-from-string');
 require('source-map-support').install();
 
 
-// Babel require hook
-const babelConfig = JSON.parse(fs.readFileSync(
-  resolve(__dirname, '../.babelrc'),
-  'utf8'));
-babelConfig.plugins.push('add-module-exports');
+require('babel-polyfill');
+require('babel-register')({
+  presets: [
+    ['env', {
+      targets: { node: 'current' },
+      useBuiltIns: true,
+    }],
+  ],
+  plugins: [
+    'transform-object-rest-spread',
+    'add-module-exports',
+  ],
+});
 
-require('babel-register')(babelConfig);
 const {
   setBundle,
   setManifest,
