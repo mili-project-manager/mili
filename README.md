@@ -52,3 +52,7 @@ Deploy to stage
 
 Deploy to prodction
 
+### npm run analyzer
+
+analyzer your app's bundled modules in a production env. See Also: [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)
+
