@@ -34,8 +34,6 @@ export default {
     rules: [
       {
         test: /\.css$/,
-        // include: /node_modules/,
-        // use: ['vue-style-loader', 'css-loader'],
         use: extractCSS.extract({
           fallback: 'vue-style-loader',
           use: 'css-loader',
@@ -48,7 +46,6 @@ export default {
           {
             loader: 'vue-loader',
             options: {
-              // extractCSS: true,
               loaders: {
                 scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
               },
@@ -58,8 +55,6 @@ export default {
       },
       {
         test: /\.scss$/,
-        // exclude: /node_modules/,
-        // use: ['vue-style-loader', 'css-loader', 'sass-loader'],
         use: extractSCSS.extract({
           fallback: 'vue-style-loader',
           use: ['css-loader', 'sass-loader'],
@@ -72,11 +67,12 @@ export default {
           {
             loader: 'babel-loader',
             options: {
-              presets: [['es2015', { modules: false }]],
-              plugins: [
-                ['transform-runtime', { polyfill: false, helpers: false }],
-                // ['transform-object-rest-spread'],
-              ],
+              presets: [['env', {
+                modules: false,
+                targets: {
+                  browser: ['>5%'],
+                },
+              }]],
             },
           },
         ],
