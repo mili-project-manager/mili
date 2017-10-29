@@ -12,6 +12,7 @@ let template = null;
 export const setBundle = (value) => {
   bundle = value;
   if (manifest && template) {
+    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
     renderer = vueServerRender({ template, bundle, manifest });
   }
 };
@@ -20,6 +21,7 @@ export const setManifest = (value) => {
   manifest = value;
 
   if (bundle && template) {
+    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
     renderer = vueServerRender({ template, bundle, manifest });
   }
 };
@@ -28,6 +30,7 @@ export const setTemplate = (value) => {
   template = value;
 
   if (bundle && manifest) {
+    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
     renderer = vueServerRender({ template, bundle, manifest });
   }
 }
@@ -54,7 +57,7 @@ export const createServer = async (server, devCompiler) => {
     .use(webpackMiddleware({
       compiler: devCompiler,
       dev: {
-        // publicPath: devCompiler.options.output.publicPath,
+        noInfo: true,
         stats: {
           colors: true,
           chunks: false,
@@ -97,6 +100,6 @@ export const readFile = (fs, file) => {
   try {
     return fs.readFileSync(file, 'utf-8');
   } catch (e) {
-    console.log(`readFileError:(${file}) ${e.message}`);
+    console.log(chalk.red(`[Server Engine] readFileError:(${file}) ${e.message}`));
   }
 }
