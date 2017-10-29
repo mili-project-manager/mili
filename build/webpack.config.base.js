@@ -13,7 +13,7 @@ import config from './config';
 
 // NOTE remove DeprecationWarning
 process.noDeprecation = true;
- 
+
 const extractSCSS = new ExtractTextPlugin('styles/[name]-sass.css');
 const extractCSS = new ExtractTextPlugin('styles/[name]-css.css');
 
@@ -21,7 +21,8 @@ const extractCSS = new ExtractTextPlugin('styles/[name]-css.css');
 // base client config
 export default {
   context: path.resolve(__dirname, '..'),
-  devtool: env.isProd ? 'nosources-source-map' : 'inline-source-map',
+  // devtool: env.isProd ? false : '#cheap-module-source-map',
+  devtool: env.isProd ? false : '#source-map',
 
   output: {
     path: path.resolve(__dirname, '../dist/client'),
@@ -48,6 +49,18 @@ export default {
             options: {
               loaders: {
                 scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
+                js: [{
+                  loader: 'babel-loader',
+                  options: {
+                    presets: [['env', {
+                      useBuiltIns: true,
+                      modules: false,
+                      targets: {
+                        browser: ['>5%'],
+                      },
+                    }]],
+                  },
+                }],
               },
             },
           },
@@ -68,6 +81,7 @@ export default {
             loader: 'babel-loader',
             options: {
               presets: [['env', {
+                useBuiltIns: true,
                 modules: false,
                 targets: {
                   browser: ['>5%'],
@@ -103,6 +117,7 @@ export default {
 
   plugins: [
     extractCSS,
+    extractSCSS,
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),

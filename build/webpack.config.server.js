@@ -23,7 +23,6 @@ export default {
   output: {
     path: path.resolve(__dirname, '../dist/server'),
     filename: '[name].js',
-    // publicPath: path.resolve(__dirname, '../dist/server'),
     chunkFilename: 'chunk.[name].js',
     libraryTarget: 'commonjs2',
   },

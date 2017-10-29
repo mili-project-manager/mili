@@ -1,4 +1,5 @@
 import fs from 'fs';
+import env from 'detect-env';
 import { createBundleRenderer } from 'vue-server-renderer';
 
 
@@ -8,10 +9,9 @@ function renderToString(renderer, url) {
   return new Promise((resolve, reject) => {
     renderer.renderToString({ url, title }, (err, html) => {
       if (err) {
-        const kerr = new Error(err.message || 'vue-server-render error');
-        kerr.status = err.code;
-        kerr.expose = !env.isProd;
-        reject(kerr);
+        err.status = err.code;
+        err.expose = !env.isProd;
+        reject(err);
         return;
       }
 
@@ -33,7 +33,10 @@ export default function ({ bundle, template, manifest: clientManifest }) {
     try {
       html = await renderToString(renderer, ctx.url);
     } catch (err) {
-      if (err.status !== 404) throw err;
+      if (err.status !== 404) {
+        console.log('[Vue Server Side Render] ', err.stack);
+        throw err;
+      }
     }
 
     if (html) ctx.body = html;

@@ -17,3 +17,7 @@ views/index.*.html
 
 # Vim
 *.swp
+
+# Lock
+yarn.lock
+package-lock.json
