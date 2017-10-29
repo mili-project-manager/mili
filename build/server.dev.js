@@ -1,8 +1,6 @@
 const fs = require('fs');
-const vm = require('vm');
 const { resolve, join } = require('path');
 const chalk = require('chalk');
-const Module = require('module');
 const webpack = require('webpack');
 const MemoryFileSystem = require('memory-fs');
 const requireFromString = require('require-from-string');
@@ -62,7 +60,6 @@ devCompiler.plugin('done', stats => {
     resolve(devConfig.output.path, 'template.html'),
   );
 
-  console.log(template);
 
   setManifest(manifest);
   setTemplate(template);

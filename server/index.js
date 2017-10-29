@@ -13,9 +13,9 @@ const HOST = process.env.HOST || '0.0.0.0';
 const clientDir = resolve(__dirname, '../client');
 
 server
-  .use(staticServer(path.resolve(__dirname, '../client')))
+  .use(staticServer(resolve(__dirname, '../client')))
   .use(ssr({
-    template: join(clientDir, 'template.html'),
+    template: fs.readFileSync(join(clientDir, 'template.html'), 'utf8'),
     bundle: join(clientDir, buildConfig.ssrFilename),
     manifest: JSON.parse(fs.readFileSync(join(clientDir, buildConfig.manifestFilename), 'utf8')),
   }))
