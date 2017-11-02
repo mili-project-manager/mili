@@ -21,8 +21,7 @@ const extractCSS = new ExtractTextPlugin('styles/[name]-css.css');
 // base client config
 export default {
   context: path.resolve(__dirname, '..'),
-  // devtool: env.isProd ? false : '#cheap-module-source-map',
-  devtool: env.isProd ? false : '#source-map',
+  devtool: env.isProd ? false : '#cheap-module-source-map',
 
   output: {
     path: path.resolve(__dirname, '../dist/client'),
