@@ -21,15 +21,14 @@ require('babel-register')({
   ],
 });
 
-const {
-  setBundle,
-  setManifest,
-  setTemplate,
-  createServer,
-  readFile } = require('./helper');
+const { Server, readFile } = require('./helper');
 
 // init compiler
 const { ssrFilename, manifestFilename } = require('./config');
+
+const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || '0.0.0.0';
+const server = new Server(PORT, HOST);
 
 
 /**
@@ -38,6 +37,7 @@ const { ssrFilename, manifestFilename } = require('./config');
  */
 const devConfig = require('./webpack.config.client.dev');
 const devCompiler = webpack(devConfig);
+server.devCompiler = devCompiler;
 
 /**
  * NOTE Webpack hook event to write html file template
@@ -50,19 +50,15 @@ devCompiler.plugin('done', stats => {
   info.warnings.forEach(warn => console.log(chalk.yellow(warn)));
   if (info.errors.length) return;
 
-  const manifest = JSON.parse(readFile(
+  server.manifest = JSON.parse(readFile(
     devCompiler.outputFileSystem,
     resolve(devConfig.output.path, manifestFilename),
   ));
 
-  const template = readFile(
+  server.template = readFile(
     devCompiler.outputFileSystem,
     resolve(devConfig.output.path, 'template.html'),
   );
-
-
-  setManifest(manifest);
-  setTemplate(template);
 });
 
 
@@ -87,12 +83,10 @@ ssrCompiler.watch({}, (err, stats) => {
   if (info.errors.length) return;
 
 
-  bundle = JSON.parse(readFile(
+  server.bundle = JSON.parse(readFile(
     ssrMfs,
     join(ssrConfig.output.path, ssrFilename),
   ));
-
-  setBundle(bundle);
 });
 
 const serverConfig = require('./webpack.config.server.dev');
@@ -107,7 +101,7 @@ serverCompiler.outputFileSystem = serverMfs;
  * serverCompiler can use watch module,
  * and will not rely on pm2 in the development environment
  */
-serverCompiler.run((err, stats) => {
+serverCompiler.watch({}, (err, stats) => {
   if (err) throw err;
 
   const info = stats.toJson();
@@ -122,10 +116,10 @@ serverCompiler.run((err, stats) => {
     resolve(serverConfig.output.path, chunkName),
   );
 
-  const server = requireFromString(code, chunkName).default;
+  koaServer = requireFromString(code, chunkName).default;
   console.log(chalk.green('🍻  Server-side code is compiled'));
 
-  createServer(server, devCompiler);
+  server.update(koaServer);
 });
 
 console.log(chalk.green('⌛️  Wait for the server-side code to compile...'));
