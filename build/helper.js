@@ -1,61 +1,78 @@
+import http from 'http';
 import webpackMiddleware from 'koa-webpack';
 import chalk from 'chalk';
 
 import vueServerRender from '../server/middleware/vue-server-render';
 
 
-let renderer = null;
-let bundle = null;
-let manifest = null;
-let template = null;
+export class Server {
+  constructor(port, host) {
+    this.__renderer = null;
+    this.__bundle = null;
+    this.__manifest = null;
+    this.__template = null;
 
-export const setBundle = (value) => {
-  bundle = value;
-  if (manifest && template) {
-    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
-    renderer = vueServerRender({ template, bundle, manifest });
+    // before server code compiled
+    this.__requestHandler = (req,res) => {
+      res.writeHead(200,{ 'content-type': 'text/plain' });
+      res.write('waiting for server code compiled');
+      res.end();
+    };
+    // NOTE: should declare in constructor. Don't need to use .bind(this)
+    this.__renderMiddleware = async (ctx, next) => {
+      if (this.__renderer) {
+        await this.__renderer(ctx, next);
+      } else {
+        ctx.body = '⌛️ WAITTING FOR COMPLIATION! REFRESH IN A MOMENT';
+      }
+    };
+
+    this.__hmrMiddleware = null;
+
+    this.__server = http
+      .createServer(this.__requestHandler)
+      .listen(port,host);
+
+    console.log(chalk.green(`🌏  The server run at ${host}:${port}`));
+    console.log(chalk.green('⌛️  Wait for the code to compile...'));
   }
-};
 
-export const setManifest = (value) => {
-  manifest = value;
+  __genRenderer() {
+    const { __manifest, __bundle, __template } = this;
 
-  if (bundle && template) {
-    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
-    renderer = vueServerRender({ template, bundle, manifest });
+    if (__manifest && __bundle && __template) {
+      if (this.__renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
+      this.__renderer = vueServerRender({
+        template: __template,
+        bundle: __bundle,
+        manifest: __manifest,
+      });
+    }
   }
-};
 
-export const setTemplate = (value) => {
-  template = value;
-
-  if (bundle && manifest) {
-    if (renderer === null) console.log(chalk.green('🍻  Client-side code is compile'))
-    renderer = vueServerRender({ template, bundle, manifest });
+  set bundle(value) {
+    this.__bundle = value;
+    this.__genRenderer();
   }
-}
 
-const PORT = process.env.PORT || 8080;
-const HOST = process.env.HOST || '0.0.0.0';
+  set manifest(value) {
+    this.__manifest = value;
+    this.__genRenderer();
+  }
 
-let runningServer = null;
+  set template(value) {
+    this.__template = value;
+    this.__genRenderer();
+  }
 
-const shutdown = async (server) => {
-  return new Promise((resolve, reject) => {
-    server.shutdown(() => {
-      console.log('server close');
-      resolve();
-    });
-  });
-};
+  set devCompiler(value) {
+    if (this.__hmrMiddleware) {
+      console.log(chalk.red('⚠️ devCompiler should not set again!'));
+      return;
+    }
 
-export const createServer = async (server, devCompiler) => {
-  if (runningServer) await shutdown(runningServer);
-
-  let closeCb = null;
-  runningServer = server
-    .use(webpackMiddleware({
-      compiler: devCompiler,
+    this.__hmrMiddleware = webpackMiddleware({
+      compiler: value,
       dev: {
         noInfo: true,
         stats: {
@@ -63,34 +80,24 @@ export const createServer = async (server, devCompiler) => {
           chunks: false,
         },
       },
-    }))
-    .use(async (ctx, next) => {
-      if (renderer === null) {
-        ctx.body = '⌛️ WAITTING FOR COMPLIATION! REFRESH IN A MOMENT';
-      } else {
-        await next();
-      }
-    })
-    .use(async (ctx, next) => {
-      await renderer(ctx, next);
-    })
-    .listen(PORT, HOST, () => {
-      if (closeCb) {
-        runningServer.close();
-        closeCb();
-      } else {
-        runningServer.shutdown = (cb) => {
-          runningServer.close();
-          cb();
-        }
-      }
     });
+  }
 
-  runningServer.shutdown = (cb) => closeCb = cb;
+  /**
+   * refresh server
+   * @param {Object} server Koa Object
+   */
+  update(server) {
+    console.log(chalk.green('Server Updating...'));
+    const { __server, __hmrMiddleware, __renderMiddleware, __requestHandler } = this;
 
-  console.log(chalk.green(`🌏  The server run at ${HOST}:${PORT}`));
-  if (renderer === null) {
-    console.log(chalk.green('⌛️  Wait for the client-side code to compile...'));
+    __server.removeListener('request', __requestHandler);
+    this.__requestHandler = server
+      .use(__hmrMiddleware)
+      .use(__renderMiddleware)
+      .callback();
+    __server.on("request", this.__requestHandler);
+    console.log(chalk.green('Server Updated'));
   }
 }
 

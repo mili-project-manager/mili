@@ -26,11 +26,8 @@ Reference linking: [Vue-Koa 同构开发环境](http://miaooo.me/article/Vue-Koa
 
 ### npm start
 
-Run app by pm2 at development environment.
+Run app at development environment.
 
-### npm stop
-
-Stop app at development environment.
 
 ### npm run start:prod
 
