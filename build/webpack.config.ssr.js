@@ -7,7 +7,6 @@ import { VueSSRServerPlugin } from 'vue-ssr-webpack-plugin';
 
 import base from './webpack.config.base';
 import config from './config';
-import { SSR } from './constant/webContainer';
 
 
 function emptyPackage(list) {

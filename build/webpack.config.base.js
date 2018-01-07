@@ -9,7 +9,6 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import config from './config';
 import { vueLoader, babelLoader, urlLoader } from './loaders';
-import { definePlugin } from './plugins';
 
 
 // NOTE remove DeprecationWarning
