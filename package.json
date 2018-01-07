@@ -6,6 +6,7 @@
   "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
   "author": "Val.istar.Guo <Val.istar.Guo@gmail.com>",
   "license": "MIT",
+  "engines" : { "node" : ">=8.9.4" },
   "scripts": {
     "clean": "rm -rf ./dist/*",
     "build": "npm run clean & webpack",
