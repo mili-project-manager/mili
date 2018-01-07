@@ -7,15 +7,25 @@ import env from 'detect-env';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-
 import config from './config';
+import { vueLoader, babelLoader, urlLoader } from './loaders';
+import { definePlugin } from './plugins';
 
 
 // NOTE remove DeprecationWarning
-process.noDeprecation = true;
+// process.noDeprecation = true;
 
 const extractSCSS = new ExtractTextPlugin('styles/[name]-sass.css');
 const extractCSS = new ExtractTextPlugin('styles/[name]-css.css');
+
+
+// PLUGINS
+const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+  }),
+];
+if (env.isProd) plugins.push[extractCSS, extractSCSS];
 
 
 // base client config
@@ -32,79 +42,23 @@ export default {
 
   module: {
     rules: [
+      { test: /\.vue/, exclude: /node_modules/, use: [vueLoader] },
+      { test: /\.js$/, exclude: /node_modules/, use: [babelLoader] },
+      { test: /\.html$/, use: 'html-loader' },
+      { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, use: [urlLoader] },
       {
         test: /\.css$/,
-        use: extractCSS.extract({
+        use: env.isProd ? extractCSS.extract({
           fallback: 'vue-style-loader',
           use: 'css-loader',
-        }),
-      },
-      {
-        test: /\.vue/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'vue-loader',
-            options: {
-              loaders: {
-                scss: ['vue-style-loader', 'css-loader', 'sass-loader'],
-                js: [{
-                  loader: 'babel-loader',
-                  options: {
-                    presets: [['env', {
-                      useBuiltIns: true,
-                      modules: false,
-                      targets: {
-                        browser: ['>5%'],
-                      },
-                    }]],
-                  },
-                }],
-              },
-            },
-          },
-        ],
+        }) : ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,
-        use: extractSCSS.extract({
+        use: env.isProd ? extractSCSS.extract({
           fallback: 'vue-style-loader',
           use: ['css-loader', 'sass-loader'],
-        }),
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [['env', {
-                useBuiltIns: true,
-                modules: false,
-                targets: {
-                  browser: ['>5%'],
-                },
-              }]],
-            },
-          },
-        ],
-      },
-
-      {
-        test: /\.html$/,
-        use: 'html-loader',
-      },
-      {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-            },
-          },
-        ],
+        }) : ['vue-style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -113,13 +67,5 @@ export default {
     alias: config.alias,
     extensions: ['.js', '.vue'],
   },
-
-  plugins: [
-    extractCSS,
-    extractSCSS,
-
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-    }),
-  ],
+  plugins,
 };

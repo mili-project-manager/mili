@@ -28,9 +28,6 @@ export default {
   },
 
   resolve: {
-    alias: {
-      // vue: 'vue/dist/vue.common',
-      ...config.alias,
-    },
+    alias: { ...config.alias },
   },
 };

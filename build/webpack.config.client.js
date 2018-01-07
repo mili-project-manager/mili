@@ -2,10 +2,11 @@ import path from 'path';
 import webpack from 'webpack';
 import env from 'detect-env';
 import merge from 'webpack-merge';
-import config from './config';
-import base from './webpack.config.base';
 import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+import config from './config';
+import base from './webpack.config.base';
 
 
 const plugins = [
@@ -23,7 +24,7 @@ const plugins = [
   }),
 
   new webpack.DefinePlugin({
-    'process.env.VUE_ENV': JSON.stringify('client'),
+    'process.env.WEB_CONTAINER': JSON.stringify('browser'),
   }),
 
   new CopyWebpackPlugin([{
@@ -55,4 +56,3 @@ export default merge(base, {
 
   plugins,
 });
-
