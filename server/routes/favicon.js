@@ -37,4 +37,3 @@ router
   .get('/:favicon([^\/]+\\.png)', respondFavicon)
 
 export default router;
-

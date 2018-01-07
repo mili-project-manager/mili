@@ -9,4 +9,3 @@ Vue.use(Vuex);
 export default function createStore() {
   return new Vuex.Store(store);
 }
-

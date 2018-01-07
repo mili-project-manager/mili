@@ -28,4 +28,3 @@ export default async ctx => {
       }, reject);
   })
 }
-
