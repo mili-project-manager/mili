@@ -1,5 +1,6 @@
 <template>
   <div class="page">
+    <document-title>Test</document-title>
     <h2>Initial Data Test</h2>
     <nav>
       <router-link class="router-link" to='/test?value=2013'>2013</router-link>

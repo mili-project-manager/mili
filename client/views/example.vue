@@ -16,12 +16,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import titleMixin from 'framework/utils/titleMixin';
 
 
 export default {
-  mixins: [titleMixin],
-  title: 'Vue-Koa Boilerplate',
 }
 </script>
 
