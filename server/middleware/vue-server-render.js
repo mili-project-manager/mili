@@ -10,7 +10,7 @@ function renderToString(renderer, url) {
     renderer.renderToString({ url, title }, (err, html) => {
       if (err) {
         err.status = err.code;
-        err.expose = !env.isProd;
+        err.expose = !env.is.prod;
         reject(err);
         return;
       }
