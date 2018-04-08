@@ -28,7 +28,7 @@ const plugins = [
 if (!env.is.prod) {
   plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   )
@@ -41,10 +41,7 @@ if (process.env.ANALYZER) {
 
 export default merge(common, {
   entry: {
-    bundle: env.detect({
-      prod: ['babel-polyfill', './client/entry-client'],
-      default: ['babel-polyfill', './client/entry-client', 'webpack-hot-middleware/client'],
-    }),
+    bundle: ['babel-polyfill', './client/entry-client'],
   },
 
   output: {
