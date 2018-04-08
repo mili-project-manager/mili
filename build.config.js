@@ -2,7 +2,6 @@
 import { resolve } from 'path';
 
 
-// 扩展配置
 export default {
   ssrFilename: 'vue-ssr-bundle.json',
   manifestFilename: 'vue-ssr-manifest.json',
@@ -15,16 +14,7 @@ export default {
     // chart: 'chart.js',
   },
 
-  // 外部依赖库，打包成独立js包
-  lib: [
-    'vue',
-    'vuex',
-    'vue-router',
-    'detect-env',
-    'superagent',
-  ],
-
   alias: {
-    framework: resolve(__dirname, '../framework'),
+    framework: resolve(__dirname, './framework'),
   },
 }

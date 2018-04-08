@@ -33,7 +33,7 @@ const readFile = (fs, file) => {
 const Server = require('./server');
 
 // init compiler
-const { ssrFilename, manifestFilename } = require('./config');
+const { ssrFilename, manifestFilename } = require('../build.config');
 
 const PORT = process.env.PORT || 8080;
 const HOST = process.env.HOST || '0.0.0.0';
@@ -44,8 +44,7 @@ const server = new Server(PORT, HOST);
  * NOTE devConfig used to make template
  *      and make webpack dev middleware
  */
-const devConfig = require('./webpack.config.client.dev');
-console.log(devConfig.entry)
+const devConfig = require('./webpack.config.client');
 const devCompiler = webpack(devConfig);
 server.devCompiler = devCompiler;
 

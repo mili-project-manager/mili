@@ -7,7 +7,7 @@ import { FETCH_STATUS } from '../contants/status';
 const fetch = () => new Promise(resolve => setTimeout(resolve, 4000)) ;
 
 export default {
-  strict: env.isProd ? false : true,
+  strict: env.is.prod ? false : true,
 
   modules: {
   },

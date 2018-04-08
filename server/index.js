@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import staticServer from 'koa-static';
 
 import server from './server';
-import buildConfig from '../build/config';
+import buildConfig from '../build.config';
 import ssr from './middleware/vue-server-render';
 
 

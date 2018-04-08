@@ -4,7 +4,7 @@ import env from 'detect-env'
 import nodeExternals from 'webpack-node-externals'
 
 import { dependencies } from '../package.json'
-import config from './config'
+import config from '../build.config'
 
 
 export default {
@@ -26,11 +26,8 @@ export default {
 
   output: {
     path: path.resolve(__dirname, '../dist/server'),
-    filename: env.detect({
-      prod: 'bundle.js',
-      default: 'bundle.[chunkhash:8].js',
-    }),
-    chunkFilename: '[chunkhash:8].chunk.js',
+    filename: env.is.prod ? 'bundle.js' : 'bundle.[chunkhash:8].js',
+    chunkFilename: 'chunk.[chunkhash:8].js',
     libraryTarget: 'commonjs2',
   },
 
