@@ -72,13 +72,13 @@ export default class Server {
     }
     this.__hmrMiddleware = webpackMiddleware({
       compiler: value,
-      // dev: {
-      //   noInfo: true,
-      //   stats: {
-      //     colors: true,
-      //     chunks: false,
-      //   },
-      // },
+      dev: {
+        noInfo: true,
+        stats: {
+          colors: true,
+          chunks: false,
+        },
+      },
     });
   }
 

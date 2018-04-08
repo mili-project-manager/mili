@@ -22,7 +22,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+@import '../styles';
+
 article {
   padding-top: 60px;
 
@@ -34,15 +36,18 @@ h1 {
   text-align: center;
 
   margin-bottom: 50px;
+  color: var(--header-text);
 }
 
 h3 {
   text-align: center;
   margin-top: 40px;
+  color: var(--header-text);
 }
 
 p {
   text-align: center;
+  color: var(--body-text);
 }
 
 nav {
