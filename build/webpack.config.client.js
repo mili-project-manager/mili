@@ -6,18 +6,18 @@ import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import config from './config';
-import base from './webpack.config.base';
+import common from './webpack.config.common';
 
 
 const plugins = [
-  new webpack.optimize.CommonsChunkPlugin({
-    names: 'lib',
-    filename: '[name].[chunkhash:8].js',
-  }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   names: 'lib',
+  //   filename: '[name].[chunkhash:8].js',
+  // }),
 
-  new webpack.optimize.CommonsChunkPlugin({
-    name: "manifest",
-  }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: "manifest",
+  // }),
 
   new VueSSRClientPlugin({
     filename: config.manifestFilename,
@@ -36,7 +36,7 @@ const plugins = [
 if (env.isProd) plugins.push(new webpack.optimize.UglifyJsPlugin());
 
 
-export default merge(base, {
+export default merge(common, {
   entry: {
     bundle: ['babel-polyfill', './client/entry-client'],
     lib: config.lib,

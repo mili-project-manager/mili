@@ -11,6 +11,8 @@ export default merge(clientConfig, {
     ],
   },
 
+  mode: 'development',
+
   devServer: {
     contentBase: './dist',
     hot: true

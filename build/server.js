@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import vueServerRender from '../server/middleware/vue-server-render';
 
 
-export class Server {
+export default class Server {
   constructor(port, host) {
     this.__renderer = null;
     this.__bundle = null;
@@ -70,16 +70,15 @@ export class Server {
       console.log(chalk.red('⚠️ devCompiler should not set again!'));
       return;
     }
-
     this.__hmrMiddleware = webpackMiddleware({
       compiler: value,
-      dev: {
-        noInfo: true,
-        stats: {
-          colors: true,
-          chunks: false,
-        },
-      },
+      // dev: {
+      //   noInfo: true,
+      //   stats: {
+      //     colors: true,
+      //     chunks: false,
+      //   },
+      // },
     });
   }
 
@@ -98,15 +97,5 @@ export class Server {
       .callback();
     __server.on("request", this.__requestHandler);
     console.log(chalk.green('Server Updated'));
-  }
-}
-
-
-// Compatible with MemoryFileSystem
-export const readFile = (fs, file) => {
-  try {
-    return fs.readFileSync(file, 'utf-8');
-  } catch (e) {
-    console.log(chalk.red(`[Server Engine] readFileError:(${file}) ${e.message}`));
   }
 }

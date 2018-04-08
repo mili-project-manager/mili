@@ -31,6 +31,7 @@ if (env.isProd) plugins.push[extractCSS, extractSCSS];
 export default {
   context: path.resolve(__dirname, '..'),
   devtool: env.isProd ? false : '#cheap-module-source-map',
+  mode: 'development',
 
   output: {
     path: path.resolve(__dirname, '../dist/client'),

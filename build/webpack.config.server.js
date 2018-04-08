@@ -1,19 +1,23 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'path'
+import fs from 'fs'
+import env from 'detect-env'
+import nodeExternals from 'webpack-node-externals'
 
-import { dependencies } from '../package.json';
-import config from './config';
-
-function getExternals() {
-  return Object.keys(dependencies);
-}
+import { dependencies } from '../package.json'
+import config from './config'
 
 
 export default {
   context: path.resolve(__dirname, '..'),
-  entry: { bundle: './server' },
+
+  entry: env.detect({
+    prod: './server',
+    default: './server/server',
+  }),
+
+  mode: 'development',
   target: 'node',
-  externals: getExternals(),
+  externals: nodeExternals(),
 
   node: {
     __filename: false,
@@ -22,8 +26,11 @@ export default {
 
   output: {
     path: path.resolve(__dirname, '../dist/server'),
-    filename: '[name].js',
-    chunkFilename: 'chunk.[name].js',
+    filename: env.detect({
+      prod: 'bundle.js',
+      default: 'bundle.[chunkhash:8].js',
+    }),
+    chunkFilename: '[chunkhash:8].chunk.js',
     libraryTarget: 'commonjs2',
   },
 

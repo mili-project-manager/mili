@@ -5,7 +5,7 @@ import merge from 'webpack-merge';
 import nodeExternals from 'webpack-node-externals';
 import { VueSSRServerPlugin } from 'vue-ssr-webpack-plugin';
 
-import base from './webpack.config.base';
+import common from './webpack.config.common';
 import config from './config';
 
 
@@ -16,7 +16,7 @@ function emptyPackage(list) {
   }), {});
 }
 
-export default merge(base, {
+export default merge(common, {
   entry: ['babel-polyfill', './client/entry-ssr'],
   target: 'node',
   externals: nodeExternals({ whitelist: /\.css$/ }),
