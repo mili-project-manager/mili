@@ -14,7 +14,7 @@ import { vueLoader, babelLoader, urlLoader } from './loaders';
 export default {
   context: path.resolve(__dirname, '..'),
   devtool: !env.is.prod && '#cheap-module-source-map',
-  mode: 'development',
+  mode: env.is.prod ? 'production' : 'development',
 
   output: {
     path: path.resolve(__dirname, '../dist/client'),

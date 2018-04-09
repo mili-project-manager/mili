@@ -1,13 +1,13 @@
-import path from 'path';
-import webpack from 'webpack';
-import env from 'detect-env';
-import merge from 'webpack-merge';
-import VueSSRClientPlugin from 'vue-server-renderer/client-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import path from 'path'
+import webpack from 'webpack'
+import env from 'detect-env'
+import merge from 'webpack-merge'
+import VueSSRClientPlugin from 'vue-server-renderer/client-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 import config from '../build.config'
-import common from './webpack.config.common';
+import common from './webpack.config.common'
 
 
 const plugins = [
@@ -23,20 +23,11 @@ const plugins = [
     from: './client/template.html',
     to: 'template.html',
   }]),
-];
+]
 
-if (!env.is.prod) {
-  plugins.push(
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    // new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  )
-}
+if (env.is.prod) plugins.push(new webpack.optimize.OccurrenceOrderPlugin())
+if (process.env.ANALYZER) plugins.push(new BundleAnalyzerPlugin())
 
-if (process.env.ANALYZER) {
-  plugins.push(new BundleAnalyzerPlugin())
-}
 
 
 export default merge(common, {
@@ -56,4 +47,4 @@ export default merge(common, {
   },
 
   plugins,
-});
+})

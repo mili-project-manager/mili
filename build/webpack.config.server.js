@@ -15,7 +15,7 @@ export default {
     default: './server/server',
   }),
 
-  mode: 'development',
+  mode: env.is.prod ? 'production' : 'development',
   target: 'node',
   externals: nodeExternals(),
 
