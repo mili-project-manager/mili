@@ -46,5 +46,15 @@ export default merge(common, {
     },
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'common',
+    },
+    runtimeChunk: {
+      name: 'runtime',
+    }
+  },
+
   plugins,
 })

@@ -1,6 +1,4 @@
 import Example from '../views/example';
-import Introduce from '../views/introduce';
-import Test from '../views/test';
 
 
 export default [
@@ -8,11 +6,11 @@ export default [
     {
       path: '',
       alias: ['introduce'],
-      component: Introduce,
+      component: () => import('../views/introduce'),
     },
     {
       path: 'test',
-      component: Test,
+      component: () => import('../views/test'),
     },
   ]},
 ];
