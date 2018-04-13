@@ -1,6 +1,6 @@
 {
   "name": "mili",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "vue + koa isomorphic boilerplate",
   "main": "index.js",
   "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
