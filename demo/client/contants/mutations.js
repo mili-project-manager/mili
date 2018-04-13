@@ -1,2 +1,0 @@
-export const UPDATE_VALUE = 'UPDATE_VALUE';
-export const UPDATE_FETCH_STATE = 'UPDATE_FETCH_STATE';

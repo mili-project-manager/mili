@@ -1,7 +1,7 @@
 {
-  "name": "vue-boilerplate",
-  "version": "1.2.0",
-  "description": "vue isomorphic boilerplate",
+  "name": "mili",
+  "version": "0.0.1-alpha.1",
+  "description": "vue + koa isomorphic boilerplate",
   "main": "index.js",
   "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
   "author": "Val.istar.Guo <Val.istar.Guo@gmail.com>",
