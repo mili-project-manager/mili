@@ -1,0 +1,23 @@
+# Mac
+.DS_Store
+
+# Editor
+.vscode
+
+# NodeJS
+node_modules
+npm-debug.log*
+
+# Yarn
+yarn-error.log
+
+# Compile
+dist
+views/index.*.html
+
+# Vim
+*.swp
+
+# Lock
+yarn.lock
+package-lock.json

@@ -1,11 +1,14 @@
 // PM2 Config
-const { join } = require('path');
+const { join } = require('path')
 
 
-const { name: APP_NAME, repository: REPO } = require('./package.json');
-const serverPath = join('/var/www', APP_NAME);
-const user = 'jumper';
-const host = 'miaooo.me';
+const { name: APP_NAME, repository: REPO, deploy = {} } = require('./package.json')
+const serverPath = join('/var/www', APP_NAME)
+const { user, host } = deploy
+
+if (!user || !host) {
+  throw new Error('package.deploy should be be set correctly, please check your package.json')
+}
 
 module.exports = {
   apps: [
@@ -54,4 +57,4 @@ module.exports = {
       NODE_ENV: 'stage',
     },
   },
-};
+}

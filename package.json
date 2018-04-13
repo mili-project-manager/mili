@@ -9,71 +9,17 @@
   "engines": {
     "node": ">=8.9.4"
   },
+  "bin": {
+    "mili": "./bin/mikc.js"
+  },
   "scripts": {
-    "clean": "rm -rf ./dist/*",
-    "build": "npm run clean & webpack",
-    "build:prod": "NODE_ENV=production npm run build",
-    "start": "node build/engine.js",
-    "start:prod": "NODE_ENV=production npm run build;NODE_ENV=production node dist/server/bundle.js",
-    "setup": "node run setup:stage",
-    "setup:stage": "pm2 deploy ecosystem.config.js stage setup",
-    "setup:prod": "pm2 deploy ecosystem.config.js prod setup",
-    "deploy": "npm run deploy:stage",
-    "deploy:stage": "pm2 deploy ecosystem.config.js stage",
-    "deploy:prod": "pm2 deploy ecosystem.config.js prod",
-    "analyzer": "NODE_ENV=production ANALYZER=true webpack"
+    "clean": "rm -rf ./dist/*"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-register": "^6.26.0",
-    "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
-    "file-loader": "^1.1.11",
-    "html-loader": "^0.5.5",
-    "koa-webpack": "^3.0.2",
-    "memory-fs": "^0.4.1",
-    "pm2": "^2.10.2",
-    "postcss-cssnext": "^3.1.0",
-    "postcss-import": "^11.1.0",
-    "postcss-loader": "^2.1.3",
-    "require-from-string": "^2.0.1",
-    "source-map-support": "^0.5.4",
-    "url-loader": "^1.0.1",
-    "vue-loader": "^14.2.2",
-    "vue-ssr-webpack-plugin": "^3.0.0",
-    "vue-style-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.5.0",
-    "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-cli": "^2.0.14",
-    "webpack-merge": "^4.1.2",
-    "webpack-node-externals": "^1.7.2"
-  },
+  "devDependencies": {},
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "chalk": "^2.3.2",
-    "detect-env": "^3.0.1",
-    "koa": "^2.5.0",
-    "koa-csp": "^1.0.11",
-    "koa-logger": "^3.2.0",
-    "koa-router": "^7.4.0",
-    "koa-static": "^4.0.2",
-    "normalize.css": "^8.0.0",
-    "superagent": "^3.8.2",
-    "vue": "^2.5.16",
-    "vue-router": "^3.0.1",
-    "vue-server-renderer": "^2.5.16",
-    "vuex": "^3.0.1"
-  },
-  "postcss": {
-    "plugins": {
-      "postcss-import": {},
-      "postcss-cssnext": {}
-    }
+    "commander": "^2.15.1",
+    "mustache": "^2.3.0",
+    "pify": "^3.0.0"
   }
 }

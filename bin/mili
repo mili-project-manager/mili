@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const { join } = require('path')
+const program = require('commander')
+const init = require('./init')
+const chalk = require('chalk')
+
+
+program
+  .version('0.1.0')
+
+program
+  .command('init [app_name]')
+  .description('initialize the project')
+  .option('-t --type [type]', 'Which app type to build.(web | component | electron)')
+  .action((appName, option) => {
+    if (!appName) {
+      console.log(chalk.red('mili init [app_name]: app_name should be set'))
+      return
+    }
+
+    console.log(chalk.green('initialize project ...'))
+    init(join(__dirname, '../template'), { appName })
+      .then(() => console.log(chalk.green('initialize complete')))
+      .catch(e => console.log(chalk.red('initialize break'), err))
+
+  })
+
+program.parse(process.argv)
