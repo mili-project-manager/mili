@@ -1,57 +1,6 @@
 #!/usr/bin/env node
+const { copyDir } = require('./utils')
 
-const fs = require('fs')
-const pify = require('pify')
-const { join } = require('path')
-const mustache = require('mustache')
-
-
-const readdir = pify(fs.readdir)
-const readFile = pify(fs.readFile)
-const writeFile = pify(fs.writeFile)
-const stat = pify(fs.stat)
-const access = pify(fs.access)
-const mkdir = pify(fs.mkdir)
-
-
-const projectPath = process.cwd()
-
-const copyDir = async ({ from, to, context }) => {
-  try { await access(to, fs.constants.W_OK) }
-  catch (e) { await mkdir(to) }
-
-  const files = await readdir(from, 'utf8')
-
-  const stats = await Promise.all(files.map(filename => {
-    return stat(join(from, filename)).then(stats => ({
-      isDir: stats.isDirectory(),
-      filename,
-    }))
-   }))
-
-  return await Promise.all(stats.map(({ isDir, filename }) => {
-    const param = {
-      from: join(from, filename),
-      to: join(to, filename),
-      context,
-    }
-
-    if (isDir) return copyDir(param)
-    else return copyFile(param)
-  }))
-}
-
-const copyFile = async ({ from , to , context }) => {
-  let content = await readFile(from, 'utf8')
-  const { encoding = 'utf8' } = context
-
-  if (/.mustache$/.test(from)) {
-    content = mustache.render(content, context)
-    return writeFile(to.replace(/.mustache$/, ''), content, encoding)
-  }
-
-  return writeFile(to, content, encoding)
-}
 
 module.exports = async (folder, context) => {
   await copyDir({ from: folder, to: process.cwd(), context })

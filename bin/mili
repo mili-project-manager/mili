@@ -10,6 +10,9 @@ program
   .version('0.1.0')
 
 program
+  .action(() => console.log('aaa'))
+
+program
   .command('init [app_name]')
   .description('initialize the project')
   .option('-t --type [type]', 'Which app type to build.(web | component | electron)')
@@ -24,6 +27,13 @@ program
       .then(() => console.log(chalk.green('initialize complete')))
       .catch(e => console.log(chalk.red('initialize break'), err))
 
+  })
+
+program
+  .command('upgrade')
+  .description('upgrade the mili framework')
+  .action(() => {
+    console.log('upgrade')
   })
 
 program.parse(process.argv)

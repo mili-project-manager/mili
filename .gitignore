@@ -3,6 +3,7 @@
 
 # Editor
 .vscode
+*.swp
 
 # NodeJS
 node_modules
@@ -15,9 +16,9 @@ yarn-error.log
 dist
 views/index.*.html
 
-# Vim
-*.swp
-
 # Lock
 yarn.lock
 package-lock.json
+
+# test
+demo/
