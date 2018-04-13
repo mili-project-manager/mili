@@ -10,7 +10,7 @@
     "node": ">=8.9.4"
   },
   "bin": {
-    "mili": "./bin/mikc.js"
+    "mili": "./bin/miki.js"
   },
   "scripts": {
     "clean": "rm -rf ./dist/*"
