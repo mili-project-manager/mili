@@ -8,7 +8,7 @@
 ## Install
 
 ```bash
-npm install mili
+npm install mili -D
 ```
 
 ## Usage
