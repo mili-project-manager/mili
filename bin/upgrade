@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+const { join, dirname } = require('path')
+const chalk = require('chalk')
+const { copyFile, copyDir, mergePackageJson, readPackageJson } = require('./utils')
+
+
+const covered = {
+  web: {
+    folders: [
+      'framework',
+      'build',
+    ],
+    files: [
+      '.babelrc',
+      '.editorconfig',
+      '.gitignore.mustache',
+      '.npmrc.mustache',
+      'webpack.config.babel.js',
+
+      'client/entry-ssr.js',
+      'client/entry-client.js',
+      'client/app.vue',
+      'client/createApp.js',
+      'client/createStore.js',
+      'client/createRouter.js',
+      'client/template.html',
+    ],
+  }
+}
+
+const upgrade = async ({ from, to, context, folders, files }) => {
+  mergePackageJson({ from, to, context })
+
+  const copyDirPromise = folders.map(folder => (
+    copyDir({ from: join(from, folder), to: join(to, folder), context })
+  ))
+
+  const copyFilePromise = files.map(file => (
+    copyFile({ from: join(from, file), to: join(to, file), context })
+  ))
+
+  return Promise.all([...copyDirPromise, ...copyFilePromise])
+}
+
+const uninitError = () => {
+  throw new Error('please init project use mili init [app_name]')
+}
+
+module.exports = async (context) => {
+  const config = await readPackageJson(process.cwd(), context)
+  if (!('type' in config.mili)) uninitError()
+
+  const { type } = config.mili
+  console.log(chalk.green(`${type} project`))
+
+  const { folders, files } = covered[type]
+  const from = join(__dirname, '../template')
+
+  await upgrade({ from, to: process.cwd(), folders, files, context })
+}

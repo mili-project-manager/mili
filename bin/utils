@@ -2,8 +2,9 @@
 
 const fs = require('fs')
 const pify = require('pify')
-const { join } = require('path')
+const { join, dirname } = require('path')
 const mustache = require('mustache')
+const jsonfile = require('jsonfile')
 
 
 const readdir = pify(fs.readdir)
@@ -12,6 +13,8 @@ const writeFile = pify(fs.writeFile)
 const stat = pify(fs.stat)
 const access = pify(fs.access)
 const mkdir = pify(fs.mkdir)
+const readJsonFile = pify(jsonfile.readFile)
+const writeJsonFile = pify(jsonfile.writeFile)
 
 
 const copyDir = async ({ from, to, context }) => {
@@ -51,4 +54,37 @@ const copyFile = async ({ from , to , context }) => {
   return writeFile(to, content, encoding)
 }
 
-module.exports = { copyDir, copyFile }
+const mergePackageJson = async ({ from, to, context }) => {
+  let content = await readJsonFile(join(from, 'package.json.mustache'), 'utf8')
+
+  const { encoding = 'utf8' } = context
+  let customContent = await readJsonFile(join(to, 'package.json'), encoding)
+
+  content = {
+    ...content,
+    ...customContent,
+    scripts: {
+      ...customContent.scripts,
+      ...content.scripts,
+    },
+    devDependencies: content.devDependencies,
+    dependencies: {
+      ...customContent.dependencies,
+      ...content.dependencies,
+    },
+    postcss: content.postcss,
+  }
+
+  await writeJsonFile(join(to, 'package.json'), content, { encoding, spaces: 2 })
+}
+
+const readPackageJson = async (folder, context) => {
+  const { encoding = 'utf8' } = context
+  const filePath = join(folder, 'package.json')
+
+  await access(filePath, fs.constants.R_OK)
+
+  return await readJsonFile(filePath, encoding)
+}
+
+module.exports = { copyDir, copyFile, mergePackageJson, readPackageJson }

@@ -2,8 +2,9 @@
 
 const { join } = require('path')
 const program = require('commander')
-const init = require('./init')
 const chalk = require('chalk')
+const init = require('./init')
+const upgrade = require('./upgrade')
 
 
 program
@@ -23,9 +24,9 @@ program
     }
 
     console.log(chalk.green('initialize project ...'))
-    init(join(__dirname, '../template'), { appName })
+    init('web', { appName })
       .then(() => console.log(chalk.green('initialize complete')))
-      .catch(e => console.log(chalk.red('initialize break'), err))
+      .catch(err => console.log(chalk.red('initialize break'), err))
 
   })
 
@@ -33,7 +34,10 @@ program
   .command('upgrade')
   .description('upgrade the mili framework')
   .action(() => {
-    console.log('upgrade')
+    console.log(chalk.green('upgrade project ...'))
+    upgrade({})
+      .then(() => console.log(chalk.green('upgrade complete')))
+      .catch(err => console.log(chalk.red('initialize break'), err))
   })
 
 program.parse(process.argv)

@@ -1,7 +1,10 @@
 #!/usr/bin/env node
+
+const { join } = require('path')
 const { copyDir } = require('./utils')
 
 
-module.exports = async (folder, context) => {
-  await copyDir({ from: folder, to: process.cwd(), context })
+module.exports = async (type, context) => {
+  const from = join(__dirname, '../template')
+  await copyDir({ from, to: process.cwd(), context })
 }
