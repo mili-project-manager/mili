@@ -13,9 +13,18 @@ npm install mili -D
 
 ## Usage
 
-### mili init [app_name]
+### mili init [option] [app_name]
 
 initial your project
+
+|  option  |      enum      | description |
+|:--------:|----------------|-------------|
+| -t -type | web, component | Which app type to build?
+
+
+### mili upgrade
+
+upgrade your project
 
 ## Technology Stack
 
