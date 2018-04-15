@@ -5,6 +5,6 @@ const { copyDir } = require('./utils')
 
 
 module.exports = async (type, context) => {
-  const from = join(__dirname, '../template')
+  const from = join(__dirname, '../template', type)
   await copyDir({ from, to: process.cwd(), context })
 }

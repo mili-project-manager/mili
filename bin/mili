@@ -5,29 +5,28 @@ const program = require('commander')
 const chalk = require('chalk')
 const init = require('./init')
 const upgrade = require('./upgrade')
+const { version: miliVersion } = require('../package.json')
 
 
 program
   .version('0.1.0')
 
 program
-  .action(() => console.log('aaa'))
-
-program
   .command('init [app_name]')
   .description('initialize the project')
-  .option('-t --type [type]', 'Which app type to build.(web | component | electron)')
+  .option('-t --type [type]', 'Which app type to build.(web | component)')
   .action((appName, option) => {
     if (!appName) {
       console.log(chalk.red('mili init [app_name]: app_name should be set'))
       return
     }
 
+    const { type = 'web' } = option
+
     console.log(chalk.green('initialize project ...'))
-    init('web', { appName })
+    init(type, { appName, miliVersion, encoding: 'utf8' })
       .then(() => console.log(chalk.green('initialize complete')))
       .catch(err => console.log(chalk.red('initialize break'), err))
-
   })
 
 program
@@ -35,7 +34,7 @@ program
   .description('upgrade the mili framework')
   .action(() => {
     console.log(chalk.green('upgrade project ...'))
-    upgrade({})
+    upgrade({ miliVersion, encoding: 'utf8' })
       .then(() => console.log(chalk.green('upgrade complete')))
       .catch(err => console.log(chalk.red('initialize break'), err))
   })

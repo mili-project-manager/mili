@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const pify = require('pify')
-const { join, dirname } = require('path')
+const { join, dirname, basename } = require('path')
 const mustache = require('mustache')
 const jsonfile = require('jsonfile')
 
@@ -14,7 +14,6 @@ const stat = pify(fs.stat)
 const access = pify(fs.access)
 const mkdir = pify(fs.mkdir)
 const readJsonFile = pify(jsonfile.readFile)
-const writeJsonFile = pify(jsonfile.writeFile)
 
 
 const copyDir = async ({ from, to, context }) => {
@@ -48,24 +47,44 @@ const copyFile = async ({ from , to , context }) => {
 
   if (/.mustache$/.test(from)) {
     content = mustache.render(content, context)
-    return writeFile(to.replace(/.mustache$/, ''), content, encoding)
+    to = to.replace(/.mustache$/, '')
+  }
+
+  if (basename(to) === 'package.json') {
+    const { encoding = 'utf8' } = context
+    let customContent = {}
+
+    try {
+      await access(to, fs.constants.R_OK)
+      customContent = await readJsonFile(to, encoding)
+    } catch (e) {
+      customContent = {}
+    }
+
+    content = mergePackageJson(JSON.parse(content), customContent)
   }
 
   return writeFile(to, content, encoding)
 }
 
-const mergePackageJson = async ({ from, to, context }) => {
-  let content = await readJsonFile(join(from, 'package.json.mustache'), 'utf8')
-
-  const { encoding = 'utf8' } = context
-  let customContent = await readJsonFile(join(to, 'package.json'), encoding)
-
+const mergePackageJson = (content, customContent) => {
   content = {
+    /**
+     * NOTE: The property order of the first parameter
+     *       determines the order of properties of
+     *       the generated file.
+     */
+    ...customContent,
     ...content,
     ...customContent,
     scripts: {
       ...customContent.scripts,
       ...content.scripts,
+    },
+    "deploy": {
+      ...customContent.deploy,
+      ...content.deploy,
+      ...customContent.deploy,
     },
     devDependencies: content.devDependencies,
     dependencies: {
@@ -74,8 +93,7 @@ const mergePackageJson = async ({ from, to, context }) => {
     },
     postcss: content.postcss,
   }
-
-  await writeJsonFile(join(to, 'package.json'), content, { encoding, spaces: 2 })
+  return JSON.stringify(content, null, ' ');
 }
 
 const readPackageJson = async (folder, context) => {

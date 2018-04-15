@@ -4,21 +4,24 @@ const { join } = require('path')
 
 const { name: APP_NAME, repository: REPO, deploy = {} } = require('./package.json')
 const serverPath = join('/var/www', APP_NAME)
-const { user, host } = deploy
+let { user, host, port, prod, dev } = deploy
 
-if (!user || !host) {
+if (!(
+  (prod.user || user) && (prod.host || host) && (prod.user || user) &&
+  (dev.user || user) && (dev.host || host) && (prod.user || user)
+)) {
   throw new Error('package.deploy should be be set correctly, please check your package.json')
 }
 
 module.exports = {
   apps: [
     {
-      name: `${APP_NAME}-stage`,
+      name: `${APP_NAME}-dev`,
       script: './dist/server/bundle.js',
       source_map_support: true,
 
-      env_stage: {
-        PORT: 5000,
+      env_dev: {
+        PORT: dev.port || port,
       },
     },
     {
@@ -26,7 +29,7 @@ module.exports = {
       script: './dist/server/bundle.js',
 
       env_prod: {
-        PORT: 6000,
+        PORT: prod.port || port,
       },
     },
   ],
@@ -40,21 +43,17 @@ module.exports = {
       path: join(serverPath, 'prod'),
       'post-deploy': `npm i; npm run build:prod; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-prod --env prod`,
 
-      env: {
-        NODE_ENV: 'prod',
-      },
+      env: { NODE_ENV: 'prod' },
     },
-    stage: {
+    dev: {
       user,
       host,
       ref: 'origin/dev',
       repo: REPO,
-      path: join(serverPath, 'stage'),
-      'post-deploy': `npm i; npm run build:prod; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-stage --env stage`,
+      path: join(serverPath, 'dev'),
+      'post-deploy': `npm i; npm run build:prod; pm2 startOrRestart ecosystem.config.js --only ${APP_NAME}-dev --env dev`,
     },
 
-    env: {
-      NODE_ENV: 'stage',
-    },
+    env: { NODE_ENV: 'dev' },
   },
 }

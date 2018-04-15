@@ -17,6 +17,7 @@ const covered = {
       '.gitignore.mustache',
       '.npmrc.mustache',
       'webpack.config.babel.js',
+      'package.json.mustache',
 
       'client/entry-ssr.js',
       'client/entry-client.js',
@@ -26,12 +27,22 @@ const covered = {
       'client/createRouter.js',
       'client/template.html',
     ],
+  },
+  component: {
+    folders: [],
+    files: [
+      '.babelrc',
+      '.editorconfig',
+      '.gitignore.mustache',
+      '.npmignore.mustache',
+      '.npmrc.mustache',
+      'package.json.mustache',
+      'rollup.config.js',
+    ],
   }
 }
 
 const upgrade = async ({ from, to, context, folders, files }) => {
-  mergePackageJson({ from, to, context })
-
   const copyDirPromise = folders.map(folder => (
     copyDir({ from: join(from, folder), to: join(to, folder), context })
   ))
@@ -40,7 +51,10 @@ const upgrade = async ({ from, to, context, folders, files }) => {
     copyFile({ from: join(from, file), to: join(to, file), context })
   ))
 
-  return Promise.all([...copyDirPromise, ...copyFilePromise])
+  return Promise.all([
+    ...copyDirPromise,
+    ...copyFilePromise,
+  ])
 }
 
 const uninitError = () => {
@@ -55,7 +69,7 @@ module.exports = async (context) => {
   console.log(chalk.green(`${type} project`))
 
   const { folders, files } = covered[type]
-  const from = join(__dirname, '../template')
+  const from = join(__dirname, `../template`, type)
 
   await upgrade({ from, to: process.cwd(), folders, files, context })
 }

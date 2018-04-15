@@ -1,0 +1,41 @@
+{
+  "name": "{{appName}}",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "ava",
+    "clean": "rm -rf ./dist/*",
+    "build": "npm run clean & rollup -c",
+    "prepublishOnly": "npm test; npm run build",
+    "precommit": "npm test"
+  },
+  "engines": { "node": ">=8.9.4" },
+  "mili": {
+    "type": "web",
+    "encoding": "{{encoding}}"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "sources": [
+      "src/**/*.js"
+    ],
+    "failFast": true,
+    "require": [
+      "babel-register"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^1.0.0-beta.3",
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.3.0"
+  }
+}
