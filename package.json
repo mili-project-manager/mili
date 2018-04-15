@@ -1,9 +1,23 @@
 {
   "name": "mili",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "vue + koa isomorphic boilerplate",
   "main": "index.js",
-  "repository": "https://github.com/Val-istar-Guo/vue-boilerplate.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Val-istar-Guo/vue-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Val-istar-Guo/vue-boilerplate/issues"
+  },
+  "homepage": "https://github.com/Val-istar-Guo/vue-boilerplate#readme",
+  "keywords": [
+    "mili",
+    "vue",
+    "koa",
+    "isomorphic",
+    "boilerplate"
+  ],
   "author": "Val.istar.Guo <Val.istar.Guo@gmail.com>",
   "license": "MIT",
   "engines": {
