@@ -19,10 +19,7 @@
   "dependencies": {
     "chalk": "^2.3.2",
     "commander": "^2.15.1",
-    "json-format": "^1.0.1",
-    "jsonfile": "^4.0.0",
     "mustache": "^2.3.0",
-    "pify": "^3.0.0",
-    "standard-json": "^1.0.2"
+    "pify": "^3.0.0"
   }
 }

@@ -4,7 +4,6 @@ const fs = require('fs')
 const pify = require('pify')
 const { join, dirname, basename } = require('path')
 const mustache = require('mustache')
-const jsonfile = require('jsonfile')
 
 
 const readdir = pify(fs.readdir)
@@ -13,7 +12,10 @@ const writeFile = pify(fs.writeFile)
 const stat = pify(fs.stat)
 const access = pify(fs.access)
 const mkdir = pify(fs.mkdir)
-const readJsonFile = pify(jsonfile.readFile)
+const readJsonFile = async (...arg) => {
+  const content = await readFile(...arg)
+  return JSON.parse(content)
+}
 
 
 const copyDir = async ({ from, to, context }) => {
@@ -56,6 +58,7 @@ const copyFile = async ({ from , to , context }) => {
 
     try {
       await access(to, fs.constants.R_OK)
+
       customContent = await readJsonFile(to, encoding)
     } catch (e) {
       customContent = {}
