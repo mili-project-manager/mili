@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist/*",
+    "upgrade": "mili upgrade",
     "build": "npm run clean & webpack",
     "build:prod": "NODE_ENV=production npm run build",
     "start": "node build/engine.js",
