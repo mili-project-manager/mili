@@ -84,11 +84,6 @@ const mergePackageJson = (content, customContent) => {
       ...customContent.scripts,
       ...content.scripts,
     },
-    deploy: {
-      ...customContent.deploy,
-      ...content.deploy,
-      ...customContent.deploy,
-    },
     mili: {
       ...customContent.mili,
       ...content.mili,
