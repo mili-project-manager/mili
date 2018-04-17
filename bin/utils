@@ -101,7 +101,7 @@ const mergePackageJson = (content, customContent) => {
     },
     postcss: content.postcss,
   }
-  return JSON.stringify(content, null, ' ');
+  return JSON.stringify(content, null, '  ');
 }
 
 const readPackageJson = async (folder, context) => {
