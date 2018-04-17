@@ -9,7 +9,7 @@ export default {
 
 }
 </script>
-<style scoped>
+<style lang="postcss" scoped>
 .page {
   text-align: center;
 }

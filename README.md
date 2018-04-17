@@ -8,18 +8,25 @@
 ## Install
 
 ```bash
-npm install mili -D
+// init an website
+npx mili init
+
+// init an component
+npx mili init -t component
 ```
 
 ## Usage
 
 ### mili init [option] [app_name]
 
-initial your project
+initial your project.
+if you don't set `app_name`, it will use the name of the current folder.
+by default, mili will init an website project， unless you set the `-t` or `--type`
 
-|  option  |      enum      | description |
-|:--------:|----------------|-------------|
-| -t -type | web, component | Which app type to build?
+
+|   option   |      enum      | default | description |
+|:----------:|----------------|---------|-------------|
+| -t --type  | web, component | web     | Which app type to build?
 
 
 ### mili upgrade
