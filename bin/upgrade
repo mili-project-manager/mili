@@ -18,6 +18,7 @@ const covered = {
       '.npmrc.mustache',
       'webpack.config.babel.js',
       'package.json.mustache',
+      'ecosystem.config.js',
 
       'client/entry-ssr.js',
       'client/entry-client.js',

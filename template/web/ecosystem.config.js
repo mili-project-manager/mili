@@ -7,8 +7,8 @@ const serverPath = join('/var/www', APP_NAME)
 let { user, host, port, prod, dev } = deploy
 
 if (!(
-  (prod.user || user) && (prod.host || host) && (prod.user || user) &&
-  (dev.user || user) && (dev.host || host) && (prod.user || user)
+  (prod.user || user) && (prod.host || host) && (prod.port || port) &&
+  (dev.user || user) && (dev.host || host) && (dev.port || port)
 )) {
   throw new Error('package.deploy should be be set correctly, please check your package.json')
 }
