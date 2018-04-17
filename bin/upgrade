@@ -21,7 +21,6 @@ const covered = {
 
       'client/entry-ssr.js',
       'client/entry-client.js',
-      'client/app.vue',
       'client/createApp.js',
       'client/createStore.js',
       'client/createRouter.js',
