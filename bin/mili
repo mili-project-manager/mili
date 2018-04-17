@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { join } = require('path')
+const { join, basename } = require('path')
 const program = require('commander')
 const chalk = require('chalk')
 const init = require('./init')
@@ -16,10 +16,8 @@ program
   .description('initialize the project')
   .option('-t --type [type]', 'Which app type to build.(web | component)')
   .action((appName, option) => {
-    if (!appName) {
-      console.log(chalk.red('mili init [app_name]: app_name should be set'))
-      return
-    }
+    if (!appName) appName = basename(process.cwd())
+    console.log(process.cwd(), basename(process.cwd()), appName)
 
     const { type = 'web' } = option
 
