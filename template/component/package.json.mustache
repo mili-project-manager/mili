@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "ava",
-    "upgrade": "mili upgrade",
+    "premili:upgrade": "npm install mili@latest -D",
+    "mili:upgrade": "mili upgrade",
     "clean": "rm -rf ./dist/*",
     "build": "npm run clean & rollup -c",
     "prepublishOnly": "npm test; npm run build",
