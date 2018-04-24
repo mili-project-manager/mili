@@ -25,8 +25,8 @@ require('babel-register')({
 const readFile = (fs, file) => {
   try {
     return fs.readFileSync(file, 'utf-8');
-  } catch (e) {
-    console.log(chalk.red(`[Server Engine] readFileError:(${file}) ${e.message}`));
+  } catch (err) {
+    log.error('read file', `filename: ${file}`, err);
   }
 }
 

@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
+const { readdirSync } = require('fs')
 const { join, basename } = require('path')
 const program = require('commander')
-const chalk = require('chalk')
+const log = require('./log')
 const init = require('./init')
 const upgrade = require('./upgrade')
 const { version: miliVersion } = require('../package.json')
 
+
+const types = readdirSync(join(__dirname, '../template')).reverse()
 
 program
   .version('0.1.0')
@@ -14,27 +17,33 @@ program
 program
   .command('init [app_name]')
   .description('initialize the project')
-  .option('-t --type [type]', 'Which app type to build.(web | component)')
+  .option('-t --type [type]', `Which app type to build.(${types.join(' | ')})`)
   .action((appName, option) => {
     if (!appName) appName = basename(process.cwd())
-    console.log(process.cwd(), basename(process.cwd()), appName)
 
     const { type = 'web' } = option
+    if (!types.includes(type)) {
+      log.error(
+        'option',
+        `-t --type [type] should be one of ${types.map(t => `'${t}'`).join(', ')}, but get '${type}'.`
+      )
+      return
+    }
 
-    console.log(chalk.green('initialize project ...'))
+    log.info('initialize project ...')
     init(type, { appName, miliVersion, encoding: 'utf8' })
-      .then(() => console.log(chalk.green('initialize complete')))
-      .catch(err => console.log(chalk.red('initialize break'), err))
+      .then(() => log.info('initialize complete'))
+      .catch(err => log.error('program', 'initialize break', err))
   })
 
 program
   .command('upgrade')
   .description('upgrade the mili framework')
   .action(() => {
-    console.log(chalk.green('upgrade project ...'))
+    log.info('upgrade project ...')
     upgrade({ miliVersion, encoding: 'utf8' })
-      .then(() => console.log(chalk.green('upgrade complete')))
-      .catch(err => console.log(chalk.red('initialize break'), err))
+      .then(() => log.info('upgrade complete'))
+      .catch(err => log.error('program', 'initialize break', err))
   })
 
 program.parse(process.argv)
