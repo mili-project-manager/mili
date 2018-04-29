@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 const { promisify } = require('util')
-const { join, dirname, basename } = require('path')
+const { join, dirname, basename, extname } = require('path')
 const mustache = require('mustache')
 
 
@@ -43,8 +43,17 @@ const copyDir = async ({ from, to, context }) => {
   }))
 }
 
+const binaryFileExtensions = ['.jpg', '.png', '.ico'];
 const copyFile = async ({ from , to , context }) => {
-  let content = await readFile(from, 'utf8')
+  let content = '';
+
+  if (binaryFileExtensions.includes(extname(to))) {
+    content = await readFile(from);
+  } else {
+    content = await readFile(from, 'utf8');
+  }
+
+
   const { encoding = 'utf8' } = context
 
   if (/.mustache$/.test(from)) {
@@ -67,7 +76,11 @@ const copyFile = async ({ from , to , context }) => {
     content = mergePackageJson(JSON.parse(content), customContent)
   }
 
-  return writeFile(to, content, encoding)
+  if (binaryFileExtensions.includes(extname(to))) {
+    return writeFile(to, content)
+  } else {
+    return writeFile(to, content, encoding)
+  }
 }
 
 const mergePackageJson = (content, customContent) => {
