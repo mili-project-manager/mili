@@ -20,6 +20,7 @@ const covered = {
       'package.json.mustache',
       'ecosystem.config.js',
 
+      'client/app.vue',
       'client/entry-ssr.js',
       'client/entry-client.js',
       'client/createApp.js',
@@ -39,7 +40,30 @@ const covered = {
       'package.json.mustache',
       'rollup.config.js',
     ],
-  }
+  },
+  pwa: {
+    folders: [
+      'framework',
+      'build',
+    ],
+    files: [
+      '.babelrc',
+      '.editorconfig',
+      '.gitignore.mustache',
+      '.npmrc.mustache',
+      'webpack.config.babel.js',
+      'package.json.mustache',
+      'ecosystem.config.js',
+
+      'client/app.vue',
+      'client/entry-ssr.js',
+      'client/entry-client.js',
+      'client/createApp.js',
+      'client/createStore.js',
+      'client/createRouter.js',
+      'client/template.html',
+    ],
+  },
 }
 
 const upgrade = async ({ from, to, context, folders, files }) => {
