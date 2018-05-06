@@ -24,9 +24,9 @@ if you don't set `app_name`, it will use the name of the current folder.
 by default, mili will init an website project， unless you set the `-t` or `--type`
 
 
-|   option   |      enum      | default | description |
-|:----------:|----------------|---------|-------------|
-| -t --type  | web, component | web     | Which app type to build?
+|   option   |                enum                | default | description |
+|:----------:|------------------------------------|---------|-------------|
+| -t --type  | web, component, pwa, assist-plugin | web     | Which app type to build?
 
 
 ### mili upgrade
