@@ -93,6 +93,7 @@ const mergePackageJson = (content, customContent) => {
     ...customContent,
     ...content,
     ...customContent,
+    main: content.main,
     scripts: {
       ...customContent.scripts,
       ...content.scripts,
