@@ -13,7 +13,21 @@ const babelLoader = {
       }
     ]],
   },
-};
+}
+
+const vueLoader =  {
+  loader: 'vue-loader',
+  options: {
+    loaders: {
+      js: [babelLoader],
+    },
+  },
+}
+
+const urlLoader = {
+  loader: 'url-loader',
+  options: { limit: 10000 },
+}
 
 export default {
   entry: './src/index.js',
@@ -21,12 +35,26 @@ export default {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     library: 'assistPlugin',
-    libraryTarget: 'jsonp',
+    // libraryTarget: 'jsonp',
   },
   mode: 'development',
   module: {
     rules: [
+      { test: /\.vue/, exclude: /node_modules/, use: [vueLoader] },
       { test: /\.js$/, exclude: /node_modules/, use: [babelLoader] },
+      { test: /\.html$/, use: 'html-loader' },
+      { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, use: [urlLoader] },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          'postcss-loader',
+        ],
+      },
     ]
   },
 }

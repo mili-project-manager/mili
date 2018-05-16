@@ -2,7 +2,7 @@
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
-[![dependencies](https://img.shields.io/david/expressjs/mili.svg)](https://www.npmjs.com/package/mili)
+[![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg)](https://www.npmjs.com/package/mili)
 
 
 ## Install
