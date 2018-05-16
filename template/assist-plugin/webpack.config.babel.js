@@ -35,9 +35,9 @@ export default {
     path: resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     library: 'assistPlugin',
-    // libraryTarget: 'jsonp',
+    libraryTarget: 'jsonp',
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
     rules: [
       { test: /\.vue/, exclude: /node_modules/, use: [vueLoader] },
