@@ -38,6 +38,7 @@ export default {
     libraryTarget: 'jsonp',
   },
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+  externals: { vuex: 'vuex' },
   module: {
     rules: [
       { test: /\.vue/, exclude: /node_modules/, use: [vueLoader] },
