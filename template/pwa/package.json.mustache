@@ -9,7 +9,7 @@
     "build": "npm run clean & webpack",
     "build:prod": "NODE_ENV=production npm run build",
     "start": "node build/engine.js",
-    "prestart:port": "NODE_ENV=production npm run build",
+    "prestart:pord": "NODE_ENV=production npm run build",
     "start:prod": "NODE_ENV=production node dist/server/bundle.js",
     "setup": "node run setup:stage",
     "setup:stage": "pm2 deploy ecosystem.config.js stage setup",
