@@ -1,6 +1,6 @@
 // Client entry file
-import Vue from 'vue';
-import createApp from './createApp';
+import Vue from 'vue'
+import createApp from './createApp'
 
 
 Vue.mixin({
@@ -13,17 +13,17 @@ Vue.mixin({
         route: to,
       })
       .then(next)
-      .catch(next);
+      .catch(next)
     } else {
-      next();
+      next()
     }
   }
-});
+})
 
-const { app, store } = createApp();
+const { app, store } = createApp()
 
 if (window.__INITIAL_STATE__) {
-  store.replaceState(window.__INITIAL_STATE__);
+  store.replaceState(window.__INITIAL_STATE__)
 }
 
 Vue.mixin({
@@ -33,9 +33,9 @@ Vue.mixin({
       initialData.call(this, {
         store: this.$store,
         route: this.$route,
-      });
+      })
     }
   },
-});
+})
 
-app.$mount('#app');
+app.$mount('#app')

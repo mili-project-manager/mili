@@ -11,11 +11,11 @@
   </div>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 export default {
   initialData: async function ({ store, route }) {
-    await store.dispatch('fetchValue', route.query.value || 0);
+    await store.dispatch('fetchValue', route.query.value || 0)
   },
 
   computed: {

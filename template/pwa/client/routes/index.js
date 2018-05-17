@@ -1,4 +1,4 @@
-import Example from '../views/example';
+import Example from '../views/example'
 
 
 export default [
@@ -13,4 +13,4 @@ export default [
       component: () => import('../views/test'),
     },
   ]},
-];
+]

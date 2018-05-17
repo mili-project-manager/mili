@@ -13,5 +13,5 @@ export default {
 </script>
 
 <style lang="postcss">
-@import './styles/index.css';
+@import './styles/index.css'
 </style>
