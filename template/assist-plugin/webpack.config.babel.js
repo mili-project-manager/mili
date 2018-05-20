@@ -58,4 +58,7 @@ export default {
       },
     ]
   },
+  resolve: {
+    extensions: ['.js', '.vue'],
+  },
 }
