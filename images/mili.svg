@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="49px" height="97px" viewBox="0 0 49 97" version="1.1" style="display: block; margin: 0 auto;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="151px" height="64px" viewBox="0 0 151 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
     <title>mili</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Artboard" transform="translate(-40.000000, -15.000000)" stroke="#333333" stroke-width="4">
-            <g id="Group" transform="translate(42.000000, 18.000000)">
-                <path d="M22.1413312,0.00572620843 C25.5803629,8.37383487 32.4004972,15.7767305 41.5418406,21.4845575 C43.7324035,28.5813671 45,36.9880413 45,46 C45,71.4050985 34.9264069,92 22.5,92 C10.0735931,92 0,71.4050985 0,46 C0,20.8397793 9.88033189,0.397472224 22.1413312,0.00572620843 Z" id="Combined-Shape"></path>
-                <path d="M42.8190169,26.2181172 C44.2172631,32.2103917 45,38.9183152 45,46 C45,71.4050985 34.9264069,92 22.5,92 C10.0735931,92 0,71.4050985 0,46 C0,20.8397793 9.88033189,0.397472224 22.1413312,0.00572620843 C22.1524657,0.0328194703 22.1636356,0.0599026143 22.1748409,0.0869756155 C24.0495295,14.2843872 32.4846141,25.2626277 42.8190169,26.2181172 Z" id="Combined-Shape"></path>
+        <g id="Artboard">
+            <g id="Group" transform="translate(20.000000, 10.000000)" stroke="#333333" stroke-width="2">
+                <path d="M11.3166804,5.10702591e-15 C13.0744078,4.09335175 16.5602547,7.71455894 21.2324975,10.5066047 C22.3521174,13.9780857 23,18.0903018 23,22.4985995 C23,34.9257798 17.8512746,45 11.5,45 C5.14872538,45 0,34.9257798 0,22.4985995 C0,10.1912038 5.04994741,0.191626826 11.3166804,-4.94529331e-13 Z" id="Combined-Shape"></path>
+                <path d="M21.8852753,12.8220763 C22.5999345,15.7532625 23,19.0345163 23,22.4985995 C23,34.9257798 17.8512746,45 11.5,45 C5.14872538,45 0,34.9257798 0,22.4985995 C0,10.1912038 5.04994741,0.191626826 11.3166804,-5.68467799e-13 C11.3223713,0.0132529638 11.3280804,0.0265009784 11.3338076,0.0397440316 C12.2919817,6.98456237 16.6032472,12.3546882 21.8852753,12.8220763 Z" id="Combined-Shape"></path>
             </g>
+            <text id="MILI" font-family="Orbitron-Regular, Orbitron" font-size="36" font-weight="normal" fill="#333333">
+                <tspan x="53" y="45">MILI</tspan>
+            </text>
         </g>
     </g>
 </svg>

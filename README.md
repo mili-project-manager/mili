@@ -1,7 +1,4 @@
-<div style="text-align: center;"><img src="https://github.com/Val-istar-Guo/mili/raw/master/images/mili.svg?sanitize=true" alt="logo" style="max-width:100%"/></div>
-
-
-# MILI
+# ![mili logo](./images/mili.svg)
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
