@@ -1,4 +1,5 @@
-<span style="display:block;text-align:center">![logo](./images/mili.svg)</span>
+<div style="text-align: center;"><img src="https://github.com/Val-istar-Guo/mili/raw/master/images/mili.svg?sanitize=true" alt="logo" style="max-width:100%"/><div>
+
 
 # MILI
 
