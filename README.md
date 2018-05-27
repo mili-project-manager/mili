@@ -1,4 +1,4 @@
-![logo](./images/mili.svg)
+<span style="display:block;text-align:center">![logo](./images/mili.svg)</span>
 
 # MILI
 
