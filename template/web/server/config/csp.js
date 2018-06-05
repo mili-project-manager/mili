@@ -6,7 +6,7 @@ export default env.detect({
   default: {
     policy: {
       // Vue need 'unsafe-eval'
-      'default-src': ['self', 'unsafe-eval', 'unsafe-inline', 'ws:'],
+      'default-src': ['self', 'unsafe-eval', 'unsafe-inline', 'ws:', 'data:'],
     },
   },
 });
