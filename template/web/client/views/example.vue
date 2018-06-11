@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div>
     <article>
       <h1>EXAMPLATE PAGE OF VUE-KOA BOILERPLATE</h1>

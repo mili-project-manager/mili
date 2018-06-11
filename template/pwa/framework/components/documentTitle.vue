@@ -1,4 +1,5 @@
-<template lang="html">
+<template>
+  <div style="display: none"></div>
 </template>
 <script>
 export default {
