@@ -103,7 +103,10 @@ const mergePackageJson = (content, customContent) => {
       ...content.mili,
       ...customContent.mili,
     },
-    devDependencies: content.devDependencies,
+    devDependencies: {
+      ...customContent.devDependencies,
+      ...content.devDependencies,
+    },
     dependencies: {
       ...customContent.dependencies,
       ...content.dependencies,
