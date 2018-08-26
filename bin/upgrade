@@ -38,7 +38,7 @@ const covered = {
       '.npmignore.mustache',
       '.npmrc.mustache',
       'package.json.mustache',
-      'rollup.config.js',
+      'build.config.js',
     ],
   },
   pwa: {
