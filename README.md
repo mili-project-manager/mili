@@ -9,10 +9,10 @@
 
 ```bash
 // init an website
-npx mili init
+npx mili@latest init
 
 // init an component
-npx mili init -t component
+npx mili@latest init -t component
 ```
 
 ## Usage
