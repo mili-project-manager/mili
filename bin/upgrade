@@ -20,6 +20,9 @@ const covered = {
       'package.json.mustache',
       'ecosystem.config.js',
       '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
+
       'client/app.vue',
       'client/entry-ssr.js',
       'client/entry-client.js',
@@ -38,6 +41,8 @@ const covered = {
       '.npmignore.mustache',
       '.npmrc.mustache',
       '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
       'package.json.mustache',
       'build.config.js',
       '.travis.yml',
@@ -57,6 +62,8 @@ const covered = {
       'package.json.mustache',
       'ecosystem.config.js',
       '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
 
       'client/app.vue',
       'client/entry-ssr.js',
