@@ -10,7 +10,9 @@
     "mili:upgrade": "mili upgrade",
     "clean": "rm -rf ./dist/*",
     "build": "npm run clean & rollup -c",
-    "prepublishOnly": "npm test; npm run build"
+    "prepublishOnly": "npm test; npm run build",
+    "ca": "git add -A && git-cz -av",
+    "commit": "git-cz"
   },
   "engines": { "node": ">=8.9.4" },
   "mili": {
@@ -44,7 +46,11 @@
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-json": "^3.0.0",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "@commitlint/cli": "^7.1.2",
+    "@commitlint/config-conventional": "^7.1.2"
   },
   "dependencies": {}
 }
