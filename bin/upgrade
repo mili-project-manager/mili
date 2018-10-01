@@ -39,6 +39,7 @@ const covered = {
       '.npmrc.mustache',
       'package.json.mustache',
       'build.config.js',
+      '.travis.yml',
     ],
   },
   pwa: {
