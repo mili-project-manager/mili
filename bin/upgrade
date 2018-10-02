@@ -19,6 +19,9 @@ const covered = {
       'webpack.config.babel.js',
       'package.json.mustache',
       'ecosystem.config.js',
+      '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
 
       'client/app.vue',
       'client/entry-ssr.js',
@@ -37,8 +40,12 @@ const covered = {
       '.gitignore.mustache',
       '.npmignore.mustache',
       '.npmrc.mustache',
+      '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
       'package.json.mustache',
       'build.config.js',
+      '.travis.yml',
     ],
   },
   pwa: {
@@ -54,6 +61,9 @@ const covered = {
       'webpack.config.babel.js',
       'package.json.mustache',
       'ecosystem.config.js',
+      '.huskyrc.yml',
+      '.czrc',
+      '.commitlintrc.yml',
 
       'client/app.vue',
       'client/entry-ssr.js',

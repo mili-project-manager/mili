@@ -11,6 +11,7 @@ export default class Server {
     this.__bundle = null;
     this.__manifest = null;
     this.__template = null;
+    this.__hmrMiddleware = null;
 
     // before server code compiled
     this.__requestHandler = (req,res) => {
@@ -21,13 +22,11 @@ export default class Server {
     // NOTE: should declare in constructor. Don't need to use .bind(this)
     this.__renderMiddleware = async (ctx, next) => {
       if (this.__renderer) {
-        await this.__renderer(ctx, next);
+        this.__renderer(ctx, next);
       } else {
         ctx.body = '⌛️ WAITTING FOR COMPLIATION! REFRESH IN A MOMENT';
       }
     };
-
-    this.__hmrMiddleware = null;
 
     this.__server = http
       .createServer(this.__requestHandler)
@@ -66,20 +65,17 @@ export default class Server {
   }
 
   set devCompiler(value) {
-    if (this.__hmrMiddleware) {
-      console.log(chalk.red('⚠️ devCompiler should not set again!'));
-      return;
-    }
-    this.__hmrMiddleware = webpackMiddleware({
+    webpackMiddleware({
       compiler: value,
-      dev: {
+      devMiddleware: {
         noInfo: true,
         stats: {
           colors: true,
           chunks: false,
         },
       },
-    });
+    })
+      .then(hmr => this.__hmrMiddleware = hmr)
   }
 
   /**
@@ -92,7 +88,10 @@ export default class Server {
 
     __server.removeListener('request', __requestHandler);
     this.__requestHandler = server
-      .use(__hmrMiddleware)
+      .use(async (ctx, next) => {
+        if (!__hmrMiddleware) ctx.body = '⌛️ WAITTING FOR COMPLIATION! REFRESH IN A MOMENT';
+        else __hmrMiddleware(ctx, next)
+      })
       .use(__renderMiddleware)
       .callback();
     __server.on("request", this.__requestHandler);
