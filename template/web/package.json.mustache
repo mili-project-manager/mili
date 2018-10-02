@@ -17,9 +17,7 @@
     "deploy": "npm run deploy:stage",
     "deploy:stage": "pm2 deploy ecosystem.config.js stage",
     "deploy:prod": "pm2 deploy ecosystem.config.js prod",
-    "analyzer": "NODE_ENV=production ANALYZER=true webpack",
-    "ca": "git add -A && git-cz -av",
-    "commit": "git-cz"
+    "analyzer": "NODE_ENV=production ANALYZER=true webpack"
   },
   "engines": { "node": ">=8.9.4" },
   "deploy": {
@@ -46,8 +44,7 @@
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
-    "husky": "^1.0.1",
-    "koa-webpack": "^5.0.2",
+    "koa-webpack": "^3.0.2",
     "memory-fs": "^0.4.1",
     "pm2": "^2.10.2",
     "postcss-cssnext": "^3.1.0",
@@ -56,19 +53,15 @@
     "require-from-string": "^2.0.1",
     "source-map-support": "^0.5.4",
     "url-loader": "^1.0.1",
-    "vue-loader": "^15.2.4",
+    "vue-loader": "^14.2.2",
     "vue-ssr-webpack-plugin": "^3.0.0",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.12.0",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.0.3",
+    "webpack": "^4.5.0",
+    "webpack-bundle-analyzer": "^2.11.1",
+    "webpack-cli": "^2.0.14",
     "webpack-merge": "^4.1.2",
-    "webpack-node-externals": "^1.7.2",
-    "commitizen": "^2.10.1",
-    "cz-conventional-changelog": "^2.1.0",
-    "@commitlint/cli": "^7.1.2",
-    "@commitlint/config-conventional": "^7.1.2"
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

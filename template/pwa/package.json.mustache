@@ -17,9 +17,7 @@
     "deploy": "npm run deploy:stage",
     "deploy:stage": "pm2 deploy ecosystem.config.js stage",
     "deploy:prod": "pm2 deploy ecosystem.config.js prod",
-    "analyzer": "NODE_ENV=production ANALYZER=true webpack",
-    "ca": "git add -A && git-cz -av",
-    "commit": "git-cz"
+    "analyzer": "NODE_ENV=production ANALYZER=true webpack"
   },
   "engines": { "node": ">=8.9.4" },
   "deploy": {
@@ -46,7 +44,7 @@
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
-    "husky": "^1.0.1",
+    "husky": "^0.14.3",
     "koa-webpack": "^5.0.2",
     "memory-fs": "^0.4.1",
     "pm2": "^2.10.4",
@@ -64,11 +62,7 @@
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.0.3",
     "webpack-merge": "^4.1.2",
-    "webpack-node-externals": "^1.7.2",
-    "commitizen": "^2.10.1",
-    "cz-conventional-changelog": "^2.1.0",
-    "@commitlint/cli": "^7.1.2",
-    "@commitlint/config-conventional": "^7.1.2"
+    "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",

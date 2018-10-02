@@ -1,4 +1,4 @@
-const babelLoader = {
+export default {
   loader: 'babel-loader',
   options: {
     presets: [[
@@ -11,9 +11,3 @@ const babelLoader = {
     ]],
   },
 };
-
-export default {
-  test: /\.js$/,
-  exclude: file => ( /node_modules/.test(file) && !/\.vue\.js/.test(file)),
-  use: [babelLoader],
-}
