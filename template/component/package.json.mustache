@@ -13,6 +13,7 @@
     "prepublishOnly": "npm test; npm run build",
     "ca": "git add -A && git-cz -av",
     "commit": "git-cz",
+    "release": "standard-version",
     "postpublish": "git push"
   },
   "engines": { "node": ">=8.9.4" },
@@ -51,7 +52,8 @@
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
     "@commitlint/cli": "^7.1.2",
-    "@commitlint/config-conventional": "^7.1.2"
+    "@commitlint/config-conventional": "^7.1.2",
+    "standard-version": "^4.4.0"
   },
   "dependencies": {}
 }
