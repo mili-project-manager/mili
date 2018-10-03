@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.0.7...v0.0.8) (2018-10-03)
+
+
+### Bug Fixes
+
+* **command:** project upgrade did not get the community profile feature ([06e3cf3](https://github.com/Val-istar-Guo/vue-boilerplate/commit/06e3cf3))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.0.5...v0.0.7) (2018-10-03)
 
