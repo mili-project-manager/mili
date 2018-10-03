@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.0.9...v0.1.0) (2018-10-03)
+
+
+### Features
+
+* **template:** push after publish ([031347d](https://github.com/Val-istar-Guo/vue-boilerplate/commit/031347d))
+
+
+
 <a name="0.0.9"></a>
 ## [0.0.9](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.0.8...v0.0.9) (2018-10-03)
 
