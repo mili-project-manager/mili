@@ -10,6 +10,7 @@ const covered = {
     folders: [
       'framework',
       'build',
+      '.github',
     ],
     files: [
       '.babelrc',
@@ -33,7 +34,9 @@ const covered = {
     ],
   },
   component: {
-    folders: [],
+    folders: [
+      '.github',
+    ],
     files: [
       '.babelrc',
       '.editorconfig',
@@ -52,6 +55,7 @@ const covered = {
     folders: [
       'framework',
       'build',
+      '.github',
     ],
     files: [
       '.babelrc',
