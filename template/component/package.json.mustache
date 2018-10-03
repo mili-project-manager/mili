@@ -12,7 +12,8 @@
     "build": "npm run clean & rollup -c",
     "prepublishOnly": "npm test; npm run build",
     "ca": "git add -A && git-cz -av",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "postpublish": "git push"
   },
   "engines": { "node": ">=8.9.4" },
   "mili": {
