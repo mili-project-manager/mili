@@ -1,6 +1,6 @@
 {
   "name": "mili",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "vue + koa isomorphic boilerplate",
   "main": "index.js",
   "repository": {
@@ -34,16 +34,21 @@
     "postpublish": "git push"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.1.2",
+    "@commitlint/cli": "^7.2.0",
     "@commitlint/config-conventional": "^7.1.2",
-    "commitizen": "^2.10.1",
+    "commitizen": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
-    "husky": "^1.0.1",
+    "husky": "^1.1.1",
+    "mustache": "^3.0.0",
     "standard-version": "^4.4.0"
   },
   "dependencies": {
-    "chalk": "^2.3.2",
-    "commander": "^2.15.1",
-    "mustache": "^2.3.0"
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "cosmiconfig": "^5.0.6",
+    "merge-deep": "^3.0.2",
+    "sanitization": "^0.3.0",
+    "semver": "^5.6.0",
+    "simple-git": "^1.104.0"
   }
 }

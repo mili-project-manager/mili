@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.1.0...v1.0.0) (2018-10-17)
+
+
+### Code Refactoring
+
+* separate the template from the scaffold ([6de2212](https://github.com/Val-istar-Guo/vue-boilerplate/commit/6de2212)), closes [#7](https://github.com/Val-istar-Guo/vue-boilerplate/issues/7)
+
+
+### Features
+
+* **template:** constraint version number and change log ([5500f8c](https://github.com/Val-istar-Guo/vue-boilerplate/commit/5500f8c))
+
+
+### BREAKING CHANGES
+
+* The option `-t` of `mili init` command is no long supported. And each template will
+become a independent project. If you want to upgrade the template, you need to manually configure
+.milirc, then run mili upgrade.
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v0.0.9...v0.1.0) (2018-10-03)
 

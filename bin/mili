@@ -3,47 +3,50 @@
 const { readdirSync } = require('fs')
 const { join, basename } = require('path')
 const program = require('commander')
-const log = require('./log')
+const log = require('../src/log')
 const init = require('./init')
 const upgrade = require('./upgrade')
-const { version: miliVersion } = require('../package.json')
+const { version } = require('../package.json')
 
-
-const types = readdirSync(join(__dirname, '../template')).reverse()
 
 program
-  .version('0.1.0')
+  .version(version)
 
 program
-  .command('init [app_name]')
+  .command('init [repository]')
+  .usage('[options] <repository>')
   .description('initialize the project')
-  .option('-t --type [type]', `Which app type to build.(${types.join(' | ')})`)
-  .action((appName, option) => {
-    if (!appName) appName = basename(process.cwd())
+  .option('-n --app-name [app_name]', `Set your app name.`)
+  .action((repository, option) => {
+    if (!repository) program.help()
 
-    const { type = 'web' } = option
-    if (!types.includes(type)) {
-      log.error(
-        'option',
-        `-t --type [type] should be one of ${types.map(t => `'${t}'`).join(', ')}, but get '${type}'.`
-      )
-      return
-    }
+    const { appName } = option
 
     log.info('initialize project ...')
-    init(type, { appName, miliVersion, encoding: 'utf8' })
+
+    return init(appName, repository)
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
 
 program
   .command('upgrade')
-  .description('upgrade the mili framework')
+  .description('upgrade the template')
   .action(() => {
-    log.info('upgrade project ...')
-    upgrade({ miliVersion, encoding: 'utf8' })
+    log.info('prepare upgrade')
+    upgrade()
       .then(() => log.info('upgrade complete'))
-      .catch(err => log.error('program', 'initialize break', err))
+      .catch(err => log.error('program', 'upgrade break', err))
   })
 
+
+// error on unknown commands
+program.on('command:*', function () {
+  log.error('command', 'Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
+  process.exit(1);
+});
+
+
 program.parse(process.argv)
+
+if (!process.argv.slice(2).length) program.help();

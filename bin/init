@@ -1,10 +1,58 @@
 #!/usr/bin/env node
+// const loadMiliConfig = require('../src/loadMiliConfig')
+const cloneRepository = require('../src/cloneRepository')
+const loadTemplateConfig = require('../src/loadTemplateConfig')
+const extractProgectBaseInfo = require('../src/extractProgectBaseInfo')
+const recommendFileEncoding = require('../src/recommendFileEncoding')
+const genFileList = require('../src/genFileList')
+const formatHandlers = require('../src/formatHandlers')
+const genTargetPath = require('../src/genTargetPath')
+const initialFolder = require('../src/initialFolder')
+const checkAndFormatView = require('../src/checkAndFormatView')
+const genMilirc = require('../src/genMilirc')
+const copy = require('../src/copy')
+const log = require('../src/log')
+const { join, basename } = require('path')
 
-const { join } = require('path')
-const { copyDir } = require('./utils')
+
+module.exports = async (name, repository) => {
+  // const miliConfig = await loadMiliConfig()
+  const templateProjectPath = await cloneRepository(repository)
+  const templateConfig = await loadTemplateConfig(templateProjectPath)
+  const templatePath = join(templateProjectPath, templateConfig.path)
+  const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
+
+  // basename(process.cwd())
+  // OPTIMIZE: Check mili version and remind user
+  // if (templateConfig.version > mili.version)
+
+  let files = await genFileList({ path: templatePath, upgrade: 'cover', handlers: [] }, templateConfig.rules)
+
+  const view = checkAndFormatView({
+    name: name || baseInfo.name || basename(process.cwd()),
+    repository: baseInfo.repository,
+    remotes: baseInfo.remotes,
+    template: { repository, version: templateConfig.version },
+  })
 
 
-module.exports = async (type, context) => {
-  const from = join(__dirname, '../template', type)
-  await copyDir({ from, to: process.cwd(), context })
+  const targetPath = process.cwd()
+  files = files
+    .map(file => ({
+      ...file,
+      view,
+      // 初始化仓库需要将所有keep模式更为cover模式
+      upgrade: file.upgrade === 'keep' ? 'cover' : file.upgrade,
+      encoding: file.encoding || recommendFileEncoding(file.path),
+    }))
+    .map(formatHandlers)
+    .map(genTargetPath(templatePath, targetPath))
+
+
+  log.info('initial folder')
+  await initialFolder(files)
+
+  log.info('copy files')
+  await Promise.all(files.map(copy))
+  await genMilirc(targetPath, view)
 }
