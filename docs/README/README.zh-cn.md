@@ -1,4 +1,4 @@
-# ![mili logo](./images/mili.svg)
+# ![mili logo](../../images/mili.svg)
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
