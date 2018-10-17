@@ -44,6 +44,11 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "commander": "^2.18.0"
+    "commander": "^2.19.0",
+    "cosmiconfig": "^5.0.6",
+    "merge-deep": "^3.0.2",
+    "sanitization": "^0.3.0",
+    "semver": "^5.6.0",
+    "simple-git": "^1.104.0"
   }
 }

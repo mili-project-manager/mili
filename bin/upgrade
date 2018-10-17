@@ -1,113 +1,68 @@
 #!/usr/bin/env node
+const loadMiliConfig = require('../src/loadMiliConfig')
+const cloneRepository = require('../src/cloneRepository')
+const loadTemplateConfig = require('../src/loadTemplateConfig')
+const extractProgectBaseInfo = require('../src/extractProgectBaseInfo')
+const recommendFileEncoding = require('../src/recommendFileEncoding')
+const genFileList = require('../src/genFileList')
+const formatHandlers = require('../src/formatHandlers')
+const genTargetPath = require('../src/genTargetPath')
+const initialFolder = require('../src/initialFolder')
+const checkAndFormatView = require('../src/checkAndFormatView')
+const genMilirc = require('../src/genMilirc')
+const copy = require('../src/copy')
+const log = require('../src/log')
+const semver = require('semver')
+const { join, basename } = require('path')
 
-const { join, dirname } = require('path')
-const log = require('./log')
-const { copyFile, copyDir, mergePackageJson, readPackageJson } = require('./utils')
+
+module.exports = async () => {
+  const miliConfig = await loadMiliConfig()
+  const repository = miliConfig.repository
+
+  console.log(miliConfig)
+  const templateProjectPath = await cloneRepository(repository)
+  const templateConfig = await loadTemplateConfig(templateProjectPath)
+
+  // miliConfig
+  if (semver.gte(miliConfig.version, templateConfig.version)) {
+    log.info('The template is already the latest version')
+    return
+  }
+
+  const templatePath = join(templateProjectPath, templateConfig.path)
+  const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
+
+  // basename(process.cwd())
+  // OPTIMIZE: Check mili version and remind user
+  // if (templateConfig.version > mili.version)
+
+  let files = await genFileList({ path: templatePath, upgrade: 'cover', handlers: [] }, templateConfig.rules)
+
+  const view = checkAndFormatView({
+    name: baseInfo.name || basename(process.cwd()),
+    repository: baseInfo.repository,
+    remotes: baseInfo.remotes,
+    template: { repository, version: templateConfig.version },
+  })
 
 
-const covered = {
-  web: {
-    folders: [
-      'framework',
-      'build',
-      '.github',
-    ],
-    files: [
-      '.babelrc',
-      '.editorconfig',
-      '.gitignore.mustache',
-      '.npmrc.mustache',
-      'webpack.config.babel.js',
-      'package.json.mustache',
-      'ecosystem.config.js',
-      '.huskyrc.yml',
-      '.czrc',
-      '.commitlintrc.yml',
+  const targetPath = process.cwd()
+  files = files
+    .filter(file => file.upgrade !== 'keep')
+    .map(file => ({
+      ...file,
+      view,
+      encoding: file.encoding || recommendFileEncoding(file.path),
+    }))
+    .map(formatHandlers)
+    .map(genTargetPath(templatePath, targetPath))
 
-      'client/app.vue',
-      'client/entry-ssr.js',
-      'client/entry-client.js',
-      'client/createApp.js',
-      'client/createStore.js',
-      'client/createRouter.js',
-      'client/template.html',
-    ],
-  },
-  component: {
-    folders: [
-      '.github',
-    ],
-    files: [
-      '.babelrc',
-      '.editorconfig',
-      '.gitignore.mustache',
-      '.npmignore.mustache',
-      '.npmrc.mustache',
-      '.huskyrc.yml',
-      '.czrc',
-      '.commitlintrc.yml',
-      'package.json.mustache',
-      'build.config.js',
-      '.travis.yml',
-    ],
-  },
-  pwa: {
-    folders: [
-      'framework',
-      'build',
-      '.github',
-    ],
-    files: [
-      '.babelrc',
-      '.editorconfig',
-      '.gitignore.mustache',
-      '.npmrc.mustache',
-      'webpack.config.babel.js',
-      'package.json.mustache',
-      'ecosystem.config.js',
-      '.huskyrc.yml',
-      '.czrc',
-      '.commitlintrc.yml',
 
-      'client/app.vue',
-      'client/entry-ssr.js',
-      'client/entry-client.js',
-      'client/createApp.js',
-      'client/createStore.js',
-      'client/createRouter.js',
-      'client/template.html',
-    ],
-  },
-}
+  log.info('check folder')
+  await initialFolder(files)
 
-const upgrade = async ({ from, to, context, folders, files }) => {
-  const copyDirPromise = folders.map(folder => (
-    copyDir({ from: join(from, folder), to: join(to, folder), context })
-  ))
-
-  const copyFilePromise = files.map(file => (
-    copyFile({ from: join(from, file), to: join(to, file), context })
-  ))
-
-  return Promise.all([
-    ...copyDirPromise,
-    ...copyFilePromise,
-  ])
-}
-
-const uninitError = () => {
-  throw new Error('please init project use mili init [app_name]')
-}
-
-module.exports = async (context) => {
-  const config = await readPackageJson(process.cwd(), context)
-  if (!('type' in config.mili)) uninitError()
-
-  const { type } = config.mili
-  log.info(`${type} project`)
-
-  const { folders, files } = covered[type]
-  const from = join(__dirname, `../template`, type)
-
-  await upgrade({ from, to: process.cwd(), folders, files, context })
+  log.info('upgrading...')
+  await Promise.all(files.map(copy))
+  await genMilirc(targetPath, view)
 }

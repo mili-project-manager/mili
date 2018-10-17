@@ -5,48 +5,31 @@
 [![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 
 
-## Install
+**Projects that derived from the same scaffolding, have evolved over time and become different.**
+Scaffolding lost control of the subsequent development of the project.
+When we need to improve some of the basic functions of scaffolding(e.g. eslint rules), we need to modify each project, and even have to design a customized solution for some unrecognizable projects.
 
-```bash
-// init an website
-npx mili@latest init
+Therefore, in order to improve the control ability of scaffolding for the subsequent development of the project,
+mili allows scaffolding to cure some files and provide upgrades for this part of the files.
 
-// init an component
-npx mili@latest init -t component
-```
 
 ## Usage
 
-### mili init [option] [app_name]
+```
+npx mili init https://github.com/Val-istar-Guo/mili-template.git
 
-initial your project.
-if you don't set `app_name`, it will use the name of the current folder.
-by default, mili will init an website project， unless you set the `-t` or `--type`
+mili upgrade
+```
 
+## Shell
 
-|   option   |                enum                | default | description |
-|:----------:|------------------------------------|---------|-------------|
-| -t --type  | web, component, pwa, assist-plugin | web     | Which app type to build?
+**mili init [option] [repository]**
 
+init project
+options:
+* `-n` or `--app-name` set application name（defaulted: name in package.json || progress.cwd())
 
-### mili upgrade
+**mili upgrade**
 
-upgrade your project
+upgrade you project if then template depended outdated.
 
-## Technology Stack
-
-- vue
--  - vuex
--  - vue-router
--  - vue-server-renderer
-- koa
--  - koa-router
--  - koa-logger
--  - koa-proxy
--  - koa-static
--  - koa-views
-- superagent
-- chalk
-- webpack
-- babel
-- pm2
