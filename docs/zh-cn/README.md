@@ -64,6 +64,8 @@ npx mili init https://github.com/Val-istar-Guo/mili-template.git
 
 ## 模版入口文件/配置文件字段
 
+[模版开发规范](https://github.com/Val-istar-Guo/mili/blob/v1.0.0/docs/zh-cn/TemplateDevelopment.md)
+
 模板入口文件/配置文件可以为json/yml/js格式。需要含有以下一些字段
 
 **config.path**
