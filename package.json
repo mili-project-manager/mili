@@ -39,7 +39,6 @@
     "commitizen": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^1.1.1",
-    "mustache": "^3.0.0",
     "standard-version": "^4.4.0"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
     "merge-deep": "^3.0.2",
     "sanitization": "^0.3.0",
     "semver": "^5.6.0",
-    "simple-git": "^1.104.0"
+    "simple-git": "^1.104.0",
+    "mustache": "^3.0.0"
   }
 }
