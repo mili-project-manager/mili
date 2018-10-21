@@ -15,9 +15,7 @@ module.exports = v => {
       const matched = url.match(gitUrlRegexp)
       if (matched) {
         const [, , , , , , , links] = matched
-        console.log(links)
         const [user, name] = links.split('/').slice(-2)
-        console.log(user, name)
         view.repository = { ...view.repository, type: 'github', user, name }
       }
     }
