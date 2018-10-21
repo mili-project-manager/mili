@@ -1,24 +1,65 @@
 const fs = require('fs')
+const { extname, basename } = require('path')
 const { promisify } = require('util')
-const { join, dirname } = require('path')
 
 
 const readFile = promisify(fs.readFile)
 const writeFile = promisify(fs.writeFile)
-const access = promisify(fs.access)
-const mkdir = promisify(fs.mkdir)
+
+const commentator = [
+  {
+    filenames: [],
+    extnames: ['.js', '.ts'],
+    create: (upgrade) => ([
+      `// mili upgrade type: ${upgrade}`,
+    ].join('\n')),
+  },
+  {
+    filenames: [],
+    extnames: ['.md'],
+    create: (upgrade) => ([
+      `<!-- mili upgrade type: ${upgrade} -->`,
+    ].join('\n')),
+  },
+  {
+    filenames: ['.gitignore', '.npmrc'],
+    extnames: ['.yml', '.yaml'],
+    create: (upgrade) => ([
+      `# mili upgrade type: ${upgrade}`,
+    ].join('\n')),
+  },
+]
 
 
+const appendFileHeader = file => {
+  const ext = extname(file.targetPath)
+  const filename = basename(file.targetPath)
+  const cm = commentator.find(handler => (
+    handler.extnames.includes(ext) || handler.filenames.includes(filename)
+  ))
 
-module.exports = async ({ path, view , handlers, encoding, targetPath }, root) => {
+  if (!cm) return file
 
-  // 提前做
-  // await ensureDirectoryExistence(targetPath)
+  if (file.upgrade === 'cover') {
+    const comment = cm.create(file.upgrade, 'This file will be cover when upgrade template')
+    return { ...file, content: `${comment}\n${file.content}` }
+  } else if (file.upgrade === 'merge') {
+    const comment = cm.create(file.upgrade, 'This file will be merge when upgrade template')
+    return { ...file, content: `${comment}\n${file.content}` }
+  }
+
+  return file
+}
+
+
+module.exports = async ({ upgrade, path, view , handlers, encoding, targetPath }, root) => {
   const content = await readFile(path, encoding)
-  file = handlers.reduce(
+  let file = handlers.reduce(
     (file, handler) => handler.genFile(file),
-    { path, view, content, encoding, targetPath }
+    { path, view, content, upgrade, encoding, targetPath }
   )
+
+  file = appendFileHeader(file)
 
   await writeFile(targetPath, file.content, encoding)
 }

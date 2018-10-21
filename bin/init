@@ -42,7 +42,6 @@ module.exports = async (name, repository) => {
       ...file,
       view,
       // 初始化仓库需要将所有keep模式更为cover模式
-      upgrade: file.upgrade === 'keep' ? 'cover' : file.upgrade,
       encoding: file.encoding || recommendFileEncoding(file.path),
     }))
     .map(formatHandlers)
