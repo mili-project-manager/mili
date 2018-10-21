@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.1.0...v1.1.1) (2018-10-21)
+
+
+### Bug Fixes
+
+* compatible with the case where the repository field is a string ([d28a3e4](https://github.com/Val-istar-Guo/vue-boilerplate/commit/d28a3e4))
+* git link parse error ([2528e96](https://github.com/Val-istar-Guo/vue-boilerplate/commit/2528e96))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.0.1...v1.1.0) (2018-10-21)
 
