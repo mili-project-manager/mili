@@ -60,10 +60,10 @@ module.exports = async templatePath => {
 
   const entryPath = join(templatePath, packageJson.main)
 
-  const config = await loadEntryFile(entryPath)
+  let config = await loadEntryFile(entryPath)
 
   try {
-    checkConfig(config)
+    config = checkConfig(config)
   } catch(e) {
     throwError('Template configuration error')
   }
