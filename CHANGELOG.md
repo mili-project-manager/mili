@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.0.1...v1.1.0) (2018-10-21)
+
+
+### Bug Fixes
+
+* **merge:** file merge handler unusable ([a24b479](https://github.com/Val-istar-Guo/vue-boilerplate/commit/a24b479)), closes [#19](https://github.com/Val-istar-Guo/vue-boilerplate/issues/19)
+
+
+### Features
+
+* add a comment indicating the upgrade type of file ([18d2cbd](https://github.com/Val-istar-Guo/vue-boilerplate/commit/18d2cbd)), closes [#15](https://github.com/Val-istar-Guo/vue-boilerplate/issues/15)
+* add update command ([01b8fed](https://github.com/Val-istar-Guo/vue-boilerplate/commit/01b8fed)), closes [#16](https://github.com/Val-istar-Guo/vue-boilerplate/issues/16)
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.0.0...v1.0.1) (2018-10-18)
 
