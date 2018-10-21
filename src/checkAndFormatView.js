@@ -1,6 +1,9 @@
 const { version } = require('../package.json')
 
 
+
+const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
+
 module.exports = v => {
   const view = { ...v }
 
@@ -9,9 +12,12 @@ module.exports = v => {
     if (/github.com/.test(url)) {
       view.repository = { ...view.repository, type: 'github' }
 
-      const matched = url.match(/([-a-zA-Z0-9@:%_\+.~#?&=]+)\/([-a-zA-Z0-9@:%_\+.~#?&=]+)(?=\.git$)/)
+      const matched = url.match(gitUrlRegexp)
       if (matched) {
-        const [, user, name] = matched
+        const [, , , , , , , links] = matched
+        console.log(links)
+        const [user, name] = links.split('/').slice(-2)
+        console.log(user, name)
         view.repository = { ...view.repository, type: 'github', user, name }
       }
     }
