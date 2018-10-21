@@ -3,6 +3,8 @@ const git = require('simple-git/promise')
 const { readJson } = require('./utils')
 
 
+const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
+
 module.exports = async path => {
   const view = {}
 
@@ -11,9 +13,14 @@ module.exports = async path => {
     view.name = config.name,
     view.version = config.version
     view.description = config.description
-    view.repository = config.repository
     view.keywords = config.keywords
     view.author = config.author
+
+    if (typeof config.repository === 'string' && gitUrlRegexp.test(config.repository)) {
+      view.repository = { url: config.repository }
+    } else if (typeof config.repository === 'object') {
+      view.repository = config.repository
+    }
   } catch(e) {
     // NOTE: don't care
   }
