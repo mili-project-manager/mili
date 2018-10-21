@@ -14,55 +14,59 @@ const copy = require('../src/copy')
 const log = require('../src/log')
 const semver = require('semver')
 const { join, basename } = require('path')
+const git = require('simple-git/promise')
 
 
 module.exports = async () => {
   const miliConfig = await loadMiliConfig()
   const repository = miliConfig.repository
 
-  console.log(miliConfig)
-  const templateProjectPath = await cloneRepository(repository)
-  const templateConfig = await loadTemplateConfig(templateProjectPath)
+  const { templatePath: templateProjectPath, currentBranch  } = await cloneRepository(repository)
+  try {
+    const templateConfig = await loadTemplateConfig(templateProjectPath)
 
-  // miliConfig
-  if (semver.gte(miliConfig.version, templateConfig.version)) {
-    log.info('The template is already the latest version')
-    return
+    // miliConfig
+    if (semver.gte(miliConfig.version, templateConfig.version)) {
+      log.info('The template is already the latest version')
+      return
+    }
+
+    const templatePath = join(templateProjectPath, templateConfig.path)
+    const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
+
+    // basename(process.cwd())
+    // OPTIMIZE: Check mili version and remind user
+    // if (templateConfig.version > mili.version)
+
+    let files = await genFileList({ path: templatePath, upgrade: 'cover', handlers: [] }, templateConfig.rules)
+
+    const view = checkAndFormatView({
+      name: baseInfo.name || basename(process.cwd()),
+      repository: baseInfo.repository,
+      remotes: baseInfo.remotes,
+      template: { repository, version: templateConfig.version },
+    })
+
+
+    const targetPath = process.cwd()
+    files = files
+      .filter(file => file.upgrade !== 'keep')
+      .map(file => ({
+        ...file,
+        view,
+        encoding: file.encoding || recommendFileEncoding(file.path),
+      }))
+      .map(formatHandlers)
+      .map(genTargetPath(templatePath, targetPath))
+
+
+    log.info('check folder')
+    await initialFolder(files)
+
+    log.info('upgrading...')
+    await Promise.all(files.map(copy))
+    await genMilirc(targetPath, view)
+  } finally {
+    await git(templateProjectPath).checkout(currentBranch )
   }
-
-  const templatePath = join(templateProjectPath, templateConfig.path)
-  const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
-
-  // basename(process.cwd())
-  // OPTIMIZE: Check mili version and remind user
-  // if (templateConfig.version > mili.version)
-
-  let files = await genFileList({ path: templatePath, upgrade: 'cover', handlers: [] }, templateConfig.rules)
-
-  const view = checkAndFormatView({
-    name: baseInfo.name || basename(process.cwd()),
-    repository: baseInfo.repository,
-    remotes: baseInfo.remotes,
-    template: { repository, version: templateConfig.version },
-  })
-
-
-  const targetPath = process.cwd()
-  files = files
-    .filter(file => file.upgrade !== 'keep')
-    .map(file => ({
-      ...file,
-      view,
-      encoding: file.encoding || recommendFileEncoding(file.path),
-    }))
-    .map(formatHandlers)
-    .map(genTargetPath(templatePath, targetPath))
-
-
-  log.info('check folder')
-  await initialFolder(files)
-
-  log.info('upgrading...')
-  await Promise.all(files.map(copy))
-  await genMilirc(targetPath, view)
 }

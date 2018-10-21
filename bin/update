@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// const loadMiliConfig = require('../src/loadMiliConfig')
+const loadMiliConfig = require('../src/loadMiliConfig')
 const cloneRepository = require('../src/cloneRepository')
 const loadTemplateConfig = require('../src/loadTemplateConfig')
 const extractProgectBaseInfo = require('../src/extractProgectBaseInfo')
@@ -16,11 +16,14 @@ const { join, basename } = require('path')
 const git = require('simple-git/promise')
 
 
-module.exports = async (name, repository) => {
-  // const miliConfig = await loadMiliConfig()
-  const { templatePath: templateProjectPath, currentBranch } = await cloneRepository(repository)
+module.exports = async () => {
+  const miliConfig = await loadMiliConfig()
+  const repository = miliConfig.repository
+
+  const { templatePath: templateProjectPath, currentBranch  } = await cloneRepository(repository, miliConfig.version)
   try {
     const templateConfig = await loadTemplateConfig(templateProjectPath)
+
     const templatePath = join(templateProjectPath, templateConfig.path)
     const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
 
@@ -31,7 +34,7 @@ module.exports = async (name, repository) => {
     let files = await genFileList({ path: templatePath, upgrade: 'cover', handlers: [] }, templateConfig.rules)
 
     const view = checkAndFormatView({
-      name: name || baseInfo.name || basename(process.cwd()),
+      name: baseInfo.name || basename(process.cwd()),
       repository: baseInfo.repository,
       remotes: baseInfo.remotes,
       template: { repository, version: templateConfig.version },
@@ -40,22 +43,23 @@ module.exports = async (name, repository) => {
 
     const targetPath = process.cwd()
     files = files
+      .filter(file => file.upgrade !== 'keep')
       .map(file => ({
         ...file,
         view,
-        // 初始化仓库需要将所有keep模式更为cover模式
         encoding: file.encoding || recommendFileEncoding(file.path),
       }))
       .map(formatHandlers)
       .map(genTargetPath(templatePath, targetPath))
 
 
-    log.info('initial folder')
+    log.info('check folder')
     await initialFolder(files)
 
-    log.info('copy files')
+    log.info('upgrading...')
     await Promise.all(files.map(copy))
     await genMilirc(targetPath, view)
+
   } finally {
     await git(templateProjectPath).checkout(currentBranch )
   }

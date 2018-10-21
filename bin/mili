@@ -6,6 +6,7 @@ const program = require('commander')
 const log = require('../src/log')
 const init = require('./init')
 const upgrade = require('./upgrade')
+const update = require('./update')
 const { version } = require('../package.json')
 
 
@@ -37,6 +38,16 @@ program
     upgrade()
       .then(() => log.info('upgrade complete'))
       .catch(err => log.error('program', 'upgrade break', err))
+  })
+
+program
+  .command('update')
+  .description('Update the project with the current version of the template')
+  .action(() => {
+    log.info('prepare update')
+    update()
+      .then(() => log.info('update complete'))
+      .catch(err => log.error('program', 'update break', err))
   })
 
 
