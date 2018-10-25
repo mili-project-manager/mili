@@ -44,7 +44,6 @@ module.exports = async (repository, version) => {
 
     gitT.checkout(version)
   } else if (tags.length) {
-    console.log(tags)
     await gitT.checkout(tags[0])
   }
 
