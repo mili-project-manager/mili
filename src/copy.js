@@ -17,6 +17,7 @@ const commentator = [
   {
     filenames: [],
     // extnames: ['.md'],
+    extnames: [],
     create: (upgrade) => ([
       `<!-- mili upgrade type: ${upgrade} -->`,
     ].join('\n')),
