@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.1.3...v1.1.4) (2018-10-25)
+
+
+### Bug Fixes
+
+* **copy:** commentator.extnames is undefined ([28570d1](https://github.com/Val-istar-Guo/vue-boilerplate/commit/28570d1)), closes [#24](https://github.com/Val-istar-Guo/vue-boilerplate/issues/24)
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.1.2...v1.1.3) (2018-10-23)
 
