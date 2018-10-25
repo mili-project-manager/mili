@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.1.4...v1.2.0) (2018-10-25)
+
+
+### Bug Fixes
+
+* **clone:** version order error ([c9ee866](https://github.com/Val-istar-Guo/vue-boilerplate/commit/c9ee866))
+* **handler:** unable to recognize functional handler ([6b0000a](https://github.com/Val-istar-Guo/vue-boilerplate/commit/6b0000a))
+
+
+### Features
+
+* **handler:** new handler to get content area from project file ([217267a](https://github.com/Val-istar-Guo/vue-boilerplate/commit/217267a)), closes [#22](https://github.com/Val-istar-Guo/vue-boilerplate/issues/22)
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.1.3...v1.1.4) (2018-10-25)
 
