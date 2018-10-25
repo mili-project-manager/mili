@@ -22,6 +22,7 @@ module.exports = v => {
   }
 
   view.mili = { version }
+  view.custom = {}
 
   return view
 }
