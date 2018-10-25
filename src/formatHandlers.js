@@ -9,7 +9,7 @@ module.exports = file => {
     if (typeof handler === 'string' && (handler in handlers)) return effectiveHandlers.push(handlers[handler])
     if (typeof handler === 'function') {
       const h = handler(handlers)
-      if (h.mili_type === 'hander') return effectiveHandlers.push(h)
+      if (h.mili_type === 'handler') return effectiveHandlers.push(h)
     }
 
     log.error('handler', [
