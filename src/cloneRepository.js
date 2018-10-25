@@ -4,6 +4,7 @@ const { join } = require('path')
 const paths = require('./paths')
 const { promisify } = require('util')
 const throwError = require('./throwError')
+const semver = require('semver')
 
 
 const access = promisify(fs.access)
@@ -21,7 +22,11 @@ module.exports = async (repository, version) => {
   }
 
   const gitT = git(templatePath)
-  const tags = await gitT.tags()
+  let tags = await gitT.tags()
+  tags = tags.all
+    .filter(semver.valid)
+    .sort(semver.compare)
+    .reverse()
 
   const branchSummary = await gitT.branch()
   const currentBranch = branchSummary.current
@@ -38,8 +43,9 @@ module.exports = async (repository, version) => {
     }
 
     gitT.checkout(version)
-  } else if (tags.latest) {
-    await gitT.checkout(tags.latest)
+  } else if (tags.length) {
+    console.log(tags)
+    await gitT.checkout(tags[0])
   }
 
   return { templatePath, currentBranch }
