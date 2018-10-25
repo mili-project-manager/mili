@@ -21,7 +21,7 @@ A clear and concise description of what you expected to happen.
  - Device: [e.g. Mac, Windows, iPhone6]
  - OS: [e.g. iOS8.2]
  - Environment: [e.g. nodejs, chrome, safari]
- - Version [e.g. 6.1.2]
+ - Version: [e.g. 6.1.2]
 
 **Additional context**
 Add any other context about the problem here.
