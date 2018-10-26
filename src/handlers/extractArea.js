@@ -13,8 +13,6 @@ module.exports = (name, begin, end = begin) => createHandler(file => {
 
     if (beginIndex && endIndex) {
       file.view.custom[name] = file.targetFile.content.substring(beginIndex, endIndex)
-      console.log(file.view.custom)
-
     }
   }
 
