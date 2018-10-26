@@ -14,8 +14,8 @@ const mergeJson = file => {
   } catch (e) {
     log.error('merge', [
       'The template file and the current file failed to merge due to a json syntax error in the template file.',
-      'The current file will be overwritten directly by the template file.'
-      `path: ${file.targetPath}`
+      'The current file will be overwritten directly by the template file.',
+      `path: ${file.targetPath}`,
     ].join('\n'))
     return file
   }
