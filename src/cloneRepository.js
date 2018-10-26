@@ -31,10 +31,9 @@ module.exports = async (repository, version) => {
   const branchSummary = await gitT.branch()
   const currentBranch = branchSummary.current
 
-
   if (version) {
     version = `v${version}`
-    if (!tags.all.includes(version)) {
+    if (!tags.includes(version)) {
       throwError([
         'No corresponding template version was found',
         'Please confirm that the version number exists in the tags of the template repository.',
