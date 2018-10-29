@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.2.1...v1.3.0) (2018-10-29)
+
+
+### Bug Fixes
+
+* **encoding:** encoding for binary file ([a50482c](https://github.com/Val-istar-Guo/vue-boilerplate/commit/a50482c))
+
+
+### Features
+
+* add new upgrade type 'exist' ([4df7db6](https://github.com/Val-istar-Guo/vue-boilerplate/commit/4df7db6)), closes [#27](https://github.com/Val-istar-Guo/vue-boilerplate/issues/27)
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.2.0...v1.2.1) (2018-10-26)
 
