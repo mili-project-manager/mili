@@ -24,5 +24,6 @@ module.exports = file => {
   })
 
   if (file.upgrade === 'merge') effectiveHandlers.push(handlers.merge)
+  if (file.upgrade === 'exist') effectiveHandlers.push(handlers.exist)
   return { ...file, handlers: effectiveHandlers }
 }
