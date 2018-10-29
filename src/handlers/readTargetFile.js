@@ -7,7 +7,6 @@ module.exports = file => {
   try {
     fs.accessSync(file.targetPath, fs.constants.F_OK)
   } catch(e) {
-    console.log('exist', e)
     return { ...file, targetFile: { exist: false } }
   }
 
