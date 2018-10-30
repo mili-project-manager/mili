@@ -47,7 +47,7 @@ const checkConfig = sa.keys({
   engines: sa.string.required,
   rules: sa.each({
     path: sa.string.required,
-    upgrade: sa.valid(['cover', 'keep', 'merge']),
+    upgrade: sa.valid(['cover', 'keep', 'exist', 'merge']),
     handler: sa.any,
     handlers: sa.array,
   }),
