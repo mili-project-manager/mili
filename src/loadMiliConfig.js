@@ -1,5 +1,6 @@
 const cosmiconfig = require('cosmiconfig')
 const semver = require('semver')
+const throwError = require('./throwError')
 
 
 const explorer = cosmiconfig('mili')
