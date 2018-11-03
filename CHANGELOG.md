@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.3.2...v1.3.3) (2018-11-03)
+
+
+### Bug Fixes
+
+* extract unexpect string when cannot find tag ([2c16b3c](https://github.com/Val-istar-Guo/vue-boilerplate/commit/2c16b3c))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.3.1...v1.3.2) (2018-11-02)
 
