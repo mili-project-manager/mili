@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.3.3...v1.4.0) (2018-11-04)
+
+
+### Bug Fixes
+
+* get latest version of template when run update ([5d74d50](https://github.com/Val-istar-Guo/vue-boilerplate/commit/5d74d50))
+
+
+### Features
+
+* add the command clean cache ([4d7c6df](https://github.com/Val-istar-Guo/vue-boilerplate/commit/4d7c6df)), closes [#25](https://github.com/Val-istar-Guo/vue-boilerplate/issues/25)
+* check the mili version of template ([b94cd59](https://github.com/Val-istar-Guo/vue-boilerplate/commit/b94cd59)), closes [#30](https://github.com/Val-istar-Guo/vue-boilerplate/issues/30)
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.3.2...v1.3.3) (2018-11-03)
 
