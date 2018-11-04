@@ -7,6 +7,7 @@ const log = require('../src/log')
 const init = require('./init')
 const upgrade = require('./upgrade')
 const update = require('./update')
+const clean = require('./clean')
 const { version } = require('../package.json')
 
 
@@ -48,6 +49,16 @@ program
     update()
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
+  })
+
+program
+  .command('clean')
+  .description('Clean the cache of mili')
+  .action(() => {
+    log.info('begin clean')
+    clean()
+      .then(() => log.info('clean complete'))
+      .catch(err => log.error('clean', 'clean break', err))
   })
 
 
