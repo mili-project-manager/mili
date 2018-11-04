@@ -8,6 +8,7 @@ const throwError = require('./throwError')
 const paths = require('./paths')
 const sa = require('sanitization')
 const semver = require('semver')
+const { version: miliVersion } = require('../package.json')
 
 
 // const readdir = promisify(fs.readdir)
@@ -66,6 +67,24 @@ module.exports = async templatePath => {
     config = checkConfig(config)
   } catch(e) {
     throwError('Template configuration error')
+  }
+
+  if (config.engines && semver.validRange(config.engines)) {
+    if (!semver.satisfies(miliVersion, config.engines)) {
+      if (semver.ltr(miliVersion, config.engines)) {
+        throwError([
+          'Your mili version is lower than the minimum version required by the template.',
+          'Please upgrade the mili version first.',
+          `Mili version range：${config.engines}`,
+        ].join('\n'))
+      } else {
+        throwError([
+          'Your mili version is higher than the maximum version required by the template.',
+          'Please downgrade the mili version first.',
+          `Mili version range：${config.engines}`,
+        ].join('\n'))
+      }
+    }
   }
 
   config.rules = config.rules
