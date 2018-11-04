@@ -33,5 +33,12 @@ options:
 
 **mili upgrade**
 
-upgrade you project if then template depended outdated.
+upgrade your project if then template depended outdated.
 
+**mili update**
+
+Update your project file with the current version of the template
+
+**mili clean**
+
+Clean the cache of mili(e.g. cloned template)
