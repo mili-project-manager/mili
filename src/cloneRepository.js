@@ -5,6 +5,7 @@ const paths = require('./paths')
 const { promisify } = require('util')
 const throwError = require('./throwError')
 const semver = require('semver')
+const log = require('./log')
 
 
 const access = promisify(fs.access)
@@ -41,9 +42,11 @@ module.exports = async (repository, version) => {
       ].join('\n'))
     }
 
-    gitT.checkout(version)
+    await gitT.checkout(version)
+    log.info(`switch to template version: ${version}`)
   } else if (tags.length) {
     await gitT.checkout(tags[0])
+    log.info(`switch to template version: ${tags[0]}`)
   }
 
   return { templatePath, currentBranch }
