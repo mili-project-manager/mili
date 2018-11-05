@@ -1,26 +1,34 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const git = require('simple-git/promise')
 const { join } = require('path')
 const paths = require('./paths')
-const { promisify } = require('util')
 const throwError = require('./throwError')
 const semver = require('semver')
 const log = require('./log')
 
 
-const access = promisify(fs.access)
+const repositoryExisted = async (templatePath, repository) => {
+  if (!await fs.pathExists(templatePath)) return false
 
+  const remotes = await git(templatePath).getRemotes(true)
+  if (remotes.every(remote => remote.refs.fetch !== repository)) return false
+
+  return true
+}
 
 module.exports = async (repository, version) => {
   const templatePath = join(paths.templates, repository)
 
-  try {
-    await access(templatePath, fs.constants.F_OK)
+
+  if (await repositoryExisted(templatePath, repository)) {
+    log.info('pull template...')
     await git(templatePath).pull()
-  } catch(err) {
-    // BUG: need delete folder
+  } else {
+    log.info('clone template...')
+    await fs.remove(templatePath)
     await git().clone(repository, templatePath)
   }
+
 
   const gitT = git(templatePath)
   let tags = await gitT.tags()
@@ -43,10 +51,10 @@ module.exports = async (repository, version) => {
     }
 
     await gitT.checkout(version)
-    log.info(`switch to template version: ${version}`)
+    log.info(`template version: ${version}`)
   } else if (tags.length) {
     await gitT.checkout(tags[0])
-    log.info(`switch to template version: ${tags[0]}`)
+    log.info(`template version: ${tags[0]}`)
   }
 
   return { templatePath, currentBranch }

@@ -5,6 +5,14 @@ const { readJson } = require('./utils')
 
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
 
+const isRepo = async path => {
+  if (!await git(path).checkIsRepo()) return false
+  const toplevel = await git(path).revparse(['--show-toplevel'])
+  if (toplevel.replace(/\n$/, '') !== path) return false
+
+  return true
+}
+
 module.exports = async path => {
   const view = {}
 
@@ -25,7 +33,7 @@ module.exports = async path => {
     // NOTE: don't care
   }
 
-  if ((!view.repository || !view.repository.url) && await git(path).checkIsRepo()) {
+  if ((!view.repository || !view.repository.url) && await isRepo(path)) {
     const remotes = await git(path).getRemotes(true)
     view.remotes = remotes
 

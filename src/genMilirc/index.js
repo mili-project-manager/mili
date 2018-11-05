@@ -1,16 +1,11 @@
-const fs = require('fs')
-const { promisify } = require('util')
+const fs = require('fs-extra')
 const { join } = require('path')
 const mustache = require('mustache')
 
 
-const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
-
-
 module.exports = async (targetPath, view) => {
-  const template = await readFile(join(__dirname, 'template.mustache'), 'utf8')
+  const template = await fs.readFile(join(__dirname, 'template.mustache'), 'utf8')
   const milirc = mustache.render(template, view)
 
-  await writeFile(join(targetPath, '.milirc.yml'), milirc, 'utf8')
+  await fs.writeFile(join(targetPath, '.milirc.yml'), milirc, 'utf8')
 }

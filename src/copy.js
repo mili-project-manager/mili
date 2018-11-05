@@ -1,10 +1,6 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const { extname, basename } = require('path')
-const { promisify } = require('util')
 
-
-const readFile = promisify(fs.readFile)
-const writeFile = promisify(fs.writeFile)
 
 const commentator = [
   {
@@ -54,7 +50,7 @@ const appendFileHeader = file => {
 
 
 module.exports = async ({ upgrade, path, view , handlers, encoding, targetPath }, root) => {
-  const content = await readFile(path, encoding)
+  const content = await fs.readFile(path, encoding)
   let file = handlers.reduce(
     (file, handler) => handler.genFile(file),
     { path, view, content, upgrade, encoding, targetPath }
@@ -62,5 +58,5 @@ module.exports = async ({ upgrade, path, view , handlers, encoding, targetPath }
 
   file = appendFileHeader(file)
 
-  await writeFile(targetPath, file.content, encoding)
+  await fs.writeFile(targetPath, file.content, encoding)
 }

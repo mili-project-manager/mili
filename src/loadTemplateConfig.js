@@ -1,35 +1,21 @@
 #!/usr/bin/env node
 const cosmiconfig = require('cosmiconfig')
-const fs = require('fs')
-const { promisify } = require('util')
-const git = require('simple-git/promise')
+const fs = require('fs-extra')
 const { join } = require('path')
 const throwError = require('./throwError')
-const paths = require('./paths')
 const sa = require('sanitization')
 const semver = require('semver')
 const { version: miliVersion } = require('../package.json')
-
-
-// const readdir = promisify(fs.readdir)
-const readFile = promisify(fs.readFile)
-// const writeFile = promisify(fs.writeFile)
-// const stat = promisify(fs.stat)
-const access = promisify(fs.access)
-// const mkdir = promisify(fs.mkdir)
-
-const readJson = path => readFile(path)
-  .then(content => JSON.parse(content))
 
 
 const loadPackageJson = async templatePath => {
   const path = join(templatePath, 'package.json')
 
   try {
-    await access(path, fs.constants.R_OK)
-    return readJson(path)
+    await fs.access(path, fs.constants.R_OK)
+    return await fs.readJson(path)
   } catch(err) {
-    throwError('Failed to load template package.json file,')
+    throwError(`Failed to load template package.json file:\n${err.message}`)
   }
 }
 
@@ -38,7 +24,7 @@ const loadEntryFile = async entryPath => {
     const result =  await cosmiconfig('template').load(entryPath)
     return result.config
   } catch(err) {
-    throwError(`Failed to load template entry file: ${err.message}`)
+    throwError(`Failed to load template entry file:\n${err.message}`)
   }
 }
 
