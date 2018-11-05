@@ -4,6 +4,7 @@
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 
+> 米粒之光，可与皓月争辉
 
 **从同一个脚手架衍生出来的项目，很多细节会渐渐变得不一致**
 也就是说：脚手架对于项目的后续发展失去了控制力。
