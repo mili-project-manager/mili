@@ -1,11 +1,8 @@
 #!/usr/bin/env node
-const rimraf = require('rimraf')
+const fs = require('fs-extra')
 const paths = require('../src/paths')
-const { promisify } = require('util')
 
-
-const rm = promisify(rimraf)
 
 module.exports = async () => {
-  await rm(paths.templates)
+  await fs.remove(paths.templates)
 }
