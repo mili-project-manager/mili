@@ -5,6 +5,7 @@ const { join } = require('path')
 const throwError = require('./throwError')
 const sa = require('sanitization')
 const semver = require('semver')
+const hooksEngine = require('./hooksEngine')
 const { version: miliVersion } = require('../package.json')
 
 
@@ -38,6 +39,7 @@ const checkConfig = sa.keys({
     handler: sa.any,
     handlers: sa.array,
   }),
+  hooks: sa.object,
 })
 
 module.exports = async templatePath => {
@@ -81,6 +83,8 @@ module.exports = async templatePath => {
       else rule.handlers = []
       return rule
     })
+
+  config.hooks = hooksEngine(config.hooks)
 
   return { ...config, version: packageJson.version }
 }

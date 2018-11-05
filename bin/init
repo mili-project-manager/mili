@@ -56,6 +56,8 @@ module.exports = async (name, repository) => {
     log.info('copy files')
     await Promise.all(files.map(copy))
     await genMilirc(targetPath, view)
+
+    await templateConfig.hooks('afterInit')
   } finally {
     await git(templateProjectPath).checkout(currentBranch )
   }

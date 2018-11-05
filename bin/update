@@ -60,6 +60,7 @@ module.exports = async () => {
     await Promise.all(files.map(copy))
     await genMilirc(targetPath, view)
 
+    await templateConfig.hooks('afterUpdate')
   } finally {
     await git(templateProjectPath).checkout(currentBranch )
   }
