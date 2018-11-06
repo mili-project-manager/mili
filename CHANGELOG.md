@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.5.0...v1.6.0) (2018-11-06)
+
+
+### Features
+
+* add project status check before init, upgrade, update ([b42b1cb](https://github.com/Val-istar-Guo/vue-boilerplate/commit/b42b1cb)), closes [#26](https://github.com/Val-istar-Guo/vue-boilerplate/issues/26)
+* add template control option ([de87d2d](https://github.com/Val-istar-Guo/vue-boilerplate/commit/de87d2d)), closes [#21](https://github.com/Val-istar-Guo/vue-boilerplate/issues/21)
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.4.0...v1.5.0) (2018-11-05)
 
