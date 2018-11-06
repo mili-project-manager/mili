@@ -15,9 +15,12 @@ const log = require('../src/log')
 const semver = require('semver')
 const { join, basename } = require('path')
 const git = require('simple-git/promise')
+const statusCheck = require('../src/statusCheck')
 
 
-module.exports = async () => {
+module.exports = async (force) => {
+  if (!force) await statusCheck(process.cwd())
+
   const miliConfig = await loadMiliConfig()
   const repository = miliConfig.repository
 

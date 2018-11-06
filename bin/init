@@ -14,9 +14,12 @@ const copy = require('../src/copy')
 const log = require('../src/log')
 const { join, basename } = require('path')
 const git = require('simple-git/promise')
+const statusCheck = require('../src/statusCheck')
 
 
-module.exports = async (name, repository) => {
+module.exports = async (name, repository, force) => {
+  if (!force) await statusCheck(process.cwd())
+
   // const miliConfig = await loadMiliConfig()
   const { templatePath: templateProjectPath, currentBranch } = await cloneRepository(repository)
   try {

@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-
-const { readdirSync } = require('fs')
-const { join, basename } = require('path')
 const program = require('commander')
 const log = require('../src/log')
 const init = require('./init')
@@ -19,14 +16,15 @@ program
   .usage('[options] <repository>')
   .description('initialize the project')
   .option('-n --app-name [app_name]', `Set your app name.`)
+  .option('--force')
   .action((repository, option) => {
     if (!repository) program.help()
 
-    const { appName } = option
+    const { appName, force = false } = option
 
     log.info('initialize project ...')
 
-    return init(appName, repository)
+    return init(appName, repository, force)
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
@@ -34,9 +32,12 @@ program
 program
   .command('upgrade')
   .description('upgrade the template')
-  .action(() => {
+  .option('--force')
+  .action((option) => {
+    const { force = false } = option
+
     log.info('prepare upgrade')
-    upgrade()
+    upgrade(force)
       .then(() => log.info('upgrade complete'))
       .catch(err => log.error('program', 'upgrade break', err))
   })
@@ -44,9 +45,12 @@ program
 program
   .command('update')
   .description('Update the project with the current version of the template')
-  .action(() => {
+  .option('--force')
+  .action((option) => {
+    const { force = false } = option
+
     log.info('prepare update')
-    update()
+    update(force)
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
   })
