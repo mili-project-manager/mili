@@ -11,3 +11,5 @@
 [模版配置](./TemplateConfig.md)
 
 [Handlers介绍](./Handlers.md)
+
+[生命周期勾子（Hooks）](./Hooks.md)

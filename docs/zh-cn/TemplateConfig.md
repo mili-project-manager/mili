@@ -17,11 +17,32 @@
 ## config.engines
 
 **类型**
+
 `String`
 
 **含义**
 
 模版支持的mili版本，必须符合[semver](https://www.npmjs.com/package/semver)规范。
+
+
+## config.hooks
+
+**类型**
+
+`Object`
+
+**含义**
+
+生命周期勾子，在某个指定的生命周期运行shell命令
+
+**例子**
+
+```js
+exports.hooks = {
+  // 初始化结束后运行，必须为shell命令
+  afterInit: 'echo "Welcome to use mili"',
+}
+```
 
 
 ## config.rules
