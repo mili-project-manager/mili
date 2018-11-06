@@ -63,7 +63,7 @@ module.exports = async (force) => {
       .map(genTargetPath(templatePath, targetPath))
 
 
-    log.info('check folder')
+    log.info('ensure folders...')
     await initialFolder(files)
 
     log.info('upgrading...')

@@ -22,8 +22,6 @@ program
 
     const { appName, force = false } = option
 
-    log.info('initialize project ...')
-
     return init(appName, repository, force)
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
@@ -36,7 +34,6 @@ program
   .action((option) => {
     const { force = false } = option
 
-    log.info('prepare upgrade')
     upgrade(force)
       .then(() => log.info('upgrade complete'))
       .catch(err => log.error('program', 'upgrade break', err))
@@ -49,7 +46,6 @@ program
   .action((option) => {
     const { force = false } = option
 
-    log.info('prepare update')
     update(force)
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))

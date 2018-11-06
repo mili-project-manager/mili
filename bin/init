@@ -53,10 +53,10 @@ module.exports = async (name, repository, force) => {
       .map(genTargetPath(templatePath, targetPath))
 
 
-    log.info('initial folder')
+    log.info('initial folders...')
     await initialFolder(files)
 
-    log.info('copy files')
+    log.info('copy files...')
     await Promise.all(files.map(copy))
     await genMilirc(targetPath, view)
 
