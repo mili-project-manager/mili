@@ -17,12 +17,16 @@ program
   .description('initialize the project')
   .option('-n --app-name [app_name]', `Set your app name.`)
   .option('--force')
+  .option('-v --version [version]', 'Set the template version')
   .action((repository, option) => {
     if (!repository) program.help()
 
     const { appName, force = false } = option
 
-    return init(appName, repository, force)
+    let version
+    if (typeof option.version === 'string') version = option.version
+
+    return init(appName, repository, force, version)
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
@@ -43,10 +47,14 @@ program
   .command('update')
   .description('Update the project with the current version of the template')
   .option('--force')
+  .option('-v --version [version]', 'Set the template version')
   .action((option) => {
     const { force = false } = option
 
-    update(force)
+    let version
+    if (typeof option.version === 'string') version = option.version
+
+    update(force, version)
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
   })

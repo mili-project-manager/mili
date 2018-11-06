@@ -15,13 +15,22 @@ const log = require('../src/log')
 const { join, basename } = require('path')
 const git = require('simple-git/promise')
 const statusCheck = require('../src/statusCheck')
+const semver = require('semver')
+const throwError = require('../src/throwError')
 
 
-module.exports = async (force) => {
+module.exports = async (force, version) => {
   if (!force) await statusCheck(process.cwd())
 
   const miliConfig = await loadMiliConfig()
   const repository = miliConfig.repository
+
+  if (!force && version && semver.lt(version, miliConfig.version)) {
+    throwError([
+      'The version number setted is lower than the current template version.',
+      "If you're sure you want to run this command, rerun it with --force.",
+    ].join('\n'))
+  }
 
   const { templatePath: templateProjectPath, currentBranch  } = await cloneRepository(repository, miliConfig.version)
   try {
