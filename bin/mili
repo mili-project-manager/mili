@@ -1,10 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander')
 const log = require('../src/log')
-const init = require('./init')
-const upgrade = require('./upgrade')
-const update = require('./update')
-const clean = require('./clean')
+const mili = require('../src/mili')
 const { version } = require('../package.json')
 
 
@@ -26,7 +23,8 @@ program
     let version
     if (typeof option.version === 'string') version = option.version
 
-    return init(appName, repository, force, version)
+    // return init(appName, repository, force, version)
+    return mili.init({ name: appName, force, repository, version })
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
@@ -38,7 +36,7 @@ program
   .action((option) => {
     const { force = false } = option
 
-    upgrade(force)
+    mili.upgrade({ force })
       .then(() => log.info('upgrade complete'))
       .catch(err => log.error('program', 'upgrade break', err))
   })
@@ -54,7 +52,7 @@ program
     let version
     if (typeof option.version === 'string') version = option.version
 
-    update(force, version)
+    mili.update({ force, version })
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
   })
@@ -64,7 +62,7 @@ program
   .description('Clean the cache of mili')
   .action(() => {
     log.info('begin clean')
-    clean()
+    mili.clean()
       .then(() => log.info('clean complete'))
       .catch(err => log.error('clean', 'clean break', err))
   })

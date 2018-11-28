@@ -1,36 +1,34 @@
 const fs = require('fs-extra')
 const git = require('simple-git/promise')
-const { join } = require('path')
-const paths = require('./paths')
-const throwError = require('./throwError')
+const throwError = require('../throwError')
 const semver = require('semver')
-const log = require('./log')
+const log = require('../log')
 
 
-const repositoryExisted = async (templatePath, repository) => {
-  if (!await fs.pathExists(templatePath)) return false
+const createRevert = (storage, branch) => async () => {
+  git(storage).checkout(branch)
+}
 
-  const remotes = await git(templatePath).getRemotes(true)
+const repositoryExisted = async (repository, storage) => {
+  if (!await fs.pathExists(storage)) return false
+
+  const remotes = await git(storage).getRemotes(true)
   if (remotes.every(remote => remote.refs.fetch !== repository)) return false
 
   return true
 }
 
-module.exports = async (repository, version) => {
-  const templatePath = join(paths.templates, repository)
-
-
-  if (await repositoryExisted(templatePath, repository)) {
+module.exports = async (repository, version, storage) => {
+  if (await repositoryExisted(repository, storage)) {
     log.info('pull template...')
-    await git(templatePath).pull()
+    await git(storage).pull()
   } else {
     log.info('clone template...')
-    await fs.remove(templatePath)
-    await git().clone(repository, templatePath)
+    await fs.remove(storage)
+    await git().clone(repository, storage)
   }
 
-
-  const gitT = git(templatePath)
+  const gitT = git(storage)
   let tags = await gitT.tags()
   tags = tags.all
     .filter(semver.valid)
@@ -57,5 +55,5 @@ module.exports = async (repository, version) => {
     log.info(`template version: ${tags[0]}`)
   }
 
-  return { templatePath, currentBranch }
+  return createRevert(storage, currentBranch)
 }

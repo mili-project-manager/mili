@@ -1,5 +1,5 @@
-const handlers = require('./handlers')
-const log = require('./log')
+const handlers = require('../handlers')
+const log = require('../log')
 
 
 module.exports = file => {

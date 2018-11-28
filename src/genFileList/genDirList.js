@@ -1,5 +1,5 @@
-const { flatten } = require('./utils')
-const throwError = require('./throwError')
+const { flatten } = require('../utils')
+const throwError = require('../throwError')
 const fs = require('fs-extra')
 const { join } = require('path')
 
@@ -20,26 +20,8 @@ const genDirList = async (dir, rules) => {
 
     if (stats.isDirectory()) return await genDirList(rule, rules)
     else return rule
-
-
-      // .then(stats => ({ isDir: stats.isDirectory(), path }))
   }))
 
-  // const list = stats.map(({ isDir, path }) => new Promise{
-  //   let rule = rules.find(item => item.path === path)
-  //   if (!rule) rule = { ...dir, path }
-
-  //   if (isDir) return genDirList(rule, rules)
-  //   else return rule
-  // })
-
-  // const list = stats.map(({ isDir, path }) => {
-  //   let rule = rules.find(item => item.path === path)
-  //   if (!rule) rule = { ...dir, path }
-
-  //   if (isDir) return genDirList(rule, rules)
-  //   else return rule
-  // })
 
   return flatten(list)
 }

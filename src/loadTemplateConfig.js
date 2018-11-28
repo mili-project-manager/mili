@@ -85,6 +85,7 @@ module.exports = async templatePath => {
     })
 
   config.hooks = hooksEngine(config.hooks)
+  config.path = join(templatePath, config.path)
 
   return { ...config, version: packageJson.version }
 }

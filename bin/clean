@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-const fs = require('fs-extra')
-const paths = require('../src/paths')
-
-
-module.exports = async () => {
-  await fs.remove(paths.templates)
-}
