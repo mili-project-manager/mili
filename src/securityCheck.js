@@ -22,12 +22,14 @@ const isWorkDirClean = async path => {
 }
 
 module.exports = async path => {
-  if (!(await git(path).checkIsRepo()) && !(await isEmpty(path))) {
+  const isRepo = await git(path).checkIsRepo()
+
+  if (!isRepo && !(await isEmpty(path))) {
     throwError([
       'The project directory is not a git repository and is a non-empty folder.',
       reminder,
     ].join('\n'))
-  } else if (!(await isWorkDirClean(path))) {
+  } else if (isRepo && !(await isWorkDirClean(path))) {
     throwError([
       'Git working directory not clean',
       reminder,
