@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.6.0...v1.7.0) (2018-11-29)
+
+
+### Bug Fixes
+
+* unable init empty folder ([4242bed](https://github.com/Val-istar-Guo/vue-boilerplate/commit/4242bed))
+
+
+### Features
+
+* access mili commands programmatically from javascript ([0366505](https://github.com/Val-istar-Guo/vue-boilerplate/commit/0366505)), closes [#33](https://github.com/Val-istar-Guo/vue-boilerplate/issues/33)
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.5.0...v1.6.0) (2018-11-06)
 
