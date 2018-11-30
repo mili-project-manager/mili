@@ -26,7 +26,6 @@ module.exports = async (options = {}) => {
 
   // template repository
   const repository = formatTemplateLink(options.repository)
-  console.log(repository)
   if (!force) await securityCheck(process.cwd())
 
   const templateStoragePath = await getTemplateStorage(repository)
