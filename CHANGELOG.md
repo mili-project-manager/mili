@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.7.0...v1.8.0) (2018-11-30)
+
+
+### Features
+
+* **init:** shorthand for the github repository uri ([35cb74b](https://github.com/Val-istar-Guo/vue-boilerplate/commit/35cb74b))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.6.0...v1.7.0) (2018-11-29)
 
