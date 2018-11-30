@@ -10,6 +10,7 @@ const log = require('../log')
 const { join, basename } = require('path')
 const securityCheck = require('../securityCheck')
 const getTemplateStorage = require('../getTemplateStorage')
+const formatTemplateLink = require('../formatTemplateLink')
 
 
 module.exports = async (options = {}) => {
@@ -17,14 +18,15 @@ module.exports = async (options = {}) => {
     cwd = process.cwd(),
     // project name
     name,
-    // template repository
-    repository,
     // whether to skip the security check
     force = false,
     // template version expected
     version,
   } = options
 
+  // template repository
+  const repository = formatTemplateLink(options.repository)
+  console.log(repository)
   if (!force) await securityCheck(process.cwd())
 
   const templateStoragePath = await getTemplateStorage(repository)
