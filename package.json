@@ -48,6 +48,7 @@
     "cosmiconfig": "^5.0.6",
     "fs-extra": "^7.0.0",
     "merge-deep": "^3.0.2",
+    "micromatch": "^3.1.10",
     "mustache": "^3.0.0",
     "sanitization": "^0.3.0",
     "semver": "^5.6.0",
