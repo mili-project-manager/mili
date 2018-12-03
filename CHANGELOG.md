@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.8.0...v1.9.0) (2018-12-03)
+
+
+### Features
+
+* use glob to match rule.path ([bf52e6d](https://github.com/Val-istar-Guo/vue-boilerplate/commit/bf52e6d)), closes [#23](https://github.com/Val-istar-Guo/vue-boilerplate/issues/23)
+* relative path for template ([f62fd86](https://github.com/Val-istar-Guo/vue-boilerplate/commit/f62fd86))
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.7.0...v1.8.0) (2018-11-30)
 
