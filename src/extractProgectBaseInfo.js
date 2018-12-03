@@ -1,17 +1,9 @@
 const { join } = require('path')
 const git = require('simple-git/promise')
-const { readJson } = require('./utils')
+const { readJson, isRepo } = require('./utils')
 
 
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
-
-const isRepo = async path => {
-  if (!await git(path).checkIsRepo()) return false
-  const toplevel = await git(path).revparse(['--show-toplevel'])
-  if (toplevel.replace(/\n$/, '') !== path) return false
-
-  return true
-}
 
 module.exports = async path => {
   const view = {}
