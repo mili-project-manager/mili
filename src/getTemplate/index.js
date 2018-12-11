@@ -2,9 +2,11 @@ const { isAbsolute } = require('path')
 const semver = require('semver')
 const git = require('simple-git/promise')
 
+
 const throwError = require('../throwError')
 const log = require('../log')
 const { isRepo } = require('../utils')
+const installDeps = require('./installDeps')
 
 const copy = require('./copy')
 const clone = require('./clone')
@@ -17,6 +19,8 @@ const createRevert = (storage, branch) => async () => {
 module.exports = async (path, storage, version) => {
   if (isAbsolute(path)) await copy(path, storage)
   else await clone(path, storage)
+
+  let revert = () => {}
 
   if (await isRepo(storage)) {
     const gitT = git(storage)
@@ -46,6 +50,10 @@ module.exports = async (path, storage, version) => {
       log.info(`template version: ${tags[0]}`)
     }
 
-    return createRevert(storage, currentBranch)
+    revert = createRevert(storage, currentBranch)
   }
+
+  await installDeps(storage)
+
+  return revert
 }
