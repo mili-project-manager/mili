@@ -66,7 +66,7 @@ module.exports = async (options) => {
     log.info('ensure folders...')
     await initialFolder(files)
 
-    log.info('upgrading...')
+    log.info('updating...')
     await Promise.all(files.map(copy))
     await genMilirc(cwd, view)
 
