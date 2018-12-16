@@ -15,7 +15,13 @@ const repositoryExisted = async (repository, storage) => {
 module.exports = async (repository, storage) => {
   if (await repositoryExisted(repository, storage)) {
     log.info(`pull template from ${repository}...`)
-    await git(storage).pull()
+    try {
+      await git(storage).pull()
+    } catch (e) {
+      log.warn(`cannot pull template. try clone from ${repository}...`)
+      await fs.remove(storage)
+      await git().clone(repository, storage)
+    }
   } else {
     log.info(`clone template from ${repository}...`)
     await fs.remove(storage)
