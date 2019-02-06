@@ -1,5 +1,5 @@
 const { flatten } = require('../utils')
-const throwError = require('../throwError')
+const throwError = require('../throw-error')
 const fs = require('fs-extra')
 const { join } = require('path')
 var glob = require('micromatch');

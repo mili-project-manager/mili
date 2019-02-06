@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const git = require('simple-git/promise')
-const throwError = require('./throwError')
+const throwError = require('./throw-error')
 
 
 const isEmpty = async path => {

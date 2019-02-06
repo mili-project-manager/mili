@@ -1,5 +1,5 @@
-const createHandler = require('./createHandler')
-const readTargetFile = require('./readTargetFile')
+const createHandler = require('./create-handler')
+const readTargetFile = require('./read-target-file')
 
 
 

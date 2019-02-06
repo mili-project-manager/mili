@@ -3,10 +3,10 @@ const semver = require('semver')
 const git = require('simple-git/promise')
 
 
-const throwError = require('../throwError')
+const throwError = require('../throw-error')
 const log = require('../log')
 const { isRepo } = require('../utils')
-const installDeps = require('./installDeps')
+const installDeps = require('./install-deps')
 
 const copy = require('./copy')
 const clone = require('./clone')

@@ -1,8 +1,8 @@
 const { join } = require('path')
-const formatHandlers = require('./formatHandlers')
-const genTargetPath = require('./genTargetPath')
-const recommendFileEncoding = require('./recommendFileEncoding')
-const genDirList = require('./genDirList')
+const formatHandlers = require('./format-handlers')
+const genTargetPath = require('./gen-target-path')
+const recommendFileEncoding = require('./recommend-file-encoding')
+const genDirList = require('./gen-dir-list')
 
 
 module.exports = async (cwd, templateConfig) => {

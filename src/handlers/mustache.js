@@ -1,5 +1,5 @@
 const mustache = require('mustache')
-const createHandler = require('./createHandler')
+const createHandler = require('./create-handler')
 
 
 module.exports = createHandler(

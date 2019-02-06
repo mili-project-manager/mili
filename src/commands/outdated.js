@@ -1,8 +1,8 @@
-const loadMiliConfig = require('../loadMiliConfig')
+const loadMiliConfig = require('../load-mili-config')
 const semver = require('semver')
 const log = require('../log')
-const throwError = require('../throwError')
-const getTemplateVersions = require('../getTemplateVersions')
+const throwError = require('../throw-error')
+const getTemplateVersions = require('../get-template-versions')
 
 
 module.exports = async () => {

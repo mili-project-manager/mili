@@ -1,4 +1,4 @@
-const throwError = require('./throwError')
+const throwError = require('./throw-error')
 const fs = require('fs-extra')
 const { join, isAbsolute } = require('path')
 

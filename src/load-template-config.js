@@ -2,10 +2,10 @@
 const cosmiconfig = require('cosmiconfig')
 const fs = require('fs-extra')
 const { join } = require('path')
-const throwError = require('./throwError')
+const throwError = require('./throw-error')
 const sa = require('sanitization')
 const semver = require('semver')
-const hooksEngine = require('./hooksEngine')
+const hooksEngine = require('./hooks-engine')
 const { version: miliVersion } = require('../package.json')
 
 

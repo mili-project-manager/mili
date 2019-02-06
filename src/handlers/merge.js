@@ -1,7 +1,7 @@
 const log = require('../log')
 const { extname } = require('path')
-const createHandler = require('./createHandler')
-const readTargetFile = require('./readTargetFile')
+const createHandler = require('./create-handler')
+const readTargetFile = require('./read-target-file')
 const merge = require('merge-deep');
 
 
