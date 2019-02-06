@@ -67,6 +67,13 @@ program
       .catch(err => log.error('clean', 'clean break', err))
   })
 
+program
+  .command('outdated')
+  .description('Check template is outdated')
+  .action(() => {
+    mili.outdated()
+  })
+
 
 // error on unknown commands
 program.on('command:*', function () {
