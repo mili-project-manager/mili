@@ -1,4 +1,5 @@
 const fs = require('fs-extra')
+const { join } = require('path')
 const { extname, basename } = require('path')
 
 
@@ -49,14 +50,22 @@ const appendFileHeader = file => {
 }
 
 
-module.exports = async ({ upgrade, path, view , handlers, encoding, targetPath }, root) => {
-  const content = await fs.readFile(path, encoding)
-  let file = handlers.reduce(
+const copy = async (file, to) => {
+  const content = await fs.readFile(file.path, file.encoding)
+
+  file = file.handlers.reduce(
     (file, handler) => handler.genFile(file),
-    { path, view, content, upgrade, encoding, targetPath }
+    { ...file, content, targetPath: join(to, file.targetPath) }
   )
 
   file = appendFileHeader(file)
 
-  await fs.writeFile(targetPath, file.content, encoding)
+  await fs.writeFile(file.targetPath, file.content, file.encoding)
+}
+
+
+module.exports = async (config) => {
+  for (let file of config.template.files) {
+    await copy({ ...file, view: { ...config, custom: {} } }, config.project.path)
+  }
 }

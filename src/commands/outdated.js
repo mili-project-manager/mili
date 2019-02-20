@@ -1,17 +1,32 @@
-const loadMiliConfig = require('../load-mili-config')
 const semver = require('semver')
-const log = require('../log')
-const throwError = require('../throw-error')
+const loadConfig = require('../load-config')
+const log = require('../utils/log')
 const getTemplateVersions = require('../get-template-versions')
 
 
-module.exports = async () => {
-  const miliConfig = await loadMiliConfig()
-  const repository = miliConfig.repository
+module.exports = async (options = {}) => {
+  const cwd = options.cwd || process.cwd()
+  let config = await loadConfig({ cwd })
 
-  const versions = await getTemplateVersions(repository)
 
-  if (semver.valid(miliConfig.version) && semver.lt(miliConfig.version, versions[0].version)) {
+  const versions = await getTemplateVersions(config.template.repository)
+  const version = config.template.version
+
+  if (!versions.length) {
+    throwError([
+      'There is no formal versioning of the template repository',
+      'mili outdated cannot work'
+    ].join('\n'))
+  }
+
+  if (!version) {
+    throwError([
+      'Unable to get template version from .milirc',
+      'Please check if the .milirc file is configured correctly.',
+    ].join('\n'))
+  }
+
+  if (version && semver.lt(version.number, versions[0].number)) {
     log.warn([
       '',
       '',
@@ -20,5 +35,7 @@ module.exports = async () => {
       '',
       '',
     ].join('\n'))
+  } else {
+    log.info('Congratulations, the current template is the latest version.')
   }
 }

@@ -1,6 +1,5 @@
-const fs = require('fs')
 const { exec } = require('child_process');
-const log = require('./log')
+const log = require('../../utils/log')
 
 
 module.exports = hooks => name => new Promise((resolve, reject) => {

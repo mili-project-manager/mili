@@ -1,18 +1,12 @@
-const loadMiliConfig = require('../load-mili-config')
-const getTemplate = require('../get-template')
-const loadTemplateConfig = require('../load-template-config')
-const extractProgectBaseInfo = require('../extract-progect-base-info')
-const genFileList = require('../gen-file-list')
-const initialFolder = require('../initial-folder')
-const checkAndFormatView = require('../check-and-format-view')
-const genMilirc = require('../gen-milirc')
-const copy = require('../copy')
-const log = require('../log')
-const { join, basename } = require('path')
+const loadConfig = require('../load-config')
 const semver = require('semver')
-const throwError = require('../throw-error')
+const downloadTemplate = require('../download-template')
+const getTemplateVersions = require('../get-template-versions')
+const throwError = require('../utils/throw-error')
+const applyTemplate = require('../apply-template')
 const securityCheck = require('../security-check')
-const getTemplateStorage = require('../get-template-storage')
+const checkParams = require('../check-params')
+const log = require('../utils/log')
 
 
 module.exports = async (options) => {
@@ -20,58 +14,74 @@ module.exports = async (options) => {
     cwd = process.cwd(),
     // whether to skip the security check
     force = false,
-    // template version expected
-    version,
   } = options
 
+  // template version expected
+  let version = options.version
+
   if (!force) await securityCheck(process.cwd())
+  if (version) checkParams.version(version)
 
 
-  const miliConfig = await loadMiliConfig()
-  const repository = miliConfig.repository
+  let config = await loadConfig({ cwd })
 
-  if (!force && version && semver.lt(version, miliConfig.version)) {
-    throwError([
+
+  if (version && semver.lt(version, config.template.version.number)) {
+    const message = [
       'The version number setted is lower than the current template version.',
       "If you're sure you want to run this command, rerun it with --force.",
-    ].join('\n'))
+    ].join('\n')
+
+    if (force) log.warn(message)
+    else throwError(message)
   }
 
-  const templateStoragePath = await getTemplateStorage(repository)
-  const revertTemplateRepository = await getTemplate(repository, templateStoragePath, version || miliConfig.version)
+  const versions = await getTemplateVersions(config.template.repository)
 
-
-  try {
-    const templateConfig = await loadTemplateConfig(templateStoragePath)
-
-    const baseInfo = await extractProgectBaseInfo(join(process.cwd()))
-
-    // basename(process.cwd())
-    // OPTIMIZE: Check mili version and remind user
-    // if (templateConfig.version > mili.version)
-
-    const view = checkAndFormatView({
-      name: baseInfo.name || basename(process.cwd()),
-      repository: baseInfo.repository,
-      remotes: baseInfo.remotes,
-      template: { repository, version: templateConfig.version },
-    })
-
-    let files = await genFileList(cwd, templateConfig)
-    files = files
-      .filter(file => file.upgrade !== 'keep')
-      .map(file => ({ ...file, view }))
-
-
-    log.info('ensure folders...')
-    await initialFolder(files)
-
-    log.info('updating...')
-    await Promise.all(files.map(copy))
-    await genMilirc(cwd, view)
-
-    await templateConfig.hooks('afterUpdate')
-  } finally {
-    await revertTemplateRepository()
+  if (versions.length) {
+    if (version) {
+      version = versions.find(v => v.number === version)
+      if (!version) {
+        throwError([
+          'No corresponding template version was found',
+          'Please confirm that the version number exists in the tags of the template repository.',
+          `Expected template version: ${version}`
+        ].join('\n'))
+      }
+    } else if (config.template.version) {
+      version = versions.find(v => v.number === config.template.version.number)
+      if (!version) {
+        throwError([
+          'No corresponding template version was found',
+          'Please confirm that the version number exists in the tags of the template repository.',
+          `Expected template version: ${version}(get from .milirc)`
+        ].join('\n'))
+      }
+    } else {
+      throwError([
+        'Cannot get template version from the .milirc for the project',
+        'mili update should specify a version.',
+        'and if you want use the latest version, run mili upgrade',
+      ].join('\n'))
+    }
+  } else {
+    if (version) {
+      throwError(`The specified version(${version}) does not exist in repository`)
+    } else if (config.template.version) {
+      throwError(`The version(${config.template.version.number}) get from .milirc does not exist in repository`)
+    } else {
+      log.warn([
+        'The template repository is not versioned. And will use the default branch/file.',
+        'Therefore `mili update` is equivalent to `mili upgrade`',
+      ].join('\n'))
+    }
   }
+
+
+  await downloadTemplate(config.template.repository, version)
+  config = await config.reload({
+    templateVersion: version,
+  })
+  await applyTemplate(cwd, config)
+  await config.template.hooks('afterUpdate')
 }

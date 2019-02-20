@@ -1,4 +1,4 @@
-const log = require('../log')
+const log = require('../utils/log')
 const { extname } = require('path')
 const createHandler = require('./create-handler')
 const readTargetFile = require('./read-target-file')
