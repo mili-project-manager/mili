@@ -20,7 +20,7 @@ const commentator = [
     ].join('\n')),
   },
   {
-    filenames: ['.gitignore', '.npmrc'],
+    filenames: ['.npmrc'],
     extnames: ['.yml', '.yaml'],
     create: (upgrade) => ([
       `# mili upgrade type: ${upgrade}`,
