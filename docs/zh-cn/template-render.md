@@ -37,34 +37,64 @@ view的结构是mili获取当前用户项目的各种信息组合成的一个结
 
 ```js
 const view = {
-  // 项目名称，来自用户项目目录下package.json中的name字段，初始化时可能是由用户指定或者目录名。
-  name: 'project name',
+  mili: {
+    // 运行的mili版本
+    version: '1.10.0',
+  },
+  project: {
+    // 项目的本地路径
+    path: 'path_to_project',
+    // 项目名称，来自用户项目目录下package.json中的name字段，初始化时可能是由用户指定或者目录名。
+    name: 'project name',
 
-  // 项目远程仓库
-  repository: {
-    // 仓库的url，从用户项目目录下package.json中的repository字段获取。
-    // 如果字段不存在，则获取项目本地仓库关联的远程仓库的列表中的第一个仓库地址。
-    url: '',
-    // 仓库的类型，枚举值 ['git', 'github']
-    type: '',
-    // 仓库的归属用户，目前仅支持github的git链接识别。无法从url上识别得到则为空
-    user: '',
-    // 仓库名，目前仅支持github的git链接识别。无法从url上识别得到则为空
-    name: '',
+    // 项目远程仓库
+    repository: {
+      // 仓库的类型，
+      type: 'git/local',
+      // 仓库托管的服务商
+      service: 'github',
+      // 仓库的url，从用户项目目录下package.json中的repository字段获取。
+      // 如果字段不存在，则获取项目本地仓库关联的远程仓库的列表中的第一个仓库地址。
+      url: 'https://github.com/Val-istar-Guo/mili.git',
+      // 仓库的归属用户，目前仅支持github的git链接识别。无法从url上识别得到则为null
+      owner: 'Val-istar-Guo',
+      // 仓库名，目前仅支持github的git链接识别。无法从url上识别得到则为null
+      name: 'mili',
+    },
   },
 
-  // 项目本地仓库关联的远程仓库列表，仅在repository.url无法从package.json中获取的时候存在该字段
-  remotes: [],
-
-  // 模版信息（这就是从你模版的package.json中提取的部分信息）
+  // 模版信息
   template: {
     // 模版的远程仓库地址
-    repository: 'template_remote_repository_url',
+    repository: {
+      // 仓库的类型，
+      type: 'git/local',
+      // 仓库托管的服务商
+      service: 'github',
+      // 仓库的url，从用户项目目录下package.json中的repository字段获取。
+      // 如果字段不存在，则获取项目本地仓库关联的远程仓库的列表中的第一个仓库地址。
+      url: 'https://github.com/Val-istar-Guo/mili.git',
+      // 仓库的归属用户，目前仅支持github的git链接识别。无法从url上识别得到则为null
+      owner: 'Val-istar-Guo',
+      // 仓库名，目前仅支持github的git链接识别。无法从url上识别得到则为null
+      name: 'mili',
+    },
     // 模版的版本
-    version: 'template_version',
+    version: {
+      commit: 'ad67824adbef....',
+      ref: 'ref/tags/v1.2.3',
+      number: '1.2.3',
+    },
+
+    // 以下为模版的入口/配置文件相关配置信息
+    path: '',
+    encoding: '',
+    engines: '',
+    rules: [],
+    hooks: {},
   },
 
-  // 通过handler注入到view中的其他信息
+  // 通过handler注入到view中的其他信息，每个文件都不一样
   custom: {},
 }
 ```

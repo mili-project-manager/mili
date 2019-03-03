@@ -1,0 +1,11 @@
+mili:
+  version: {{mili.version}}
+template:
+  repository: {{{template.repository.url}}}
+  version: {{template.version.number}}
+interaction: {{template.interactionSHA1}}
+answers:
+  {{#project.interaction}}
+  {{key}}: {{value}}
+  {{/project.interaction}}
+

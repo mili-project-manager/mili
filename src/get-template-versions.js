@@ -1,18 +1,41 @@
 const git = require('simple-git/promise')
 const semver = require('semver')
+const log = require('./utils/log')
+const isRepo = require('./utils/is-repository')
 
 
-
-module.exports = async (repository) => {
-  const result = await git().listRemote(['--tags', repository])
+const getRepositoryVersions = async (repository) => {
+  const result = await git().listRemote(['--tags', repository.url])
   const arr = result.split('\n')
-  return arr
+  const versions = arr
     .filter(item => item.length && !/\^{}$/.test(item))
     .map(item => {
       const [commit, ref] = item.split(/\s+/)
-      const version = ref.substring('refs/tags/v'.length)
-      return { commit, ref, version }
+      const number = ref.substring('refs/tags/v'.length)
+      return { commit, ref, number }
     })
-    .filter(item => semver.valid(item.version))
-    .sort((a, b) => semver.lt(a.version, b.version) ? 1 : -1)
+    .filter(item => semver.valid(item.number))
+    .sort((a, b) => semver.rcompare(a.number, b.number))
+
+  if (!versions.length) {
+    log.warn([
+      'Cannot get template versions, May be caused by the following reasons:',
+      `1. repository is not a mili template(${repository.url})`,
+      '2. template have not a valid tag to mark the version(e.g. v1.0.0)',
+      `3. cannot get versions by command: \`git ls-remote --tags ${repository.rul}}\``,
+    ].join('\n'))
+  }
+
+  return versions
+}
+
+module.exports = async (repository) => {
+  log.info('check template versions')
+  if (repository.type === 'git') {
+    return await getRepositoryVersions(repository)
+  } else if (repository.type === 'local' && await isRepo(repository.url)) {
+    return await getRepositoryVersions(repository)
+  } else {
+    return []
+  }
 }

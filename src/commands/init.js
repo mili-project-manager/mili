@@ -1,61 +1,58 @@
-const getTemplate = require('../get-template')
-const loadTemplateConfig = require('../load-template-config')
-const extractProgectBaseInfo = require('../extract-progect-base-info')
-const genFileList = require('../gen-file-list')
-const initialFolder = require('../initial-folder')
-const checkAndFormatView = require('../check-and-format-view')
-const genMilirc = require('../gen-milirc')
-const copy = require('../copy')
-const log = require('../log')
-const { join, basename } = require('path')
+const { basename } = require('path')
+const loadConfig = require('../load-config')
+const downloadTemplate = require('../download-template')
+const getTemplateVersions = require('../get-template-versions')
+const throwError = require('../utils/throw-error')
+const applyTemplate = require('../apply-template')
 const securityCheck = require('../security-check')
-const getTemplateStorage = require('../get-template-storage')
-const formatTemplateLink = require('../format-template-link')
+const checkParams = require('../check-params')
+const prompt = require('../prompt')
 
 
 module.exports = async (options = {}) => {
-  const {
-    cwd = process.cwd(),
-    // project name
-    name,
-    // whether to skip the security check
-    force = false,
-    // template version expected
-    version,
-  } = options
+  const cwd = options.cwd || process.cwd()
+  const name = options.name || basename(cwd)
+  const repository = options.repository
+  let version = options.version
 
-  // template repository
-  const repository = formatTemplateLink(options.repository, cwd)
-  if (!force) await securityCheck(process.cwd())
+  if (!options.force) await securityCheck(process.cwd())
+  if (version) checkParams.version(version)
 
-  const templateStoragePath = await getTemplateStorage(repository)
-  const revertTemplateRepository = await getTemplate(repository, templateStoragePath, version)
+  let config = await loadConfig({
+    cwd,
+    projectName: name,
+    templateRepository: repository,
+  })
 
-  try {
-    const templateConfig = await loadTemplateConfig(templateStoragePath)
-    const baseInfo = await extractProgectBaseInfo(cwd)
-
-    const view = checkAndFormatView({
-      name: name || baseInfo.name || basename(process.cwd()),
-      repository: baseInfo.repository,
-      remotes: baseInfo.remotes,
-      template: { repository, version: templateConfig.version },
-    })
-
-
-    let files = await genFileList(cwd, templateConfig)
-    files = files.map(file => ({ ...file, view }))
-
-
-    log.info('initial folders...')
-    await initialFolder(files)
-
-    log.info('copy files...')
-    await Promise.all(files.map(copy))
-    await genMilirc(cwd, view)
-
-    await templateConfig.hooks('afterInit')
-  } finally {
-    await revertTemplateRepository()
+  const versions = await getTemplateVersions(config.template.repository)
+  if (version) {
+    version = versions.find(v => v.number === version)
+    if (!version) {
+      throwError([
+        'No corresponding template version was found',
+        'Please confirm that the version number exists in the tags of the template repository.',
+        `Expected template version: ${version}`
+      ].join('\n'))
+    }
+  } else {
+    version = versions[0]
   }
+
+
+  await downloadTemplate(config.template.repository, version)
+
+  config = await config.reload({
+    templateVersion: version,
+  })
+
+  if (config.template.status !== 'loaded') {
+    throwError([
+      'The template configuration file could not be loaded',
+      'Please check the template entry file for errors that make it unloadable'
+    ].join('\n'))
+  }
+
+  await prompt(config)
+  await applyTemplate(cwd, config)
+  await config.template.hooks('afterInit')
 }

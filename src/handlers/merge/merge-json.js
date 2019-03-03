@@ -1,11 +1,7 @@
-const log = require('../log')
-const { extname } = require('path')
-const createHandler = require('./create-handler')
-const readTargetFile = require('./read-target-file')
-const merge = require('merge-deep');
+const merge = require('merge-deep')
 
 
-const mergeJson = file => {
+module.exports = file => {
   let content = ''
   let targetFileContent = ''
 
@@ -36,22 +32,3 @@ const mergeJson = file => {
     content: JSON.stringify(merge(targetFileContent, content), null, '  ')
   }
 }
-
-module.exports = createHandler(file => {
-  file = readTargetFile(file)
-
-  if (file.targetFile.exist) {
-    if (extname(file.targetPath) === '.json') return mergeJson(file)
-    else {
-      log.error('merge', [
-        `Merge files of this type(${extname(file.targetPath)}) are not supported by mili`,
-        'please confirm if the loaded template supports the current mili version,',
-        'and feedback this question to the template developer.',
-        'The current file will be overwritten directly by the template file.',
-        `path: ${file.targetPath}`
-      ].join('\n'))
-    }
-  }
-
-  return file
-})

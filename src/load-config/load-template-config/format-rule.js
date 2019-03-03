@@ -1,11 +1,15 @@
-const handlers = require('../handlers')
-const log = require('../log')
+const handlers = require('../../handlers')
 
 
-module.exports = file => {
+module.exports = rule => {
+  if (rule.handlers) rule.handlers = rule.handlers
+  else if (rule.handler) rule.handlers = [rule.handler]
+  else rule.handlers = []
+
+
   const effectiveHandlers = []
 
-  file.handlers.forEach(handler => {
+  rule.handlers.forEach(handler => {
     if (typeof handler === 'string' && (handler in handlers)) return effectiveHandlers.push(handlers[handler])
     if (typeof handler === 'function') {
       const h = handler(handlers)
@@ -18,12 +22,12 @@ module.exports = file => {
       'Please confirm if the loaded template supports the current mili version,',
       'and feedback this question to the template developer.',
       'The current file will be overwritten directly by the template file.',
-      `path: ${file.path}`
+      `path: ${rule.path}`
     ].join('\n'))
-
   })
 
-  if (file.upgrade === 'merge') effectiveHandlers.push(handlers.merge)
-  if (file.upgrade === 'exist') effectiveHandlers.push(handlers.exist)
-  return { ...file, handlers: effectiveHandlers }
+  if (rule.upgrade === 'merge') effectiveHandlers.push(handlers.merge)
+  if (rule.upgrade === 'exist') effectiveHandlers.push(handlers.exist)
+
+  return { ...rule, handlers: effectiveHandlers }
 }

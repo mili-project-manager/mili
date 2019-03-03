@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander')
-const log = require('../src/log')
+const log = require('../src/utils/log')
 const mili = require('../src/mili')
 const { version } = require('../package.json')
 

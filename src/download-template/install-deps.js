@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const { exec } = require('child_process')
 const { join } = require('path')
-const log = require('../log')
+const log = require('../utils/log')
 
 
 const install = path => new Promise((resolve, reject) => {
