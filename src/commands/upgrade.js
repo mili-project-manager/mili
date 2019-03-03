@@ -34,6 +34,7 @@ module.exports = async (options = {}) => {
   })
 
   await prompt(config)
+  config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
   await applyTemplate(cwd, config)
   await config.template.hooks('afterUpgrade')
 }
