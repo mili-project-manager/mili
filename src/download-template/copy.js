@@ -11,6 +11,7 @@ module.exports = async (repository, version, storage) => {
 
   if (isRepo(storage)) {
     if (version) {
+      await git(storage).reset('hard')
       await git(storage).checkout(`v${version.number}`)
       log.info(`template version: ${version.number}`)
     } else {
