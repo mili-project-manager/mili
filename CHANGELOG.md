@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.10.0...v2.0.0) (2019-03-03)
+
+
+### Bug Fixes
+
+* **copy:** reset repository after cpoyed ([10d5118](https://github.com/Val-istar-Guo/vue-boilerplate/commit/10d5118))
+* **update:** the log is printed as 'upgrade' ([49d1a35](https://github.com/Val-istar-Guo/vue-boilerplate/commit/49d1a35))
+
+
+### Code Refactoring
+
+* split module functionality to reduce duplicate code ([d56137b](https://github.com/Val-istar-Guo/vue-boilerplate/commit/d56137b))
+
+
+### Features
+
+* **clone:** try clone if cannot pull repository ([22ccbfb](https://github.com/Val-istar-Guo/vue-boilerplate/commit/22ccbfb))
+* **command:** new command used to check template is outdated ([e707f67](https://github.com/Val-istar-Guo/vue-boilerplate/commit/e707f67)), closes [#38](https://github.com/Val-istar-Guo/vue-boilerplate/issues/38)
+* **merge-handler:** support merge gitignore file ([650ec83](https://github.com/Val-istar-Guo/vue-boilerplate/commit/650ec83))
+* get information by interaction ([5f3057c](https://github.com/Val-istar-Guo/vue-boilerplate/commit/5f3057c)), closes [#17](https://github.com/Val-istar-Guo/vue-boilerplate/issues/17)
+
+
+### BREAKING CHANGES
+
+* View structure and milirc config structure was changed.Template need to be upgraded
+to support new view.And project need to change milirc manually.
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v1.9.0...v1.10.0) (2018-12-11)
 
