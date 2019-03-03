@@ -6,6 +6,7 @@ const applyTemplate = require('../apply-template')
 const securityCheck = require('../security-check')
 const log = require('../utils/log')
 const prompt = require('../prompt')
+const checkParams = require('../check-params')
 
 
 module.exports = async (options = {}) => {
