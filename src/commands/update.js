@@ -7,6 +7,7 @@ const applyTemplate = require('../apply-template')
 const securityCheck = require('../security-check')
 const checkParams = require('../check-params')
 const log = require('../utils/log')
+const prompt = require('../prompt')
 
 
 module.exports = async (options) => {
@@ -82,6 +83,8 @@ module.exports = async (options) => {
   config = await config.reload({
     templateVersion: version,
   })
+
+  await prompt(config)
   await applyTemplate(cwd, config)
   await config.template.hooks('afterUpdate')
 }

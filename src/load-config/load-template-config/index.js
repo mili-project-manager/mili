@@ -11,6 +11,7 @@ const formatRule = require('./format-rule')
 const throwError = require('../../utils/throw-error')
 const isDirectory = require('../../utils/is-directory')
 const searchFile = require('./search-files')
+const sha1 = require('sha1')
 
 
 const checkConfig = sa.keys({
@@ -25,6 +26,7 @@ const checkConfig = sa.keys({
     handlers: sa.array,
   }),
   hooks: sa.object,
+  interaction: sa.array,
 })
 
 const loadEntryFile = async path => {
@@ -74,7 +76,8 @@ module.exports = async (repository, version) => {
     engines: null,
     path: null,
     rules: null,
-    interaction: null,
+    interaction: [],
+    interactionSHA1: '',
   }
 
   if (!repository) return config
@@ -98,6 +101,7 @@ module.exports = async (repository, version) => {
     })
 
     config.interaction = entryFile.interaction
+    config.interactionSHA1 = sha1(JSON.stringify(entryFile.interaction))
     config.hooks = formatHooks(entryFile.hooks)
 
     config.files = await searchFile(config)

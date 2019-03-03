@@ -1,3 +1,4 @@
+const { basename } = require('path')
 const loadConfig = require('../load-config')
 const downloadTemplate = require('../download-template')
 const getTemplateVersions = require('../get-template-versions')
@@ -5,7 +6,7 @@ const throwError = require('../utils/throw-error')
 const applyTemplate = require('../apply-template')
 const securityCheck = require('../security-check')
 const checkParams = require('../check-params')
-const { basename } = require('path')
+const prompt = require('../prompt')
 
 
 module.exports = async (options = {}) => {
@@ -51,6 +52,7 @@ module.exports = async (options = {}) => {
     ].join('\n'))
   }
 
+  await prompt(config)
   await applyTemplate(cwd, config)
   await config.template.hooks('afterInit')
 }
