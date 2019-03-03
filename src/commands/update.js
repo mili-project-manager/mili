@@ -83,6 +83,7 @@ module.exports = async (options) => {
   config = await config.reload({
     templateVersion: version,
   })
+  checkParams.engine(config)
 
   await prompt(config)
   config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')

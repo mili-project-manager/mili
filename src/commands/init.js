@@ -45,6 +45,8 @@ module.exports = async (options = {}) => {
     templateVersion: version,
   })
 
+  checkParams.engine(config)
+
   if (config.template.status !== 'loaded') {
     throwError([
       'The template configuration file could not be loaded',
