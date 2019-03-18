@@ -4,7 +4,7 @@
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 
-[简体中文](./docs/zh-cn/README.md)
+[简体中文](./docs/zh-cn/readme.md)
 
 
 **Projects that derived from the same scaffolding, have evolved over time and become different.**
