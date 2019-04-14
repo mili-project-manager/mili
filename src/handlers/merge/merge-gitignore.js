@@ -33,6 +33,12 @@ module.exports = file => {
     }
   })
 
+  if (lastIgnoreListIndex < projectIgnoreList.length) {
+    const lastProjectListFragment = projectIgnoreList
+      .slice(lastProjectIgnoreListIndex, projectIgnoreList.length)
+      .filter(item => !ignoreList.includes(item) && item.length)
+    mergedList.push(...lastProjectListFragment)
+  }
 
   mergedList = mergedList.reduce((list, item) => {
     if (!item.length || !list.includes(item)) list.push(item)
