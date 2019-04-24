@@ -1,6 +1,7 @@
 const throwError = require('./throw-error')
 const fs = require('fs-extra')
 const { join, isAbsolute } = require('path')
+const validateNpmPackageName = require("validate-npm-package-name")
 
 const githubSH = /^(github:)?[-a-zA-Z0-9@:%._\+~#=]+\/[-a-zA-Z0-9@:%._\+~#=]+$/
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
@@ -52,6 +53,9 @@ module.exports = (link) => {
     return formatRepository(`https://github.com/${link.replace(/^github:/, '')}.git`)
   } else if (gitUrlRegexp.test(link)) {
     return formatRepository(link)
+  } else if (/^npm:/.test(link) && validateNpmPackageName(link.substring('npm:'.length))) {
+    // npm:xxxx/xxx
+    return { type: 'npm', url: link, owner: '', name: link.substring('npm:'.length), path: link }
   }
 
   throwError(`Invalid repository url: ${link}`)
