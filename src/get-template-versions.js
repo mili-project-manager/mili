@@ -2,8 +2,11 @@ const git = require('simple-git/promise')
 const semver = require('semver')
 const log = require('./utils/log')
 const isRepo = require('./utils/is-repository')
+const childProcess = require('child_process')
+const { promisify } = require('util')
 
 
+const exec = promisify(childProcess.exec)
 const getRepositoryVersions = async (repository) => {
   const result = await git().listRemote(['--tags', repository.url])
   const arr = result.split('\n')
@@ -29,12 +32,20 @@ const getRepositoryVersions = async (repository) => {
   return versions
 }
 
+const getNpmVersion = async repository => {
+  const { stdout, stderr } = await exec(`npm view ${repository.name} versions  --json`)
+  if (stderr) console.error(stderr)
+  return JSON.parse(stdout).reverse().map(number => ({ number }))
+}
+
 module.exports = async (repository) => {
   log.info('check template versions')
   if (repository.type === 'git') {
     return await getRepositoryVersions(repository)
   } else if (repository.type === 'local' && await isRepo(repository.url)) {
     return await getRepositoryVersions(repository)
+  } else if (repository.type === 'npm') {
+    return await getNpmVersion(repository)
   } else {
     return []
   }
