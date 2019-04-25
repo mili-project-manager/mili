@@ -13,18 +13,19 @@ program
   .usage('[options] <repository>')
   .description('initialize the project')
   .option('-n --app-name [app_name]', `Set your app name.`)
+  .option('--no-deps', 'Need not install dependencies', false)
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .action((repository, option) => {
     if (!repository) program.help()
 
-    const { appName, force = false } = option
+    const { appName, force = false, deps = true } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
 
     // return init(appName, repository, force, version)
-    return mili.init({ name: appName, force, repository, version })
+    return mili.init({ name: appName, force, repository, version, noDeps: !deps })
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
@@ -33,10 +34,11 @@ program
   .command('upgrade')
   .description('upgrade the template')
   .option('--force')
+  .option('--no-deps', 'Need not install dependencies', false)
   .action((option) => {
-    const { force = false } = option
+    const { force = false, deps = true } = option
 
-    mili.upgrade({ force })
+    mili.upgrade({ force, noDeps: !deps })
       .then(() => log.info('upgrade complete'))
       .catch(err => log.error('program', 'upgrade break', err))
   })
@@ -46,13 +48,14 @@ program
   .description('Update the project with the current version of the template')
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
+  .option('--no-deps', 'Need not install dependencies', false)
   .action((option) => {
-    const { force = false } = option
+    const { force = false, deps = true } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
 
-    mili.update({ force, version })
+    mili.update({ force, version, noDeps: !deps })
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
   })

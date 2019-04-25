@@ -14,6 +14,7 @@ module.exports = async (options = {}) => {
     cwd = process.cwd(),
     // whether to skip the security check
     force = false,
+    noDeps = false,
   } = options
 
   if (!force) await securityCheck(process.cwd())
@@ -29,7 +30,7 @@ module.exports = async (options = {}) => {
     }
   }
   const version = versions[0]
-  await downloadTemplate(config.template.repository, version)
+  await downloadTemplate(config.template.repository, version, noDeps)
   config = await config.reload({
     templateVersion: version,
     loadTemplate: true,
