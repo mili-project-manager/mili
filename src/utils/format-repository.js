@@ -14,15 +14,13 @@ const formatRepository = repository => {
       const matched = repository.match(gitUrlRegexp)
       const [, , , , , , , links] = matched
       const [owner, name] = links.split('/').slice(-2)
-      return { type: 'git', service: 'github', url: repository, owner, name }
+      return { type: 'git', service: 'github', url: repository, owner, name, path: repository }
     }
 
-    return { type: 'git', service: 'unknow', url: repository, owner: null, name: null }
-  } else if (isAbsolute(repository)) {
-    return { type: 'local', url: repository, owner: null, name: null }
+    return { type: 'git', service: 'unknow', url: repository, owner: null, name: null, path: repository }
   }
 
-  return { type: 'unknow', url: repository ,owner: null, name: null }
+  return { type: 'unknow', url: repository ,owner: null, name: null, path: repository }
 }
 
 
@@ -38,11 +36,16 @@ const dirExist = async link => {
 
 module.exports = (link) => {
   const cwd = process.cwd()
-  if (isRelative(link) || isAbsolute(link)) {
-    if (isAbsolute(link) && dirExist(link)) return formatRepository(link)
 
-    link = join(cwd, link)
-    if (dirExist(link)) return formatRepository(link)
+  if (isRelative(link) || isAbsolute(link)) {
+    if (isAbsolute(link) && dirExist(link)) {
+      return { type: 'local', url: link, owner: null, name: null, path: link }
+    }
+
+    const url = join(cwd, link)
+    if (dirExist(url)) {
+      return { type: 'local', url, owner: null, name: null, path: link }
+    }
 
     throwError('Template path cannot be found. Ensure it is an exist directory.')
   } else if (githubSH.test(link)) {
