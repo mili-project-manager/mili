@@ -82,6 +82,7 @@ module.exports = async (options) => {
   await downloadTemplate(config.template.repository, version)
   config = await config.reload({
     templateVersion: version,
+    loadTemplate: true,
   })
   checkParams.engine(config)
 

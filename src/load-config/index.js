@@ -3,9 +3,9 @@ const loadTemplateConfig = require('./load-template-config')
 const loadProjectConfig = require('./load-project-config')
 
 
-const loadConfig = async ({ cwd, projectName, templateRepository, templateVersion }) => {
+const loadConfig = async ({ cwd, projectName, templateRepository, templateVersion, loadTemplate }) => {
   const mili = await loadMiliConfig()
-  const template = await loadTemplateConfig(templateRepository, templateVersion)
+  const template = await loadTemplateConfig(templateRepository, templateVersion, loadTemplate)
   const project = await loadProjectConfig(cwd, projectName)
 
 
