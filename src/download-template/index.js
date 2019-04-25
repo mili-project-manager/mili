@@ -7,7 +7,7 @@ const clone = require('./clone')
 const npmInstall = require('./npm-install')
 
 
-module.exports = async (repository, version) => {
+module.exports = async (repository, version, noDeps) => {
   const localStoragePath = getLocalStoragePath(repository, version)
 
   if (repository.type === 'local') await copy(repository, version, localStoragePath)
@@ -20,5 +20,5 @@ module.exports = async (repository, version) => {
     ].join('\n'))
   }
 
-  await installDeps(localStoragePath)
+  if (!noDeps) await installDeps(localStoragePath)
 }

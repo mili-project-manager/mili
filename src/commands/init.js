@@ -13,6 +13,7 @@ module.exports = async (options = {}) => {
   const cwd = options.cwd || process.cwd()
   const name = options.name || basename(cwd)
   const repository = options.repository
+  const noDeps = options.noDeps
   let version = options.version
 
   if (!options.force) await securityCheck(process.cwd())
@@ -39,7 +40,7 @@ module.exports = async (options = {}) => {
   }
 
 
-  await downloadTemplate(config.template.repository, version)
+  await downloadTemplate(config.template.repository, version, noDeps)
 
   config = await config.reload({
     templateVersion: version,
