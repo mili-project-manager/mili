@@ -1,6 +1,6 @@
 {
   "name": "mili",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "vue + koa isomorphic boilerplate",
   "main": "src/mili.js",
   "repository": {

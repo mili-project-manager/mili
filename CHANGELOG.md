@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.2.0...v2.3.0) (2019-04-25)
+
+
+### Bug Fixes
+
+* log is undefined ([94d8afd](https://github.com/Val-istar-Guo/vue-boilerplate/commit/94d8afd)), closes [#45](https://github.com/Val-istar-Guo/vue-boilerplate/issues/45)
+* relative path will be saved as absolute path in .milirc ([e15c844](https://github.com/Val-istar-Guo/vue-boilerplate/commit/e15c844)), closes [#48](https://github.com/Val-istar-Guo/vue-boilerplate/issues/48)
+* throw error when main is unset at package.json ([033abb4](https://github.com/Val-istar-Guo/vue-boilerplate/commit/033abb4)), closes [#44](https://github.com/Val-istar-Guo/vue-boilerplate/issues/44)
+
+
+### Features
+
+* could load template from npm ([10d06f9](https://github.com/Val-istar-Guo/vue-boilerplate/commit/10d06f9)), closes [#37](https://github.com/Val-istar-Guo/vue-boilerplate/issues/37)
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.1.1...v2.2.0) (2019-04-14)
 
