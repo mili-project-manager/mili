@@ -43,6 +43,7 @@ module.exports = async (options = {}) => {
 
   config = await config.reload({
     templateVersion: version,
+    loadTemplate: true,
   })
 
   checkParams.engine(config)

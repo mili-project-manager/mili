@@ -33,7 +33,7 @@ const loadEntryFile = async path => {
   try {
     const packageJson = await loadPackageJson(path)
     let entryFilePath = join(path, 'entry.js')
-    if (packageJson) entryFilePath = join(path, packageJson.main)
+    if (packageJson && typeof packageJson.main === 'string') entryFilePath = join(path, packageJson.main)
 
     const result =  await cosmiconfig('template').load(entryFilePath)
     const config = checkConfig(result.config)
@@ -55,7 +55,7 @@ const loadEntryFile = async path => {
 }
 
 
-module.exports = async (repository, version) => {
+module.exports = async (repository, version, load = false) => {
   const milirc = await loadMilirc()
 
   if (!repository) {
@@ -80,34 +80,31 @@ module.exports = async (repository, version) => {
     interactionSHA1: '',
   }
 
-  if (!repository) return config
+  if (!load) return config
 
   const localStoragePath = await getLocalStoragePath(config.repository, config.version)
   if (!await fs.pathExists(localStoragePath)) return config
 
   const packageJson = await loadPackageJson(localStoragePath)
-  try {
-    const entryFile = await loadEntryFile(localStoragePath)
-    config.name = entryFile.name || packageJson.name || ''
-    config.version = version
-    config.engines = entryFile.engines
 
-    config.path = join(localStoragePath, entryFile.path)
-    if (!await isDirectory(config.path)) throwError('The template path should be a folder')
+  const entryFile = await loadEntryFile(localStoragePath)
+  config.name = entryFile.name || packageJson.name || ''
+  config.version = version
+  config.engines = entryFile.engines
 
-    config.rules = entryFile.rules.map(rule => {
-      rule.path = join(localStoragePath, rule.path)
-      return formatRule(rule)
-    })
+  config.path = join(localStoragePath, entryFile.path)
+  if (!await isDirectory(config.path)) throwError('The template path should be a folder')
 
-    config.interaction = entryFile.interaction
-    config.interactionSHA1 = sha1(JSON.stringify(entryFile.interaction))
-    config.hooks = formatHooks(entryFile.hooks)
+  config.rules = entryFile.rules.map(rule => {
+    rule.path = join(localStoragePath, rule.path)
+    return formatRule(rule)
+  })
 
-    config.files = await searchFile(config)
-    config.status = 'loaded'
-    return config
-  } catch (e) {
-    return config
-  }
+  config.interaction = entryFile.interaction
+  config.interactionSHA1 = sha1(JSON.stringify(entryFile.interaction))
+  config.hooks = formatHooks(entryFile.hooks)
+
+  config.files = await searchFile(config)
+  config.status = 'loaded'
+  return config
 }
