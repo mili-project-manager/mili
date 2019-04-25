@@ -1,4 +1,5 @@
 const handlers = require('../../handlers')
+const log = require('../../utils/log')
 
 
 module.exports = rule => {
