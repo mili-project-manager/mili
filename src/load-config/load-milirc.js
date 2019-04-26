@@ -1,6 +1,8 @@
+const fs = require('fs-extra')
 const cosmiconfig = require('cosmiconfig')
 const semver = require('semver')
 const throwError = require('../utils/throw-error')
+const { join, relative } = require('path')
 
 
 const explorer = cosmiconfig('mili')
@@ -18,10 +20,12 @@ const formatVersion1Config = config => ({
 })
 
 
-module.exports = async () => {
-  const result = await explorer.search()
+module.exports = async (cwd) => {
   let config = {}
+  const filepath = join(cwd, '.milirc.yml')
+  if (!await fs.pathExists(filepath)) return config
 
+  const result = await explorer.load(filepath)
   if (!result) return config
 
   config = result.config || {}
@@ -39,6 +43,9 @@ module.exports = async () => {
     'The version number of the template finded in .milirc does not conform to the semver specification',
     'Please check if the .milirc file is configured correctly.',
   ].join('\n'))
+
+
+  config.template.repository = relative(process.cwd(), join(cwd, config.template.repository))
 
   return config
 }

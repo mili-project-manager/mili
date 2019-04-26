@@ -7,7 +7,7 @@ const git = require('simple-git/promise')
 
 module.exports = async (cwd, projectName) => {
   const packageJson = await loadPackJson(cwd)
-  const milirc = await loadMilirc()
+  const milirc = await loadMilirc(cwd)
   const answers = milirc.answers || {}
 
   const config = {

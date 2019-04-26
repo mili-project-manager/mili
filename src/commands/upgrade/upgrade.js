@@ -1,12 +1,12 @@
-const loadConfig = require('../load-config')
+const loadConfig = require('../../load-config')
 const semver = require('semver')
-const downloadTemplate = require('../download-template')
-const getTemplateVersions = require('../get-template-versions')
-const applyTemplate = require('../apply-template')
-const securityCheck = require('../security-check')
-const log = require('../utils/log')
-const prompt = require('../prompt')
-const checkParams = require('../check-params')
+const downloadTemplate = require('../../download-template')
+const getTemplateVersions = require('../../get-template-versions')
+const applyTemplate = require('../../apply-template')
+const securityCheck = require('../../security-check')
+const log = require('../../utils/log')
+const prompt = require('../../prompt')
+const checkParams = require('../../check-params')
 
 
 module.exports = async (options = {}) => {
@@ -39,6 +39,8 @@ module.exports = async (options = {}) => {
 
   await prompt(config)
   config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
-  await applyTemplate(cwd, config)
+  await applyTemplate(config)
   await config.template.hooks('afterUpgrade')
+
+  log.info('upgrade complete')
 }

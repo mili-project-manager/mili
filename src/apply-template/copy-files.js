@@ -50,12 +50,12 @@ const appendFileHeader = file => {
 }
 
 
-const copy = async (file, to) => {
+const copy = async (file) => {
   const content = await fs.readFile(file.path, file.encoding)
 
   file = file.handlers.reduce(
     (file, handler) => handler.genFile(file),
-    { ...file, content, targetPath: join(to, file.targetPath) }
+    { ...file, content, targetPath: file.targetPath }
   )
 
   file = appendFileHeader(file)
@@ -66,6 +66,6 @@ const copy = async (file, to) => {
 
 module.exports = async (config) => {
   for (let file of config.template.files) {
-    await copy({ ...file, view: { ...config, custom: {} } }, config.project.path)
+    await copy({ ...file, view: { ...config, custom: {} } })
   }
 }

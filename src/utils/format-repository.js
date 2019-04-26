@@ -1,6 +1,6 @@
 const throwError = require('./throw-error')
 const fs = require('fs-extra')
-const { join, isAbsolute } = require('path')
+const { join, isAbsolute, relative } = require('path')
 const validateNpmPackageName = require("validate-npm-package-name")
 
 const githubSH = /^(github:)?[-a-zA-Z0-9@:%._\+~#=]+\/[-a-zA-Z0-9@:%._\+~#=]+$/
@@ -45,7 +45,8 @@ module.exports = (link) => {
 
     const url = join(cwd, link)
     if (dirExist(url)) {
-      return { type: 'local', url, owner: null, name: null, path: link }
+      // NOTE: the path saved in .milirc should be relative to the output folder, rather than process.cwd()
+      return { type: 'local', url, owner: null, name: null, path: savepath => relative(savepath, url) }
     }
 
     throwError('Template path cannot be found. Ensure it is an exist directory.')

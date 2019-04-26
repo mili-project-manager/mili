@@ -57,6 +57,6 @@ module.exports = async (options = {}) => {
   }
 
   await prompt(config)
-  await applyTemplate(cwd, config)
+  await applyTemplate(config)
   await config.template.hooks('afterInit')
 }
