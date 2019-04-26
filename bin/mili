@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander')
+const { join } = require('path')
 const log = require('../src/utils/log')
 const mili = require('../src/mili')
 const { version } = require('../package.json')
@@ -30,17 +31,25 @@ program
       .catch(err => log.error('program', 'initialize break', err))
   })
 
+const collect = (val, memo) => {
+  memo.push(val);
+  return memo;
+}
+
 program
   .command('upgrade')
   .description('upgrade the template')
   .option('--force')
   .option('--no-deps', 'Need not install dependencies', false)
+  .option('-r, --recursive', 'Upgrade recursive all subfolder')
+  .option('--ignore [file]', 'the folder need not search', collect, [])
   .action((option) => {
-    const { force = false, deps = true } = option
+    const { force = false, deps = true, recursive } = option
+    const cwd = process.cwd()
+    const ignore = option.ignore.map(item => join(cwd, item))
 
-    mili.upgrade({ force, noDeps: !deps })
-      .then(() => log.info('upgrade complete'))
-      .catch(err => log.error('program', 'upgrade break', err))
+    mili.upgrade({ force, noDeps: !deps, recursive, ignore })
+    .catch(err => log.error('program', 'upgrade break', err))
   })
 
 program

@@ -4,10 +4,10 @@ const copyFiles = require('./copy-files')
 const initFolder = require('./init-folder')
 
 
-module.exports = async (cwd, config) => {
+module.exports = async (config) => {
   log.info('initial folders...')
   await initFolder(config.template.files)
   log.info('copy files...')
   await copyFiles(config)
-  await genMilirc(cwd, config)
+  await genMilirc(config)
 }

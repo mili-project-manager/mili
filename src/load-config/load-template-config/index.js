@@ -56,19 +56,6 @@ const loadEntryFile = async path => {
 
 
 module.exports = async (repository, version, load = false) => {
-  const milirc = await loadMilirc()
-
-  if (!repository) {
-    if (milirc.template && milirc.template.repository) repository = milirc.template.repository
-    else throw new Error('Unable to find template repository, please check whether milirc is configured correctly')
-  }
-
-  if (!version && milirc.template && milirc.template.version) {
-    version = {
-      number: milirc.template.version
-    }
-  }
-
   const config = {
     status: 'prepare',
     version: version || null,
@@ -76,6 +63,7 @@ module.exports = async (repository, version, load = false) => {
     engines: null,
     path: null,
     rules: null,
+    files: [],
     interaction: [],
     interactionSHA1: '',
   }
