@@ -2,11 +2,11 @@ const throwError = require('./throw-error')
 const fs = require('fs-extra')
 const { join, isAbsolute, relative } = require('path')
 const validateNpmPackageName = require("validate-npm-package-name")
+const isRelativePath = require('./is-relative-path')
+
 
 const githubSH = /^(github:)?[-a-zA-Z0-9@:%._\+~#=]+\/[-a-zA-Z0-9@:%._\+~#=]+$/
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
-const isRelative = path => /^\.\.?\//.test(path)
-
 
 const formatRepository = repository => {
   if (gitUrlRegexp.test(repository)) {
@@ -38,7 +38,7 @@ const dirExist = async link => {
 module.exports = (link) => {
   const cwd = process.cwd()
 
-  if (isRelative(link) || isAbsolute(link)) {
+  if (isRelativePath(link) || isAbsolute(link)) {
     if (isAbsolute(link) && dirExist(link)) {
       return { type: 'local', url: link, owner: null, name: null, path: link }
     }
