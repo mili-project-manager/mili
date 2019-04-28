@@ -1,7 +1,7 @@
 {
   "name": "mili",
   "version": "2.3.0",
-  "description": "vue + koa isomorphic boilerplate",
+  "description": "Scaffolding with continuous control over the development of the project.",
   "main": "src/mili.js",
   "repository": {
     "type": "git",
