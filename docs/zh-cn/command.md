@@ -20,6 +20,11 @@
 
 升级项目模版，如果模板已是最新版本，则提示无需升级。
 
+**选项**
+* `-r` or `--recursive` 查找当前文件夹下所有的子文件夹，并且升级所有包含`.milirc`文件的目录
+* `--ignore [file]` 忽略检索的目录（支持`glob`）。
+  与`-r`的配合使用。
+  可以设置多个，（e.g. `npx mili upgrade -r --ignore "**/node_modules" --ignore "**/src"`）
 
 ## mili update
 
