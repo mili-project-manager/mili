@@ -1,6 +1,8 @@
+const { join } = require('path')
 const fs = require('fs-extra')
 const git = require('simple-git/promise')
 const throwError = require('./utils/throw-error')
+const isChildPathOf = require('./utils/is-child-path-of')
 
 
 const isEmpty = async path => {
@@ -17,8 +19,13 @@ const reminder = [
 
 const isWorkDirClean = async path => {
   const { files } =  await git(path).status()
-
-  return !files.length
+  let toplevel = await git(path).revparse(['--show-toplevel'])
+  toplevel = toplevel.replace(/\n$/, '')
+  
+  return !files
+    .map(file => join(toplevel, file.path))
+    .filter(isChildPathOf(path))
+    .length
 }
 
 module.exports = async path => {
