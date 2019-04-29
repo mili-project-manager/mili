@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.4.0"></a>
+# [2.4.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.3.0...v2.4.0) (2019-04-29)
+
+
+### Bug Fixes
+
+* **npm:** the path error when upgrade template from npm ([c5d8882](https://github.com/Val-istar-Guo/vue-boilerplate/commit/c5d8882))
+
+
+### Features
+
+* add option to prevent install dependencies ([69c3685](https://github.com/Val-istar-Guo/vue-boilerplate/commit/69c3685)), closes [#43](https://github.com/Val-istar-Guo/vue-boilerplate/issues/43)
+* new option to upgrade recursive ([cd7321a](https://github.com/Val-istar-Guo/vue-boilerplate/commit/cd7321a)), closes [#47](https://github.com/Val-istar-Guo/vue-boilerplate/issues/47)
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.2.0...v2.3.0) (2019-04-25)
 
