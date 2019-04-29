@@ -31,14 +31,20 @@
     "ca": "git add -A && git-cz -av",
     "commit": "git-cz",
     "release": "standard-version",
-    "postpublish": "git push"
+    "postpublish": "git push",
+    "test": "ava",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "report": "nyc npm run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.5.0",
+    "ava": "^1.4.1",
     "commitizen": "^3.1.1",
+    "coveralls": "^3.0.3",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^2.1.0",
+    "nyc": "^14.0.0",
     "standard-version": "^5.0.2"
   },
   "dependencies": {
