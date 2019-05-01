@@ -1,4 +1,5 @@
 const merge = require('merge-deep')
+const log = require('../../utils/log')
 
 
 module.exports = file => {
