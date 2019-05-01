@@ -4,7 +4,6 @@ const formatRepository = require('../utils/format-repository')
 const isRepo = require('../utils/is-repository')
 const git = require('simple-git/promise')
 
-
 module.exports = async (cwd, projectName) => {
   const packageJson = await loadPackJson(cwd)
   const milirc = await loadMilirc(cwd)
@@ -15,7 +14,7 @@ module.exports = async (cwd, projectName) => {
 
     // shell interaction result
     answers,
-    interactionSHA1: milirc.interaction
+    interactionSHA1: milirc.interaction,
   }
 
   if (packageJson && packageJson.repository) {
@@ -23,7 +22,8 @@ module.exports = async (cwd, projectName) => {
   } else if (await isRepo(cwd)) {
     const remotes = await git(cwd).getRemotes(true)
 
-    if (remotes.length) config.repository = formatRepository(remotes[0].refs.push)
+    if (remotes.length)
+      config.repository = formatRepository(remotes[0].refs.push)
   } else {
     config.repository = null
   }

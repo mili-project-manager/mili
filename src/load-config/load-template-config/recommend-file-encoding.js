@@ -1,6 +1,5 @@
 const { extname } = require('path')
 
-
 const binaryFileExtensitions = ['.jpg', '.png', '.ico']
 
 module.exports = path => {

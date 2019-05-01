@@ -4,8 +4,6 @@ const childProcess = require('child_process')
 const { promisify } = require('util')
 const log = require('../utils/log')
 
-
-
 const genIndexFile = name => `
 const { join } = require('path')
 const config = require('${name}')

@@ -4,7 +4,6 @@ const glob = require('micromatch')
 const upgrade = require('./upgrade')
 const log = require('../../utils/log')
 
-
 const upgradeRecursive = async (dir, ignore, options) => {
   const stats = await fs.stat(dir)
   if (!stats.isDirectory()) return
@@ -31,10 +30,7 @@ const upgradeRecursive = async (dir, ignore, options) => {
 }
 
 module.exports = async options => {
-  const {
-    cwd = process.cwd(),
-    ignore,
-  } = options
+  const { cwd = process.cwd(), ignore } = options
 
   await upgradeRecursive(cwd, ignore, options)
 }

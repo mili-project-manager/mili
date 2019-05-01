@@ -10,13 +10,16 @@ test('format github repository', t => {
     name: 'mili-template',
     url: 'https://github.com/Val-istar-Guo/mili-template.git',
     path: 'https://github.com/Val-istar-Guo/mili-template.git',
-  };
+  }
 
-  t.deepEqual(formatRepository('https://github.com/Val-istar-Guo/mili-template.git'), result)
+  t.deepEqual(
+    formatRepository('https://github.com/Val-istar-Guo/mili-template.git'),
+    result
+  )
   // t.deepEqual(formatRepository('git@github.com:Val-istar-Guo/mili-template.git'), result)
   t.deepEqual(formatRepository('Val-istar-Guo/mili-template'), result)
   t.deepEqual(formatRepository('github:Val-istar-Guo/mili-template'), result)
-  
+
   // formatRepository('');
   // formatRepository('/User/template/mili-template');
 })

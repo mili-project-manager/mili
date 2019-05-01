@@ -8,7 +8,6 @@ const securityCheck = require('../security-check')
 const checkParams = require('../check-params')
 const prompt = require('../prompt')
 
-
 module.exports = async (options = {}) => {
   const cwd = options.cwd || process.cwd()
   const name = options.name || basename(cwd)
@@ -29,16 +28,17 @@ module.exports = async (options = {}) => {
   if (version) {
     version = versions.find(v => v.number === version)
     if (!version) {
-      throwError([
-        'No corresponding template version was found',
-        'Please confirm that the version number exists in the tags of the template repository.',
-        `Expected template version: ${version}`
-      ].join('\n'))
+      throwError(
+        [
+          'No corresponding template version was found',
+          'Please confirm that the version number exists in the tags of the template repository.',
+          `Expected template version: ${version}`,
+        ].join('\n')
+      )
     }
   } else {
     version = versions[0]
   }
-
 
   await downloadTemplate(config.template.repository, version, noDeps)
 
@@ -50,10 +50,12 @@ module.exports = async (options = {}) => {
   checkParams.engine(config)
 
   if (config.template.status !== 'loaded') {
-    throwError([
-      'The template configuration file could not be loaded',
-      'Please check the template entry file for errors that make it unloadable'
-    ].join('\n'))
+    throwError(
+      [
+        'The template configuration file could not be loaded',
+        'Please check the template entry file for errors that make it unloadable',
+      ].join('\n')
+    )
   }
 
   await prompt(config)

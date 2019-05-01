@@ -2,13 +2,11 @@ module.exports = file => {
   const ignoreList = file.content.split('\n')
   const projectIgnoreList = file.targetFile.content.split('\n')
 
-
   let mergedList = []
   let lastIgnoreListIndex = 0
   let lastProjectIgnoreListIndex = 0
 
   ignoreList.forEach((item, index) => {
-
     let i = projectIgnoreList
       .slice(lastProjectIgnoreListIndex)
       .findIndex(value => value === item)
@@ -44,7 +42,6 @@ module.exports = file => {
     if (!item.length || !list.includes(item)) list.push(item)
     return list
   }, [])
-
 
   return {
     ...file,

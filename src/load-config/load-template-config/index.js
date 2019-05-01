@@ -13,7 +13,6 @@ const isDirectory = require('../../utils/is-directory')
 const searchFile = require('./search-files')
 const sha1 = require('sha1')
 
-
 const checkConfig = sa.keys({
   path: sa.string.required,
   encoding: sa.string.defaulted('utf8'),
@@ -33,27 +32,25 @@ const loadEntryFile = async path => {
   try {
     const packageJson = await loadPackageJson(path)
     let entryFilePath = join(path, 'entry.js')
-    if (packageJson && typeof packageJson.main === 'string') entryFilePath = join(path, packageJson.main)
+    if (packageJson && typeof packageJson.main === 'string')
+      entryFilePath = join(path, packageJson.main)
 
-    const result =  await cosmiconfig('template').load(entryFilePath)
+    const result = await cosmiconfig('template').load(entryFilePath)
     const config = checkConfig(result.config)
 
-    config.rules = config.rules
-      .map(rule => {
-        rule.path = join(config.path, rule.path)
-        if (rule.handlers) rule.handlers = rule.handlers
-        else if (rule.handler) rule.handlers = [rule.handler]
-        else rule.handlers = []
-        return rule
-      })
-
+    config.rules = config.rules.map(rule => {
+      rule.path = join(config.path, rule.path)
+      if (rule.handlers) rule.handlers = rule.handlers
+      else if (rule.handler) rule.handlers = [rule.handler]
+      else rule.handlers = []
+      return rule
+    })
 
     return config
-  } catch(err) {
+  } catch (err) {
     throwError(`Failed to load template entry file:\n${err.message}`)
   }
 }
-
 
 module.exports = async (repository, version, load = false) => {
   const config = {
@@ -70,8 +67,11 @@ module.exports = async (repository, version, load = false) => {
 
   if (!load) return config
 
-  const localStoragePath = await getLocalStoragePath(config.repository, config.version)
-  if (!await fs.pathExists(localStoragePath)) return config
+  const localStoragePath = await getLocalStoragePath(
+    config.repository,
+    config.version
+  )
+  if (!(await fs.pathExists(localStoragePath))) return config
 
   const packageJson = await loadPackageJson(localStoragePath)
 
@@ -81,7 +81,8 @@ module.exports = async (repository, version, load = false) => {
   config.engines = entryFile.engines
 
   config.path = join(localStoragePath, entryFile.path)
-  if (!await isDirectory(config.path)) throwError('The template path should be a folder')
+  if (!(await isDirectory(config.path)))
+    throwError('The template path should be a folder')
 
   config.rules = entryFile.rules.map(rule => {
     rule.path = join(localStoragePath, rule.path)
