@@ -2,11 +2,8 @@ const { exec } = require('child_process');
 const log = require('../../utils/log')
 
 
-module.exports = hooks => name => new Promise((resolve, reject) => {
-  if (typeof hooks[name] !== 'string') return resolve()
-  log.info(`run ${name} hook...`)
-
-  exec(hooks[name], (error, stdout, stderr) => {
+const execCommand = command => new Promise(resolve => {
+  exec(command, (error, stdout, stderr) => {
     if (error) {
       log.error('hook exec error', error);
       return resolve()
@@ -18,3 +15,24 @@ module.exports = hooks => name => new Promise((resolve, reject) => {
     resolve()
   });
 })
+
+const execFunction = async func => {
+  try {
+    await func()
+  } catch (error) {
+    log.error('hook exec error', error)
+  }
+}
+
+module.exports = hooks => async name => {
+  switch(typeof hooks[name]) {
+    case 'string':
+      log.info(`run ${name} hook...`)
+      await execCommand(hooks[name])
+      break
+    case 'function':
+      log.info(`run ${name} hook...`)
+      await execFunction(hooks[name])
+      break
+  }
+}
