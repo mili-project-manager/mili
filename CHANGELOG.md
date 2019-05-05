@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.5.0"></a>
+# [2.5.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.4.0...v2.5.0) (2019-05-05)
+
+
+### Bug Fixes
+
+* missing require('utils/log') ([18ff879](https://github.com/Val-istar-Guo/vue-boilerplate/commit/18ff879))
+
+
+### Features
+
+* --force needed only on the woking dir is not clean ([d56225b](https://github.com/Val-istar-Guo/vue-boilerplate/commit/d56225b)), closes [#46](https://github.com/Val-istar-Guo/vue-boilerplate/issues/46)
+* **hooks:** use function to define hook ([3ae83e7](https://github.com/Val-istar-Guo/vue-boilerplate/commit/3ae83e7)), closes [#57](https://github.com/Val-istar-Guo/vue-boilerplate/issues/57)
+
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.3.0...v2.4.0) (2019-04-29)
 
