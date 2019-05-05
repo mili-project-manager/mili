@@ -3,9 +3,8 @@ const log = require('../../utils/log')
 
 
 module.exports = rule => {
-  if (rule.handlers) rule.handlers = rule.handlers
-  else if (rule.handler) rule.handlers = [rule.handler]
-  else rule.handlers = []
+  if (!rule.handlers && rule.handler) rule.handlers = [rule.handler]
+  else if (!rule.handlers) rule.handlers = []
 
 
   const effectiveHandlers = []
@@ -23,7 +22,7 @@ module.exports = rule => {
       'Please confirm if the loaded template supports the current mili version,',
       'and feedback this question to the template developer.',
       'The current file will be overwritten directly by the template file.',
-      `path: ${rule.path}`
+      `path: ${rule.path}`,
     ].join('\n'))
   })
 

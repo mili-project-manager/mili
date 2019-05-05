@@ -7,7 +7,7 @@ const { promisify } = require('util')
 
 
 const exec = promisify(childProcess.exec)
-const getRepositoryVersions = async (repository) => {
+const getRepositoryVersions = async repository => {
   const result = await git().listRemote(['--tags', repository.url])
   const arr = result.split('\n')
   const versions = arr
@@ -38,7 +38,7 @@ const getNpmVersion = async repository => {
   return JSON.parse(stdout).reverse().map(number => ({ number }))
 }
 
-module.exports = async (repository) => {
+module.exports = async repository => {
   log.info('check template versions')
   if (repository.type === 'git') {
     return await getRepositoryVersions(repository)

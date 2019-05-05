@@ -9,7 +9,7 @@ const checkParams = require('../check-params')
 const prompt = require('../prompt')
 
 
-module.exports = async (options = {}) => {
+module.exports = async(options = {}) => {
   const cwd = options.cwd || process.cwd()
   const name = options.name || basename(cwd)
   const repository = options.repository
@@ -32,7 +32,7 @@ module.exports = async (options = {}) => {
       throwError([
         'No corresponding template version was found',
         'Please confirm that the version number exists in the tags of the template repository.',
-        `Expected template version: ${version}`
+        `Expected template version: ${version}`,
       ].join('\n'))
     }
   } else {
@@ -52,7 +52,7 @@ module.exports = async (options = {}) => {
   if (config.template.status !== 'loaded') {
     throwError([
       'The template configuration file could not be loaded',
-      'Please check the template entry file for errors that make it unloadable'
+      'Please check the template entry file for errors that make it unloadable',
     ].join('\n'))
   }
 

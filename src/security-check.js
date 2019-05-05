@@ -18,10 +18,10 @@ const reminder = [
 ].join('\n')
 
 const isWorkDirClean = async path => {
-  const { files } =  await git(path).status()
+  const { files } = await git(path).status()
   let toplevel = await git(path).revparse(['--show-toplevel'])
   toplevel = toplevel.replace(/\n$/, '')
-  
+
   return !files
     .map(file => join(toplevel, file.path))
     .filter(isChildPathOf(path))

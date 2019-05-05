@@ -2,11 +2,12 @@ const semver = require('semver')
 const loadConfig = require('../load-config')
 const log = require('../utils/log')
 const getTemplateVersions = require('../get-template-versions')
+const throwError = require('../utils/throw-error')
 
 
-module.exports = async (options = {}) => {
+module.exports = async(options = {}) => {
   const cwd = options.cwd || process.cwd()
-  let config = await loadConfig({ cwd })
+  const config = await loadConfig({ cwd })
 
 
   const versions = await getTemplateVersions(config.template.repository)
@@ -15,7 +16,7 @@ module.exports = async (options = {}) => {
   if (!versions.length) {
     throwError([
       'There is no formal versioning of the template repository',
-      'mili outdated cannot work'
+      'mili outdated cannot work',
     ].join('\n'))
   }
 

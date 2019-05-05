@@ -10,7 +10,7 @@ const log = require('../utils/log')
 const prompt = require('../prompt')
 
 
-module.exports = async (options) => {
+module.exports = async options => {
   const {
     cwd = process.cwd(),
     // whether to skip the security check
@@ -47,7 +47,7 @@ module.exports = async (options) => {
         throwError([
           'No corresponding template version was found',
           'Please confirm that the version number exists in the tags of the template repository.',
-          `Expected template version: ${version}`
+          `Expected template version: ${version}`,
         ].join('\n'))
       }
     } else if (config.template.version) {
@@ -56,7 +56,7 @@ module.exports = async (options) => {
         throwError([
           'No corresponding template version was found',
           'Please confirm that the version number exists in the tags of the template repository.',
-          `Expected template version: ${version}(get from .milirc)`
+          `Expected template version: ${version}(get from .milirc)`,
         ].join('\n'))
       }
     } else {
@@ -66,17 +66,15 @@ module.exports = async (options) => {
         'and if you want use the latest version, run mili upgrade',
       ].join('\n'))
     }
+  } else if (version) {
+    throwError(`The specified version(${version}) does not exist in repository`)
+  } else if (config.template.version) {
+    throwError(`The version(${config.template.version.number}) get from .milirc does not exist in repository`)
   } else {
-    if (version) {
-      throwError(`The specified version(${version}) does not exist in repository`)
-    } else if (config.template.version) {
-      throwError(`The version(${config.template.version.number}) get from .milirc does not exist in repository`)
-    } else {
-      log.warn([
-        'The template repository is not versioned. And will use the default branch/file.',
-        'Therefore `mili update` is equivalent to `mili upgrade`',
-      ].join('\n'))
-    }
+    log.warn([
+      'The template repository is not versioned. And will use the default branch/file.',
+      'Therefore `mili update` is equivalent to `mili upgrade`',
+    ].join('\n'))
   }
 
 

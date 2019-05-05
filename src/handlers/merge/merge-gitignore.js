@@ -8,7 +8,6 @@ module.exports = file => {
   let lastProjectIgnoreListIndex = 0
 
   ignoreList.forEach((item, index) => {
-
     let i = projectIgnoreList
       .slice(lastProjectIgnoreListIndex)
       .findIndex(value => value === item)

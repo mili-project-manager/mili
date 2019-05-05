@@ -5,7 +5,7 @@ const upgrade = require('./upgrade')
 const log = require('../../utils/log')
 
 
-const upgradeRecursive = async (dir, ignore, options) => {
+const upgradeRecursive = async(dir, ignore, options) => {
   const stats = await fs.stat(dir)
   if (!stats.isDirectory()) return
 
@@ -25,7 +25,7 @@ const upgradeRecursive = async (dir, ignore, options) => {
    *       because it's possible that two of these projects were used same template,
    *       resulting in template download conflict.
    */
-  for (let folder of folders) {
+  for (const folder of folders) {
     await upgradeRecursive(folder, ignore, options)
   }
 }
