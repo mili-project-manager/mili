@@ -4,7 +4,7 @@ const { join, isAbsolute, relative } = require('path')
 const validateNpmPackageName = require('validate-npm-package-name')
 const isRelativePath = require('./is-relative-path')
 
-const githubSH = /^(github:)?[-a-zA-Z0-9@:%._\+~#=]+\/[-a-zA-Z0-9@:%._\+~#=]+$/
+const githubSH = /^(github:)?[-a-zA-Z0-9@:%._+~#=]+\/[-a-zA-Z0-9@:%._+~#=]+$/
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
 
 const formatRepository = repository => {
@@ -72,13 +72,9 @@ module.exports = link => {
       }
     }
 
-    throwError(
-      'Template path cannot be found. Ensure it is an exist directory.'
-    )
+    throwError('Template path cannot be found. Ensure it is an exist directory.')
   } else if (githubSH.test(link)) {
-    return formatRepository(
-      `https://github.com/${link.replace(/^github:/, '')}.git`
-    )
+    return formatRepository(`https://github.com/${link.replace(/^github:/, '')}.git`)
   } else if (gitUrlRegexp.test(link)) {
     return formatRepository(link)
   } else if (

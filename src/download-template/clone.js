@@ -2,11 +2,9 @@ const fs = require('fs-extra')
 const git = require('simple-git/promise')
 const log = require('../utils/log')
 
-const repositoryExisted = async storage => {
-  return await fs.pathExists(storage)
-}
+const repositoryExisted = async storage => await fs.pathExists(storage)
 
-module.exports = async (repository, version, storage) => {
+module.exports = async(repository, version, storage) => {
   if (version && !(await repositoryExisted(storage))) {
     log.info(`clone template from ${repository.url}...`)
     await fs.remove(storage)
@@ -22,6 +20,6 @@ module.exports = async (repository, version, storage) => {
     await fs.remove(storage)
     await git().clone(repository.url, storage)
   } else {
-    log.info(`use the cache of repository`)
+    log.info('use the cache of repository')
   }
 }

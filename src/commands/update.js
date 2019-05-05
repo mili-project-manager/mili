@@ -41,53 +41,39 @@ module.exports = async options => {
     if (version) {
       version = versions.find(v => v.number === version)
       if (!version) {
-        throwError(
-          [
-            'No corresponding template version was found',
-            'Please confirm that the version number exists in the tags of the template repository.',
-            `Expected template version: ${version}`,
-          ].join('\n')
-        )
+        throwError([
+          'No corresponding template version was found',
+          'Please confirm that the version number exists in the tags of the template repository.',
+          `Expected template version: ${version}`,
+        ].join('\n'))
       }
     } else if (config.template.version) {
       version = versions.find(v => v.number === config.template.version.number)
       if (!version) {
-        throwError(
-          [
-            'No corresponding template version was found',
-            'Please confirm that the version number exists in the tags of the template repository.',
-            `Expected template version: ${version}(get from .milirc)`,
-          ].join('\n')
-        )
+        throwError([
+          'No corresponding template version was found',
+          'Please confirm that the version number exists in the tags of the template repository.',
+          `Expected template version: ${version}(get from .milirc)`,
+        ].join('\n'))
       }
     } else {
-      throwError(
-        [
-          'Cannot get template version from the .milirc for the project',
-          'mili update should specify a version.',
-          'and if you want use the latest version, run mili upgrade',
-        ].join('\n')
-      )
+      throwError([
+        'Cannot get template version from the .milirc for the project',
+        'mili update should specify a version.',
+        'and if you want use the latest version, run mili upgrade',
+      ].join('\n'))
     }
+  } else if (version) {
+    throwError(`The specified version(${version}) does not exist in repository`)
+  } else if (config.template.version) {
+    throwError(`The version(${
+      config.template.version.number
+    }) get from .milirc does not exist in repository`)
   } else {
-    if (version) {
-      throwError(
-        `The specified version(${version}) does not exist in repository`
-      )
-    } else if (config.template.version) {
-      throwError(
-        `The version(${
-          config.template.version.number
-        }) get from .milirc does not exist in repository`
-      )
-    } else {
-      log.warn(
-        [
-          'The template repository is not versioned. And will use the default branch/file.',
-          'Therefore `mili update` is equivalent to `mili upgrade`',
-        ].join('\n')
-      )
-    }
+    log.warn([
+      'The template repository is not versioned. And will use the default branch/file.',
+      'Therefore `mili update` is equivalent to `mili upgrade`',
+    ].join('\n'))
   }
 
   await downloadTemplate(config.template.repository, version, noDeps)
@@ -98,9 +84,7 @@ module.exports = async options => {
   checkParams.engine(config)
 
   await prompt(config)
-  config.template.files = config.template.files.filter(
-    file => file.upgrade !== 'keep'
-  )
+  config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
   await applyTemplate(config)
   await config.template.hooks('afterUpdate')
 }

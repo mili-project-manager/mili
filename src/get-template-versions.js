@@ -20,25 +20,21 @@ const getRepositoryVersions = async repository => {
     .sort((a, b) => semver.rcompare(a.number, b.number))
 
   if (!versions.length) {
-    log.warn(
-      [
-        'Cannot get template versions, May be caused by the following reasons:',
-        `1. repository is not a mili template(${repository.url})`,
-        '2. template have not a valid tag to mark the version(e.g. v1.0.0)',
-        `3. cannot get versions by command: \`git ls-remote --tags ${
-          repository.rul
-        }}\``,
-      ].join('\n')
-    )
+    log.warn([
+      'Cannot get template versions, May be caused by the following reasons:',
+      `1. repository is not a mili template(${repository.url})`,
+      '2. template have not a valid tag to mark the version(e.g. v1.0.0)',
+      `3. cannot get versions by command: \`git ls-remote --tags ${
+        repository.rul
+      }}\``,
+    ].join('\n'))
   }
 
   return versions
 }
 
 const getNpmVersion = async repository => {
-  const { stdout, stderr } = await exec(
-    `npm view ${repository.name} versions  --json`
-  )
+  const { stdout, stderr } = await exec(`npm view ${repository.name} versions  --json`)
   if (stderr) console.error(stderr)
   return JSON.parse(stdout)
     .reverse()

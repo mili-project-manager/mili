@@ -4,7 +4,7 @@ const loadTemplateConfig = require('./load-template-config')
 const loadProjectConfig = require('./load-project-config')
 const loadMilirc = require('./load-milirc')
 
-const loadConfig = async ({
+const loadConfig = async({
   cwd,
   projectName,
   templateRepository,
@@ -14,18 +14,15 @@ const loadConfig = async ({
   const milirc = await loadMilirc(cwd)
 
   if (!templateRepository) {
-    if (milirc.template && milirc.template.repository)
+    if (milirc.template && milirc.template.repository) {
       templateRepository = milirc.template.repository
-    else
-      throw new Error(
-        'Unable to find template repository, please check whether milirc is configured correctly'
-      )
+    } else {
+      throw new Error('Unable to find template repository, please check whether milirc is configured correctly')
+    }
   }
 
   if (!templateVersion && milirc.template && milirc.template.version) {
-    templateVersion = {
-      number: milirc.template.version,
-    }
+    templateVersion = { number: milirc.template.version }
   }
 
   const mili = await loadMiliConfig()
@@ -37,8 +34,9 @@ const loadConfig = async ({
   const project = await loadProjectConfig(cwd, projectName)
 
   // NOTE: generate the path that relative to the output folder
-  if (typeof template.repository.path === 'function')
+  if (typeof template.repository.path === 'function') {
     template.repository.path = template.repository.path(cwd)
+  }
 
   // NOTE: The files of template's targetPath should point to project
   template.files = template.files.map(file => ({
@@ -50,14 +48,13 @@ const loadConfig = async ({
     mili,
     template,
     project,
-    reload: (parms = {}) =>
-      loadConfig({
-        cwd,
-        projectName,
-        templateRepository,
-        templateVersion,
-        ...parms,
-      }),
+    reload: (parms = {}) => loadConfig({
+      cwd,
+      projectName,
+      templateRepository,
+      templateVersion,
+      ...parms,
+    }),
   }
 }
 

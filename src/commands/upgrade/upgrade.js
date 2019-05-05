@@ -8,7 +8,7 @@ const log = require('../../utils/log')
 const prompt = require('../../prompt')
 const checkParams = require('../../check-params')
 
-module.exports = async (options = {}) => {
+module.exports = async(options = {}) => {
   const {
     cwd = process.cwd(),
     // whether to skip the security check
@@ -36,9 +36,7 @@ module.exports = async (options = {}) => {
   checkParams.engine(config)
 
   await prompt(config)
-  config.template.files = config.template.files.filter(
-    file => file.upgrade !== 'keep'
-  )
+  config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
   await applyTemplate(config)
   await config.template.hooks('afterUpgrade')
 

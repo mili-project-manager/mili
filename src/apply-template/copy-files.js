@@ -1,5 +1,4 @@
 const fs = require('fs-extra')
-const { join } = require('path')
 const { extname, basename } = require('path')
 
 const commentator = [
@@ -24,10 +23,7 @@ const commentator = [
 const appendFileHeader = file => {
   const ext = extname(file.targetPath)
   const filename = basename(file.targetPath)
-  const cm = commentator.find(
-    handler =>
-      handler.extnames.includes(ext) || handler.filenames.includes(filename)
-  )
+  const cm = commentator.find(handler => handler.extnames.includes(ext) || handler.filenames.includes(filename))
 
   if (!cm) return file
 
@@ -63,7 +59,7 @@ const copy = async file => {
 }
 
 module.exports = async config => {
-  for (let file of config.template.files) {
+  for (const file of config.template.files) {
     await copy({ ...file, view: { ...config, custom: {} } })
   }
 }

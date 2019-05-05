@@ -3,7 +3,7 @@ const git = require('simple-git/promise')
 const log = require('../utils/log')
 const isRepo = require('../utils/is-repository')
 
-module.exports = async (repository, version, storage) => {
+module.exports = async(repository, version, storage) => {
   await fs.emptyDir(storage)
   log.info(`copy template from ${repository.url}`)
   await fs.copy(repository.url, storage)

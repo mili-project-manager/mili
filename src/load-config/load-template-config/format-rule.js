@@ -2,15 +2,15 @@ const handlers = require('../../handlers')
 const log = require('../../utils/log')
 
 module.exports = rule => {
-  if (rule.handlers) rule.handlers = rule.handlers
-  else if (rule.handler) rule.handlers = [rule.handler]
-  else rule.handlers = []
+  if (!rule.handlers && rule.handler) rule.handlers = [rule.handler]
+  else if (!rule.handlers) rule.handlers = []
 
   const effectiveHandlers = []
 
   rule.handlers.forEach(handler => {
-    if (typeof handler === 'string' && handler in handlers)
+    if (typeof handler === 'string' && handler in handlers) {
       return effectiveHandlers.push(handlers[handler])
+    }
     if (typeof handler === 'function') {
       const h = handler(handlers)
       if (h.mili_type === 'handler') return effectiveHandlers.push(h)

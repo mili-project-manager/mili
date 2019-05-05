@@ -13,7 +13,7 @@ module.exports = config
 `
 
 const exec = promisify(childProcess.exec)
-module.exports = async (repository, version, storage) => {
+module.exports = async(repository, version, storage) => {
   await fs.emptyDir(storage)
   log.info(`install ${repository.name} template from npm...`)
 
