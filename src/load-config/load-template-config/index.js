@@ -2,7 +2,6 @@ const fs = require('fs-extra')
 const { join } = require('path')
 const cosmiconfig = require('cosmiconfig')
 const sa = require('sanitization')
-const loadMilirc = require('../load-milirc')
 const loadPackageJson = require('../load-package-json')
 const formatRepository = require('../../utils/format-repository')
 const getLocalStoragePath = require('../../utils/get-local-storage-path')
@@ -35,27 +34,17 @@ const loadEntryFile = async path => {
     let entryFilePath = join(path, 'entry.js')
     if (packageJson && typeof packageJson.main === 'string') entryFilePath = join(path, packageJson.main)
 
-    const result =  await cosmiconfig('template').load(entryFilePath)
+    const result = await cosmiconfig('template').load(entryFilePath)
     const config = checkConfig(result.config)
 
-    config.rules = config.rules
-      .map(rule => {
-        rule.path = join(config.path, rule.path)
-        if (rule.handlers) rule.handlers = rule.handlers
-        else if (rule.handler) rule.handlers = [rule.handler]
-        else rule.handlers = []
-        return rule
-      })
-
-
     return config
-  } catch(err) {
+  } catch (err) {
     throwError(`Failed to load template entry file:\n${err.message}`)
   }
 }
 
 
-module.exports = async (repository, version, load = false) => {
+module.exports = async(repository, version, load = false) => {
   const config = {
     status: 'prepare',
     version: version || null,
@@ -84,7 +73,7 @@ module.exports = async (repository, version, load = false) => {
   if (!await isDirectory(config.path)) throwError('The template path should be a folder')
 
   config.rules = entryFile.rules.map(rule => {
-    rule.path = join(localStoragePath, rule.path)
+    rule.path = join(config.path, rule.path)
     return formatRule(rule)
   })
 

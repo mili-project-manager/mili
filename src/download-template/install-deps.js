@@ -9,7 +9,7 @@ const install = path => new Promise((resolve, reject) => {
 
   exec('npm install --production', { cwd: path }, (error, stdout, stderr) => {
     if (error) {
-      log.error('Unable install template dependencies');
+      log.error('Unable install template dependencies')
       return reject(error)
     }
 

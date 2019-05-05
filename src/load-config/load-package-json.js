@@ -4,7 +4,7 @@ const log = require('../utils/log')
 const formatRepository = require('../utils/format-repository')
 
 
-module.exports = async (path, defaulted = null) => {
+module.exports = async(path, defaulted = null) => {
   let packageJson = defaulted
 
   try {
@@ -17,9 +17,9 @@ module.exports = async (path, defaulted = null) => {
     } else if (typeof packageJson.repository === 'object' && packageJson.repository.url) {
       packageJson.repository = formatRepository(packageJson.repository.url)
     }
+    return packageJson
   } catch (e) {
     log.warn(`cannot load package.json (${path})`, e.message)
-  } finally {
     return packageJson
   }
 }

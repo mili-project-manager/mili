@@ -5,7 +5,7 @@ const loadProjectConfig = require('./load-project-config')
 const loadMilirc = require('./load-milirc')
 
 
-const loadConfig = async ({ cwd, projectName, templateRepository, templateVersion, loadTemplate }) => {
+const loadConfig = async({ cwd, projectName, templateRepository, templateVersion, loadTemplate }) => {
   const milirc = await loadMilirc(cwd)
 
   if (!templateRepository) {
@@ -15,7 +15,7 @@ const loadConfig = async ({ cwd, projectName, templateRepository, templateVersio
 
   if (!templateVersion && milirc.template && milirc.template.version) {
     templateVersion = {
-      number: milirc.template.version
+      number: milirc.template.version,
     }
   }
 

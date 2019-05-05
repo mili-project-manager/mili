@@ -7,13 +7,16 @@ const clone = require('./clone')
 const npmInstall = require('./npm-install')
 
 
-module.exports = async (repository, version, noDeps) => {
+module.exports = async(repository, version, noDeps) => {
   const localStoragePath = getLocalStoragePath(repository, version)
 
-  if (repository.type === 'local') await copy(repository, version, localStoragePath)
-  else if (repository.type === 'git') await clone(repository, version, localStoragePath)
-  else if (repository.type == 'npm') await npmInstall(repository, version, localStoragePath)
-  else {
+  if (repository.type === 'local') {
+    await copy(repository, version, localStoragePath)
+  } else if (repository.type === 'git') {
+    await clone(repository, version, localStoragePath)
+  } else if (repository.type === 'npm') {
+    await npmInstall(repository, version, localStoragePath)
+  } else {
     throwError([
       'Cannot parse template git repository or local path.',
       'Please check your input is correct and is supported by mili.',

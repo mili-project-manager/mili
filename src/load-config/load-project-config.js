@@ -5,7 +5,7 @@ const isRepo = require('../utils/is-repository')
 const git = require('simple-git/promise')
 
 
-module.exports = async (cwd, projectName) => {
+module.exports = async(cwd, projectName) => {
   const packageJson = await loadPackJson(cwd)
   const milirc = await loadMilirc(cwd)
   const answers = milirc.answers || {}
@@ -15,7 +15,7 @@ module.exports = async (cwd, projectName) => {
 
     // shell interaction result
     answers,
-    interactionSHA1: milirc.interaction
+    interactionSHA1: milirc.interaction,
   }
 
   if (packageJson && packageJson.repository) {

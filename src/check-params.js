@@ -16,8 +16,8 @@ module.exports = {
     if (!semver.satisfies(config.mili.version, config.template.engines)) {
       throwError([
         `The mili version template need is ${config.template.engines}`,
-        `But mili version used is ${config.mili.version}`
+        `But mili version used is ${config.mili.version}`,
       ].join('\n'))
     }
-  }
+  },
 }

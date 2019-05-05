@@ -9,7 +9,7 @@ const prompt = require('../../prompt')
 const checkParams = require('../../check-params')
 
 
-module.exports = async (options = {}) => {
+module.exports = async(options = {}) => {
   const {
     cwd = process.cwd(),
     // whether to skip the security check

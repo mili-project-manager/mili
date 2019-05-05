@@ -1,5 +1,4 @@
 const fs = require('fs-extra')
-const { join } = require('path')
 const { extname, basename } = require('path')
 
 
@@ -7,7 +6,7 @@ const commentator = [
   {
     filenames: [],
     extnames: ['.js', '.ts'],
-    create: (upgrade) => ([
+    create: upgrade => ([
       `// mili upgrade type: ${upgrade}`,
     ].join('\n')),
   },
@@ -15,14 +14,14 @@ const commentator = [
     filenames: [],
     // extnames: ['.md'],
     extnames: [],
-    create: (upgrade) => ([
+    create: upgrade => ([
       `<!-- mili upgrade type: ${upgrade} -->`,
     ].join('\n')),
   },
   {
     filenames: ['.npmrc'],
     extnames: ['.yml', '.yaml'],
-    create: (upgrade) => ([
+    create: upgrade => ([
       `# mili upgrade type: ${upgrade}`,
     ].join('\n')),
   },
@@ -50,7 +49,7 @@ const appendFileHeader = file => {
 }
 
 
-const copy = async (file) => {
+const copy = async file => {
   const content = await fs.readFile(file.path, file.encoding)
 
   file = file.handlers.reduce(
@@ -64,8 +63,8 @@ const copy = async (file) => {
 }
 
 
-module.exports = async (config) => {
-  for (let file of config.template.files) {
+module.exports = async config => {
+  for (const file of config.template.files) {
     await copy({ ...file, view: { ...config, custom: {} } })
   }
 }

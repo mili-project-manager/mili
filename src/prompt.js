@@ -1,14 +1,14 @@
 const inquirer = require('inquirer')
 
 
-module.exports = async (config, force = false) => {
+module.exports = async(config, force = false) => {
   const questions = [...config.template.interaction]
 
   if (!Array.isArray(questions)) return []
 
   if (!force && config.template.interactionSHA1 === config.project.interactionSHA1) {
     config.project.interaction = Object.entries(config.project.answers)
-    .map(item => ({ key: item[0], value: item[1] }))
+      .map(item => ({ key: item[0], value: item[1] }))
     return []
   }
 
