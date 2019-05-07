@@ -18,7 +18,7 @@ module.exports = async(options = {}) => {
   } = options
 
   if (!force) await securityCheck(process.cwd())
-  let config = await loadConfig({ cwd })
+  let config = await loadConfig({ cwd, operation: 'upgrade' })
 
 
   const versions = await getTemplateVersions(config.template.repository)
@@ -38,7 +38,6 @@ module.exports = async(options = {}) => {
   checkParams.engine(config)
 
   await prompt(config)
-  config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
   await applyTemplate(config)
   await config.template.hooks('afterUpgrade')
 

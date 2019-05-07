@@ -5,7 +5,10 @@ const loadProjectConfig = require('./load-project-config')
 const loadMilirc = require('./load-milirc')
 
 
-const loadConfig = async({ cwd, projectName, templateRepository, templateVersion, loadTemplate }) => {
+const loadConfig = async arg => {
+  const { operation, cwd, projectName, loadTemplate } = arg
+  let { templateRepository, templateVersion } = arg
+
   const milirc = await loadMilirc(cwd)
 
   if (!templateRepository) {
@@ -33,10 +36,11 @@ const loadConfig = async({ cwd, projectName, templateRepository, templateVersion
   }))
 
   return {
+    operation,
     mili,
     template,
     project,
-    reload: (parms = {}) => loadConfig({ cwd, projectName, templateRepository, templateVersion, ...parms }),
+    reload: (parms = {}) => loadConfig({ ...arg, ...parms }),
   }
 }
 

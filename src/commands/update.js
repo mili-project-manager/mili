@@ -24,9 +24,7 @@ module.exports = async options => {
   if (!force) await securityCheck(process.cwd())
   if (version) checkParams.version(version)
 
-
-  let config = await loadConfig({ cwd })
-
+  let config = await loadConfig({ cwd, operation: 'update' })
 
   if (version && semver.lt(version, config.template.version.number)) {
     const message = [
@@ -86,7 +84,6 @@ module.exports = async options => {
   checkParams.engine(config)
 
   await prompt(config)
-  config.template.files = config.template.files.filter(file => file.upgrade !== 'keep')
   await applyTemplate(config)
   await config.template.hooks('afterUpdate')
 }
