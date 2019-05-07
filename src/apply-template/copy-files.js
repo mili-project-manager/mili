@@ -57,6 +57,9 @@ const copy = async file => {
     { ...file, content, targetPath: file.targetPath }
   )
 
+  // NOTE: Handler may remove file
+  if (!file.render) return
+
   file = appendFileHeader(file)
 
   await fs.writeFile(file.targetPath, file.content, file.encoding)
@@ -65,6 +68,6 @@ const copy = async file => {
 
 module.exports = async config => {
   for (const file of config.template.files) {
-    await copy({ ...file, view: { ...config, custom: {} } })
+    await copy({ ...file, view: { ...config, custom: {}, answers: config.project.answers } })
   }
 }

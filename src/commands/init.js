@@ -20,6 +20,7 @@ module.exports = async(options = {}) => {
   if (version) checkParams.version(version)
 
   let config = await loadConfig({
+    operation: 'init',
     cwd,
     projectName: name,
     templateRepository: repository,

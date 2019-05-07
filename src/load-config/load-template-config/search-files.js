@@ -39,5 +39,6 @@ module.exports = async config => {
       (p, handler) => handler.genPath(p),
       relative(config.path, file.path)
     ),
+    render: true,
   }))
 }

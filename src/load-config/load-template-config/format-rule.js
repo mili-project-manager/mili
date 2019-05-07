@@ -28,6 +28,7 @@ module.exports = rule => {
 
   if (rule.upgrade === 'merge') effectiveHandlers.push(handlers.merge)
   if (rule.upgrade === 'exist') effectiveHandlers.push(handlers.exist)
+  if (rule.upgrade === 'keep') effectiveHandlers.push(handlers.removeWhen(config => config.operation === 'init'))
 
   return { ...rule, handlers: effectiveHandlers }
 }
