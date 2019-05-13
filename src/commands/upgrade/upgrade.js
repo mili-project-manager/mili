@@ -17,7 +17,7 @@ module.exports = async(options = {}) => {
     noDeps = false,
   } = options
 
-  if (!force) await securityCheck(process.cwd())
+  if (!force) await securityCheck(cwd)
   let config = await loadConfig({ cwd, operation: 'upgrade' })
 
 

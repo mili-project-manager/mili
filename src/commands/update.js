@@ -21,7 +21,7 @@ module.exports = async options => {
   // template version expected
   let version = options.version
 
-  if (!force) await securityCheck(process.cwd())
+  if (!force) await securityCheck(cwd)
   if (version) checkParams.version(version)
 
   let config = await loadConfig({ cwd, operation: 'update' })
