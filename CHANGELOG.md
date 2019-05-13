@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.6.0"></a>
+# [2.6.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.5.0...v2.6.0) (2019-05-13)
+
+
+### Features
+
+* add cwd setting in cli ([ff1898d](https://github.com/Val-istar-Guo/vue-boilerplate/commit/ff1898d)), closes [#63](https://github.com/Val-istar-Guo/vue-boilerplate/issues/63)
+* handler can remove file ([82f9dc6](https://github.com/Val-istar-Guo/vue-boilerplate/commit/82f9dc6)), closes [#61](https://github.com/Val-istar-Guo/vue-boilerplate/issues/61)
+
+
+
 <a name="2.5.0"></a>
 # [2.5.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.4.0...v2.5.0) (2019-05-05)
 
