@@ -13,7 +13,7 @@ program
   .command('init [repository]')
   .usage('[options] <repository>')
   .description('initialize the project')
-  .option('-n --app-name [app_name]', `Set your app name.`)
+  .option('-n --app-name [app_name]', 'Set your app name.')
   .option('--no-deps', 'Need not install dependencies', false)
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
@@ -32,8 +32,8 @@ program
   })
 
 const collect = (val, memo) => {
-  memo.push(val);
-  return memo;
+  memo.push(val)
+  return memo
 }
 
 program
@@ -43,13 +43,13 @@ program
   .option('--no-deps', 'Need not install dependencies', false)
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
   .option('--ignore [file]', 'the folder need not search', collect, [])
-  .action((option) => {
+  .action(option => {
     const { force = false, deps = true, recursive } = option
     const cwd = process.cwd()
     const ignore = option.ignore.map(item => join(cwd, item))
 
     mili.upgrade({ force, noDeps: !deps, recursive, ignore })
-    .catch(err => log.error('program', 'upgrade break', err))
+      .catch(err => log.error('program', 'upgrade break', err))
   })
 
 program
@@ -58,7 +58,7 @@ program
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .option('--no-deps', 'Need not install dependencies', false)
-  .action((option) => {
+  .action(option => {
     const { force = false, deps = true } = option
 
     let version
@@ -88,12 +88,12 @@ program
 
 
 // error on unknown commands
-program.on('command:*', function () {
-  log.error('command', 'Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '));
-  process.exit(1);
-});
+program.on('command:*', () => {
+  log.error('command', 'Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '))
+  process.exit(1)
+})
 
 
 program.parse(process.argv)
 
-if (!process.argv.slice(2).length) program.help();
+if (!process.argv.slice(2).length) program.help()
