@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander')
-const { join } = require('path')
+const { join, resolve } = require('path')
 const log = require('../src/utils/log')
 const mili = require('../src/mili')
 const { version } = require('../package.json')
@@ -8,6 +8,8 @@ const { version } = require('../package.json')
 
 program
   .version(version)
+
+const absolutize = val => resolve(val)
 
 program
   .command('init [repository]')
@@ -17,16 +19,16 @@ program
   .option('--no-deps', 'Need not install dependencies', false)
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
   .action((repository, option) => {
     if (!repository) program.help()
 
-    const { appName, force = false, deps = true } = option
+    const { appName, force = false, deps = true, cwd } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
 
-    // return init(appName, repository, force, version)
-    return mili.init({ name: appName, force, repository, version, noDeps: !deps })
+    return mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
       .then(() => log.info('initialize complete'))
       .catch(err => log.error('program', 'initialize break', err))
   })
@@ -43,12 +45,12 @@ program
   .option('--no-deps', 'Need not install dependencies', false)
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
   .option('--ignore [file]', 'the folder need not search', collect, [])
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
   .action(option => {
-    const { force = false, deps = true, recursive } = option
-    const cwd = process.cwd()
+    const { cwd, force = false, deps = true, recursive } = option
     const ignore = option.ignore.map(item => join(cwd, item))
 
-    mili.upgrade({ force, noDeps: !deps, recursive, ignore })
+    mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
       .catch(err => log.error('program', 'upgrade break', err))
   })
 
@@ -58,13 +60,14 @@ program
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .option('--no-deps', 'Need not install dependencies', false)
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
   .action(option => {
-    const { force = false, deps = true } = option
+    const { cwd, force = false, deps = true } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
 
-    mili.update({ force, version, noDeps: !deps })
+    mili.update({ cwd, force, version, noDeps: !deps })
       .then(() => log.info('update complete'))
       .catch(err => log.error('program', 'update break', err))
   })

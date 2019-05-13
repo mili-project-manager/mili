@@ -16,7 +16,7 @@ module.exports = async(options = {}) => {
   const noDeps = options.noDeps
   let version = options.version
 
-  if (!options.force) await securityCheck(process.cwd())
+  if (!options.force) await securityCheck(cwd)
   if (version) checkParams.version(version)
 
   let config = await loadConfig({
