@@ -1,6 +1,6 @@
-import test from 'ava'
 import { join, relative } from 'path'
 import formatRepository from '../../src/utils/format-repository'
+import test from 'ava'
 
 test('format github repository', t => {
   const result = {
@@ -10,15 +10,17 @@ test('format github repository', t => {
     name: 'mili-template',
     url: 'https://github.com/Val-istar-Guo/mili-template.git',
     path: 'https://github.com/Val-istar-Guo/mili-template.git',
-  };
+  }
 
   t.deepEqual(formatRepository('https://github.com/Val-istar-Guo/mili-template.git'), result)
   // t.deepEqual(formatRepository('git@github.com:Val-istar-Guo/mili-template.git'), result)
   t.deepEqual(formatRepository('Val-istar-Guo/mili-template'), result)
   t.deepEqual(formatRepository('github:Val-istar-Guo/mili-template'), result)
-  
-  // formatRepository('');
-  // formatRepository('/User/template/mili-template');
+
+  /*
+   * formatRepository('');
+   * formatRepository('/User/template/mili-template');
+   */
 })
 
 test('format npm package', t => {
@@ -43,5 +45,5 @@ test('format relative path', t => {
     url: absolutePath,
   })
 
-  t.is(result.path(__dirname), '../../src')
+  t.is(result.path(__dirname), './../../src')
 })
