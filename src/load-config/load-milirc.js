@@ -30,7 +30,7 @@ module.exports = async cwd => {
   const result = await explorer.load(filepath)
   if (!result) return config
 
-  config = result.config || {}
+  if (result.config) config = JSON.parse(JSON.stringify(result.config))
 
   if (semver.lt(config.mili.version, '2.0.0')) {
     config = formatVersion1Config(config)
