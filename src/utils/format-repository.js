@@ -4,6 +4,7 @@ const { join, isAbsolute } = require('path')
 const validateNpmPackageName = require('validate-npm-package-name')
 const isRelativePath = require('./is-relative-path')
 const relativePath = require('./relative-path')
+const log = require('./log')
 
 
 const githubSH = /^(github:)?[-a-zA-Z0-9@:%._+~#=]+\/[-a-zA-Z0-9@:%._+~#=]+$/
@@ -51,6 +52,7 @@ module.exports = link => {
 
     throwError('Template path cannot be found. Ensure it is an exist directory.')
   } else if (githubSH.test(link)) {
+    if (!/^github:/.test(link)) log.warn(`Don't use '${link}' anymore. And use 'github:${link}' instead.`)
     return formatRepository(`https://github.com/${link.replace(/^github:/, '')}.git`)
   } else if (gitUrlRegexp.test(link)) {
     return formatRepository(link)
