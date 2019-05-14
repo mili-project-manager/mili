@@ -33,7 +33,7 @@ rules:
   prefer-spread: error
   prefer-template: error
   rest-spread-spacing: error
-  sort-imports: error
+  sort-imports: off
   template-curly-spacing: error
   yield-star-spacing: error
   yoda:
