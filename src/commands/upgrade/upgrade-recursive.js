@@ -1,4 +1,4 @@
-const { join } = require('path')
+const { join, isAbsolute } = require('path')
 const fs = require('fs-extra')
 const glob = require('micromatch')
 const upgrade = require('./upgrade')
@@ -33,8 +33,13 @@ const upgradeRecursive = async(dir, ignore, options) => {
 module.exports = async options => {
   const {
     cwd = process.cwd(),
-    ignore,
+    ignore = [],
   } = options
 
-  await upgradeRecursive(cwd, ignore, options)
+  const absolutePathIgnored = ignore.map(item => {
+    if (!isAbsolute(item)) return join(cwd, item)
+    return item
+  })
+
+  await upgradeRecursive(cwd, absolutePathIgnored, options)
 }

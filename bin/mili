@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander')
-const { join, resolve } = require('path')
+const { resolve } = require('path')
+const fs = require('fs-extra')
 const log = require('../src/utils/log')
 const mili = require('../src/mili')
 const { version } = require('../package.json')
@@ -19,7 +20,7 @@ program
   .option('--no-deps', 'Need not install dependencies', false)
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .action((repository, option) => {
     if (!repository) program.help()
 
@@ -27,6 +28,7 @@ program
 
     let version
     if (typeof option.version === 'string') version = option.version
+    if (cwd) fs.ensureDir(cwd)
 
     return mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
       .then(() => log.info('initialize complete'))
@@ -44,11 +46,14 @@ program
   .option('--force')
   .option('--no-deps', 'Need not install dependencies', false)
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
-  .option('--ignore [file]', 'the folder need not search', collect, [])
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
+  .option('--ignore [file]', 'the folder need not search', collect)
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .action(option => {
-    const { cwd, force = false, deps = true, recursive } = option
-    const ignore = option.ignore.map(item => join(cwd, item))
+    const { cwd, force = false, deps = true, recursive, ignore } = option
+    if (cwd && !fs.pathExistsSync(cwd)) {
+      log.error('cwd', `No such directory: ${cwd}`)
+      return
+    }
 
     mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
       .catch(err => log.error('program', 'upgrade break', err))
@@ -60,12 +65,16 @@ program
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .option('--no-deps', 'Need not install dependencies', false)
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize, process.cwd())
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .action(option => {
     const { cwd, force = false, deps = true } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
+    if (cwd && !fs.pathExistsSync(cwd)) {
+      log.error('cwd', `No such directory: ${cwd}`)
+      return
+    }
 
     mili.update({ cwd, force, version, noDeps: !deps })
       .then(() => log.info('update complete'))
