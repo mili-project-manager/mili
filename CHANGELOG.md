@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.6.1"></a>
+## [2.6.1](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.6.0...v2.6.1) (2019-05-15)
+
+
+### Bug Fixes
+
+* ./ is missing in relative path ([806f14b](https://github.com/Val-istar-Guo/vue-boilerplate/commit/806f14b)), closes [#65](https://github.com/Val-istar-Guo/vue-boilerplate/issues/65)
+* cosmiconfig result should not be changed directly ([99aa1f9](https://github.com/Val-istar-Guo/vue-boilerplate/commit/99aa1f9)), closes [#65](https://github.com/Val-istar-Guo/vue-boilerplate/issues/65)
+
+
+
 <a name="2.6.0"></a>
 # [2.6.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.5.0...v2.6.0) (2019-05-13)
 
