@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.0"></a>
+# [2.7.0](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.6.1...v2.7.0) (2019-05-16)
+
+
+### Features
+
+* create dir or throw error when cwd unexisted ([89db505](https://github.com/Val-istar-Guo/vue-boilerplate/commit/89db505)), closes [#67](https://github.com/Val-istar-Guo/vue-boilerplate/issues/67)
+
+
+
 <a name="2.6.1"></a>
 ## [2.6.1](https://github.com/Val-istar-Guo/vue-boilerplate/compare/v2.6.0...v2.6.1) (2019-05-15)
 
