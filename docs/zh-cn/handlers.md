@@ -5,7 +5,7 @@
 Handlers为项目模版初始化/升级提供了无限可能。
 这篇介绍目前支持的handler的功能。
 
-![handlers](../images/handlers.png)
+![handlers](../images/handlers.svg)
 
 
 # mustache
