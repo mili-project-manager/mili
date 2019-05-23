@@ -1,4 +1,4 @@
-# ![mili logo](../../images/mili.svg)
+# ![mili logo](../images/mili.svg)
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
@@ -8,44 +8,51 @@
 
 **从同一个脚手架衍生出来的项目，很多细节会渐渐变得不一致**
 也就是说：脚手架对于项目的后续发展失去了控制力。
-当我们想要升级一些脚手架的基础功能（例：eslint规则）时，我们不得不去升级每一个项目，甚至不得不对一些改动过大的项目设计定制化的升级方案。
+当我们想要升级一些脚手架的基础功能（例：eslint规则）时，我们不得不去升级每一个项目.
+甚至不得不对一些改动过大的项目设计定制化的升级方案。
 
-因此，为了提高脚手架对项目后续发展的控制力，mili允许模版固化一部分文件，并为这部分文件提供升级功能。
+因此，为了提高脚手架对项目后续发展的控制力，模版可以修改一部分文件，并发布新的模版版本。然后，项目就可以升级模版版本。
+
 如果你们团队管理着多个项目，并希望这些项目具有统一的、可持续迭代的代码规范、基础功能、框架结构，mili非常适合作为你们的脚手架工具。
 
-[详细使用指南请戳这里](./guide.md)
-
+- [模版开发](./template.md)
+- [CLI](./cli.md)
 
 ## Usage
 
-mili主要有两个功能，创建项目和升级项目，让我们分别来看看如何使用。
+Mili的核心设计理念：
+
+![theory](../images/handlers.svg)
+
+1. 首先，你需要开发一个模版（template），或者使用别人的模版。
+2. 创建项目目录，并在项目根目录运行`npx mili init template_path`。
+3. 当模版版本需要升级时，在项目根目录运行`npx mili upgrade`
 
 ### 创建项目
 
-我们使用一个用于创建模版的mili模版 -- [mili-template](https://github.com/Val-istar-Guo/mili-template)。
-来创建一个模板项目。
+我们使用[mili-template](https://github.com/Val-istar-Guo/mili-template)模版来创建一个项目：
 
+```shell
+// template in github
+npx mili init github:Val-istar-Guo/mili-template.git
+// template in npm
+npx mili init npm:mili-template
+// template in private git repository
+npx mili init https://github.com/Val-istar-Guo/mili.git
 ```
-# 在项目目录下执行
-npx mili init https://github.com/Val-istar-Guo/mili-template.git
-```
-
-这样就通过脚手架和mili-template模版创建了一个项目。
-
-依照mili-template设定的规范，.czrc、.commitlintrc.yml等文件是不能修改的，必须要与模版的规范一致。
-而package.json可以添加自定义的东西，但是如果字段在mili-template中已经进行了设置，或者未来模版添加了这个字段，都会以模版规范为准，覆盖本地相同的字段配置。这保证了整个团队项目基本规范和使用方式一致性。
-
 
 ### 升级项目
+
+升级操作非常简单，模版配置文件中对于每个文件配置的handlers, 决定了升级操作的对项目文件的影响。
 
 ```shell
 # 在项目目录下执行
 mili upgrade
 ```
 
-由于mili-template已经将这条命令加入package.json的script中， 我们可以直接运行`npm run upgrade`升级项目依赖的模板。
-升级会按照模版设定的规则对对一些文件进行覆盖。
+handler可以提取项目文件的数据，或者将模板文件用为[mustache](https://github.com/janl/mustache.js)模板，并将项目数据作为view，渲染出新的项目文件，并覆盖旧文件。
 
+handlers可以自由灵活地组合，以实现各种各样的`init`和`upgrade`运行效果。
 
 ## 正反馈
 
@@ -57,18 +64,16 @@ mili upgrade
 
 当存在一下情况时：
 
-1. 被模版固化的基础功能/结构无法满足项目的业务需求
-2. 模版固化的文件存在bug
+1. 被模版的基础功能/结构无法满足项目的业务需求
+2. 模版的文件存在bug
 
 这时候，项目的开发者需要对模版进行更新。因为只有更新到模版后，才能‘安全的’将这些改动应用到项目中来（通过升级模版）。
 与此同时，模版 => 项目的反馈也会为所有的项目带来bug升级、新特性、或结构性调整，减少其他项目升级工作量。
 
+## 示例
 
-## E.g.
-
-- [mili-template](https://github.com/Val-istar-Guo/mili-template)
+- [mili-template](https://github.com/Val-istar-Guo/mili-template): 一个简单的mili模版，很适合作为第一次开发模版的参考项目。
 - [component-template](https://github.com/Val-istar-Guo/component-template)
-
 
 ## Q&A
 
