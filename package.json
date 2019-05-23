@@ -5,12 +5,12 @@
   "main": "src/mili.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Val-istar-Guo/vue-boilerplate.git"
+    "url": "git+https://github.com/Val-istar-Guo/mili.git"
   },
   "bugs": {
-    "url": "https://github.com/Val-istar-Guo/vue-boilerplate/issues"
+    "url": "https://github.com/Val-istar-Guo/mili/issues"
   },
-  "homepage": "https://github.com/Val-istar-Guo/vue-boilerplate#readme",
+  "homepage": "https://github.com/Val-istar-Guo/mili#readme",
   "keywords": [
     "mili",
     "scaffold",
@@ -18,7 +18,7 @@
     "templates",
     "continuous"
   ],
-  "author": "Val.istar.Guo <Val.istar.Guo@gmail.com>",
+  "author": "Val.istar.Guo <val.istar.guo@gmail.com>",
   "license": "MIT",
   "engines": {
     "node": ">=8.9.4"

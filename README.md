@@ -204,7 +204,7 @@ init project
 :---------------------------|:---------------------------------------|:--------------
  `-n --app-name [app_name]` | `basename of cwd` or `progress.cwd()`  | Set application name
  `-v --version [version]`   | latest version                         | Set the template version
- `--cwd [cwd]`              | progress.cwd()                         | Set the current work directory
+ `--cwd [cwd]`              | `progress.cwd()`                       | Set the current work directory
  `--no-deps`                | -                                      | Don't install template dependencies. You can save some time, if don't install dependencies.
  `--force`                  | -                                      | Enforce command. Ignore security check.
 
@@ -229,7 +229,7 @@ upgrade your project if then template depended outdated.
 
  option                     | default                                | description
 :---------------------------|:---------------------------------------|:--------------
- `--cwd [cwd]`              | progress.cwd()                         | Set the current work directory
+ `--cwd [cwd]`              | `progress.cwd()`                       | Set the current work directory
  `--no-deps`                | -                                      | Don't install template dependencies. You can save some time, if don't install dependencies.
  `--force`                  | -                                      | Enforce command. Ignore security check.
  `-r --recursive`           | -                                      | Upgrade recursive all subfolder.
@@ -244,7 +244,7 @@ Update your project file with the current version of the template
  option                     | default                                | description
 :---------------------------|:---------------------------------------|:--------------
  `-v --version [version]`   | current template version               | Set the template version
- `--cwd [cwd]`              | progress.cwd()                         | Set the current work directory
+ `--cwd [cwd]`              | `progress.cwd()`                       | Set the current work directory
  `--no-deps`                | -                                      | Don't install template dependencies. You can save some time, if don't install dependencies.
  `--force`                  | -                                      | Enforce command. Ignore security check.
 
