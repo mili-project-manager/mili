@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.2"></a>
+## [2.7.2](https://github.com/Val-istar-Guo/mili/compare/v2.7.1...v2.7.2) (2019-05-29)
+
+
+
 <a name="2.7.1"></a>
 ## [2.7.1](https://github.com/Val-istar-Guo/mili/compare/v2.7.0...v2.7.1) (2019-05-26)
 
