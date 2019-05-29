@@ -1,4 +1,4 @@
-# ![mili logo](../images/mili.svg)
+# ![mili logo](../images/mili.svg?sanitize=true)
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
@@ -22,7 +22,7 @@
 
 Mili的核心设计理念：
 
-![theory](../images/handlers.svg)
+![theory](../images/handlers.svg?sanitize=true)
 
 1. 首先，你需要开发一个模版（template），或者使用别人的模版。
 2. 创建项目目录，并在项目根目录运行`npx mili init template_path`。

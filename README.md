@@ -1,4 +1,4 @@
-# ![mili logo](./docs/images/mili.svg)
+# ![mili logo](./docs/images/mili.svg?sanitize=true)
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
@@ -21,7 +21,7 @@ It is useful for team project management.
 
 The basic principle of mili.
 
-![theory](./docs/images/handlers.svg)
+![theory](./docs/images/handlers.svg?sanitize=true)
 
 1. First, you need to design your own template or use someone else's template.
 2. Make project directory and run `npx mili init template_path`.
