@@ -51,14 +51,14 @@ module.exports = link => {
     }
 
     throwError('Template path cannot be found. Ensure it is an exist directory.')
-  } else if (githubSH.test(link)) {
-    if (!/^github:/.test(link)) log.warn(`Don't use '${link}' anymore. And use 'github:${link}' instead.`)
-    return formatRepository(`https://github.com/${link.replace(/^github:/, '')}.git`)
   } else if (gitUrlRegexp.test(link)) {
     return formatRepository(link)
   } else if (/^npm:/.test(link) && validateNpmPackageName(link.substring('npm:'.length))) {
     // npm:xxxx/xxx
     return { type: 'npm', url: link, owner: '', name: link.substring('npm:'.length), path: link }
+  } else if (githubSH.test(link)) {
+    if (!/^github:/.test(link)) log.warn(`Don't use '${link}' anymore. And use 'github:${link}' instead.`)
+    return formatRepository(`https://github.com/${link.replace(/^github:/, '')}.git`)
   }
 
   throwError(`Invalid repository url: ${link}`)
