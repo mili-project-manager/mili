@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.7.3"></a>
+## [2.7.3](https://github.com/Val-istar-Guo/mili/compare/v2.7.2...v2.7.3) (2019-06-10)
+
+
+### Bug Fixes
+
+* the npm template of organization cannot download ([5342f63](https://github.com/Val-istar-Guo/mili/commit/5342f63)), closes [#73](https://github.com/Val-istar-Guo/mili/issues/73)
+
+
+
 <a name="2.7.2"></a>
 ## [2.7.2](https://github.com/Val-istar-Guo/mili/compare/v2.7.1...v2.7.2) (2019-05-29)
 
