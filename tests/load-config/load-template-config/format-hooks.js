@@ -1,4 +1,4 @@
-import test from "ava"
+import test from 'ava'
 import proxyquire from 'proxyquire'
 import sinon from 'sinon'
 
@@ -33,7 +33,7 @@ test('exec error command in hooks', async t => {
     { child_process: { exec } },
   )
 
-  await t.notThrowsAsync(formatHooks({ afterInit: command })('afterInit')) 
+  await t.notThrowsAsync(formatHooks({ afterInit: command })('afterInit'))
 })
 
 test('exec function in hook', async t => {
