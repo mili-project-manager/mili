@@ -7,15 +7,21 @@ const mergeIgnore = require('./merge-ignore')
 const mergeYaml = require('./merge-yaml')
 
 
+const jsonFileExts = ['.json']
+const yamlFileExts = ['.yaml', '.yml']
+const ignoreFilenames = ['.gitignore', '.npmignore']
+
 module.exports = createHandler(file => {
   file = readTargetFile(file)
 
   if (file.targetFile.exist) {
-    if (extname(file.targetPath) === '.json') {
+    const ext = extname(file.targetPath)
+    const filename = basename(file.targetPath)
+    if (jsonFileExts.includes(ext)) {
       return mergeJson(file)
-    } else if (['.yaml', '.yml'].includes(extname(file.targetPath))) {
+    } else if (yamlFileExts.includes(ext)) {
       return mergeYaml(file)
-    } else if (['.gitignore', '.npmignore'].includes(basename(file.targetPath))) {
+    } else if (ignoreFilenames.includes(filename)) {
       return mergeIgnore(file)
     } else {
       log.error('merge', [
