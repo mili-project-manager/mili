@@ -4,6 +4,7 @@ const createHandler = require('../create-handler')
 const readTargetFile = require('../read-target-file')
 const mergeJson = require('./merge-json')
 const mergeIgnore = require('./merge-ignore')
+const mergeYaml = require('./merge-yaml')
 
 
 module.exports = createHandler(file => {
@@ -12,6 +13,8 @@ module.exports = createHandler(file => {
   if (file.targetFile.exist) {
     if (extname(file.targetPath) === '.json') {
       return mergeJson(file)
+    } else if (['.yaml', '.yml'].includes(extname(file.targetPath))) {
+      return mergeYaml(file)
     } else if (['.gitignore', '.npmignore'].includes(basename(file.targetPath))) {
       return mergeIgnore(file)
     } else {
