@@ -3,7 +3,7 @@ const { extname, basename } = require('path')
 const createHandler = require('../create-handler')
 const readTargetFile = require('../read-target-file')
 const mergeJson = require('./merge-json')
-const mergeGitignore = require('./merge-gitignore')
+const mergeIgnore = require('./merge-ignore')
 
 
 module.exports = createHandler(file => {
@@ -12,8 +12,8 @@ module.exports = createHandler(file => {
   if (file.targetFile.exist) {
     if (extname(file.targetPath) === '.json') {
       return mergeJson(file)
-    } else if (basename(file.targetPath) === '.gitignore') {
-      return mergeGitignore(file)
+    } else if (['.gitignore', '.npmignore'].includes(basename(file.targetPath))) {
+      return mergeIgnore(file)
     } else {
       log.error('merge', [
         `Merge files of this type(${extname(file.targetPath)}) are not supported by mili`,
