@@ -1,6 +1,6 @@
 {
   "name": "mili",
-  "version": "2.7.3",
+  "version": "2.8.0",
   "description": "Scaffolding with continuous control over the development of the project.",
   "main": "src/mili.js",
   "repository": {

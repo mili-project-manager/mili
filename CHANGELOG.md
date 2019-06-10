@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.0"></a>
+# [2.8.0](https://github.com/Val-istar-Guo/mili/compare/v2.7.3...v2.8.0) (2019-06-10)
+
+
+### Bug Fixes
+
+* --ignore is not work ([fec6d0c](https://github.com/Val-istar-Guo/mili/commit/fec6d0c)), closes [#76](https://github.com/Val-istar-Guo/mili/issues/76)
+
+
+### Features
+
+* **handler:** merge handler support yaml/yml file ([57c9dd9](https://github.com/Val-istar-Guo/mili/commit/57c9dd9))
+* **handlers:** merge handler support .npmignore file ([b673770](https://github.com/Val-istar-Guo/mili/commit/b673770)), closes [#75](https://github.com/Val-istar-Guo/mili/issues/75)
+
+
+
 <a name="2.7.3"></a>
 ## [2.7.3](https://github.com/Val-istar-Guo/mili/compare/v2.7.2...v2.7.3) (2019-06-10)
 
