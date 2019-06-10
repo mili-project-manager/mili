@@ -46,7 +46,7 @@ program
   .option('--force')
   .option('--no-deps', 'Need not install dependencies', false)
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
-  .option('--ignore [file]', 'the folder need not search', collect)
+  .option('--ignore [file]', 'the folder need not search', collect, [])
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .action(option => {
     const { cwd, force = false, deps = true, recursive, ignore } = option
