@@ -54,6 +54,26 @@ handler可以提取项目文件的数据，或者将模板文件用为[mustache]
 
 handlers可以自由灵活地组合，以实现各种各样的`init`和`upgrade`运行效果。
 
+### 校验项目文件
+
+配合[husky](https://www.npmjs.com/package/husky)，可以很容易的实现提交前校验项目文件是否符合模版规范。
+从而保障项目代码的规范。
+
+在终端运行命令：
+```shell
+npx mili check
+```
+
+或者在[husky](https://www.npmjs.com/package/husky)里配置：
+```yaml
+hooks:
+  pre-commit: 'npx mili check'
+```
+
+An example: ![mili check](../images/check.png)
+
+运行`npx mili update`命令，mili将自动按照`diff`的提示进行增删，从而符合模版的规范。
+
 ## 正反馈
 
 ### 模版 => 项目
