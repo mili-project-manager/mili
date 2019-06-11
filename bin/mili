@@ -98,6 +98,25 @@ program
     mili.outdated()
   })
 
+program
+  .command('check')
+  .description('Check if the project file meets the template requirements')
+  .option('--no-deps', 'Need not install dependencies', false)
+  .option('-r, --recursive', 'Upgrade recursive all subfolder')
+  .option('--ignore [file]', 'the folder need not search', collect, [])
+  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
+  .option('-d --diff', 'Show file difference')
+  .option('--fold', 'fold undifferentiated code')
+  .action(options => {
+    const { cwd, deps = true, recursive, ignore, diff, fold } = options
+    if (cwd && !fs.pathExistsSync(cwd)) {
+      log.error('cwd', `No such directory: ${cwd}`)
+      return
+    }
+
+    return mili.check({ cwd, noDeps: !deps, recursive, ignore, diff, fold })
+      .catch(err => log.error('program', 'check break', err))
+  })
 
 // error on unknown commands
 program.on('command:*', () => {

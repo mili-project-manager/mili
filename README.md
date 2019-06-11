@@ -53,6 +53,29 @@ The handler can extract the data of the project file, or use the template file a
 The handlers can be flexibly and freely combined to implement a variety of initialization and upgrade modes.
 
 
+### Check Before Commit
+
+With [husky] (https://www.npmjs.com/package/husky),
+it is easy to verify whether the project file meets the template before commit.
+Thereby ensuring the specification of the project code.
+
+Run in terminal:
+```shell
+npx mili check
+```
+
+Or configuration in husky:
+
+```yaml
+hooks:
+  pre-commit: 'npx mili check'
+```
+
+An example: ![mili check](../images/check.png)
+
+Run `npx mili upgrade` command will auto modify code according to the diff.
+
+
 ### Template
 
 The template's entry file exposes the configuration of the template.
