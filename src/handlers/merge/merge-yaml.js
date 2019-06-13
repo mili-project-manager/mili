@@ -29,8 +29,13 @@ module.exports = file => {
     return file
   }
 
+  const beginBlank = file.content.match(/^\s*/g)[0]
+  const endBlank = file.content.match(/\s*$/g)[0]
+
+  const result = yaml.dump(merge(targetFileContent, content))
+
   return {
     ...file,
-    content: yaml.dump(merge(targetFileContent, content)),
+    content: `${beginBlank}${result}${endBlank}`,
   }
 }
