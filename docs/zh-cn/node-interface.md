@@ -13,7 +13,7 @@ mili.outdated()
 mili.clean()
 ```
 
-### `mili.init(options)`
+## `mili.init(options)`
 
  option      | default                               | description
 :------------|:--------------------------------------|:--------------
@@ -24,7 +24,7 @@ mili.clean()
  noDeps      | `false`                               | 是否安装模版依赖，不安装可以节约时间
  force       | `false`                               | 跳过安全检测
 
-### `mili.upgrade(options)`
+## `mili.upgrade(options)`
 
  option     | default          | description
 :-----------|:-----------------|:--------------
@@ -34,7 +34,7 @@ mili.clean()
  recursive  | `false`          | 升级目录下所有的项目，深度遍历目录下所有的子文件夹。
  ignore     | `[]`             | 当设置`--recursive`时，忽略遍历某一些文件夹。可以避免错误升级或者用于检测节约时间。例如忽略`node_modules`文件夹可以节约大量时间。
 
-### `mili.update(options)`
+## `mili.update(options)`
 
  option  | default                  | description
 :--------|:-------------------------|:--------------
@@ -43,12 +43,23 @@ mili.clean()
  noDeps  | `false`                  | 是否安装模版依赖，不安装可以节约时间
  force   | `false`                  | 跳过安全检测
 
-### `mili.outdated(options)`
+## `mili.outdated(options)`
 
  option  | default                  | description
 :--------|:-------------------------|:--------------
  cwd     | `progress.cwd()`         | 设置工作目录
 
-### `mili.clean()`
+## `mili.clean()`
 
 No options.
+
+## `mili check`
+
+ option                     | default              | description
+:---------------------------|:---------------------|:--------------
+ `--cwd [cwd]`              | `progress.cwd()`     | 设置工作目录
+ `--no-deps`                | -                    | 是否安装模版依赖，不安装可以节约时间
+ `-r --recursive`           | -                    | 检查目录下所有的项目，深度遍历目录下所有的子文件夹。
+ `--ignore [file]`          | -                    | 当设置`--recursive`时，忽略遍历某一些文件夹。可以避免错误升级或者用于检测节约时间。例如忽略`node_modules`文件夹可以节约大量时间。
+ `-d --diff`                | `false`              | 展示文件内容的差异，类似`git diff`
+ `--fold`                   | `false`              | 展示内容差异时，折叠未改动的代码。配合`--diff`使用

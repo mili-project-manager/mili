@@ -1,12 +1,12 @@
-## CLI
+# CLI
 
 使用 `npx mili -h`查看最新介绍
 
-### `mili init [options] [repository]`
+## `mili init [options] [repository]`
 
 创建项目
 
-#### options
+### options
 
  option                     | default                                | description
 :---------------------------|:---------------------------------------|:--------------
@@ -16,7 +16,7 @@
  `--no-deps`                | -                                      | 是否安装模版依赖，不安装可以节约时间
  `--force`                  | -                                      | 跳过安全检测
 
-#### repository
+### repository
 
 模版项目的存储地址，支持的类型有：
 
@@ -29,11 +29,11 @@
  relative path       | 从指定的相对路径获取模版项目. 当在一个仓库中，管理多个具有相同模版项目时非常有用。例如使用learn工具时。 | `npx mili init ./template/module-template`
  absolute path       | 从制定的绝对路径获取模版项目，往往用于测试 | `npx mili ini /template/test-template`
 
-### `mili upgrade [options]`
+## `mili upgrade [options]`
 
 升级项目依赖的模版版本。
 
-#### options
+### options
 
  option                     | default                                | description
 :---------------------------|:---------------------------------------|:--------------
@@ -43,11 +43,11 @@
  `-r --recursive`           | -                                      | 升级目录下所有的项目，深度遍历目录下所有的子文件夹。
  `--ignore [file]`          | -                                      | 当设置`--recursive`时，忽略遍历某一些文件夹。可以避免错误升级或者用于检测节约时间。例如忽略`node_modules`文件夹可以节约大量时间。
 
-### `mili update [options]`
+## `mili update [options]`
 
 使用指定版本（默认为当前版本）的模版更新项目。
 
-#### options
+### options
 
  option                     | default              | description
 :---------------------------|:---------------------|:--------------
@@ -56,32 +56,32 @@
  `--no-deps`                | -                    | 是否安装模版依赖，不安装可以节约时间
  `--force`                  | -                    | 跳过安全检测
 
-### `mili clean`
+## `mili clean`
 
 清理mili缓存，例如缓存的已下载的模版项目
 
-### `mili outdated`
+## `mili outdated`
 
 检查项目的模版版本是否已经过时
 
-### `mili check`
+## `mili check [options]`
 
 检查项目文件是否符合模版的规范，`mili check`会以`.milirc`中的模版配置编译模版，并对比生成的文件内容与当前项目文件内容做对比。
 如果存在差异，则说明当前项目文件内容不符合模版要求。
-`mili check`并不会自动修复错误内容，因为文件内容的错误很可能并非简单的样式错误。
-有可能是项目开发人员错误的修改了配置规范或者项目模块造成的。
-可以运行`mili update`来修正文件错误。
-在运行`mili update`前，推荐先提交代码或者保存到暂存区，这样可以方便的review项目的更新差异，确保项目正常运行。
+`mili check`并不会自动修复错误内容。
+因为文件内容的错误很可能并非简单的样式错误，有可能是项目开发人员错误的修改了配置规范或者项目模块造成的。
+您可以运行`mili update`来修正文件错误，
+在运行前，推荐先提交代码或者保存到暂存区，这样可以方便的review项目的更新差异，确保项目能够正常运行。
 
 另外，`mili check`可以配合`husky`工具使用，在用户提交代码时进行校验。避免用户提交不符合模版规范的代码。
 
-#### options
+### options
 
  option                     | default              | description
 :---------------------------|:---------------------|:--------------
  `--cwd [cwd]`              | `progress.cwd()`     | 设置工作目录
  `--no-deps`                | -                    | 是否安装模版依赖，不安装可以节约时间
- `-r --recursive`           | -                    | 升级目录下所有的项目，深度遍历目录下所有的子文件夹。
+ `-r --recursive`           | -                    | 检查目录下所有的项目，深度遍历目录下所有的子文件夹。
  `--ignore [file]`          | -                    | 当设置`--recursive`时，忽略遍历某一些文件夹。可以避免错误升级或者用于检测节约时间。例如忽略`node_modules`文件夹可以节约大量时间。
  `-d --diff`                | `false`              | 展示文件内容的差异，类似`git diff`
  `--fold`                   | `false`              | 展示内容差异时，折叠未改动的代码。配合`--diff`使用
