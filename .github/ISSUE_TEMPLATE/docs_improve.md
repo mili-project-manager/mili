@@ -1,6 +1,8 @@
 ---
 name: Document improve
 about: Improve document quality or improve document content
+title: 'docs: '
+assignees: val-istar-guo
 
 ---
 <!-- Please delete unused section -->
