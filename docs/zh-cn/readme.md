@@ -15,9 +15,6 @@
 
 如果你们团队管理着多个项目，并希望这些项目具有统一的、可持续迭代的代码规范、基础功能、框架结构，mili非常适合作为你们的脚手架工具。
 
-- [模版开发](./template.md)
-- [CLI](./cli.md)
-
 ## Usage
 
 Mili的核心设计理念：
@@ -90,11 +87,6 @@ An example: ![mili check](../images/check.png)
 这时候，项目的开发者需要对模版进行更新。因为只有更新到模版后，才能‘安全的’将这些改动应用到项目中来（通过升级模版）。
 与此同时，模版 => 项目的反馈也会为所有的项目带来bug升级、新特性、或结构性调整，减少其他项目升级工作量。
 
-## 示例
-
-- [mili-template](https://github.com/Val-istar-Guo/mili-template): 一个简单的mili模版，很适合作为第一次开发模版的参考项目。
-- [component-template](https://github.com/Val-istar-Guo/component-template)
-
 ## Q&A
 
 ### template的模版非常像是一个依赖包，为什么不将模版提成一个npm包呢？
@@ -124,6 +116,16 @@ An example: ![mili check](../images/check.png)
 ###### `shell模式`是指，需要通过shell命令+配置文件的方式运行。这样集成到库中难度会大些。
 
 
+## 更多内容
+
+- [CLI API](./cli.md)
+- [NODE API](./node-interface.md)
+- [模版开发](./template.md)
+- 示例：
+  + [mili-template](https://github.com/Val-istar-Guo/mili-template): 一个简单的mili模版，很适合作为第一次开发模版的参考项目。
+
 ## Contributing & Development
 
-如果存在如何疑问，非常欢迎提issue一起讨论。请在讨论时，遵守[Contributor Covenant Code of Conduct](https://github.com/Val-istar-Guo/mili/blob/master/.github/CODE_OF_CONDUCT.md)与[CONTRIBUTING](https://github.com/Val-istar-Guo/mili/blob/master/.github/CONTRIBUTING.md)，共同维护良好的社区环境。
+如果存在如何疑问，非常欢迎提issue一起讨论。
+请在讨论时，遵守[Contributor Covenant Code of Conduct](../../.github/CODE_OF_CONDUCT.md)与[CONTRIBUTING](../../.github/CONTRIBUTING.md)。
+让我们共同维护良好的社区环境。
