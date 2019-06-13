@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.9.0"></a>
+# [2.9.0](https://github.com/Val-istar-Guo/mili/compare/v2.8.0...v2.9.0) (2019-06-13)
+
+
+### Bug Fixes
+
+* different output when project file is same ([94e6827](https://github.com/Val-istar-Guo/mili/commit/94e6827))
+
+
+### Features
+
+* check for unsafe file changes ([83753fa](https://github.com/Val-istar-Guo/mili/commit/83753fa)), closes [#72](https://github.com/Val-istar-Guo/mili/issues/72)
+
+
+
 <a name="2.8.0"></a>
 # [2.8.0](https://github.com/Val-istar-Guo/mili/compare/v2.7.3...v2.8.0) (2019-06-10)
 
