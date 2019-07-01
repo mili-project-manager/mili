@@ -23,6 +23,11 @@ test('Integration testing', async t => {
     await fs.remove(ignoreFile)
 
     await upgrade({ cwd })
+    const deletedFile = join(cwd, 'deleted.md')
+
+    if (await fs.pathExists(deletedFile)) throw new Error('The deleted file was existed.')
+
+    await update({ cwd })
     await check({ cwd })
 
     await fs.remove(ignoreFile)
@@ -36,7 +41,6 @@ test('Integration testing', async t => {
     const cwd = join(__dirname, '../demo')
     await fs.emptyDir(cwd)
     const repository = relative(process.cwd(), join(__dirname, './test-template'))
-
 
     await init({ cwd, repository: `./${repository}` })
 

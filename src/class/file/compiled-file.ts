@@ -63,7 +63,10 @@ export class CompiledFile {
   }
 
   public async render(): Promise<void> {
-    if (this.deleted) await fs.remove(this.projectPath)
+    if (this.deleted) {
+      await fs.remove(this.projectPath)
+      return
+    }
     if (!this.renderable) return
 
     const { projectPath, content, encoding } = this

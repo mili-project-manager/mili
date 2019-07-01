@@ -9,6 +9,10 @@ exports.rules = [
     upgrade: 'exist',
   },
   {
+    path: 'deleted.md',
+    handler: core => core.deleteWhen(resource => resource.operation === 'upgrade'),
+  },
+  {
     path: 'package.json.mustache',
     upgrade: 'merge',
     handler: 'mustache',
