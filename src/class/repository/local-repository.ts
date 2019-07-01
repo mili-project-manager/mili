@@ -3,7 +3,7 @@ import git from 'simple-git/promise'
 import { relative, join, isAbsolute, basename } from 'path'
 import { Repository } from './repository'
 import { TEMPLATE_STORAGE } from '@/consts'
-import { logger, dirExist, isRootDirOfRepo } from '@/utils'
+import { logger, dirExist, isRootDirOfRepo, isRelativePath } from '@/utils'
 import semver from 'semver'
 
 
@@ -31,7 +31,12 @@ export class LocalRepository extends Repository {
   get record(): string | ((projectPath: string) => string) {
     if (this.absolute) return this.path
     /** the path saved in .milirc should be relative to the output folder, rather than process.cwd() */
-    return projectPath => relative(projectPath, this.path)
+    return projectPath => {
+      const relativePath = relative(projectPath, this.path)
+
+      if (isRelativePath(relativePath)) return relativePath
+      else return `./${relativePath}`
+    }
   }
 
   get storage(): string {

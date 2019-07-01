@@ -23,7 +23,7 @@ export abstract class Repository {
   public version?: string
 
   public static async format(str: string): Promise<Repository> {
-    const githubSH = /^(github:)?[-a-zA-Z0-9@:%._+~#=]+\/[-a-zA-Z0-9@:%._+~#=]+$/
+    const githubSH = /^(github:)[-a-zA-Z0-9@:%._+~#=]+\/[-a-zA-Z0-9@:%._+~#=]+$/
     const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
     let repo: Repository
 
@@ -34,12 +34,10 @@ export abstract class Repository {
       }
       repo = localRepo
     } else if (gitUrlRegexp.test(str)) {
-      repo = new LocalRepository(str)
       repo = new GitRepository(str)
     } else if (/^npm:/.test(str) && validateNpmPackageName(str.substring('npm:'.length))) {
       repo = new NpmRepository(str.substring('npm:'.length))
     } else if (githubSH.test(str)) {
-      if (!/^github:/.test(str)) logger.warn(`Don't use '${str}' anymore. And use 'github:${str}' instead.`)
       repo = new GitRepository(`https://github.com/${str.replace(/^github:/, '')}.git`)
     } else {
       throw new Error(`Invalid repository url: ${str}`)

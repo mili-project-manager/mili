@@ -26,7 +26,7 @@
  `npm:package-name`  | 模版项目可以是npm包。需要注意的是，有一些文件可能在发布时被忽略（例如：`.gitignore`）。如果这是你模版文件的一部分，需要进行特殊处理。| `npx mili init npm:mili-template`
  clone with HTTPS    | 模版项目的存储地址是一个远程git仓库 | `npx mili init https://github.com/Val-istar-Guo/mili-template.git`
  clone with SSH      | 模版项目的存储地址是一个远程git仓库 | `npx mili init git@github.com:Val-istar-Guo/mili-template.git`
- relative path       | 从指定的相对路径获取模版项目. 当在一个仓库中，管理多个具有相同模版项目时非常有用。例如使用learn工具时。 | `npx mili init ./template/module-template`
+ relative path       | 从指定的相对路径获取模版项目. 当在一个仓库中，管理多个具有相同模版项目时非常有用。例如使用learn工具时。路径必须是以`./`或`../`开头的字符串。 | `npx mili init ./template/module-template`
  absolute path       | 从制定的绝对路径获取模版项目，往往用于测试 | `npx mili ini /template/test-template`
 
 ## `mili upgrade [options]`

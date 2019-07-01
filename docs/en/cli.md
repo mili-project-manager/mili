@@ -26,7 +26,7 @@ The repository of template, The supported repository types are:
  `npm:package-name`  | The template could be an npm package. Note that some file names will be ignored at the time of publish(e.g. `.gitignore`). | `npx mili init npm:mili-template`
  clone with HTTPS    | Clone template from repository. | `npx mili init https://github.com/Val-istar-Guo/mili-template.git`
  clone with SSH      | Clone template from repository. | `npx mili init git@github.com:Val-istar-Guo/mili-template.git`
- relative path       | Get template from the relative path. It is useful when managing a lot of packages that use a unified template in a repository. (e.g. lerna) | `npx mili init ./template/module-template`
+ relative path       | Get template from the relative path. It is useful when managing a lot of packages that use a unified template in a repository. (e.g. lerna) The path must begin with `./` or `../`. | `npx mili init ./template/module-template`
  absolute path       | Get template from the absolute path.It is often used for testing | `npx mili ini /template/test-template`
 
 ## `mili upgrade [options]`
