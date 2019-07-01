@@ -38,7 +38,7 @@ The rules is an array of object, that describe how each file is rendered:
  field    | type                       | description | example
 :---------|:---------------------------|:-----------|:--------
  path     | `string`                   | The file path that relative to the folder path of template files
- handlers | `Function[]` or `string[]` | The array of handler used to handle file one by one. It determines the behavior of the file when it is initialized and upgraded. This is also the design philosophy of the mili template.
+ handlers | `Function[]` or `string[]` | The array of handler used to handle file one by one. It determines the behavior of the file when it is initialized and upgraded. This is also the design philosophy of the mili template. [See more abolut handler](./handler/index.md)
  upgrade  | `'cover'` or `'keep'` or `'merge'` or `'exist'` | This is the syntactic sugar of the handlers, and can be used simultaneously with the handlers. Used to automatically add some handlers based on different modes.
 
 An rules example:
@@ -54,59 +54,6 @@ exports.rules = [{
 }]
 ```
 
-## Template View
-
-From the above example you will find that the template file can be a template. And could be hanled by template handler like [mustache](https://github.com/janl/mustache.js).
-
-It is well known that rendering files requires a template and a view. The template is our template file. But where did the view get from?
-
-View is a data provided by mili and contains basic information about the anwser, project, template and mili.
-
-The view construction:
-
- key       | type                                  | description
-:----------|:--------------------------------------|:--------------
- operation | `'init'` or `'upgrade'` or `'update'` | The operation of cli
- mili      | `object`                              | The information about mili used
- template  | `object`                              | The information about template
- project   | `object`                              | The information about project
- custom    | `object`                              | The custom key-value set by handler(e.g. `extractArea` handler)
-
-### view.mili
-
- key       | type                        | description
-:----------|:----------------------------|:--------------
- version   | semver version              | The running mili version
-
-### view.template
-
- key         | type                        | description
-:------------|:----------------------------|:--------------
- path        | `string`       | The folder path of template files that relative to the entry file | `'./template'`
- engines     | `string`       | The range of mili version | `'>=2.0.0 <3.0.0'`
- rules       | `object[]`     | The configuration of each file | Details later
- hooks       | `object`       | The hook will run on the lifecycle of the mili | Details later
- interaction | `object[]`     | Relying on [inquirer](https://github.com/SBoudrias/Inquirer.js/) to implement user-defined parameters | Details later
-
-### view.project
-
- key       | type                        | description
-:----------|:----------------------------|:--------------
- path      | `string`                    | The project path
- answers   | `object`                    | The answers of interaction setted in template config
-
-### view.answers
-
-This is the copy of `mili.project.answers`
-
-### view.custom
-
-This is an object, used to mount data by handler.
-Let's see an example: `core => core.extractArea('content', '<!-- custom -->')`.
-The `extractArea` handler will extract the text between the `'<!-- custom -->'`.
-And you can get the text from `view.custom.content`.
-
-
 ## Template Hooks
 
 The hook will run on the lifecycle of the mili.
@@ -116,9 +63,11 @@ The hooks currently available are:
 
  field        | description                            | example
 :-------------|:---------------------------------------|:--------
- afterInit    | Run after `npx mili init` completed    | `{ afterInit: 'npm install' }`
- afterUpgrade | Run after `npx mili upgrade` completed | `{ afterUpgrade: 'npm install' }`
- afterUpdate  | Run after `npx mili update` completed  | `{ afterUpdate: 'npm install' }`
+ initialized  | Run after `npx mili init` completed    | `{ initialized: 'npm install' }`
+ upgraded     | Run after `npx mili upgrade` completed | `{ upgraded: 'npm install' }`
+ updated      | Run after `npx mili update` completed  | `{ updated: 'npm install' }`
+ checked      | Run after `npx mili check` completed   | `{ checked: "echo 'hello world'" }`
+ rendered     | Run after all file rendered. Before `initialized`, `upgraded` and `updated` | `{ rendered: 'npm install' }`
 
 ## Template Interaction
 
@@ -133,4 +82,4 @@ exports.interaction = [
 ]
 ```
 
-Then, you can get the anwser from `view.answsers.key`.
+Then, you can get the answer from `resource.answsers.key`.

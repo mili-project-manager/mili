@@ -1,10 +1,19 @@
-extends: eslint:recommended
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+plugins:
+  - '@typescript-eslint'
 parserOptions:
-  ecmaVersion: 9
+  project: ./tsconfig.json
+  ecmaVersion: 6
+  sourceType: module
 env:
   es6: true
   node: true
 rules:
+  func-call-spacing: off
+  no-unused-vars: off
   eqeqeq: error
   no-floating-decimal: error
   no-var: error
@@ -43,9 +52,7 @@ rules:
     - error
     - multi-line
     - consistent
-  semi:
-    - error
-    - never
+  semi: off
   quotes:
     - error
     - single
@@ -72,9 +79,6 @@ rules:
     - error
     - last
   computed-property-spacing:
-    - error
-    - never
-  func-call-spacing:
     - error
     - never
   function-paren-newline:
@@ -107,6 +111,9 @@ rules:
   no-multiple-empty-lines:
     - error
     - max: 2
+  no-empty:
+    - error
+    - allowEmptyCatch: true
   object-curly-newline:
     - error
     - multiline: true
@@ -138,3 +145,27 @@ rules:
   arrow-parens:
     - error
     - as-needed
+  '@typescript-eslint/semi':
+    - error
+    - never
+  '@typescript-eslint/indent':
+    - error
+    - 2
+  '@typescript-eslint/explicit-function-return-type':
+    - error
+    - allowHigherOrderFunctions: true
+      allowExpressions: true
+      allowTypedFunctionExpressions: true
+  '@typescript-eslint/member-delimiter-style':
+    - error
+    - multiline:
+        delimiter: none
+  '@typescript-eslint/no-unused-vars': error
+  '@typescript-eslint/func-call-spacing':
+    - error
+    - never
+  '@typescript-eslint/explicit-member-accessibility':
+    - error
+    - overrides:
+        accessors: off
+        constructors: off

@@ -13,7 +13,7 @@ npm-debug.log*
 yarn-error.log
 
 # Compile
-dist
+lib
 views/index.*.html
 
 # Lock
@@ -24,3 +24,4 @@ package-lock.json
 demo/
 /templates
 .nyc_output
+/coverage

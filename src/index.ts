@@ -1,0 +1,6 @@
+export { default as init } from '@/commands/init'
+export { default as upgrade } from '@/commands/upgrade'
+export { default as update } from '@/commands/update'
+export { default as clean } from '@/commands/clean'
+export { default as outdated } from '@/commands/outdated'
+export { default as check } from '@/commands/check'

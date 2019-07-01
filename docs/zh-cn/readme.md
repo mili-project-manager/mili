@@ -1,4 +1,8 @@
-# ![mili logo](../images/mili.svg?sanitize=true)
+<p align="center" style="padding-top: 40px">
+  <img src="./docs/images/logo.svg?sanitize=true" width="60" alt="logo" />
+</p>
+
+<h1 align="center">Mili</h1>
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
@@ -19,11 +23,14 @@
 
 Mili的核心设计理念：
 
-![theory](../images/handlers.svg?sanitize=true)
+<p align="center">
+  <img src="./docs/images/handlers.svg?sanitize=true" width="80%" />
+</p>
 
 1. 首先，你需要开发一个模版（template），或者使用别人的模版。
 2. 创建项目目录，并在项目根目录运行`npx mili init template_path`。
 3. 当模版版本需要升级时，在项目根目录运行`npx mili upgrade`
+4. 模版中会对各个文件配置各种的handler，`mili`会在初始化和升级时调用对应的`handler`生产项目文件。
 
 ### 创建项目
 
@@ -64,10 +71,12 @@ npx mili check
 或者在[husky](https://www.npmjs.com/package/husky)里配置：
 ```yaml
 hooks:
-  pre-commit: 'npx mili check'
+  pre-commit: 'npx mili check --diff --fold'
 ```
 
-An example: ![mili check](../images/check.png)
+An example:
+
+![mili check](../images/check.png)
 
 运行`npx mili update`命令，mili将自动按照`diff`的提示进行增删，从而符合模版的规范。
 
@@ -104,23 +113,16 @@ An example: ![mili check](../images/check.png)
 2. 有些文件无法抽象到库中，但是还需要在所有项目里统一。例如：issue模版、readme.md的内容结构等东西。
    必须要放在项目根目录下才能被识别，但是又需要跟随模版升级、多项目统一。
 
-3. 并非所以的依赖的开源工具都能像webpack一样同时提供`编程模式`、`shell模式`两种使用方式。
-   有些工具目前只支持*识别项目根目录下的配置文件*来运行，例如：husky。统一这部分文件，mili做起来更容易些。
-
 因此，即使已经将具有统一规范的功能完全的抽象为一个库，依旧有很大的可能，在每个项目下面，存在一些需要多项目统一的文件。
 
 另外，必须要说明的一点是**将具有统一规范的部分提取成库与mili并不冲突**。往往你提取完成后，得到的依旧是一个简化的轻量级的模版。
-
-
-###### `编程模式`是指，其支持在`js`中`require('xxx')`，并传入参数来运行。这样能方便的集成到库中。
-###### `shell模式`是指，需要通过shell命令+配置文件的方式运行。这样集成到库中难度会大些。
-
 
 ## 更多内容
 
 - [CLI API](./cli.md)
 - [NODE API](./node-interface.md)
 - [模版开发](./template.md)
+- [Handler](./handler/index.md)
 - 示例：
   + [mili-template](https://github.com/Val-istar-Guo/mili-template): 一个简单的mili模版，很适合作为第一次开发模版的参考项目。
 

@@ -2,10 +2,26 @@
 const program = require('commander')
 const { resolve } = require('path')
 const fs = require('fs-extra')
-const log = require('../src/utils/log')
-const mili = require('../src/mili')
+const log4js = require('log4js')
+const mili = require('../lib')
 const { version } = require('../package.json')
 
+
+const logger = log4js.getLogger('mili-cli')
+if (process.env.NODE_ENV === 'development') logger.level = 'debug'
+else logger.level = 'info'
+
+
+function exitWhenThrowError(func) {
+  return async(...arg) => {
+    try {
+      await func(...arg)
+    } catch (e) {
+      console.error(e)
+      process.exit(1)
+    }
+  }
+}
 
 program
   .version(version)
@@ -21,7 +37,7 @@ program
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action((repository, option) => {
+  .action(exitWhenThrowError(async(repository, option) => {
     if (!repository) program.help()
 
     const { appName, force = false, deps = true, cwd } = option
@@ -30,10 +46,9 @@ program
     if (typeof option.version === 'string') version = option.version
     if (cwd) fs.ensureDir(cwd)
 
-    return mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
-      .then(() => log.info('initialize complete'))
-      .catch(err => log.error('program', 'initialize break', err))
-  })
+    await mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
+    logger.info('initialize complete')
+  }))
 
 const collect = (val, memo) => {
   memo.push(val)
@@ -48,16 +63,15 @@ program
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
   .option('--ignore [file]', 'the folder need not search', collect, [])
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action(option => {
+  .action(exitWhenThrowError(async option => {
     const { cwd, force = false, deps = true, recursive, ignore } = option
     if (cwd && !fs.pathExistsSync(cwd)) {
-      log.error('cwd', `No such directory: ${cwd}`)
-      return
+      throw new Error(`No such directory: ${cwd}`)
     }
 
-    mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
-      .catch(err => log.error('program', 'upgrade break', err))
-  })
+    await mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
+    logger.info('upgraded complete')
+  }))
 
 program
   .command('update')
@@ -65,38 +79,37 @@ program
   .option('--force')
   .option('-v --version [version]', 'Set the template version')
   .option('--no-deps', 'Need not install dependencies', false)
+  .option('-r, --recursive', 'Upgrade recursive all subfolder')
+  .option('--ignore [file]', 'the folder need not search', collect, [])
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action(option => {
-    const { cwd, force = false, deps = true } = option
+  .action(exitWhenThrowError(async option => {
+    const { cwd, force = false, deps = true, recursive, ignore } = option
 
     let version
     if (typeof option.version === 'string') version = option.version
     if (cwd && !fs.pathExistsSync(cwd)) {
-      log.error('cwd', `No such directory: ${cwd}`)
-      return
+      throw new Error(`No such directory: ${cwd}`)
     }
 
-    mili.update({ cwd, force, version, noDeps: !deps })
-      .then(() => log.info('update complete'))
-      .catch(err => log.error('program', 'update break', err))
-  })
+    await mili.update({ cwd, force, version, noDeps: !deps, recursive, ignore })
+    logger.info('update complete')
+  }))
 
 program
   .command('clean')
   .description('Clean the cache of mili')
-  .action(() => {
-    log.info('begin clean')
-    mili.clean()
-      .then(() => log.info('clean complete'))
-      .catch(err => log.error('clean', 'clean break', err))
-  })
+  .action(exitWhenThrowError(async() => {
+    logger.info('begin clean')
+    await mili.clean()
+    logger.info('clean complete')
+  }))
 
 program
   .command('outdated')
   .description('Check template is outdated')
-  .action(() => {
-    mili.outdated()
-  })
+  .action(exitWhenThrowError(async() => {
+    await mili.outdated()
+  }))
 
 program
   .command('check')
@@ -107,20 +120,24 @@ program
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .option('-d --diff', 'Show file difference')
   .option('--fold', 'fold undifferentiated code')
-  .action(options => {
+  .action(exitWhenThrowError(async options => {
     const { cwd, deps = true, recursive, ignore, diff, fold } = options
     if (cwd && !fs.pathExistsSync(cwd)) {
-      log.error('cwd', `No such directory: ${cwd}`)
-      return
+      throw new Error(`No such directory: ${cwd}`)
     }
 
-    return mili.check({ cwd, noDeps: !deps, recursive, ignore, diff, fold })
-      .catch(err => log.error('program', 'check break', err))
-  })
+    try {
+      await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold })
+      logger.info('check completed')
+    } catch (e) {
+      console.error(e)
+      process.exit(1)
+    }
+  }))
 
 // error on unknown commands
 program.on('command:*', () => {
-  log.error('command', 'Invalid command: %s\nSee --help for a list of available commands.', program.args.join(' '))
+  logger.error(`Invalid command: %s\nSee --help for a list of available commands.${program.args.join(' ')}`)
   process.exit(1)
 })
 

@@ -1,0 +1,13 @@
+{
+  "$id": "question.json",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["input", "list", "checkbox"]
+    },
+    "name": {
+      "type": "string"
+    }
+  },
+  "required": ["name"]
+}
