@@ -55,6 +55,8 @@ Update your project file with the current version of the template
  `--cwd [cwd]`              | `progress.cwd()`                       | Set the current work directory
  `--no-deps`                | -                                      | Don't install template dependencies. You can save some time, if don't install dependencies.
  `--force`                  | -                                      | Enforce command. Ignore security check.
+ `-r --recursive`           | -                                      | Upgrade recursive all subfolder.
+ `--ignore [file]`          | -                                      | Folders that do not need to be searched when recursively upgrading
 
 ## `mili clean`
 
@@ -85,4 +87,4 @@ Before running, it is recommended to submit the code first or add it to the stag
  `-r --recursive`           | -                    | Checking will recursive all subfolder.
  `--ignore [file]`          | -                    | Folders that do not need to be searched when recursively checking.
  `-d --diff`                | `false`              | Show file difference, like `git diff`
- `--fold`                   | `false`              | Fold unchanged code, when show file difference. Used with `--diff`. 
+ `--fold`                   | `false`              | Fold unchanged code, when show file difference. Used with `--diff`.

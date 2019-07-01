@@ -1,5 +1,6 @@
 export default {
-  files: ['tests/**/*.js'],
-
-  require: ['esm'],
+  compileEnhancements: false,
+  files: ['tests/**/*.ts'],
+  extensions: ['ts'],
+  require: ['tsconfig-paths/register', 'ts-node/register'],
 }

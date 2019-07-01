@@ -1,0 +1,35 @@
+{
+  "$id": "rule.json",
+  "properties": {
+    "path": {
+      "type": "string"
+    },
+    "encoding": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": ["utf8", "binary"]
+        },
+        {
+          "type": "object",
+          "propertyNames": {
+            "enum": ["utf8", "binary"]
+          },
+          "patternProperties": {
+            ".*": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "upgrade": {
+      "type": "string",
+      "enum": ["cover", "keep", "exist", "merge"],
+      "default": "cover"
+    },
+    "glob": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": ["path"]
+}

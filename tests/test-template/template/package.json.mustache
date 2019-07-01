@@ -1,0 +1,23 @@
+{
+  "name": "{{project.name}}",
+  "engines": {
+    "node": ">=8.9.4"
+  },
+  "scripts": {
+    "ca": "git add -A && git-cz -av",
+    "commit": "git-cz",
+    "release": "standard-version",
+    "release:first": "standard-version --first-release",
+    "upgrade": "mili upgrade"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.2.0",
+    "@commitlint/config-conventional": "^7.1.2",
+    "commitizen": "^3.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "husky": "^2.1.0",
+    "lint-staged": "^8.1.5",
+    "prettier": "1.17.0",
+    "standard-version": "^5.0.2"
+  }
+}

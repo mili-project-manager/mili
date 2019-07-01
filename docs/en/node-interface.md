@@ -35,12 +35,14 @@ mili.clean()
 
 ## `mili.update(options)`
 
- option  | default                  | description
-:--------|:-------------------------|:--------------
- version | current template version | Set the template version
- cwd     | `progress.cwd()`         | Set the current work directory
- noDeps  | `false`                  | Don't install template dependencies. You can save some time, if don't install dependencies.
- force   | `false`                  | Enforce command. Ignore security check.
+ option     | default                  | description
+:-----------|:-------------------------|:--------------
+ version    | current template version | Set the template version
+ cwd        | `progress.cwd()`         | Set the current work directory
+ noDeps     | `false`                  | Don't install template dependencies. You can save some time, if don't install dependencies.
+ force      | `false`                  | Enforce command. Ignore security check.
+ recursive  | `false`                  | Upgrade recursive all subfolder.
+ ignore     | `[]`                     | Folders that do not need to be searched when recursively upgrading
 
 ## `mili.outdated(options)`
 
@@ -61,4 +63,4 @@ No options.
  `-r --recursive`           | -                    | Checking will recursive all subfolder.
  `--ignore [file]`          | -                    | Folders that do not need to be searched when recursively checking.
  `-d --diff`                | `false`              | Show file difference, like `git diff`
- `--fold`                   | `false`              | Fold unchanged code, when show file difference. Used with `--diff`. 
+ `--fold`                   | `false`              | Fold unchanged code, when show file difference. Used with `--diff`.
