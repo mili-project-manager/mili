@@ -1,6 +1,33 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.0.0](https://github.com/Val-istar-Guo/mili/compare/v2.9.0...v3.0.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* different meanings of github repository shorthand ([775356d](https://github.com/Val-istar-Guo/mili/commit/775356d)), closes [#66](https://github.com/Val-istar-Guo/mili/issues/66)
+
+
+### Features
+
+* support for delete file ([634c808](https://github.com/Val-istar-Guo/mili/commit/634c808)), closes [#29](https://github.com/Val-istar-Guo/mili/issues/29)
+* support replace effect function to another ([c66fe03](https://github.com/Val-istar-Guo/mili/commit/c66fe03)), closes [#71](https://github.com/Val-istar-Guo/mili/issues/71)
+
+
+### refactor
+
+* rewrite code with typescript ([c7d7cff](https://github.com/Val-istar-Guo/mili/commit/c7d7cff)), closes [#70](https://github.com/Val-istar-Guo/mili/issues/70)
+
+
+### BREAKING CHANGES
+
+* Never support github path like `xxx/xxx`.Please use `github:xxx/xxx` instead.
+* Rename milirc.interaction to milirc.question; Rename `afterInit`, `afterUpgrade`
+and `afterUpdate` to `initialized`, `updated` and `upgraded`; Change parameters of handler.
+
+
 
 <a name="2.9.0"></a>
 # [2.9.0](https://github.com/Val-istar-Guo/mili/compare/v2.8.0...v2.9.0) (2019-06-13)
