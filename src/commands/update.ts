@@ -1,4 +1,4 @@
-import { Project, Resource } from '@/class'
+import { Project, Resource, Effect, EffectOptions } from '@/internal'
 import { recursiveExecte, logger, checkWorkDir } from '@/utils'
 import semver from 'semver'
 
@@ -8,6 +8,7 @@ interface UpdateOptions {
   noDeps?: boolean
   version?: string
   force?: boolean
+  effect?: EffectOptions
 }
 
 export default recursiveExecte(async(options: UpdateOptions): Promise<void> => {
@@ -15,6 +16,8 @@ export default recursiveExecte(async(options: UpdateOptions): Promise<void> => {
   const noDeps = options.noDeps || false
   const version = options.version
   const force = options.force || false
+
+  Effect.replace(options.effect)
 
   if (!force) await checkWorkDir(cwd)
 

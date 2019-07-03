@@ -1,13 +1,15 @@
 import { logger } from '@/utils'
-import { Project } from '@/internal'
+import { Project, Effect, EffectOptions } from '@/internal'
 
 
 interface OutdatedOptions {
   cwd?: string
+  effect?: EffectOptions
 }
 
 export default async(options: OutdatedOptions = {}) => {
   const cwd = options.cwd || process.cwd()
+  Effect.replace(options.effect)
 
   const project = await Project.load(cwd)
   const repo = await project.getTemplateRepo()

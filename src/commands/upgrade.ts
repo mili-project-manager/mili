@@ -1,16 +1,19 @@
-import { Project, Resource } from '@/internal'
+import { Project, Resource, Effect, EffectOptions } from '@/internal'
 import { logger, checkWorkDir } from '@/utils'
 
 interface UpgradeOptions {
   cwd?: string
   noDeps?: boolean
   force?: boolean
+  effect?: EffectOptions
 }
 
 export default async(options: UpgradeOptions): Promise<void> => {
   const cwd = options.cwd || process.cwd()
   const noDeps = options.noDeps || false
   const force = options.force || false
+
+  Effect.replace(options.effect)
 
   if (!force) await checkWorkDir(cwd)
 

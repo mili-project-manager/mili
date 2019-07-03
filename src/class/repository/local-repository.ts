@@ -1,10 +1,10 @@
-import fs from 'fs-extra'
 import git from 'simple-git/promise'
+import semver from 'semver'
 import { relative, join, isAbsolute, basename } from 'path'
 import { Repository } from './repository'
 import { TEMPLATE_STORAGE } from '@/consts'
 import { logger, dirExist, isRootDirOfRepo, isRelativePath } from '@/utils'
-import semver from 'semver'
+import { Effect } from '@/internal'
 
 
 export class LocalRepository extends Repository {
@@ -73,9 +73,9 @@ export class LocalRepository extends Repository {
   public async download(): Promise<void> {
     const { path, version, storage } = this
 
-    await fs.emptyDir(storage)
+    await Effect.fs.emptyDir(storage)
     logger.info(`copy template from ${path}`)
-    await fs.copy(path, storage)
+    await Effect.fs.copy(path, storage)
 
 
     if (isRootDirOfRepo(storage) && version) {

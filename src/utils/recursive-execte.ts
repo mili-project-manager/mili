@@ -1,7 +1,6 @@
 import { join, isAbsolute } from 'path'
-import fs from 'fs-extra'
 import glob from 'micromatch'
-import logger from './logger'
+import { Effect } from '@/internal'
 
 
 interface Err {
@@ -10,11 +9,11 @@ interface Err {
 }
 
 const execteFuncInSubproject = async(func: Function, dir: string, options: any, errors: Err[]): Promise<void> => {
-  const stats = await fs.stat(dir)
+  const stats = await Effect.fs.stat(dir)
   if (!stats.isDirectory()) return
 
-  if (await fs.pathExists(join(dir, '.milirc.yml'))) {
-    logger.info(`check ${dir}`)
+  if (await Effect.fs.pathExists(join(dir, '.milirc.yml'))) {
+    Effect.logger.info(`check ${dir}`)
     try {
       const newOptions = { ...options, cwd: dir }
       await func(newOptions)
@@ -25,7 +24,7 @@ const execteFuncInSubproject = async(func: Function, dir: string, options: any, 
     }
   }
 
-  let folders = await fs.readdir(dir)
+  let folders = await Effect.fs.readdir(dir)
   folders = folders
     .map(filename => join(dir, filename))
     .filter(filepath => !glob.isMatch(filepath, options.ignore))
@@ -64,7 +63,7 @@ export default (func: Function) => async(options: any): Promise<void> => {
 
     if (errors.length) {
       errors.forEach(error => {
-        logger.error([
+        Effect.logger.error([
           '',
           `Fail: ${error.dir}.`,
           `Because: ${error.message}`,

@@ -1,5 +1,4 @@
-import fs from 'fs-extra'
-import { Resource } from '@/internal'
+import { Resource, Effect } from '@/internal'
 import { Encoding } from '@/consts'
 import { diffFile } from '@/utils'
 import { isNil } from 'ramda'
@@ -58,19 +57,19 @@ export class CompiledFile {
     if (!isNil(this.projectContent)) return this.projectContent
     if (!this.projectFileExisted) throw new Error(`Cannot get content from an unexisted file ${projectPath}.`)
 
-    this.projectContent = await fs.readFile(projectPath, encoding)
+    this.projectContent = await Effect.fs.readFile(projectPath, encoding)
     return this.projectContent
   }
 
   public async render(): Promise<void> {
     if (this.deleted) {
-      await fs.remove(this.projectPath)
+      await Effect.fs.remove(this.projectPath)
       return
     }
     if (!this.renderable) return
 
     const { projectPath, content, encoding } = this
-    await fs.writeFile(projectPath, content, encoding)
+    await Effect.fs.writeFile(projectPath, content, encoding)
   }
 
   public async check(options: CheckOptions = {}): Promise<boolean> {

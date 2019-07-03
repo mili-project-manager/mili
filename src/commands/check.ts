@@ -1,4 +1,4 @@
-import { Project, Resource } from '@/internal'
+import { Project, Resource, Effect, EffectOptions } from '@/internal'
 import recursiveExecte from '@/utils/recursive-execte'
 
 
@@ -7,6 +7,7 @@ interface CheckOptions {
   fold?: boolean
   cwd?: string
   noDeps?: boolean
+  effect?: EffectOptions
 }
 
 export default recursiveExecte(async(options: CheckOptions = {}) => {
@@ -17,6 +18,7 @@ export default recursiveExecte(async(options: CheckOptions = {}) => {
     noDeps = false,
   } = options
 
+  Effect.replace(options.effect)
 
   const project = await Project.load(cwd)
   const repo = await project.getTemplateRepo()

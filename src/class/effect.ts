@@ -1,11 +1,21 @@
-// import fse from 'fs-extra'
+import fse, { WriteFileOptions, CopyOptions, EnsureOptions, ReadOptions, Stats, WriteOptions } from 'fs-extra'
 import { Prompter } from './question'
-// import { inquirerPrompter } from '@/prompters'
+import { inquirerPrompter } from '@/prompters'
+import { logger } from '@/utils'
 
 
 export interface FileSystem {
-  writeFile: Function
-  readFile: Function
+  writeFile: (file: string, data: any, options?: WriteFileOptions | string) => Promise<void>
+  readFile: (file: string, encoding: string) => Promise<string>
+  pathExists: (path: string) => Promise<boolean>
+  remove: (dir: string) => Promise<void>
+  emptyDir: (path: string) => Promise<void>
+  copy: (src: string, dest: string, options?: CopyOptions) => Promise<void>
+  ensureDir: (path: string, options?: EnsureOptions | number) => Promise<void>
+  readJSON: (file: string, options?: ReadOptions) => Promise<any>
+  writeJSON: (file: string, object: any, options?: WriteOptions) => Promise<void>
+  stat: (path: string | Buffer) => Promise<Stats>
+  readdir: (path: string | Buffer) => Promise<string[]>
 }
 
 export interface Logger {
@@ -17,24 +27,22 @@ export interface Logger {
   fatal(message): void
 }
 
-export interface Effects {
+export interface EffectOptions {
   fs?: FileSystem
   prompter?: Prompter
   logger?: Logger
 }
 
+export class Effect {
+  public static fs: FileSystem = fse
 
-/*
- * export class Effect {
- *   public fs: FileSystem = fse
- */
+  public static prompter: Prompter = inquirerPrompter
 
-//   public prompter: Prompter = inquirerPrompter
+  public static logger: Logger = logger
 
-/*
- *   constructor(effects: Effects) {
- *     if (effects.fs) this.fs = effects.fs
- *     if (effects.prompter) this.prompter = effects.prompter
- *   }
- * }
- */
+  public static replace(options: EffectOptions = {}): void {
+    if (options.fs) this.fs = options.fs
+    if (options.prompter) this.prompter = options.prompter
+    if (options.logger) this.logger = options.logger
+  }
+}

@@ -1,10 +1,10 @@
 import childProcess from 'child_process'
 import { promisify } from 'util'
-import fs from 'fs-extra'
 import { join } from 'path'
 import { Repository } from './repository'
 import { logger } from '@/utils'
 import { TEMPLATE_STORAGE } from '@/consts'
+import { Effect } from '@/internal'
 
 
 const genIndexFile = (name: string): string => `
@@ -50,17 +50,17 @@ export class NpmRepository extends Repository {
     const { name, version, storage } = this
     if (!version) throw new Error('Please checkout version before install npm template')
 
-    await fs.emptyDir(storage)
+    await Effect.fs.emptyDir(storage)
 
     logger.info(`install ${name} template from npm...`)
 
-    await fs.writeJSON(join(storage, 'package.json'), {
+    await Effect.fs.writeJSON(join(storage, 'package.json'), {
       main: 'index.js',
       description: '',
       license: 'MIT',
     })
-    await fs.writeFile(join(storage, 'index.js'), genIndexFile(name))
-    await fs.writeFile(join(storage, '.npmrc'), 'package-lock=false')
+    await Effect.fs.writeFile(join(storage, 'index.js'), genIndexFile(name))
+    await Effect.fs.writeFile(join(storage, '.npmrc'), 'package-lock=false')
 
     const command = `npm install ${name}@${version}`
     await exec(command, { cwd: storage })

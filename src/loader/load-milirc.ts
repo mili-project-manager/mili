@@ -1,11 +1,10 @@
-import fs from 'fs-extra'
 import cosmiconfig from 'cosmiconfig'
 import semver from 'semver'
 import { join } from 'path'
 import Ajv from 'ajv'
 import { relativePath, isRelativePath } from '@/utils'
 import { MilircSchema } from '@/schema'
-import { Milirc } from '@/class'
+import { Milirc, Effect } from '@/internal'
 
 
 const ajv = new Ajv({ useDefaults: true, nullable: true })
@@ -17,7 +16,7 @@ export default async(cwd: string): Promise<Milirc | null> => {
   let config: Milirc | null = null
 
   const filepath = join(cwd, '.milirc.yml')
-  if (!await fs.pathExists(filepath)) return config
+  if (!await Effect.fs.pathExists(filepath)) return config
 
   const result = await explorer.load(filepath)
   if (!result || !result.config) return config
