@@ -1,5 +1,5 @@
 import semver from 'semver'
-import { Compiler, CompilerOptions } from '@/internal'
+import { Compiler } from '@/internal'
 import { version } from '../../package.json'
 import { Project } from './project'
 import { Template } from './template'
@@ -65,7 +65,7 @@ export class Resource {
     }
   }
 
-  public async compile(options?: CompilerOptions): Promise<Compiler> {
-    return new Compiler(this, options)
+  public async compile(): Promise<Compiler> {
+    return new Compiler(this)
   }
 }

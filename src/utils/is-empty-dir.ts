@@ -1,6 +1,6 @@
-import fs from 'fs-extra'
+import { Effect } from '@/internal'
 
 export default async(path: string): Promise<boolean> => {
-  const files = await fs.readdir(path)
+  const files = await Effect.fs.readdir(path)
   return !files.length
 }

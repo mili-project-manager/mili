@@ -1,6 +1,5 @@
 import Ajv from 'ajv'
 import ajvKeywords from 'ajv-keywords'
-import fs from 'fs-extra'
 import { join, dirname } from 'path'
 import cosmiconfig from 'cosmiconfig'
 import { unnest } from 'ramda'
@@ -20,8 +19,10 @@ import {
   Question,
   Questions,
   Rule,
+  Effect,
+  CompiledFile,
+  CompiledFiles,
 } from '@/internal'
-import { CompiledFile, CompiledFiles } from './file'
 
 
 const ajv = new Ajv({ useDefaults: true, $data: true })
@@ -63,7 +64,7 @@ export class Template {
     const promises = Object.entries(folders)
       .map(async([name, child]) => {
         const dir = join(prefix, name)
-        await fs.ensureDir(dir)
+        await Effect.fs.ensureDir(dir)
         await this.ensureFolder(child, dir)
       })
     await Promise.all(promises)
@@ -174,7 +175,7 @@ export class Template {
 
 
   private static async searchDirFile(path: string, rule: Rule, rules: Rule[]): Promise<Files> {
-    const files = await fs.readdir(path)
+    const files = await Effect.fs.readdir(path)
     const promises = files.map(async(filename: string): Promise<File | Files> => {
       const subPath = join(path, filename)
 

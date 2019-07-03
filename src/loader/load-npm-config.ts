@@ -1,6 +1,5 @@
-import fs from 'fs-extra'
 import { join } from 'path'
-import { MissingFileError } from '../class/error/missing-file-error'
+import { MissingFileError, Effect } from '@/internal'
 import { validateGitRepoUrl } from '@/utils'
 
 
@@ -16,12 +15,12 @@ interface NpmConfig {
 
 export default async(path: string): Promise<NpmConfig> => {
   const packageJsonPath = join(path, 'package.json')
-  const exist = await fs.pathExists(packageJsonPath)
+  const exist = await Effect.fs.pathExists(packageJsonPath)
 
   if (!exist) throw new MissingFileError(path)
 
   try {
-    const config: NpmConfig = await fs.readJson(packageJsonPath)
+    const config: NpmConfig = await Effect.fs.readJSON(packageJsonPath)
 
     if (typeof config.repository === 'string') {
       if (validateGitRepoUrl(config.repository)) {

@@ -1,6 +1,5 @@
-import fs from 'fs-extra'
 import { relative, join } from 'path'
-import { Handler, Resource, CompiledFile } from '@/internal'
+import { Handler, Resource, CompiledFile, Effect } from '@/internal'
 import { InferEncodingFunc } from '@/consts'
 import { inferEncodingNormally } from '@/infer-encoding'
 
@@ -33,7 +32,7 @@ export class File {
     const content = await this.readTemplateFile()
     const encoding = this.inferEncoding(this.templatePath)
 
-    const projectFileExisted = await fs.pathExists(projectPath)
+    const projectFileExisted = await Effect.fs.pathExists(projectPath)
 
     const compiledFile = new CompiledFile(templatePath, content, encoding, projectPath, resource, projectFileExisted)
 
@@ -45,7 +44,7 @@ export class File {
   private async readTemplateFile(): Promise<string> {
     const { templatePath, inferEncoding } = this
     const encoding = inferEncoding(templatePath)
-    return await fs.readFile(templatePath, encoding)
+    return await Effect.fs.readFile(templatePath, encoding)
   }
 }
 

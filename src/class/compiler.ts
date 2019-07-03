@@ -1,18 +1,12 @@
-import fs from 'fs-extra'
 import EventEmitter from 'events'
 import { mergeDeepLeft, pick, prop } from 'ramda'
 import { join } from 'path'
-import { CheckOptions, Prompter, Resource } from '@/internal'
-import { inquirerPrompter } from '@/prompters'
+import { CheckOptions, Resource, Effect } from '@/internal'
 import yaml from 'js-yaml'
 import { logger } from '@/utils'
 import { Template } from './template'
 import { Project } from './project'
 
-
-export interface CompilerOptions {
-  prompter?: Prompter
-}
 
 export interface RenderOptions {
   /**
@@ -28,11 +22,8 @@ export class Compiler {
 
   private readonly eventEmitter: EventEmitter = new EventEmitter()
 
-  private readonly prompter: Prompter = inquirerPrompter
-
-  constructor(resource: Resource, options: CompilerOptions = {}) {
+  constructor(resource: Resource) {
     this.resource = resource
-    if (options.prompter) this.prompter = options.prompter
 
     this.template.hooks.map(hook => hook.appendTo(this.eventEmitter))
   }
@@ -50,7 +41,7 @@ export class Compiler {
   }
 
   private async prompt(force = false): Promise<void> {
-    const { template, project, prompter } = this
+    const { template, project } = this
     let { questions } = template
 
     if (project.answers && !force) {
@@ -63,7 +54,7 @@ export class Compiler {
     logger.info('Please answer the questions of template.')
 
     const namesOfQuestions = questions.map(prop('name'))
-    let answers = await prompter(questions)
+    let answers = await Effect.prompter(questions)
 
     if (project.answers) answers = mergeDeepLeft(answers, project.answers)
 
@@ -86,6 +77,6 @@ export class Compiler {
 
   private async generateMilirc(): Promise<void> {
     const milirc = yaml.safeDump(this.resource.milirc, { skipInvalid: true })
-    await fs.writeFile(join(this.project.path, '.milirc.yml'), milirc, 'utf8')
+    await Effect.fs.writeFile(join(this.project.path, '.milirc.yml'), milirc, 'utf8')
   }
 }

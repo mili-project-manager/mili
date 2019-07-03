@@ -1,7 +1,7 @@
-import fs from 'fs-extra'
 import semver from 'semver'
 import git from 'simple-git/promise'
 import { Repository } from './repository'
+import { Effect } from '@/internal'
 import { logger } from '@/utils'
 import { TEMPLATE_STORAGE } from '@/consts'
 import { join } from 'path'
@@ -68,16 +68,16 @@ export class GitRepository extends Repository {
     if (!version) {
       logger.warn('Version is unset, use the default branch files of git repository')
 
-      await fs.remove(storage)
+      await Effect.fs.remove(storage)
       await git().clone(url, storage)
     }
 
-    const repositoryExisted = await fs.pathExists(storage)
+    const repositoryExisted = await Effect.fs.pathExists(storage)
 
     if (!repositoryExisted) {
       logger.info(`clone template from ${url}...`)
 
-      await fs.remove(storage)
+      await Effect.fs.remove(storage)
       await git().clone(url, storage, ['--branch', `v${version}`, '--single-branch'])
 
       logger.info(`template version: ${version}`)

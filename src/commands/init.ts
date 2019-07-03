@@ -1,4 +1,4 @@
-import { Repository, Resource, Project } from '@/internal'
+import { Repository, Resource, Project, Effect, EffectOptions } from '@/internal'
 import { checkWorkDir } from '@/utils'
 
 interface InitOptions {
@@ -8,6 +8,7 @@ interface InitOptions {
   version?: string
   force?: boolean
   repository?: string
+  effect?: EffectOptions
 }
 
 export default async(options: InitOptions): Promise<void> => {
@@ -18,6 +19,9 @@ export default async(options: InitOptions): Promise<void> => {
   const force = options.force || false
 
   if (!options.repository) throw new TypeError('options.repository is required for `mili.init(options)`')
+
+  Effect.replace(options.effect)
+
 
   if (force) await checkWorkDir(cwd)
 

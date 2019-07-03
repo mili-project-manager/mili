@@ -28,7 +28,7 @@ There are two main parameters, `file` and `resource`.Let's to show you how to us
 :-------------------|:--------------------------------------|:--------------
  content            | `string`                              | 写入项目文件的内容
  projectFileExisted | `boolean`                             | 项目文件是否存在
- getProjectContent  | `() => Promise<string>`               | 获取当前项目文件的内容
+ getProjectContent  | `() => Promise<string>`               | 获取当前项目文件的内容。不要使用`fs`读取文件，使用`getProjectContent`更加安全。
  deleted            | `boolean`                             | 是否删除文件，默认为`false`。当设置为`true`时，项目文件将被删除，`file.content`也不会被渲染。
  renderable         | `boolean`                             | 是否渲染文件，默认为`true`。当设置为`false`时，`file.content`将不会覆盖项目文件原有内容。
  addition           | `object`                              | 文件的额外信息，默认是`{}`。

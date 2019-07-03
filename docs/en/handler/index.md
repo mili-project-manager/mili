@@ -24,7 +24,7 @@ And the behavior of rendering 'file' is controlled by `file.delete` and `file.re
 :-------------------|:--------------------------------------|:--------------
  content            | `string`                              | The contents will be write to project.
  projectFileExisted | `boolean`                             | Whether the project file exists.
- getProjectContent  | `() => Promise<string>`               | Get the content of project file.
+ getProjectContent  | `() => Promise<string>`               | Get the content of project file. Never read file manually, use `getProjectContent` is more secure.
  deleted            | `boolean`                             | Whether to delete file，defaulted `false`.
  renderable         | `boolean`                             | Whether to render file，defaulted`true`.
  addition           | `object`                              | The additional information of file.

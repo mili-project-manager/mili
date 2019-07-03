@@ -1,8 +1,7 @@
 import { join, isAbsolute } from 'path'
 import validateNpmPackageName from 'validate-npm-package-name'
-import fs from 'fs-extra'
 import { isRelativePath, installDeps, logger } from '@/utils'
-import { Template, GitRepository, NpmRepository, LocalRepository } from '@/internal'
+import { Template, GitRepository, NpmRepository, LocalRepository, Effect } from '@/internal'
 import semver from 'semver'
 
 
@@ -89,7 +88,7 @@ export abstract class Repository {
     const { storage } = this
 
     const npmConfigFile = join(storage, 'package.json')
-    const npmConfigFileExist = await fs.pathExists(npmConfigFile)
+    const npmConfigFileExist = await Effect.fs.pathExists(npmConfigFile)
     if (npmConfigFileExist) await installDeps(storage)
   }
 
