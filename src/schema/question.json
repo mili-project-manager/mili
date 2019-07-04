@@ -3,7 +3,7 @@
   "properties": {
     "type": {
       "type": "string",
-      "enum": ["input", "list", "checkbox"]
+      "enum": ["input", "list", "checkbox", "confirm", "number", "rawlist", "expand", "password", "editor"]
     },
     "name": {
       "type": "string"
