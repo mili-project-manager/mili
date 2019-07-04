@@ -12,7 +12,7 @@ const mergeJson: FileGenerator = async file => {
     throw new Error([
       'The template file and the current file failed to merge due to a json syntax error in the template file.',
       'The current file will be overwritten directly by the template file.',
-      `path: ${file.projectPath}`,
+      `path: ${file.templatePath}`,
     ].join('\n'))
   }
 
