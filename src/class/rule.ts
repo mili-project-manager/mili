@@ -109,7 +109,7 @@ export class Rule {
 
     if (upgrade === 'merge') upgradeHandler = buildInHandlers.merge
     if (upgrade === 'exist') upgradeHandler = buildInHandlers.exist
-    if (upgrade === 'keep') upgradeHandler = buildInHandlers.ignoreWhen(({ operation }) => operation === 'init')
+    if (upgrade === 'keep') upgradeHandler = buildInHandlers.ignoreWhen(({ operation }) => operation !== 'init')
 
     if (handler && upgradeHandler) handler = Handler.compose([handler, upgradeHandler])
     else if (!handler && upgradeHandler) handler = upgradeHandler
