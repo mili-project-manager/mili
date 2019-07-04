@@ -10,9 +10,9 @@ import { Effect } from '@/internal'
 const genIndexFile = (name: string): string => `
 const { join } = require('path')
 const config = require('${name}')
-config.path = join('./node_modules/${name}', config.path)
+const path = join('./node_modules/${name}', config.path)
 
-module.exports = config
+module.exports = { ...config, path }
 `
 
 const exec = promisify(childProcess.exec)

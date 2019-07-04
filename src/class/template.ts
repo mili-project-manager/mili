@@ -2,7 +2,7 @@ import Ajv from 'ajv'
 import ajvKeywords from 'ajv-keywords'
 import { join, dirname } from 'path'
 import cosmiconfig from 'cosmiconfig'
-import { unnest } from 'ramda'
+import { unnest, clone } from 'ramda'
 import { loadNpmConfig } from '@/loader'
 import { TemplateSchema, RuleSchema, QuestionSchema } from '@/schema'
 import { isDirectory, logger } from '@/utils'
@@ -119,7 +119,6 @@ export class Template {
 
   public static async load(repo: Repository): Promise<Template> {
     const cwd = repo.storage
-
     let entry = join(cwd, 'index.js')
 
     try {
@@ -128,6 +127,10 @@ export class Template {
     } catch (e) {
     }
 
+    /**
+     * NOTE: don't change the object that return by cosmiconfig.
+     *       It was cache by cosmiconfig
+     */
     const result = await cosmiconfig('template').load(entry)
     if (!result) {
       throw new Error([
@@ -136,7 +139,7 @@ export class Template {
       ].join('\n'))
     }
 
-    const config = result.config
+    const config = clone(result.config)
 
     const valid = validateTemplateConfig(config)
 
@@ -148,15 +151,15 @@ export class Template {
     }
 
     /** absoult template path */
-    config.path = join(cwd, config.path)
+    const path = join(cwd, config.path)
 
     /** generate files */
     const rules = config.rules
-      .map(item => ({ ...item, path: join(config.path, item.path) }))
+      .map(item => ({ ...item, path: join(path, item.path) }))
       .map(item => Rule.format(item))
-    const rootRule = new Rule(config.path, UpgradeType.Cover, true)
+    const rootRule = new Rule(path, UpgradeType.Cover, true)
 
-    const files = await this.searchDirFile(config.path, rootRule, rules)
+    const files = await this.searchDirFile(path, rootRule, rules)
 
     /** generate questions */
     let questions: Questions = []
@@ -170,7 +173,7 @@ export class Template {
     }
 
 
-    return new Template(repo, config.path, config.engines, files, questions, hooks)
+    return new Template(repo, path, config.engines, files, questions, hooks)
   }
 
 
