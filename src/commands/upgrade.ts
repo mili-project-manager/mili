@@ -1,5 +1,5 @@
 import { Project, Resource, Effect, EffectOptions } from '@/internal'
-import { logger, checkWorkDir } from '@/utils'
+import { recursiveExecte, logger, checkWorkDir } from '@/utils'
 
 interface UpgradeOptions {
   cwd?: string
@@ -8,7 +8,7 @@ interface UpgradeOptions {
   effect?: EffectOptions
 }
 
-export default async(options: UpgradeOptions): Promise<void> => {
+export default recursiveExecte(async(options: UpgradeOptions): Promise<void> => {
   const cwd = options.cwd || process.cwd()
   const noDeps = options.noDeps || false
   const force = options.force || false
@@ -38,4 +38,4 @@ export default async(options: UpgradeOptions): Promise<void> => {
 
   await compiler.render()
   await compiler.emit('upgraded')
-}
+})
