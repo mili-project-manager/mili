@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/Val-istar-Guo/mili/compare/v3.0.0...v3.1.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* missing type when validate question.type ([394af6b](https://github.com/Val-istar-Guo/mili/commit/394af6b))
+* should exit when checkout an unexist version ([08cb107](https://github.com/Val-istar-Guo/mili/commit/08cb107))
+* the path error in error message of merge handler ([7610ac9](https://github.com/Val-istar-Guo/mili/commit/7610ac9))
+* **handler:** difference between the merge results of init and upgrade ([209a7ee](https://github.com/Val-istar-Guo/mili/commit/209a7ee))
+* **handler:** ignoreWhen running is reversed ([59682a7](https://github.com/Val-istar-Guo/mili/commit/59682a7))
+
+
+### Features
+
+* add default version used for template development ([41c9614](https://github.com/Val-istar-Guo/mili/commit/41c9614))
+
+
+
 ## [3.0.0](https://github.com/Val-istar-Guo/mili/compare/v2.9.0...v3.0.0) (2019-07-03)
 
 
