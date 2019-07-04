@@ -13,7 +13,7 @@ const execteFuncInSubproject = async(func: Function, dir: string, options: any, 
   if (!stats.isDirectory()) return
 
   if (await Effect.fs.pathExists(join(dir, '.milirc.yml'))) {
-    Effect.logger.info(`check ${dir}`)
+    Effect.logger.info(`Find project ${dir}`)
     try {
       const newOptions = { ...options, cwd: dir }
       await func(newOptions)
