@@ -47,4 +47,12 @@ test('Integration testing', async t => {
     await clean()
     if (await fs.pathExists(TEMPLATE_STORAGE)) throw new Error("mili.clean wasn't remove tempalte cache")
   })
+
+  await t.throwsAsync(async() => {
+    const cwd = join(__dirname, '../demo')
+    await fs.emptyDir(cwd)
+    const repository = relative(process.cwd(), join(__dirname, './test-template'))
+
+    await init({ cwd, repository: `./${repository}`, version: 'abc' })
+  })
 })

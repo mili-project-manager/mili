@@ -26,7 +26,7 @@ export default async(options: InitOptions): Promise<void> => {
   if (force) await checkWorkDir(cwd)
 
   const repo = await Repository.format(options.repository)
-  if (version) repo.checkout(version)
+  if (version) await repo.checkout(version)
   const template = await repo.install({ noDeps })
   const project = await Project.load(cwd)
   if (options.name) project.name = name

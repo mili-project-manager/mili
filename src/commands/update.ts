@@ -34,7 +34,7 @@ export default recursiveExecte(async(options: UpdateOptions): Promise<void> => {
     else throw new Error(message)
   }
 
-  if (version) repo.checkout(version)
+  if (version) await repo.checkout(version)
 
   const template = await repo.install({ noDeps })
   const resource = new Resource('update', project, template)
