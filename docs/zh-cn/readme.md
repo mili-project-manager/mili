@@ -1,5 +1,5 @@
 <p align="center" style="padding-top: 40px">
-  <img src="./docs/images/logo.svg?sanitize=true" width="60" alt="logo" />
+  <img src="../images/logo.svg?sanitize=true" width="60" alt="logo" />
 </p>
 
 <h1 align="center" style="text-align: center">Mili</h1>
@@ -24,7 +24,7 @@
 Mili的核心设计理念：
 
 <p align="center">
-  <img src="./docs/images/handlers.svg?sanitize=true" width="80%" />
+  <img src="../images/handlers.svg?sanitize=true" width="80%" />
 </p>
 
 1. 首先，你需要开发一个模版（template），或者使用别人的模版。
@@ -116,6 +116,21 @@ An example:
 因此，即使已经将具有统一规范的功能完全的抽象为一个库，依旧有很大的可能，在每个项目下面，存在一些需要多项目统一的文件。
 
 另外，必须要说明的一点是**将具有统一规范的部分提取成库与mili并不冲突**。往往你提取完成后，得到的依旧是一个简化的轻量级的模版。
+
+### 对于不同小团队之间的不同开发方式如何做统一
+
+1. 如果是类似于“代码是否应该使用分号”这类的差异，是佛说佛有理，公说公有理。
+   但是这类差异“统一”往往比“不统一”更有团队价值。
+   还有争议更大的如`react` vs `vue`。
+2. 再一个面临的问题是，当前的*web模版*并不适合一些团队的*小程序*类型的应用开发。
+   这时候可能出现两种办法：
+   * 扩展web模版，使其能支持多端开发，可以利用一些`write once run everywhere`的框架。
+   * 开发一个新的模版专门用于规范小程序开发，使得web与小程序分离。保持两方面开发的灵活性。
+     这就类似于制定法律，往往不止有一个宪法，还会有商品法、房地产管理法等等。
+
+   是用一个模版，还是管理多个模版。需要从灵活性、简单、统一等方面考量出最适合团队的一个综合方案。
+   但是，保持多个模版中相似规范和框架的一致性是必要的。可以通过开发一个“模版的模版”来实现。
+
 
 ## 更多内容
 
