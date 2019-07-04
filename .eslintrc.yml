@@ -14,6 +14,7 @@ env:
 rules:
   func-call-spacing: off
   no-unused-vars: off
+  require-atomic-updates: off
   eqeqeq: error
   no-floating-decimal: error
   no-var: error

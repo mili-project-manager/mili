@@ -18,8 +18,6 @@ const notSupportErrorMessage = (filename, projectPath): string => [
 
 
 const genFile: FileGenerator = async(file, resource) => {
-  if (!file.projectFileExisted) return
-
   const { projectPath } = file
 
   const ext = extname(projectPath)

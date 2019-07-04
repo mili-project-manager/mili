@@ -77,7 +77,9 @@ const renderBucket = (bucket: Bucket): string => bucket
 const mergeIgnore: FileGenerator = async file => {
   const templateIgnoreList = file.content.split('\n')
 
-  const projectContent = await file.getProjectContent()
+  let projectContent = ''
+  if (file.projectFileExisted) projectContent = await file.getProjectContent()
+
   const projectIgnoreList = projectContent.split('\n')
 
   const templateIgnoreBucket = classifyIgnore(templateIgnoreList)
