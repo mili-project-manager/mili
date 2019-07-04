@@ -50,10 +50,14 @@ export class NpmRepository extends Repository {
     const { name, version, storage } = this
     if (version === 'default' || !version) throw new Error('Please checkout version before install npm template')
 
-    await Effect.fs.emptyDir(storage)
+    const repositoryExisted = await Effect.fs.pathExists(storage)
+    if (repositoryExisted) {
+      logger.info('use the cache of template')
+      return
+    }
 
     logger.info(`install ${name} template from npm...`)
-
+    await Effect.fs.emptyDir(storage)
     await Effect.fs.writeJSON(join(storage, 'package.json'), {
       main: 'index.js',
       description: '',
