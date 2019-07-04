@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/Val-istar-Guo/mili/compare/v3.1.0...v3.2.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* log of recursive execte only used for check ([0a20d88](https://github.com/Val-istar-Guo/mili/commit/0a20d88))
+* template.path error when reload npm template config ([cd7ed47](https://github.com/Val-istar-Guo/mili/commit/cd7ed47))
+* unable recursive upgrade ([79bd644](https://github.com/Val-istar-Guo/mili/commit/79bd644))
+
+
+### Features
+
+* enable cache npm template ([d9708e9](https://github.com/Val-istar-Guo/mili/commit/d9708e9))
+
+
+
 ## [3.1.0](https://github.com/Val-istar-Guo/mili/compare/v3.0.0...v3.1.0) (2019-07-04)
 
 
