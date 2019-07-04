@@ -36,7 +36,7 @@ export class Project {
     const repoStr = milirc.template.repository
 
     const repo = await Repository.format(repoStr)
-    if (version) repo.version = version
+    if (version) await repo.checkout(version)
 
     return repo
   }

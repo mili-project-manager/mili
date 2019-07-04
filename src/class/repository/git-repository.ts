@@ -65,21 +65,19 @@ export class GitRepository extends Repository {
   public async download(): Promise<void> {
     const { url, version, storage } = this
 
-    if (!version) {
-      logger.warn('Version is unset, use the default branch files of git repository')
+    if (!version || version === 'default') {
+      if (!version) logger.warn('Version is unset, use the default branch files of git repository')
 
       await Effect.fs.remove(storage)
       await git().clone(url, storage)
+      return
     }
 
     const repositoryExisted = await Effect.fs.pathExists(storage)
 
     if (!repositoryExisted) {
       logger.info(`clone template from ${url}...`)
-
-      await Effect.fs.remove(storage)
       await git().clone(url, storage, ['--branch', `v${version}`, '--single-branch'])
-
       logger.info(`template version: ${version}`)
     } else {
       logger.info('use the cache of template')

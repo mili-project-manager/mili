@@ -6,8 +6,7 @@
       "properties": {
         "version": {
           "type": "string",
-          "nullable": true,
-          "default": ""
+          "nullable": true
         }
       },
       "default": { "version": "" }

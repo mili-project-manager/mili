@@ -77,13 +77,12 @@ export class LocalRepository extends Repository {
     logger.info(`copy template from ${path}`)
     await Effect.fs.copy(path, storage)
 
-
-    if (isRootDirOfRepo(storage) && version) {
+    if (isRootDirOfRepo(storage) && version && version !== 'default') {
       await git(storage).reset('hard')
       await git(storage).checkout(`v${version}`)
 
       logger.info(`template version: ${version}`)
-    } else {
+    } else if (version !== 'default') {
       logger.warn('Version is unset, use the default files')
     }
   }

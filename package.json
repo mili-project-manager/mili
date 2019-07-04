@@ -29,7 +29,7 @@
   "scripts": {
     "clean": "rm -rf ./lib/*",
     "ca": "git add -A && git-cz -av",
-    "commit": "git-cz",
+    "ci": "git-cz",
     "release": "standard-version",
     "prepublish": "npm run build",
     "postpublish": "git push",

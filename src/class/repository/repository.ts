@@ -56,19 +56,21 @@ export abstract class Repository {
 
 
   public async checkout(version: string = 'latest'): Promise<void> {
-    if (version !== 'latest' && !semver.valid(version)) {
+    if (version !== 'latest' && version !== 'default' && !semver.valid(version)) {
       throw new Error('Semantic version expected.')
     }
 
     const versions = await this.getVersions()
 
-    if (version === 'latest') {
+    if (version === 'default') {
+      this.version = 'default'
+    } else if (version === 'latest') {
       if (versions.length) this.version = versions[0]
       else this.version = undefined
     } else if (versions.includes(version)) {
       this.version = version
     } else {
-      throw new Error(`Cannot find template(${this.record}) for the version ${version} `)
+      throw new Error(`Cannot find template for the version ${version} `)
     }
   }
 

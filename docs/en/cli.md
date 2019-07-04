@@ -11,7 +11,7 @@ init project
  option                     | default                                | description
 :---------------------------|:---------------------------------------|:--------------
  `-n --app-name [app_name]` | `basename of cwd` or `progress.cwd()`  | Set application name
- `-v --version [version]`   | latest version                         | Set the template version
+ `-v --version [version]`   | latest version                         | Set the template version.
  `--cwd [cwd]`              | `progress.cwd()`                       | Set the current work directory
  `--no-deps`                | -                                      | Don't install template dependencies. You can save some time, if don't install dependencies.
  `--force`                  | -                                      | Enforce command. Ignore security check.
@@ -88,3 +88,11 @@ Before running, it is recommended to submit the code first or add it to the stag
  `--ignore [file]`          | -                    | Folders that do not need to be searched when recursively checking.
  `-d --diff`                | `false`              | Show file difference, like `git diff`
  `--fold`                   | `false`              | Fold unchanged code, when show file difference. Used with `--diff`.
+
+## Template version
+
+Template version should be one of:
+
+* semantic version number: Specific template versions
+* `'latest'`: The latest template version
+* `'default'`: The default files of template or default branch of repository. Used for template development.

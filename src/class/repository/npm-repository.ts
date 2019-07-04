@@ -48,7 +48,7 @@ export class NpmRepository extends Repository {
 
   public async download(): Promise<void> {
     const { name, version, storage } = this
-    if (!version) throw new Error('Please checkout version before install npm template')
+    if (version === 'default' || !version) throw new Error('Please checkout version before install npm template')
 
     await Effect.fs.emptyDir(storage)
 
