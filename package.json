@@ -31,7 +31,7 @@
     "ca": "git add -A && git-cz -av",
     "ci": "git-cz",
     "release": "standard-version",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "postpublish": "git push",
     "test": "ava --verbose",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
