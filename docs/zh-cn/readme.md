@@ -2,7 +2,7 @@
   <img src="./docs/images/logo.svg?sanitize=true" width="60" alt="logo" />
 </p>
 
-<h1 align="center">Mili</h1>
+<h1 align="center" style="text-align: center">Mili</h1>
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
