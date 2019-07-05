@@ -29,6 +29,11 @@
     "glob": {
       "type": "boolean",
       "default": true
+    },
+    "handler": { "$ref": "handler.json" },
+    "handlers": {
+      "type": "array",
+      "items": { "$ref": "handler.json" }
     }
   },
   "required": ["path"]
