@@ -37,6 +37,14 @@ test('Integration testing', async t => {
 
     await update({ cwd })
     await check({ cwd, showDiff: true, fold: true })
+  })
+
+  await t.throwsAsync(async() => {
+    const cwd = join(__dirname, '../demo')
+    await fs.emptyDir(cwd)
+    const repository = relative(process.cwd(), join(__dirname, './test-template'))
+
+    await init({ cwd, repository: `./${repository}` })
     await outdated({ cwd })
   })
 
