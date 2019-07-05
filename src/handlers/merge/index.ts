@@ -11,8 +11,7 @@ const ignoreFilenames = ['.gitignore', '.npmignore']
 
 const notSupportErrorMessage = (filename, projectPath): string => [
   `Merge files of this type(${filename}) are not supported by merge handler.`,
-  'Please feedback this question to the template developer.',
-  'The current file will be overwritten directly by the template file.',
+  'Please change the handler and feedback this question to the developer.',
   `Path: ${projectPath}`,
 ].join('\n')
 
