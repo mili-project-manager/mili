@@ -1,17 +1,21 @@
+<!-- title -->
 <p align="center" style="padding-top: 40px">
   <img src="./docs/images/logo.svg?sanitize=true" width="60" alt="logo" />
 </p>
 
 <h1 align="center" style="text-align: center">Mili</h1>
+<!-- title -->
 
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
+[![license](https://img.shields.io/npm/l/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![coveralls](https://img.shields.io/coveralls/github/Val-istar-Guo/mili.svg?style=flat-square)](https://coveralls.io/github/Val-istar-Guo/mili)
 
 
-[简体中文](./docs/zh-cn/readme.md)
 
+<!-- description -->
+[简体中文](./docs/zh-cn/readme.md)
 
 **Projects that derived from the same scaffolding, have evolved over time and become different.**
 Scaffolding lost control of the subsequent development of the project.
@@ -20,9 +24,11 @@ When we need to improve some of the basic functions of scaffolding(e.g. eslint r
 Therefore, in order to improve the control ability of scaffolding for the subsequent development of the project,template can modified some files and release new template version, then project can upgrade the template version.
 
 It is useful for team project management.
+<!-- description -->
 
 ## Usage
 
+<!-- usage -->
 The basic principle of mili.
 
 <p align="center">
@@ -84,7 +90,9 @@ An example:
 
 Run `npx mili upgrade` command will auto modify code according to the diff.
 
+<!-- usage -->
 
+<!-- addition -->
 ## See More
 
 - [Command Line Interface](./docs/en/cli.md)
@@ -100,3 +108,4 @@ Run `npx mili upgrade` command will auto modify code according to the diff.
 If there is any doubt, it is very welcome to discuss the issue together.
 Please read [Contributor Covenant Code of Conduct](.github/CODE_OF_CONDUCT.md) and [CONTRIBUTING](.github/CONTRIBUTING.md).
 Let's keep a good community environment.
+<!-- addition -->
