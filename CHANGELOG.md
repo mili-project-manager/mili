@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.4.0](https://github.com/Val-istar-Guo/mili/compare/v3.2.0...v3.4.0) (2019-07-05)
+
+
+### Bug Fixes
+
+* mili@1 error should before config valiator ([56edb92](https://github.com/Val-istar-Guo/mili/commit/56edb92))
+* missing validation of the handler field ([2a23e53](https://github.com/Val-istar-Guo/mili/commit/2a23e53))
+* **handler:** misleading error message ([5ffb22f](https://github.com/Val-istar-Guo/mili/commit/5ffb22f))
+* **question:** old fields lost when incremental question ([a391316](https://github.com/Val-istar-Guo/mili/commit/a391316))
+* npm outdated not work ([c717cf5](https://github.com/Val-istar-Guo/mili/commit/c717cf5))
+
+
+### Features
+
+* **handler:** new handler used for rename file ([12cb12b](https://github.com/Val-istar-Guo/mili/commit/12cb12b))
+* **handler:** support merge .npmrc ([2af02f1](https://github.com/Val-istar-Guo/mili/commit/2af02f1))
+
+
+### Tests
+
+* rename test file name ([2ea0d1d](https://github.com/Val-istar-Guo/mili/commit/2ea0d1d))
+
+
+
 ## [3.3.0](https://github.com/Val-istar-Guo/mili/compare/v3.2.0...v3.3.0) (2019-07-05)
 
 
