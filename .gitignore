@@ -1,27 +1,30 @@
 # Mac
 .DS_Store
 
-# Editor
-.vscode
-*.swp
-
-# NodeJS
+# Node
 node_modules
-npm-debug.log*
 
-# Yarn
+# Error Log
+npm-debug.log*
 yarn-error.log
 
-# Compile
-lib
-views/index.*.html
+# Complie
+lib/
+es/
 
-# Lock
-yarn.lock
+# Editor
+*.swp
+.vscode
+
+# Lock File
 package-lock.json
+yarn.lock
 
-# test
-demo/
-/templates
+# Test
+coverage
 .nyc_output
+/demo
 /coverage
+
+# Temp
+/templates

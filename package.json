@@ -2,7 +2,8 @@
   "name": "mili",
   "version": "3.2.0",
   "description": "Scaffolding with continuous control over the development of the project.",
-  "main": "src/mili.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Val-istar-Guo/mili.git"
@@ -31,16 +32,18 @@
     "ca": "git add -A && git-cz -av",
     "ci": "git-cz",
     "release": "standard-version",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm test && npm run build",
     "postpublish": "git push",
-    "test": "ava --verbose",
+    "test": "ava",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "prereport": "rm -rf .nyc_output coverage",
     "report": "nyc --reporter=html --reporter=text-summary --skip-full ava",
     "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"  --fix",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "watch": "NODE_ENV=development rollup -c -w"
+    "watch": "NODE_ENV=development rollup -c -w",
+    "test:update": "ava -u",
+    "test:debug": "ava --verbose"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
@@ -67,7 +70,9 @@
     "standard-version": "^6.0.1",
     "ts-node": "^8.3.0",
     "tsconfig-paths": "^3.8.0",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "rollup-plugin-commonjs": "^9.1.0",
+    "rollup-plugin-node-resolve": "^3.3.0"
   },
   "dependencies": {
     "@types/cosmiconfig": "^5.0.3",
