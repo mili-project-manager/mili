@@ -1,0 +1,15 @@
+
+{
+  "$id": "handler.json",
+  "anyOf": [
+    { "type": "string" },
+    { "instanceof": "Function" },
+    {
+      "type": "object",
+      "properties": {
+        "genFile": { "instanceof": "Function" },
+        "genPath": { "instanceof": "Function" }
+      }
+    }
+  ]
+}

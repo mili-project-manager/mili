@@ -4,7 +4,7 @@ import { join, dirname } from 'path'
 import cosmiconfig from 'cosmiconfig'
 import { unnest, clone } from 'ramda'
 import { loadNpmConfig } from '@/loader'
-import { TemplateSchema, RuleSchema, QuestionSchema } from '@/schema'
+import { TemplateSchema, RuleSchema, QuestionSchema, HandlerSchema } from '@/schema'
 import { isDirectory, logger } from '@/utils'
 import { UpgradeType } from '@/consts'
 import {
@@ -28,6 +28,7 @@ import {
 const ajv = new Ajv({ useDefaults: true, $data: true })
 ajvKeywords(ajv)
 const validateTemplateConfig = ajv
+  .addSchema([HandlerSchema])
   .addSchema([RuleSchema, QuestionSchema])
   .compile(TemplateSchema)
 

@@ -1,14 +1,16 @@
 import Ajv from 'ajv'
 import glob from 'micromatch'
 import { UpgradeType, Encoding, InferEncodingFunc } from '@/consts'
-import { RuleSchema } from '@/schema'
+import { RuleSchema, HandlerSchema } from '@/schema'
 import { inferEncodingByMapping, inferEncodingImmobile, inferEncodingNormally } from '@/infer-encoding'
 import { Handler, Handlers, File, buildInHandlers, Maybe } from '@/internal'
 import { isAbsolute } from 'path'
 
 
 const ajv = new Ajv({ useDefaults: true })
-const validate = ajv.compile(RuleSchema)
+const validate = ajv
+  .addSchema([HandlerSchema])
+  .compile(RuleSchema)
 
 export class Rule {
   public readonly path: string
