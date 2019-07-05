@@ -43,6 +43,7 @@ export class Compiler {
   private async prompt(force = false): Promise<void> {
     const { template, project } = this
     let { questions } = template
+    const namesOfQuestions = questions.map(prop('name'))
 
     if (project.answers && !force) {
       const answers = project.answers
@@ -50,14 +51,10 @@ export class Compiler {
     }
 
     if (!questions.length) return
-
     logger.info('Please answer the questions of template.')
 
-    const namesOfQuestions = questions.map(prop('name'))
     let answers = await Effect.prompter(questions)
-
     if (project.answers) answers = mergeDeepLeft(answers, project.answers)
-
 
     project.answers = pick(namesOfQuestions, answers)
   }
