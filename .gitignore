@@ -9,8 +9,8 @@ npm-debug.log*
 yarn-error.log
 
 # Complie
-lib/
-es/
+/lib
+/es
 
 # Editor
 *.swp
