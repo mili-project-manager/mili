@@ -7,7 +7,7 @@ import mergeYaml from './merge-yaml'
 
 const jsonFileExts = ['.json']
 const yamlFileExts = ['.yaml', '.yml']
-const ignoreFilenames = ['.gitignore', '.npmignore']
+const ignoreFilenames = ['.gitignore', '.npmignore', '.npmrc']
 
 const notSupportErrorMessage = (filename, projectPath): string => [
   `Merge files of this type(${filename}) are not supported by merge handler.`,
