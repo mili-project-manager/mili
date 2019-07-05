@@ -31,7 +31,7 @@
     "clean": "rm -rf ./lib/*",
     "ca": "git add -A && git-cz -av",
     "ci": "git-cz",
-    "release": "standard-version",
+    "release": "standard-version --no-verify",
     "prepublishOnly": "npm test && npm run build",
     "postpublish": "git push",
     "test": "ava",
