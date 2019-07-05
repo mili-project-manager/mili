@@ -12,6 +12,9 @@ test('Integration testing', async t => {
     const repository = join(__dirname, './test-template')
     await init({ cwd, repository })
 
+    const renameFile = join(cwd, 'new_file_name.md')
+    if (!await fs.pathExists(renameFile)) throw new Error('rename.md is not existed')
+
     const keepFiles = join(cwd, 'keep/index.js')
     await fs.remove(keepFiles)
 
@@ -37,6 +40,23 @@ test('Integration testing', async t => {
     await outdated({ cwd })
   })
 
+  await t.throwsAsync(async() => {
+    const cwd = join(__dirname, '../demo')
+    await fs.emptyDir(cwd)
+    const repository = relative(process.cwd(), join(__dirname, './test-template'))
+
+    await init({ cwd, repository: `./${repository}` })
+    await outdated({ cwd })
+  })
+
+  await t.throwsAsync(async() => {
+    const cwd = join(__dirname, '../demo')
+    await fs.emptyDir(cwd)
+    const repository = relative(process.cwd(), join(__dirname, './test-template'))
+
+    await init({ cwd, repository: `./${repository}`, version: 'abc' })
+  })
+
   await t.notThrowsAsync(async() => {
     const cwd = join(__dirname, '../demo')
     await fs.emptyDir(cwd)
@@ -46,13 +66,5 @@ test('Integration testing', async t => {
 
     await clean()
     if (await fs.pathExists(TEMPLATE_STORAGE)) throw new Error("mili.clean wasn't remove tempalte cache")
-  })
-
-  await t.throwsAsync(async() => {
-    const cwd = join(__dirname, '../demo')
-    await fs.emptyDir(cwd)
-    const repository = relative(process.cwd(), join(__dirname, './test-template'))
-
-    await init({ cwd, repository: `./${repository}`, version: 'abc' })
   })
 })
