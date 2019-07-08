@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://github.com/Val-istar-Guo/mili/compare/v3.4.0...v3.5.0) (2019-07-08)
+
+
+### Features
+
+* sigle file check ([c026c2f](https://github.com/Val-istar-Guo/mili/commit/c026c2f))
+
+
+### Tests
+
+* add test from execte func in subproject ([097e3f0](https://github.com/Val-istar-Guo/mili/commit/097e3f0))
+
+
+
 ## [3.4.0](https://github.com/Val-istar-Guo/mili/compare/v3.2.0...v3.4.0) (2019-07-05)
 
 
