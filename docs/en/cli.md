@@ -66,7 +66,7 @@ Clean the cache of mili(e.g. cloned template)
 
 Check if the file is out of date
 
-## `mili check [options]`
+## `mili check [options] <files...>`
 
 Verify whether the project file meets the template，`mili check` will compile template according to the `.milirc`.
 Then compare the difference between the compilation result and the project file.
@@ -77,6 +77,12 @@ Because the error of the file content may be caused by the project developer inc
 
 You can run `mili update` to fix file errors.
 Before running, it is recommended to submit the code first or add it to the staging area, so that you can easily review the update differences of the project to ensure the project can working properly.
+
+You can use `mili check` with `husky` and `lint-stage`.
+
+### <files...>
+
+Only check the files at list. If not set `<files...>`, all files of project will be checked.
 
 ### options
 

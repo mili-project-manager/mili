@@ -21,7 +21,7 @@ test('Integration testing', async t => {
     const ignoreFile = join(cwd, '.npmignore')
     await fs.writeFile(ignoreFile, 't1\n', { flag: 'a' })
 
-    await check({ cwd })
+    await check({ cwd, files: [ignoreFile] })
 
     await fs.remove(ignoreFile)
 

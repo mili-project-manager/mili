@@ -112,7 +112,7 @@ program
   }))
 
 program
-  .command('check')
+  .command('check [files...]')
   .description('Check if the project file meets the template requirements')
   .option('--no-deps', 'Need not install dependencies', false)
   .option('-r, --recursive', 'Upgrade recursive all subfolder')
@@ -120,14 +120,14 @@ program
   .option('--cwd [cwd]', 'Set the current work directory', absolutize)
   .option('-d --diff', 'Show file difference')
   .option('--fold', 'fold undifferentiated code')
-  .action(exitWhenThrowError(async options => {
+  .action(exitWhenThrowError(async(files, options) => {
     const { cwd, deps = true, recursive, ignore, diff, fold } = options
     if (cwd && !fs.pathExistsSync(cwd)) {
       throw new Error(`No such directory: ${cwd}`)
     }
 
     try {
-      await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold })
+      await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold, files })
       logger.info('check completed')
     } catch (e) {
       console.error(e)

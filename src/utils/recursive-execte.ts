@@ -1,6 +1,8 @@
-import { join, isAbsolute } from 'path'
+import { join, isAbsolute, dirname, resolve } from 'path'
 import glob from 'micromatch'
 import { Effect } from '@/internal'
+import { uniq, union } from 'ramda'
+import isChildPathOf from './is-child-path-of'
 
 
 interface Err {
@@ -39,14 +41,76 @@ const execteFuncInSubproject = async(func: Function, dir: string, options: any, 
   }
 }
 
+function dirOfFiles(files: string[], root: string = '/'): string[] {
+  if (!files.length) return []
+
+  const dirs = files
+    .map(filepath => dirname(filepath))
+    .filter(filepath => filepath !== root)
+
+  const uniqDirs = uniq(dirs)
+  const parentDirs = dirOfFiles(uniqDirs, root)
+
+  return union(parentDirs, dirs)
+}
+
+/**
+ * Check the dir of files that include .milirc.
+ * It is useful for lint-stage.
+ */
+const execteFuncInParentProject = async(func: Function, files: string[], options: any, errors: Err[]): Promise<void> => {
+  const baseUrl = options.cwd ? resolve(options.cwd) : process.cwd()
+  const dirs = dirOfFiles(files)
+    .filter(isChildPathOf(baseUrl, true))
+
+  for (const dir of dirs) {
+    if (await Effect.fs.pathExists(join(dir, '.milirc.yml'))) {
+      Effect.logger.info(`Find project ${dir}`)
+      try {
+        const newOptions = { ...options, cwd: dir }
+        await func(newOptions)
+      } catch (e) {
+        errors.push({ dir, message: e.message })
+      } finally {
+        console.log('\n')
+      }
+    }
+  }
+}
+
+const handleErrors = (errors: Err[]): void => {
+  if (errors.length) {
+    errors.forEach(error => {
+      Effect.logger.error([
+        '',
+        `Fail: ${error.dir}.`,
+        `Because: ${error.message}`,
+        '',
+      ].join('\n'))
+    })
+
+    throw new Error('Please fix the error.')
+  }
+}
+
 export default (func: Function) => async(options: any): Promise<void> => {
   const {
     cwd = process.cwd(),
     ignore = [],
     recursive = false,
+    files = [],
   } = options
 
-  if (!recursive) {
+  if (files.length) {
+    const absoluteFiles = files.map((item: string) => {
+      if (!isAbsolute(item)) return join(cwd, item)
+      return item
+    })
+
+    const errors: Err[] = []
+    await execteFuncInParentProject(func, absoluteFiles, options, errors)
+    handleErrors(errors)
+  } else if (!recursive) {
     await func(options)
   } else {
     const absolutePathIgnored = ignore.map((item: string) => {
@@ -60,18 +124,6 @@ export default (func: Function) => async(options: any): Promise<void> => {
     }
     const errors: Err[] = []
     await execteFuncInSubproject(func, cwd, newOptions, errors)
-
-    if (errors.length) {
-      errors.forEach(error => {
-        Effect.logger.error([
-          '',
-          `Fail: ${error.dir}.`,
-          `Because: ${error.message}`,
-          '',
-        ].join('\n'))
-      })
-
-      throw new Error('Please fix the error.')
-    }
+    handleErrors(errors)
   }
 }
