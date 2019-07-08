@@ -30,7 +30,7 @@ test('Integration testing', async t => {
 
     if (await fs.pathExists(deletedFile)) throw new Error('The deleted file was existed.')
 
-    await update({ cwd })
+    await update({ cwd, recursive: true })
     await check({ cwd })
 
     await fs.remove(ignoreFile)
