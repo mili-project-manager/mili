@@ -23,6 +23,8 @@ exports.rules = [
   {
     path: 'readme.md.mustache',
     handlers: [
+      core => core.extractArea('addition', '<!-- addition -->'),
+      core => core.extractArea('description', '<!-- description -->'),
       core => core.extractArea('content', '<!-- custom -->'),
       'mustache',
     ],
