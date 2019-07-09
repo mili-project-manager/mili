@@ -1,0 +1,22 @@
+{
+  "env": {
+    "es6": {
+      "presets": [
+        ["@babel/preset-env"]
+      ]
+    },
+    "es5": {
+      "presets": [
+        ["@babel/preset-env", { "modules": "umd" }]
+      ],
+      "plugins": [    ["@babel/plugin-transform-runtime",       {
+        "regenerator": true
+      }]]
+    },
+    "cjs": {
+      "presets": [
+        ["@babel/preset-env", { "modules": "cjs" }]
+      ]
+    }
+  }
+}

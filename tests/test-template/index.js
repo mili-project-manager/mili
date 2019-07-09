@@ -41,6 +41,10 @@ exports.rules = [
     path: 'rename.md',
     handler: core => core.rename('new_file_name.md'),
   },
+  {
+    path: '.babelrc',
+    upgrade: 'merge',
+  },
 ]
 exports.hooks = {
   rendered: "echo 'test string hook'",
