@@ -48,7 +48,7 @@ export class Project {
 
     if (await isRootDirOfRepo(path)) {
       const remotes = await git(path).getRemotes(true)
-      if (remotes && remotes.length) repo = new GitRepository(remotes[0].refs.push)
+      if (remotes && remotes.length && remotes[0].refs.push) repo = new GitRepository(remotes[0].refs.push)
     }
 
     if (milirc && milirc.answers) answers = milirc.answers
