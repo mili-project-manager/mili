@@ -43,7 +43,9 @@
     "build": "rollup -c",
     "watch": "NODE_ENV=development rollup -c -w",
     "test:update": "ava -u",
-    "test:debug": "ava --verbose"
+    "test:debug": "ava --verbose",
+    "release:alpha": "standard-version --prerelease alpha",
+    "release:first": "standard-version --first-release"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
