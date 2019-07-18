@@ -1,4 +1,3 @@
-export { default as ejs } from './ejs'
 export { default as merge } from './merge'
 export { default as exist } from './exist'
 export { default as extractArea } from './extract-area'

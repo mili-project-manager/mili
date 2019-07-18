@@ -47,10 +47,6 @@ exports.rules = [
     path: '.babelrc',
     upgrade: 'merge',
   },
-  {
-    path: 'test-ejs.md.ejs',
-    handler: core => core.ejs(),
-  },
 ]
 exports.hooks = {
   rendered: "echo 'test string hook'",
