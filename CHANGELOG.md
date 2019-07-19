@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://github.com/Val-istar-Guo/mili/compare/v3.5.0...v3.6.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* unable get ref from project repository ([721017e](https://github.com/Val-istar-Guo/mili/commit/721017e))
+
+
+### Features
+
+* **handler:** support merge .babelrc ([3dabcca](https://github.com/Val-istar-Guo/mili/commit/3dabcca))
+
+
+### Tests
+
+* extract area missing tag test ([96b236a](https://github.com/Val-istar-Guo/mili/commit/96b236a))
+* test for ejs handler ([79c471a](https://github.com/Val-istar-Guo/mili/commit/79c471a))
+* test for merge comment in ignore file ([5349c4c](https://github.com/Val-istar-Guo/mili/commit/5349c4c))
+
+
+
 ## [3.5.0](https://github.com/Val-istar-Guo/mili/compare/v3.4.0...v3.5.0) (2019-07-08)
 
 
