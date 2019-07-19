@@ -1,5 +1,6 @@
 import { Project, Resource, Effect, EffectOptions } from '@/internal'
 import { recursiveExecte, logger, checkWorkDir } from '@/utils'
+import semver from 'semver'
 
 interface UpgradeOptions {
   cwd?: string
@@ -30,7 +31,14 @@ export default recursiveExecte(async(options: UpgradeOptions): Promise<void> => 
     logger.warn(message)
   }
 
+  const currentVersion = repo.version
+
   await repo.checkout('latest')
+
+  if (currentVersion && currentVersion !== 'default' && repo.version && semver.diff(currentVersion, repo.version) === 'major') {
+    logger.warn(`The template upgrade a major version from ${currentVersion} to ${repo.version}. Please view the template breaking change first.`)
+  }
+
   const template = await repo.install({ noDeps })
   const resource = new Resource('upgrade', project, template)
 
