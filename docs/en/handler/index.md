@@ -65,10 +65,16 @@ Resource is the read-only data, contains all runtime data.
  path      | `string`                    | The project path
  answers   | `object`                    | The answers of interaction setted in template config
 
-## The build-in `hadnlers`
+## The build-in `hadnler`
 
 - exist[./exist.md]
 - merge[./merge.md]
 - mustache[./mustache.md]
 - ignoreWhen[./ignore-when.md]
 - extractArea[./extract-area.md]
+
+## More `handler`
+
+- [mili-handler-additional-property](https://github.com/Val-istar-Guo/mili-handler-additional-property): The mili handler used to add property to file.addition.
+- [mili-handler-prettier](https://github.com/Val-istar-Guo/mili-handler-prettier): The mili handler used to format code by prettier.
+- [mili-handler-ejs](https://github.com/Val-istar-Guo/mili-handler-ejs): The mili handler used to parse ejs template.

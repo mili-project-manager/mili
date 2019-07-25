@@ -39,8 +39,11 @@ Mili的核心设计理念：
 我们使用[mili-template](https://github.com/Val-istar-Guo/mili-template)模版来创建一个项目：
 
 ```shell
+mkdir project_path
+cd project_path
+
 # template in github
-npx mili init github:Val-istar-Guo/mili-template.git
+npx mili init github:Val-istar-Guo/mili-template
 # template in npm
 npx mili init npm:mili-template
 # template in private git repository

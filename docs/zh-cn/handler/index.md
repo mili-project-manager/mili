@@ -75,3 +75,9 @@ There are two main parameters, `file` and `resource`.Let's to show you how to us
 - mustache[./mustache.md]
 - ignoreWhen[./ignore-when.md]
 - extractArea[./extract-area.md]
+
+## 更多`handler`
+
+- [mili-handler-additional-property](https://github.com/Val-istar-Guo/mili-handler-additional-property): 在`file.addition`上添加自定义属性。
+- [mili-handler-prettier](https://github.com/Val-istar-Guo/mili-handler-prettier): 将文件内容使用`prettier`格式化。
+- [mili-handler-ejs](https://github.com/Val-istar-Guo/mili-handler-ejs): 编译`ejs`模版的`handler`。

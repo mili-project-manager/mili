@@ -45,8 +45,11 @@ The basic principle of mili.
 Let's use a existed template.
 
 ```shell
+mkdir project_path
+cd project_path
+
 # template in github
-npx mili init github:Val-istar-Guo/mili-template.git
+npx mili init github:Val-istar-Guo/mili-template
 # template in npm
 npx mili init npm:mili-template
 # template in private git repository
