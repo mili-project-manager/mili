@@ -1,6 +1,6 @@
 {
   "name": "mili",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "Scaffolding with continuous control over the development of the project.",
   "main": "lib/index.js",
   "module": "es/index.js",

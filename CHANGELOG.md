@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://github.com/Val-istar-Guo/mili/compare/v3.6.0...v3.7.0) (2019-07-25)
+
+
+### Features
+
+* warn user when template upgrade a major version ([f8062a6](https://github.com/Val-istar-Guo/mili/commit/f8062a6))
+
+
+
 ## [3.6.0](https://github.com/Val-istar-Guo/mili/compare/v3.5.0...v3.6.0) (2019-07-19)
 
 
