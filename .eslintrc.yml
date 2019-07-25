@@ -37,7 +37,7 @@ rules:
   new-cap: error
   no-lonely-if: error
   no-console: off
-  multiline-comment-style: error
+  multiline-comment-style: off
   object-shorthand: error
   prefer-const: error
   prefer-spread: error
@@ -170,3 +170,4 @@ rules:
     - overrides:
         accessors: off
         constructors: off
+        properties: no-public

@@ -1,8 +1,8 @@
 mili:
-  version: 3.5.0
+  version: 3.6.0
 template:
   repository: 'https://github.com/Val-istar-Guo/component-template.git'
-  version: 2.2.5
+  version: 2.4.1
 answers:
   ci: true
   standardVersion: true
