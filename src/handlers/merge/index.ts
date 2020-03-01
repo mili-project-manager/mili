@@ -8,7 +8,7 @@ import mergeBabelrc from './merge-babel'
 
 const jsonFileExts = ['.json']
 const yamlFileExts = ['.yaml', '.yml']
-const ignoreFilenames = ['.gitignore', '.npmignore', '.npmrc']
+const ignoreFilenames = ['.gitignore', '.npmignore', '.npmrc', '.eslintignore']
 const babelrcFilenames = ['.babelrc']
 
 const notSupportErrorMessage = (filename, projectPath): string => [
