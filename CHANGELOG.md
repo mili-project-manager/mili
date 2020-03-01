@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://github.com/Val-istar-Guo/mili/compare/v3.6.0...v3.8.0) (2020-03-01)
+
+
+### Features
+
+* support merge eslintignore ([ace86ba](https://github.com/Val-istar-Guo/mili/commit/ace86ba3a41481c1dd373b8fbeb99d9491f4f3af))
+* warn user when template upgrade a major version ([f8062a6](https://github.com/Val-istar-Guo/mili/commit/f8062a6054d086f141100bfc46aa8359595ede69))
+
 ## [3.7.0](https://github.com/Val-istar-Guo/mili/compare/v3.6.0...v3.7.0) (2019-07-25)
 
 
