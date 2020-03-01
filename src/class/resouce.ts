@@ -1,6 +1,6 @@
 import semver from 'semver'
 import { Compiler } from '@/internal'
-import { version } from '../../package.json'
+import { version } from '@root/package.json'
 import { Project } from './project'
 import { Template } from './template'
 import { logger } from '@/utils'
@@ -23,13 +23,13 @@ export interface Milirc {
 
 export type MiliOperations = 'init' | 'upgrade' | 'update' | 'check'
 export class Resource {
-  public readonly mili = { version }
+  readonly mili = { version }
 
-  public readonly project: Project
+  readonly project: Project
 
-  public readonly template: Template
+  readonly template: Template
 
-  public readonly operation: MiliOperations
+  readonly operation: MiliOperations
 
   constructor(operation: MiliOperations, project: Project, template: Template) {
     if (!template.engines) {

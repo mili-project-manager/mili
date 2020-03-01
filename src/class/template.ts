@@ -1,7 +1,7 @@
 import Ajv from 'ajv'
 import ajvKeywords from 'ajv-keywords'
 import { join, dirname } from 'path'
-import cosmiconfig from 'cosmiconfig'
+import { cosmiconfig } from 'cosmiconfig'
 import { unnest, clone } from 'ramda'
 import { loadNpmConfig } from '@/loader'
 import { TemplateSchema, RuleSchema, QuestionSchema, HandlerSchema } from '@/schema'
@@ -34,17 +34,17 @@ const validateTemplateConfig = ajv
 
 
 export class Template {
-  public readonly repository: Repository
+  readonly repository: Repository
 
-  public path: string
+  path: string
 
-  public engines: string
+  engines: string
 
-  public files: Files
+  files: Files
 
-  public questions: Questions
+  questions: Questions
 
-  public hooks: Hooks
+  hooks: Hooks
 
   constructor(repo: Repository, path: string, engines: string, files: Files, questions: Questions = [], hooks: Hooks = []) {
     this.path = path

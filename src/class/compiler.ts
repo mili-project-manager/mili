@@ -1,4 +1,4 @@
-import EventEmitter from 'events'
+import { EventEmitter } from 'events'
 import { mergeDeepLeft, pick, prop } from 'ramda'
 import { join } from 'path'
 import { CheckOptions, Resource, Effect } from '@/internal'
@@ -18,7 +18,7 @@ export interface RenderOptions {
 
 
 export class Compiler {
-  public readonly resource: Resource
+  readonly resource: Resource
 
   private readonly eventEmitter: EventEmitter = new EventEmitter()
 

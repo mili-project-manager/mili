@@ -1,4 +1,4 @@
-import cosmiconfig from 'cosmiconfig'
+import { cosmiconfig } from 'cosmiconfig'
 import semver from 'semver'
 import { join } from 'path'
 import Ajv from 'ajv'
