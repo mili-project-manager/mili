@@ -104,19 +104,7 @@ Run `npx mili upgrade` command will auto modify code according to the diff.
 - [Handler](./docs/en/handler/index.md)
 - Reference
   + [mili-template](https://github.com/Val-istar-Guo/mili-template): An simple mili template. This can be used as a reference for first time template writing.
-<!-- addition -->
 
-## Sponsor
-
-Support code development on patron.
-
-[![patron](https://c5.patreon.com/external/logo/become_a_patron_button@2x.png)](https://www.patreon.com/bePatron?u=22478507)
-
-## Contributing & Development
-
-If there is any doubt, it is very welcome to discuss the issue together.
-Please read [Contributor Covenant Code of Conduct](.github/CODE_OF_CONDUCT.md) and [CONTRIBUTING](.github/CONTRIBUTING.md).
-Let's keep a good community environment.
 <!-- addition -->
 
 ## Sponsor

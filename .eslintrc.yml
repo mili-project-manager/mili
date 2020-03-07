@@ -107,6 +107,7 @@ rules:
   lines-between-class-members:
     - error
     - always
+    - exceptAfterSingleLine: true
   no-multiple-empty-lines:
     - error
     - max: 2

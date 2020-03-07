@@ -10,7 +10,7 @@ import { join } from 'path'
 const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
 
 export class GitRepository extends Repository {
-  public url: string
+  url: string
 
   constructor(url) {
     super()
@@ -37,7 +37,7 @@ export class GitRepository extends Repository {
   public async getVersions(): Promise<string[]> {
     if (this.versions) return this.versions
 
-    const result = await git().listRemote(['--tags', this.url])
+    const result = await git(this.storage).listRemote(['--tags', this.url])
     const arr = result.split('\n')
     const versions = arr
       .filter(item => item.length && !/\^{}$/.test(item))
@@ -69,7 +69,7 @@ export class GitRepository extends Repository {
       if (!version) logger.warn('Version is unset, use the default branch files of git repository')
 
       await Effect.fs.remove(storage)
-      await git().clone(url, storage)
+      await git(storage).clone(url, storage)
       return
     }
 
@@ -77,7 +77,7 @@ export class GitRepository extends Repository {
 
     if (!repositoryExisted) {
       logger.info(`clone template from ${url}...`)
-      await git().clone(url, storage, ['--branch', `v${version}`, '--single-branch'])
+      await git(storage).clone(url, storage, ['--branch', `v${version}`, '--single-branch'])
       logger.info(`template version: ${version}`)
     } else {
       logger.info('use the cache of template')
@@ -86,7 +86,7 @@ export class GitRepository extends Repository {
 
   public async existed(): Promise<boolean> {
     try {
-      const result = await git().listRemote([])
+      const result = await git(this.storage).listRemote([])
       return Boolean(result && result.length)
     } catch (e) {
       return false
