@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.8.1](https://github.com/Val-istar-Guo/mili/compare/v3.8.0...v3.8.1) (2020-03-07)
+
+
+### Bug Fixes
+
+* git error when run mili check in pre-commit hook ([d527377](https://github.com/Val-istar-Guo/mili/commit/d5273773806737e6b7fef67a03a3627842296a3a)), closes [#87](https://github.com/Val-istar-Guo/mili/issues/87)
+
 ## [3.8.0](https://github.com/Val-istar-Guo/mili/compare/v3.6.0...v3.8.0) (2020-03-01)
 
 
