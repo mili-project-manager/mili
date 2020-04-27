@@ -24,7 +24,7 @@ export default recursiveExecte(async(options: UpdateOptions): Promise<void> => {
   const project = await Project.load(cwd)
   const repo = await project.getTemplateRepo()
 
-  if (version && repo.version && semver.lt(version, repo.version)) {
+  if (version && repo.version && version !== 'default' && version !== 'latest' && semver.lt(version, repo.version)) {
     const message = [
       'The version number setted is lower than the current template version.',
       "If you're sure you want to run this command, rerun it with --force.",
