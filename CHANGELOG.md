@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.9.0](https://github.com/Val-istar-Guo/mili/compare/v3.8.2...v3.9.0) (2020-04-27)
+
+
+### Features
+
+* cache the templates in users home dir ([59efb0a](https://github.com/Val-istar-Guo/mili/commit/59efb0aa46c9a881e9b504f3ea50a1d6588c7551))
+
+
+### Bug Fixes
+
+* update version not support latest and default ([8d1c9b1](https://github.com/Val-istar-Guo/mili/commit/8d1c9b1d224d6e2b74c550b6001102a9648f72a1))
+
 ### [3.8.2](https://github.com/Val-istar-Guo/mili/compare/v3.8.1...v3.8.2) (2020-04-24)
 
 
