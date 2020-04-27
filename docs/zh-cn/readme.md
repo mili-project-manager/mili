@@ -85,6 +85,8 @@ An example:
 
 运行`npx mili update`命令，mili将自动按照`diff`的提示进行增删，从而符合模版的规范。
 
+> 如果你使用git仓库作为模版，请不要在pre-commit中使用`mili check`。这会导致一个令人困惑的错误提示。
+
 ## 正反馈
 
 ### 模版 => 项目

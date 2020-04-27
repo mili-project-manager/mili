@@ -93,6 +93,9 @@ An example:
 
 Run `npx mili upgrade` command will auto modify code according to the diff.
 
+> When use git repository as template source,
+> don't run `mili check` at pre-commit hook.
+> This will throw a confusing error.
 <!-- usage -->
 
 <!-- addition -->
