@@ -1,4 +1,5 @@
 import test from 'ava'
+import { homedir } from 'os'
 import { relative } from 'path'
 import { GitRepository } from '@/internal'
 
@@ -8,5 +9,5 @@ test('Create git repository', t => {
   t.is(repo.owner, 'epoberezkin')
   t.is(repo.name, 'ajv')
   t.is(repo.record, 'https://github.com/epoberezkin/ajv.git')
-  t.snapshot(relative(process.cwd(), repo.storage))
+  t.snapshot(relative(homedir(), repo.storage))
 })

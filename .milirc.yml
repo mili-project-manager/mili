@@ -1,8 +1,8 @@
 mili:
-  version: 3.8.2
+  version: 3.8.1
 template:
   repository: 'npm:@mtpl/component'
-  version: 2.7.9
+  version: 2.8.2
 answers:
   ci: true
   standardVersion: true
