@@ -10,28 +10,20 @@ export interface CheckOptions {
 }
 
 export class CompiledFile {
-  public templatePath: string
-
-  public encoding: Encoding
-
-  public projectPath: string
-
+  templatePath: string
+  encoding: Encoding
+  projectPath: string
   private projectContent?: string
 
-  public projectFileExisted: boolean
-
-  public content: string
-
-  public resource: Resource
-
+  projectFileExisted: boolean
+  content: string
+  resource: Resource
   /** Delete project file */
-  public deleted: boolean = false
-
+  deleted = false
   /** Need to render file */
-  public renderable: boolean = true
-
+  renderable = true
   /** Additional file information that added by handler */
-  public addition = {}
+  addition = {}
 
   constructor(
     templatePath: string,

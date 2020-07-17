@@ -6,6 +6,7 @@ import yaml from 'js-yaml'
 import { logger } from '@/utils'
 import { Template } from './template'
 import { Project } from './project'
+import { Answers } from './question'
 
 
 export interface RenderOptions {
@@ -54,7 +55,7 @@ export class Compiler {
     logger.info('Please answer the questions of template.')
 
     let answers = await Effect.prompter(questions)
-    if (project.answers) answers = mergeDeepLeft(answers, project.answers)
+    if (project.answers) answers = mergeDeepLeft(answers, project.answers) as Answers
 
     project.answers = pick(namesOfQuestions, answers)
   }

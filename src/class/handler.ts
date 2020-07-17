@@ -16,9 +16,8 @@ interface HandlerDuck {
 }
 
 export class Handler {
-  public genFile: FileGenerator
-
-  public genPath: PathGenerator
+  genFile: FileGenerator
+  genPath: PathGenerator
 
   constructor(genFile: FileGenerator, genPath: PathGenerator = identity) {
     this.genFile = genFile

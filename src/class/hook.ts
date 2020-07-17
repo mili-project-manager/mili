@@ -9,9 +9,8 @@ const exec = promisify(childProcess.exec)
 export type Listener = (...arg: any[]) => void
 
 export class Hook {
-  public eventName: string
-
-  public listener: Listener
+  eventName: string
+  listener: Listener
 
   /*
    * constructor(eventName: string, listener: string)

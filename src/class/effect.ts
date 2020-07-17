@@ -34,11 +34,9 @@ export interface EffectOptions {
 }
 
 export class Effect {
-  public static fs: FileSystem = fse
-
-  public static prompter: Prompter = inquirerPrompter
-
-  public static logger: Logger = logger
+  static fs: FileSystem = fse
+  static prompter: Prompter = inquirerPrompter
+  static logger: Logger = logger
 
   public static replace(options: EffectOptions = {}): void {
     if (options.fs) this.fs = options.fs

@@ -5,11 +5,9 @@ import { inferEncodingNormally } from '@/infer-encoding'
 
 
 export class File {
-  public templatePath: string
-
-  public inferEncoding: InferEncodingFunc
-
-  public handler?: Handler
+  templatePath: string
+  inferEncoding: InferEncodingFunc
+  handler?: Handler
 
   constructor(path: string, inferEncoding: InferEncodingFunc = inferEncodingNormally, handler?: Handler) {
     this.templatePath = path

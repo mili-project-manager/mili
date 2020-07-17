@@ -5,12 +5,13 @@ import { Repository } from './repository'
 import { TEMPLATE_STORAGE } from '@/consts'
 import { logger, dirExist, isRootDirOfRepo, isRelativePath } from '@/utils'
 import { Effect } from '@/internal'
+import { ResetMode } from 'simple-git'
 
 
 export class LocalRepository extends Repository {
-  public absolute: boolean = false
+  absolute = false
 
-  public path: string
+  path: string
 
   constructor(str) {
     super()
@@ -78,7 +79,7 @@ export class LocalRepository extends Repository {
     await Effect.fs.copy(path, storage)
 
     if (isRootDirOfRepo(storage) && version && version !== 'default') {
-      await git(storage).reset('hard')
+      await git(storage).reset(ResetMode.HARD)
       await git(storage).checkout(`v${version}`)
 
       logger.info(`template version: ${version}`)

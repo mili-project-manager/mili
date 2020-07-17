@@ -13,20 +13,16 @@ const validate = ajv
   .compile(RuleSchema)
 
 export class Rule {
-  public readonly path: string
-
-  public readonly upgrade: UpgradeType
-
-  public readonly glob: boolean
-
-  public readonly handler?: Handler
-
-  public readonly inferEncoding: InferEncodingFunc
+  readonly path: string
+  readonly upgrade: UpgradeType
+  readonly glob: boolean
+  readonly handler?: Handler
+  readonly inferEncoding: InferEncodingFunc
 
   constructor(
     path: string,
     upgrade: UpgradeType = UpgradeType.Cover,
-    glob: boolean = true,
+    glob = true,
     inferEncoding: InferEncodingFunc = inferEncodingNormally,
     handler?: Handler,
   ) {

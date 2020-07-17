@@ -9,15 +9,12 @@ import { Maybe } from '@/types'
 
 
 export class Project {
-  public path: string
+  path: string
+  repository?: Repository
+  name: string | undefined
+  answers?: Answers
 
-  public repository?: Repository
-
-  public name: string | undefined
-
-  public answers?: Answers
-
-  constructor(path: string, name: string = '', repository?: Repository, answers?: Answers) {
+  constructor(path: string, name = '', repository?: Repository, answers?: Answers) {
     this.path = path
     this.name = name
     this.repository = repository

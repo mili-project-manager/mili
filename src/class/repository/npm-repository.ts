@@ -17,7 +17,7 @@ module.exports = { ...config, path }
 
 const exec = promisify(childProcess.exec)
 export class NpmRepository extends Repository {
-  public scope: string | null
+  scope: string | null
 
   constructor(name) {
     super()

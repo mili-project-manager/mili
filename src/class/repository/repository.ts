@@ -11,15 +11,12 @@ export interface InstallOptions {
 }
 
 export abstract class Repository {
-  public type!: RepositoryTypes
-
-  public owner: string = ''
-
-  public name: string = ''
-
+  type!: RepositoryTypes
+  owner = ''
+  name = ''
+  version?: string
   protected versions: string[] | null = null
 
-  public version?: string
 
   public static async format(str: string): Promise<Repository> {
     const githubSH = /^(github:)[-a-zA-Z0-9@:%._+~#=]+\/[-a-zA-Z0-9@:%._+~#=]+$/
@@ -55,7 +52,7 @@ export abstract class Repository {
   }
 
 
-  public async checkout(version: string = 'latest'): Promise<void> {
+  public async checkout(version = 'latest'): Promise<void> {
     if (version !== 'latest' && version !== 'default' && !semver.valid(version)) {
       throw new Error('Semantic version expected.')
     }

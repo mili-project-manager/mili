@@ -130,7 +130,7 @@ program
       await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold, files })
       logger.info('check completed')
     } catch (e) {
-      console.error(e)
+      logger.error(e)
       process.exit(1)
     }
   }))
@@ -140,6 +140,11 @@ program.on('command:*', () => {
   logger.error(`Invalid command: %s\nSee --help for a list of available commands.${program.args.join(' ')}`)
   process.exit(1)
 })
+program.on('command:*', function (operands) {
+  logger.error(`error: unknown command '${operands[0]}'`);
+  // const availableCommands = program.commands.map(cmd => cmd.name());
+  process.exitCode = 1;
+});
 
 
 program.parse(process.argv)

@@ -29,29 +29,18 @@ export interface QuestionOptions {
 }
 
 export class Question {
-  public type: QuesstionTypes = 'input'
-
-  public name: string = ''
-
-  public message: string | Function = ''
-
-  public default: any
-
-  public choices: Choices = []
-
-  public validate: Validator = T
-
-  public filter: Filter = identity
-
-  public transformer: Function = identity
-
-  public when: When = T
-
-  public pageSize: number = 0
-
-  public prefix: string = ''
-
-  public suffix: string = ''
+  type: QuesstionTypes = 'input'
+  name = ''
+  message: string | Function = ''
+  default: any
+  choices: Choices = []
+  validate: Validator = T
+  filter: Filter = identity
+  transformer: Function = identity
+  when: When = T
+  pageSize = 0
+  prefix = ''
+  suffix = ''
 
   constructor(options: QuestionOptions) {
     if (options.type) this.type = options.type
