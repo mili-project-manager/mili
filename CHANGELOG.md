@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.9.1](https://github.com/Val-istar-Guo/mili/compare/v3.9.0...v3.9.1) (2020-07-18)
+
 ## [3.9.0](https://github.com/Val-istar-Guo/mili/compare/v3.8.2...v3.9.0) (2020-04-27)
 
 
