@@ -7,7 +7,7 @@ import { TEMPLATE_STORAGE } from '@/consts'
 import { join } from 'path'
 
 
-const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)(\/)?$/
+const gitUrlRegexp = /((git|ssh|http(s)?)|(git@[\w.]+))(:(\/\/)?)([\w.@:/\-~]+)(\.git)?(\/)?$/
 
 export class GitRepository extends Repository {
   url: string
@@ -22,7 +22,7 @@ export class GitRepository extends Repository {
     const [, , , , , , , links] = matched
     const [owner, name] = links.split('/').slice(-2)
     this.owner = owner
-    this.name = name
+    this.name = name.replace(/.git$/, '')
   }
 
   get record(): string {
