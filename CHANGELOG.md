@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.9.2](https://github.com/Val-istar-Guo/mili/compare/v3.9.1...v3.9.2) (2020-10-22)
+
+
+### Bug Fixes
+
+* .git isn't required for git url ([c5421af](https://github.com/Val-istar-Guo/mili/commit/c5421af66f8bb750bc7bea7c29e67039d3bbf433)), closes [#89](https://github.com/Val-istar-Guo/mili/issues/89)
+
 ### [3.9.1](https://github.com/Val-istar-Guo/mili/compare/v3.9.0...v3.9.1) (2020-07-18)
 
 ## [3.9.0](https://github.com/Val-istar-Guo/mili/compare/v3.8.2...v3.9.0) (2020-04-27)
