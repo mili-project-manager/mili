@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://github.com/Val-istar-Guo/mili/compare/v3.9.2...v3.10.0) (2021-04-24)
+
+
+### Bug Fixes
+
+* async commander support ([619fe10](https://github.com/Val-istar-Guo/mili/commit/619fe1070034819b638304f70e1e1cdca7eb7c5b))
+* upgrade template ([cb3cb73](https://github.com/Val-istar-Guo/mili/commit/cb3cb7320f8febbc3f61362792f2a5c5f343c462))
+
 ### [3.9.2](https://github.com/Val-istar-Guo/mili/compare/v3.9.1...v3.9.2) (2020-10-22)
 
 
