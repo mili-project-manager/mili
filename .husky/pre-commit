@@ -3,4 +3,4 @@
 
 npm test
 npx --no-install lint-staged
-npx --no-install mili check --diff --no-deps --ignore "**/node_modules"
+# npx --no-install mili check --diff --no-deps --ignore "**/node_modules"
