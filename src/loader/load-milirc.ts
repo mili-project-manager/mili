@@ -1,5 +1,5 @@
 import { cosmiconfig } from 'cosmiconfig'
-import semver from 'semver'
+import * as semver from 'semver'
 import { join } from 'path'
 import Ajv from 'ajv'
 import { relativePath, isRelativePath } from '@/utils'
@@ -8,7 +8,7 @@ import { Milirc, Effect } from '@/internal'
 import { clone } from 'ramda'
 
 
-const ajv = new Ajv({ useDefaults: true, nullable: true })
+const ajv = new Ajv({ useDefaults: true })
 const validate = ajv.compile(MilircSchema)
 
 const explorer = cosmiconfig('mili')

@@ -2,7 +2,7 @@ import { join, isAbsolute } from 'path'
 import validateNpmPackageName from 'validate-npm-package-name'
 import { isRelativePath, installDeps, logger } from '@/utils'
 import { Template, GitRepository, NpmRepository, LocalRepository, Effect } from '@/internal'
-import semver from 'semver'
+import * as semver from 'semver'
 
 
 export type RepositoryTypes = 'npm' | 'local' | 'git'

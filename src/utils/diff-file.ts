@@ -1,5 +1,5 @@
 import { diffLines, Change } from 'diff'
-import chalk from 'chalk'
+import * as chalk from 'chalk'
 import { isNil } from 'ramda'
 
 

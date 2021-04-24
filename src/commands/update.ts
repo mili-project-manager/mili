@@ -1,6 +1,6 @@
 import { Project, Resource, Effect, EffectOptions } from '@/internal'
 import { recursiveExecte, logger, checkWorkDir } from '@/utils'
-import semver from 'semver'
+import * as semver from 'semver'
 
 
 interface UpdateOptions {

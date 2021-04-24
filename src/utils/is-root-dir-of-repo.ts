@@ -1,8 +1,8 @@
-import git from 'simple-git/promise'
+import * as git from 'simple-git/promise'
 import dirExist from './dir-exist'
 
 
-export default async(path: string) => {
+export default async(path: string): Promise<boolean> => {
   if (!await dirExist(path)) return false
   if (!await git(path).checkIsRepo()) return false
 

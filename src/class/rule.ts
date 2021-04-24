@@ -1,5 +1,6 @@
 import Ajv from 'ajv'
-import glob from 'micromatch'
+import ajvKeywords from 'ajv-keywords'
+import * as glob from 'micromatch'
 import { UpgradeType, Encoding, InferEncodingFunc } from '@/consts'
 import { RuleSchema, HandlerSchema } from '@/schema'
 import { inferEncodingByMapping, inferEncodingImmobile, inferEncodingNormally } from '@/infer-encoding'
@@ -8,6 +9,7 @@ import { isAbsolute } from 'path'
 
 
 const ajv = new Ajv({ useDefaults: true })
+ajvKeywords(ajv)
 const validate = ajv
   .addSchema([HandlerSchema])
   .compile(RuleSchema)

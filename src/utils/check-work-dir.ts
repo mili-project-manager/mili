@@ -1,5 +1,5 @@
 import { join } from 'path'
-import git from 'simple-git/promise'
+import * as git from 'simple-git/promise'
 import { isChildPathOf, isEmptyDir } from '@/utils'
 
 

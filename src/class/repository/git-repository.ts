@@ -1,5 +1,5 @@
-import semver from 'semver'
-import git from 'simple-git/promise'
+import * as semver from 'semver'
+import * as git from 'simple-git/promise'
 import { Repository } from './repository'
 import { Effect } from '@/internal'
 import { logger } from '@/utils'

@@ -1,4 +1,4 @@
-import merge from 'merge-deep'
+import * as merge from 'merge-deep'
 import { FileGenerator } from '@/internal'
 
 

@@ -1,4 +1,4 @@
-import childProcess from 'child_process'
+import * as childProcess from 'child_process'
 import { promisify } from 'util'
 import { logger } from '@/utils'
 import { EventEmitter } from 'events'

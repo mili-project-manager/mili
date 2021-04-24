@@ -3,7 +3,7 @@ import logger from './logger'
 import { Path } from '@/consts'
 
 
-export default (path: Path) => new Promise((resolve, reject) => {
+export default (path: Path): Promise<void> => new Promise((resolve, reject) => {
   logger.info('install template dependencies...')
 
   exec('npm install --production', { cwd: path }, (error, stdout, stderr) => {

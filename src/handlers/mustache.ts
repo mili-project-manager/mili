@@ -1,4 +1,4 @@
-import mustache from 'mustache'
+import * as mustache from 'mustache'
 import { Handler, FileGenerator, PathGenerator } from '@/internal'
 
 const genFile: FileGenerator = async(file, resource) => {

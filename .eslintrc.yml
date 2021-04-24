@@ -166,7 +166,7 @@ rules:
   '@typescript-eslint/func-call-spacing':
     - error
     - never
-  '@typescript-eslint/ban-ts-ignore': off
+  '@typescript-eslint/ban-ts-comment': off
   '@typescript-eslint/explicit-member-accessibility':
     - error
     - overrides:

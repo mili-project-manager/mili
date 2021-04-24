@@ -1,5 +1,5 @@
-import git from 'simple-git/promise'
-import semver from 'semver'
+import * as git from 'simple-git/promise'
+import * as semver from 'semver'
 import { relative, join, isAbsolute, basename } from 'path'
 import { Repository } from './repository'
 import { TEMPLATE_STORAGE } from '@/consts'

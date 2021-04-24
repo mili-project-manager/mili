@@ -1,4 +1,4 @@
 export * from './src/index'
-// @ts-ignore
+/** @ts-ignore */
 import defaultExport from './src/index'
 export default defaultExport

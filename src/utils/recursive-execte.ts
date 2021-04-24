@@ -1,5 +1,5 @@
 import { join, isAbsolute, dirname, resolve } from 'path'
-import glob from 'micromatch'
+import * as glob from 'micromatch'
 import { Effect } from '@/internal'
 import { uniq, union } from 'ramda'
 import isChildPathOf from './is-child-path-of'
@@ -10,7 +10,10 @@ interface Err {
   readonly message: string
 }
 
-const execteFuncInSubproject = async(func: Function, dir: string, options: any, errors: Err[]): Promise<void> => {
+
+type ExectableFunc = (options: any) => Promise<void> | void
+
+const execteFuncInSubproject = async(func: ExectableFunc, dir: string, options: any, errors: Err[]): Promise<void> => {
   const stats = await Effect.fs.stat(dir)
   if (!stats.isDirectory()) return
 
@@ -41,7 +44,7 @@ const execteFuncInSubproject = async(func: Function, dir: string, options: any, 
   }
 }
 
-function dirOfFiles(files: string[], root: string = '/'): string[] {
+function dirOfFiles(files: string[], root = '/'): string[] {
   if (!files.length) return []
 
   const dirs = files
@@ -58,7 +61,7 @@ function dirOfFiles(files: string[], root: string = '/'): string[] {
  * Check the dir of files that include .milirc.
  * It is useful for lint-stage.
  */
-const execteFuncInParentProject = async(func: Function, files: string[], options: any, errors: Err[]): Promise<void> => {
+const execteFuncInParentProject = async(func: ExectableFunc, files: string[], options: any, errors: Err[]): Promise<void> => {
   const baseUrl = options.cwd ? resolve(options.cwd) : process.cwd()
   const dirs = dirOfFiles(files)
     .filter(isChildPathOf(baseUrl, true))
@@ -93,7 +96,7 @@ const handleErrors = (errors: Err[]): void => {
   }
 }
 
-export default (func: Function) => async(options: any): Promise<void> => {
+export default (func: (options) => void) => async(options: any): Promise<void> => {
   const {
     cwd = process.cwd(),
     ignore = [],

@@ -1,7 +1,7 @@
 import test from 'ava'
 import { init, check, clean, upgrade, update, outdated } from '@/index'
 import { join, relative } from 'path'
-import fs from 'fs-extra'
+import * as fs from 'fs-extra'
 import { TEMPLATE_STORAGE } from '@/consts'
 
 

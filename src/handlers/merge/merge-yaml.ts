@@ -1,5 +1,5 @@
-import yaml from 'js-yaml'
-import merge from 'merge-deep'
+import * as yaml from 'js-yaml'
+import * as merge from 'merge-deep'
 import { FileGenerator } from '@/internal'
 
 

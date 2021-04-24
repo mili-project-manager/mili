@@ -1,4 +1,4 @@
-import git from 'simple-git/promise'
+import * as git from 'simple-git/promise'
 import { basename } from 'path'
 import { loadMilirc, loadNpmConfig } from '@/loader'
 import { Answers } from './question'

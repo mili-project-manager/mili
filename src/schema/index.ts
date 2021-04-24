@@ -1,14 +1,14 @@
-import Template from './template.json'
+import * as Template from './template.json'
 export const TemplateSchema = Template
 
-import Rule from './rule.json'
+import * as Rule from './rule.json'
 export const RuleSchema = Rule
 
-import Handler from './hander.json'
+import * as Handler from './hander.json'
 export const HandlerSchema = Handler
 
-import Question from './question.json'
+import * as Question from './question.json'
 export const QuestionSchema = Question
 
-import Milirc from './milirc.json'
+import * as Milirc from './milirc.json'
 export const MilircSchema = Milirc

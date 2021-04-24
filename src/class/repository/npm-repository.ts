@@ -1,4 +1,4 @@
-import childProcess from 'child_process'
+import * as childProcess from 'child_process'
 import { promisify } from 'util'
 import { join } from 'path'
 import { Repository } from './repository'

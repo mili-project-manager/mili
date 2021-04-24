@@ -1,4 +1,4 @@
-import semver from 'semver'
+import * as semver from 'semver'
 import { Compiler } from '@/internal'
 import { version } from '@root/package.json'
 import { Project } from './project'

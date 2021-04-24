@@ -1,4 +1,5 @@
-import fse, { WriteFileOptions, CopyOptions, EnsureOptions, ReadOptions, Stats, WriteOptions } from 'fs-extra'
+import * as fse from 'fs-extra'
+import { WriteFileOptions, CopyOptions, EnsureOptions, ReadOptions, Stats, WriteOptions } from 'fs-extra'
 import { Prompter } from './question'
 import { inquirerPrompter } from '@/prompters'
 import { logger } from '@/utils'
