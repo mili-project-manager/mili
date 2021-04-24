@@ -24,9 +24,7 @@
   "engines": {
     "node": ">=8.9.4"
   },
-  "bin": {
-    "mili": "./bin/mili"
-  },
+  "bin": "./bin/mili",
   "scripts": {
     "clean": "rm -rf ./lib/*",
     "ca": "git add -A && git-cz -av",
