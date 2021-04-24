@@ -23,130 +23,134 @@ function exitWhenThrowError(func) {
   }
 }
 
-program
-  .version(version)
+async function main() {
+  program
+    .version(version)
 
-const absolutize = val => resolve(val)
+  const absolutize = val => resolve(val)
 
-program
-  .command('init [repository]')
-  .usage('[options] <repository>')
-  .description('initialize the project')
-  .option('-n --app-name [app_name]', 'Set your app name.')
-  .option('--no-deps', 'Need not install dependencies', false)
-  .option('--force')
-  .option('-v --version [version]', 'Set the template version')
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action(exitWhenThrowError(async(repository, option) => {
-    if (!repository) program.help()
+  program
+    .command('init [repository]')
+    .usage('[options] <repository>')
+    .description('initialize the project')
+    .option('-n --app-name [app_name]', 'Set your app name.')
+    .option('--no-deps', 'Need not install dependencies', false)
+    .option('--force')
+    .option('-v --version [version]', 'Set the template version')
+    .option('--cwd [cwd]', 'Set the current work directory', absolutize)
+    .action(exitWhenThrowError(async(repository, option) => {
+      if (!repository) program.help()
 
-    const { appName, force = false, deps = true, cwd } = option
+      const { appName, force = false, deps = true, cwd } = option
 
-    let version
-    if (typeof option.version === 'string') version = option.version
-    if (cwd) fs.ensureDir(cwd)
+      let version
+      if (typeof option.version === 'string') version = option.version
+      if (cwd) fs.ensureDir(cwd)
 
-    await mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
-    logger.info('initialize complete')
-  }))
+      await mili.init({ cwd, name: appName, force, repository, version, noDeps: !deps })
+      logger.info('initialize complete')
+    }))
 
-const collect = (val, memo) => {
-  memo.push(val)
-  return memo
+  const collect = (val, memo) => {
+    memo.push(val)
+    return memo
+  }
+
+  program
+    .command('upgrade')
+    .description('upgrade the template')
+    .option('--force')
+    .option('--no-deps', 'Need not install dependencies', false)
+    .option('-r, --recursive', 'Upgrade recursive all subfolder')
+    .option('--ignore [file]', 'the folder need not search', collect, [])
+    .option('--cwd [cwd]', 'Set the current work directory', absolutize)
+    .action(exitWhenThrowError(async option => {
+      const { cwd, force = false, deps = true, recursive, ignore } = option
+      if (cwd && !fs.pathExistsSync(cwd)) {
+        throw new Error(`No such directory: ${cwd}`)
+      }
+
+      await mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
+      logger.info('upgraded complete')
+    }))
+
+  program
+    .command('update')
+    .description('Update the project with the current version of the template')
+    .option('--force')
+    .option('-v --version [version]', 'Set the template version')
+    .option('--no-deps', 'Need not install dependencies', false)
+    .option('-r, --recursive', 'Upgrade recursive all subfolder')
+    .option('--ignore [file]', 'the folder need not search', collect, [])
+    .option('--cwd [cwd]', 'Set the current work directory', absolutize)
+    .action(exitWhenThrowError(async option => {
+      const { cwd, force = false, deps = true, recursive, ignore } = option
+
+      let version
+      if (typeof option.version === 'string') version = option.version
+      if (cwd && !fs.pathExistsSync(cwd)) {
+        throw new Error(`No such directory: ${cwd}`)
+      }
+
+      await mili.update({ cwd, force, version, noDeps: !deps, recursive, ignore })
+      logger.info('update complete')
+    }))
+
+  program
+    .command('clean')
+    .description('Clean the cache of mili')
+    .action(exitWhenThrowError(async() => {
+      logger.info('begin clean')
+      await mili.clean()
+      logger.info('clean complete')
+    }))
+
+  program
+    .command('outdated')
+    .description('Check template is outdated')
+    .action(exitWhenThrowError(async() => {
+      await mili.outdated()
+    }))
+
+  program
+    .command('check [files...]')
+    .description('Check if the project file meets the template requirements')
+    .option('--no-deps', 'Need not install dependencies', false)
+    .option('-r, --recursive', 'Upgrade recursive all subfolder')
+    .option('--ignore [file]', 'the folder need not search', collect, [])
+    .option('--cwd [cwd]', 'Set the current work directory', absolutize)
+    .option('-d --diff', 'Show file difference')
+    .option('--fold', 'fold undifferentiated code')
+    .action(exitWhenThrowError(async(files, options) => {
+      const { cwd, deps = true, recursive, ignore, diff, fold } = options
+      if (cwd && !fs.pathExistsSync(cwd)) {
+        throw new Error(`No such directory: ${cwd}`)
+      }
+
+      try {
+        await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold, files })
+        logger.info('check completed')
+      } catch (e) {
+        logger.error(e)
+        process.exit(1)
+      }
+    }))
+
+  // error on unknown commands
+  program.on('command:*', () => {
+    logger.error(`Invalid command: %s\nSee --help for a list of available commands.${program.args.join(' ')}`)
+    process.exit(1)
+  })
+  program.on('command:*', function (operands) {
+    logger.error(`error: unknown command '${operands[0]}'`);
+    // const availableCommands = program.commands.map(cmd => cmd.name());
+    process.exitCode = 1;
+  });
+
+
+  program.parseAsync(process.argv)
+
+  if (!process.argv.slice(2).length) program.help()
 }
 
-program
-  .command('upgrade')
-  .description('upgrade the template')
-  .option('--force')
-  .option('--no-deps', 'Need not install dependencies', false)
-  .option('-r, --recursive', 'Upgrade recursive all subfolder')
-  .option('--ignore [file]', 'the folder need not search', collect, [])
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action(exitWhenThrowError(async option => {
-    const { cwd, force = false, deps = true, recursive, ignore } = option
-    if (cwd && !fs.pathExistsSync(cwd)) {
-      throw new Error(`No such directory: ${cwd}`)
-    }
-
-    await mili.upgrade({ cwd, force, noDeps: !deps, recursive, ignore })
-    logger.info('upgraded complete')
-  }))
-
-program
-  .command('update')
-  .description('Update the project with the current version of the template')
-  .option('--force')
-  .option('-v --version [version]', 'Set the template version')
-  .option('--no-deps', 'Need not install dependencies', false)
-  .option('-r, --recursive', 'Upgrade recursive all subfolder')
-  .option('--ignore [file]', 'the folder need not search', collect, [])
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .action(exitWhenThrowError(async option => {
-    const { cwd, force = false, deps = true, recursive, ignore } = option
-
-    let version
-    if (typeof option.version === 'string') version = option.version
-    if (cwd && !fs.pathExistsSync(cwd)) {
-      throw new Error(`No such directory: ${cwd}`)
-    }
-
-    await mili.update({ cwd, force, version, noDeps: !deps, recursive, ignore })
-    logger.info('update complete')
-  }))
-
-program
-  .command('clean')
-  .description('Clean the cache of mili')
-  .action(exitWhenThrowError(async() => {
-    logger.info('begin clean')
-    await mili.clean()
-    logger.info('clean complete')
-  }))
-
-program
-  .command('outdated')
-  .description('Check template is outdated')
-  .action(exitWhenThrowError(async() => {
-    await mili.outdated()
-  }))
-
-program
-  .command('check [files...]')
-  .description('Check if the project file meets the template requirements')
-  .option('--no-deps', 'Need not install dependencies', false)
-  .option('-r, --recursive', 'Upgrade recursive all subfolder')
-  .option('--ignore [file]', 'the folder need not search', collect, [])
-  .option('--cwd [cwd]', 'Set the current work directory', absolutize)
-  .option('-d --diff', 'Show file difference')
-  .option('--fold', 'fold undifferentiated code')
-  .action(exitWhenThrowError(async(files, options) => {
-    const { cwd, deps = true, recursive, ignore, diff, fold } = options
-    if (cwd && !fs.pathExistsSync(cwd)) {
-      throw new Error(`No such directory: ${cwd}`)
-    }
-
-    try {
-      await mili.check({ cwd, noDeps: !deps, recursive, ignore, showDiff: diff, fold, files })
-      logger.info('check completed')
-    } catch (e) {
-      logger.error(e)
-      process.exit(1)
-    }
-  }))
-
-// error on unknown commands
-program.on('command:*', () => {
-  logger.error(`Invalid command: %s\nSee --help for a list of available commands.${program.args.join(' ')}`)
-  process.exit(1)
-})
-program.on('command:*', function (operands) {
-  logger.error(`error: unknown command '${operands[0]}'`);
-  // const availableCommands = program.commands.map(cmd => cmd.name());
-  process.exitCode = 1;
-});
-
-
-program.parse(process.argv)
-
-if (!process.argv.slice(2).length) program.help()
+main()
