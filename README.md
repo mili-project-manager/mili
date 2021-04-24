@@ -1,6 +1,6 @@
 <!-- title -->
 <p align="center" style="padding-top: 40px">
-  <img src="./docs/images/logo.svg?sanitize=true" width="60" alt="logo" />
+  <img src="./docs/images/logo.svg?sanitize=true" width="120" alt="logo" />
 </p>
 
 <h1 align="center" style="text-align: center">Mili</h1>
