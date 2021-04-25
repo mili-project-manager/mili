@@ -1,5 +1,6 @@
 {
   "$id": "template.json",
+  "type": "object",
   "properties": {
     "path": {
       "type": "string",
@@ -10,26 +11,40 @@
     },
     "rules": {
       "type": "array",
-      "items": { "$ref": "rule.json" },
+      "items": {
+        "$ref": "rule.json"
+      },
       "default": []
     },
     "hooks": {
       "type": "object",
       "propertyNames": {
-        "enum": ["initialized", "updated", "upgraded", "checked", "rendered"]
+        "enum": [
+          "initialized",
+          "updated",
+          "upgraded",
+          "checked",
+          "rendered"
+        ]
       },
       "patternProperties": {
         ".*": {
           "oneOf": [
-            { "type": "string" },
-            { "instanceof": "Function" }
+            {
+              "type": "string"
+            },
+            {
+              "instanceof": "Function"
+            }
           ]
         }
       }
     },
     "questions": {
       "type": "array",
-      "items": { "$ref": "question.json" }
+      "items": {
+        "$ref": "question.json"
+      }
     }
   }
 }

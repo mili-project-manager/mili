@@ -1,5 +1,6 @@
 {
   "$id": "rule.json",
+  "type": "object",
   "properties": {
     "path": {
       "type": "string"
@@ -8,33 +9,52 @@
       "oneOf": [
         {
           "type": "string",
-          "enum": ["utf8", "binary"]
+          "enum": [
+            "utf8",
+            "binary"
+          ]
         },
         {
           "type": "object",
           "propertyNames": {
-            "enum": ["utf8", "binary"]
+            "enum": [
+              "utf8",
+              "binary"
+            ]
           },
           "patternProperties": {
-            ".*": { "type": "string" }
+            ".*": {
+              "type": "string"
+            }
           }
         }
       ]
     },
     "upgrade": {
       "type": "string",
-      "enum": ["cover", "keep", "exist", "merge"],
+      "enum": [
+        "cover",
+        "keep",
+        "exist",
+        "merge"
+      ],
       "default": "cover"
     },
     "glob": {
       "type": "boolean",
       "default": true
     },
-    "handler": { "$ref": "handler.json" },
+    "handler": {
+      "$ref": "handler.json"
+    },
     "handlers": {
       "type": "array",
-      "items": { "$ref": "handler.json" }
+      "items": {
+        "$ref": "handler.json"
+      }
     }
   },
-  "required": ["path"]
+  "required": [
+    "path"
+  ]
 }

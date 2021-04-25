@@ -1,5 +1,6 @@
 {
   "$id": "milirc.json",
+  "type": "object",
   "properties": {
     "mili": {
       "type": "object",
@@ -9,9 +10,10 @@
           "nullable": true
         }
       },
-      "default": { "version": "" }
+      "default": {
+        "version": ""
+      }
     },
-
     "template": {
       "type": "object",
       "properties": {
@@ -24,14 +26,18 @@
           "default": ""
         }
       },
-      "required": ["repository"]
+      "required": [
+        "repository"
+      ]
     },
-
     "answers": {
       "type": "object",
-      "nullable": true
+      "nullable": true,
+      "properties": {}
     }
   },
-
-  "required": ["mili", "template"]
+  "required": [
+    "mili",
+    "template"
+  ]
 }
