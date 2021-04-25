@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.1](https://github.com/Val-istar-Guo/mili/compare/v3.10.0...v3.10.1) (2021-04-25)
+
+
+### Bug Fixes
+
+* cannot find validate-npm-package-name ([0213f7f](https://github.com/Val-istar-Guo/mili/commit/0213f7fdeee624256fa3f517dd285289ee40339c))
+* schema warning ([404c218](https://github.com/Val-istar-Guo/mili/commit/404c218f7bb57b0f2dece468590d9f27bcaf240d))
+
 ## [3.10.0](https://github.com/Val-istar-Guo/mili/compare/v3.9.2...v3.10.0) (2021-04-24)
 
 
