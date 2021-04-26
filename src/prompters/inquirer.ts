@@ -1,5 +1,5 @@
 import { Prompter } from '@/internal'
-import inquirer from 'inquirer'
+import * as inquirer from 'inquirer'
 
 const inquirerPrompter: Prompter = async questions => await inquirer.prompt(questions)
 
