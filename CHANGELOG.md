@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.10.2](https://github.com/Val-istar-Guo/mili/compare/v3.10.1...v3.10.2) (2021-04-26)
+
+
+### Bug Fixes
+
+* cannot find inquirer ([278e074](https://github.com/Val-istar-Guo/mili/commit/278e074a4c3239f309d47120fd062b5b89327970))
+
 ### [3.10.1](https://github.com/Val-istar-Guo/mili/compare/v3.10.0...v3.10.1) (2021-04-25)
 
 
