@@ -74,7 +74,7 @@ export class Compiler {
   }
 
   private async generateMilirc(): Promise<void> {
-    const milirc = yaml.safeDump(this.resource.milirc, { skipInvalid: true })
+    const milirc = yaml.dump(this.resource.milirc, { skipInvalid: true })
     await Effect.fs.writeFile(join(this.project.path, '.milirc.yml'), milirc, 'utf8')
   }
 }

@@ -4,7 +4,7 @@ import { FileGenerator } from '@/internal'
 
 
 const mergeYaml: FileGenerator = async file => {
-  let content = file.content
+  let content: any = file.content
 
   const beginMatched = content.match(/^\s*/g)
   const beginBlank = beginMatched ? beginMatched[0] : ''
@@ -25,7 +25,7 @@ const mergeYaml: FileGenerator = async file => {
       ].join('\n'))
     }
   } else {
-    let projectContent = await file.getProjectContent()
+    let projectContent: any = await file.getProjectContent()
 
     try {
       content = yaml.load(file.content)
