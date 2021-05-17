@@ -1,7 +1,0 @@
-export { default as merge } from './merge'
-export { default as exist } from './exist'
-export { default as extractArea } from './extract-area'
-export { default as mustache } from './mustache'
-export { default as ignoreWhen } from './ignore-when'
-export { default as deleteWhen } from './delete-when'
-export { default as rename } from './rename'

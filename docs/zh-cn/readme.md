@@ -17,51 +17,43 @@
 当我们想要升级一些脚手架的基础功能（例：eslint规则）时，我们不得不去升级每一个项目.
 甚至不得不对一些改动过大的项目设计定制化的升级方案。
 
-因此，为了提高脚手架对项目后续发展的控制力，模版可以修改一部分文件，并发布新的模版版本。然后，项目就可以升级模版版本。
+Mili 提供使用模板来控制项目结构和文件内容的能力，所有使用模板的项目，都必须通过升级模板来实现被控制的文件的变更升级。
 
 如果你们团队管理着多个项目，并希望这些项目具有统一的、可持续迭代的代码规范、基础功能、框架结构，mili非常适合作为你们的脚手架工具。
 
+## 目录
+
+- [命令行使用](./cli.md)
+- [模板开发指南](./template.md)
+- [Loaders](./loader/index.md)
+- [Handlers](./handler/index.md)
+
 ## Usage
-
-Mili的核心设计理念：
-
-<p align="center">
-  <img src="../images/handlers.svg?sanitize=true" width="80%" />
-</p>
-
-1. 首先，你需要开发一个模版（template），或者使用别人的模版。
-2. 创建项目目录，并在项目根目录运行`npx mili init template_path`。
-3. 当模版版本需要升级时，在项目根目录运行`npx mili upgrade`
-4. 模版中会对各个文件配置各种的handler，`mili`会在初始化和升级时调用对应的`handler`生产项目文件。
-
 ### 创建项目
 
-我们使用[mili-template](https://github.com/Val-istar-Guo/mili-template)模版来创建一个项目：
-
 ```shell
-mkdir project_path
-cd project_path
+mkdir my_project
+cd my_project
 
-# template in github
-npx mili init github:Val-istar-Guo/mili-template
-# template in npm
-npx mili init npm:mili-template
-# template in private git repository
-npx mili init https://github.com/Val-istar-Guo/mili.git
+# 来自于NPM仓库的模板
+npx mili init npm:@mtpl/code-style
+# 来自于GitHub仓库的模板
+npx mili init github:mili-project-manager/mtpl-code-style
+# 来自于私有仓库的模板
+npx mili init https://github.com/mili-project-manager/mtpl-code-style
+# 支持SSH
+npx mili init git@github.com:mili-project-manager/mtpl-code-style.git
 ```
 
 ### 升级项目
 
-升级操作非常简单，模版配置文件中对于每个文件配置的handlers, 决定了升级操作的对项目文件的影响。
+将`模板`升级到`latest`版本
 
 ```shell
 # 在项目目录下执行
 mili upgrade
 ```
 
-handler可以提取项目文件的数据，或者将模板文件用为[mustache](https://github.com/janl/mustache.js)模板，并将项目数据作为view，渲染出新的项目文件，并覆盖旧文件。
-
-handlers可以自由灵活地组合，以实现各种各样的`init`和`upgrade`运行效果。
 
 ### 校验项目文件
 
@@ -73,19 +65,12 @@ handlers可以自由灵活地组合，以实现各种各样的`init`和`upgrade`
 npx mili check
 ```
 
-或者在[husky](https://www.npmjs.com/package/husky)里配置：
-```yaml
-hooks:
-  pre-commit: 'npx mili check --diff --fold'
-```
-
-An example:
+输出结果：
 
 ![mili check](../images/check.png)
 
 运行`npx mili update`命令，mili将自动按照`diff`的提示进行增删，从而符合模版的规范。
 
-> 如果你使用git仓库作为模版，请不要在pre-commit中使用`mili check`。这会导致一个令人困惑的错误提示。
 
 ## 正反馈
 
@@ -138,15 +123,6 @@ An example:
    是用一个模版，还是管理多个模版。需要从灵活性、简单、统一等方面考量出最适合团队的一个综合方案。
    但是，保持多个模版中相似规范和框架的一致性是必要的。可以通过开发一个“模版的模版”来实现。
 
-
-## 更多内容
-
-- [CLI API](./cli.md)
-- [NODE API](./node-interface.md)
-- [模版开发](./template.md)
-- [Handler](./handler/index.md)
-- 示例：
-  + [mili-template](https://github.com/Val-istar-Guo/mili-template): 一个简单的mili模版，很适合作为第一次开发模版的参考项目。
 
 ## Contributing & Development
 

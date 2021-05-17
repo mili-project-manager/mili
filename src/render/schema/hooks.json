@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "propertyNames": {
+      "type": "string",
+      "enum": [
+        "after-init",
+        "after-update",
+        "after-upgrade",
+        "after-check",
+        "after-render",
+        "before-init",
+        "before-update",
+        "before-upgrade",
+        "before-check",
+        "before-render"
+      ]
+    },
+    "additionalProperties": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "path"
+    ],
+    "properties": {
+      "path": {
+        "type": "string",
+        "format": "uri-reference"
+      },
+      "encoding": {
+        "type": "string",
+        "enum": [
+          "utf8",
+          "binary",
+          "hex",
+          "ascii"
+        ]
+      },
+      "handlers": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "options": {}
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

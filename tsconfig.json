@@ -3,7 +3,7 @@
     "outDir": "./lib",
     "moduleResolution": "node",
     "module": "commonjs",
-    "target": "ESNext",
+    "target": "esnext",
     "strict": true,
     "noImplicitAny": false,
     "declaration": true,

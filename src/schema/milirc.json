@@ -2,33 +2,11 @@
   "$id": "milirc.json",
   "type": "object",
   "properties": {
-    "mili": {
-      "type": "object",
-      "properties": {
-        "version": {
-          "type": "string",
-          "nullable": true
-        }
-      },
-      "default": {
-        "version": ""
-      }
-    },
     "template": {
-      "type": "object",
-      "properties": {
-        "repository": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string",
-          "nullable": true,
-          "default": ""
-        }
-      },
-      "required": [
-        "repository"
-      ]
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
     },
     "answers": {
       "type": "object",
@@ -37,7 +15,6 @@
     }
   },
   "required": [
-    "mili",
     "template"
   ]
 }

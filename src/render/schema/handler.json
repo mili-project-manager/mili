@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "required": [
+    "compile"
+  ],
+  "properties": {
+    "engines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "compile": {
+      "instanceof": "Function"
+    }
+  }
+}
