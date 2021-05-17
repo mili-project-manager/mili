@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "required": [
+    "engines"
+  ],
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "engines": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "extends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "template"
+        ],
+        "properties": {
+          "template": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "answers": {},
+          "when": {}
+        }
+      }
+    },
+    "loaders": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "options": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

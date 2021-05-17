@@ -1,0 +1,87 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": [
+          "input",
+          "number",
+          "confirm",
+          "list",
+          "rawlist",
+          "expand",
+          "checkbox",
+          "password",
+          "editor"
+        ]
+      },
+      "name": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "default": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "array"
+          }
+        ]
+      },
+      "choices": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "short": {
+                  "type": "string"
+                },
+                "value": {
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "loop": {
+        "type": "boolean"
+      },
+      "schema": {},
+      "when": {}
+    },
+    "required": [
+      "name",
+      "type"
+    ]
+  }
+}

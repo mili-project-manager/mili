@@ -29,44 +29,32 @@ It is useful for team project management.
 ## Usage
 
 <!-- usage -->
-The basic principle of mili.
-
-<p align="center">
-  <img src="./docs/images/handlers.svg?sanitize=true" width="80%" />
-</p>
-
-1. First, you need to design your own template or use someone else's template.
-2. Make project directory and run `npx mili init template_path`.
-3. Run `npx mili upgrade`, when template is out of date.
-4. `mili` run the handler of file that set by tempalte, when `init` or `upgrade` template
-
 ### Init Project
 
-Let's use a existed template.
-
 ```shell
-mkdir project_path
-cd project_path
+mkdir my_project
+cd my_project
 
-# template in github
-npx mili init github:Val-istar-Guo/mili-template
 # template in npm
-npx mili init npm:mili-template
+npx mili init npm:@mtpl/code-style
+# template in github
+npx mili init github:mili-project-manager/mtpl-code-style
 # template in private git repository
-npx mili init https://github.com/Val-istar-Guo/mili.git
+npx mili init https://github.com/mili-project-manager/mtpl-code-style
+# ssh is also support
+npx mili init git@github.com:mili-project-manager/mtpl-code-style.git
 ```
 
 ### Upgrade
 
-The upgrade operation is very simple to use.The effect of the upgrade is determined by the handlers configured for each file in the template configuration.
+The upgrade operation is very simple to use.
+It will upgrade the template to the latest version.
 
 ```shell
 npx run upgrade
 ```
 
-The handler can extract the data of the project file, or use the template file as a [mustache](https://github.com/janl/mustache.js) template to render a new project file that will cover old one.
-
-The handlers can be flexibly and freely combined to implement a variety of initialization and upgrade modes.
+###### This command maybe overwrite your files.
 
 
 ### Check Before Commit
@@ -80,34 +68,14 @@ Run in terminal:
 npx mili check --diff --fold
 ```
 
-Or configuration in husky:
-
-```yaml
-hooks:
-  pre-commit: 'npx mili check --diff --fold'
-```
-
-An example:
+The example stdout:
 
 ![mili check](./docs/images/check.png)
 
 Run `npx mili upgrade` command will auto modify code according to the diff.
-
-> When use git repository as template source,
-> don't run `mili check` at pre-commit hook.
-> This will throw a confusing error.
 <!-- usage -->
 
 <!-- addition -->
-## See More
-
-- [Command Line Interface](./docs/en/cli.md)
-- [Node Interface](./docs/en/node-interface.md)
-- [Template Development](./docs/en/template.md)
-- [Handler](./docs/en/handler/index.md)
-- Reference
-  + [mili-template](https://github.com/Val-istar-Guo/mili-template): An simple mili template. This can be used as a reference for first time template writing.
-
 <!-- addition -->
 
 ## Sponsor
