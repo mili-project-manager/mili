@@ -9,8 +9,8 @@
 [![version](https://img.shields.io/npm/v/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![downloads](https://img.shields.io/npm/dm/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
 [![license](https://img.shields.io/npm/l/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
-[![dependencies](https://img.shields.io/david/Val-istar-Guo/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
-[![coveralls](https://img.shields.io/coveralls/github/Val-istar-Guo/mili.svg?style=flat-square)](https://coveralls.io/github/Val-istar-Guo/mili)
+[![dependencies](https://img.shields.io/david/mili-project-manager/mili.svg?style=flat-square)](https://www.npmjs.com/package/mili)
+[![coveralls](https://img.shields.io/coveralls/github/mili-project-manager/mili.svg?style=flat-square)](https://coveralls.io/github/mili-project-manager/mili)
 
 
 
