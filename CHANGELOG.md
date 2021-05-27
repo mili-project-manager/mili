@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://www.github.com/mili-project-manager/mili/compare/v3.10.2...v4.0.0) (2021-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* The template and handler of mili@3 is not compatible.
+* Node.js 12 LTS is now the minimum required version.
+
+### Features
+
+* bump Node.js version requirement to 12.13.0 ([33f2271](https://www.github.com/mili-project-manager/mili/commit/33f2271b0c8e21031bcec4b085ea8a64b07e0b7a))
+
+
+### Code Refactoring
+
+* redesign the project ([dc4b72d](https://www.github.com/mili-project-manager/mili/commit/dc4b72d13aecebae7d4cba5ae175def83f1a0002)), closes [#90](https://www.github.com/mili-project-manager/mili/issues/90)
+
 ### [3.10.2](https://github.com/Val-istar-Guo/mili/compare/v3.10.1...v3.10.2) (2021-04-26)
 
 
