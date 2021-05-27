@@ -6,12 +6,12 @@
   "module": "es/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Val-istar-Guo/mili.git"
+    "url": "git+https://github.com/mili-project-manager/mili.git"
   },
   "bugs": {
-    "url": "https://github.com/Val-istar-Guo/mili/issues"
+    "url": "https://github.com/mili-project-manager/mili/issues"
   },
-  "homepage": "https://github.com/Val-istar-Guo/mili#readme",
+  "homepage": "https://github.com/mili-project-manager/mili#readme",
   "keywords": [
     "mili",
     "scaffold",
