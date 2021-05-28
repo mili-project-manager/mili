@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.2](https://www.github.com/mili-project-manager/mili/compare/v4.2.1...v4.2.2) (2021-05-28)
+
+
+### Bug Fixes
+
+* cannot copy to a subdirectory of itself ([1f931b9](https://www.github.com/mili-project-manager/mili/commit/1f931b9055e3608fbbf9d1f780a4b2cdccec4313))
+* cannot download specify version template ([eaf6551](https://www.github.com/mili-project-manager/mili/commit/eaf65517a0402c0aa85920e55d495712185f2112))
+
 ### [4.2.1](https://www.github.com/mili-project-manager/mili/compare/v4.2.0...v4.2.1) (2021-05-28)
 
 
