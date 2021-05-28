@@ -20,7 +20,6 @@ export async function render(cwd: string, repository: Repository, answers: Answe
 
   answers = await inquire(config.questions, answers)
 
-  logger.info('compile template...')
   for (const extension of config.extends) {
     if (extension.when) {
       const validate = ajv.compile(extension.when)
@@ -33,10 +32,11 @@ export async function render(cwd: string, repository: Repository, answers: Answe
     let subAnwsers = R.clone(answers)
     if (extension.answers) subAnwsers = { ...subAnwsers, ...extension.answers }
 
-    render(cwd, subRepository, subAnwsers)
+    await render(cwd, subRepository, subAnwsers)
   }
 
 
+  logger.info(`compile template ${repository.name}...`)
   const resource = new Map<string, any>()
 
   for (const loader of config.loaders) {
