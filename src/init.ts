@@ -1,8 +1,5 @@
-import * as fs from 'fs-extra'
 import { render } from './render'
 import { check } from './util/check'
-import { copy } from './util/copy'
-import { createTmpDir } from './util/create-tmp-dir'
 import { parseTemplate } from './util/parse-template'
 
 
@@ -31,12 +28,8 @@ export async function init(options: Options): Promise<void> {
   } = options
 
   if (!force) await check(cwd)
-  const tmpDir = await createTmpDir()
-  await copy(cwd, tmpDir)
+  const tmpDir = cwd
 
   const repository = parseTemplate(template, version)
   await render(tmpDir, repository, {})
-
-  await fs.copy(tmpDir, cwd)
-  await fs.remove(tmpDir)
 }
