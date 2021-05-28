@@ -16,20 +16,27 @@
     "extends": {
       "type": "array",
       "items": {
-        "type": "object",
-        "required": [
-          "template"
-        ],
-        "properties": {
-          "template": {
+        "oneOf": [
+          {
             "type": "string"
           },
-          "version": {
-            "type": "string"
-          },
-          "answers": {},
-          "when": {}
-        }
+          {
+            "type": "object",
+            "required": [
+              "template"
+            ],
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "answers": {},
+              "when": {}
+            }
+          }
+        ]
       }
     },
     "loaders": {
