@@ -41,7 +41,7 @@ export async function upgrade(options: Options, version = 'latest'): Promise<voi
 
   if (!force) await check(cwd)
   const tmpDir = await createTmpDir()
-  await copy(cwd, tmpDir)
+  await copy(cwd, tmpDir, true)
 
   const repository = parseTemplate(template, version)
   await render(tmpDir, repository, answers)

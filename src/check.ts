@@ -48,7 +48,7 @@ export async function check(options: Options): Promise<void> {
   } = options
 
   const tmpDir = await createTmpDir()
-  await copy(cwd, tmpDir)
+  await copy(cwd, tmpDir, true)
 
   const repository = parseTemplate(template, version)
   await render(tmpDir, repository, answers)
