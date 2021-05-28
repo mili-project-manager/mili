@@ -110,6 +110,8 @@ export async function loadMiliConfig(dir: string): Promise<Omit<Config, 'questio
 
 export async function loadHooksConfig(dir: string): Promise<Hook[]> {
   const config: Record<Hook['name'], string> = await readConfig(path.join(dir, 'hooks'))
+  if (!config) return []
+
   validate(hooksSchema, config, 'hooks')
   const pair = Object.entries(config) as [Hook['name'], string][]
 
