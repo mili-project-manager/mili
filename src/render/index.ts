@@ -24,7 +24,7 @@ export async function render(cwd: string, repository: Repository, answers: Answe
   for (const extension of config.extends) {
     if (extension.when) {
       const validate = ajv.compile(extension.when)
-      const valid = validate(answers[repository.name])
+      const valid = validate(answers)
       if (!valid) continue
     }
 
