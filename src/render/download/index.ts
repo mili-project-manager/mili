@@ -13,17 +13,18 @@ import { installDeps } from './install-deps'
 export async function hasCache(repository: Repository): Promise<boolean> {
   if (semver.valid(repository.version)) {
     const existed = await fs.pathExists(repository.storage)
-    if (existed) logger.info(`use the ${repository.name} template cache`)
-    return existed
+    if (existed) {
+      logger.info(`use the ${repository.name} template cache`)
+      return existed
+    }
   }
   return false
 }
 
 export async function download(repository: Repository): Promise<Path> {
-  await fs.ensureDir(repository.storage)
-
   if (repository.type === 'git') {
     if (await hasCache(repository)) return repository.storage
+    await fs.ensureDir(repository.storage)
     logger.info(`clone ${repository.name} template from git...`)
 
     const git = simpleGit(repository.storage)
@@ -39,6 +40,7 @@ export async function download(repository: Repository): Promise<Path> {
     logger.info(`install ${repository.name} template from npm...`)
     const templatePath = path.join(repository.storage, 'node_modules', repository.name)
     if (hasCache(repository)) templatePath
+    await fs.ensureDir(repository.storage)
 
     await fs.emptyDir(repository.storage)
     await fs.writeJSON(path.join(repository.storage, 'package.json'), {
