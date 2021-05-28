@@ -50,7 +50,7 @@ export async function render(cwd: string, repository: Repository, answers: Answe
 
   resource.set('answers', answers)
   resource.set('milirc', {
-    template: repository.name,
+    template: repository.type === 'npm' ? `npm:${repository.name}` : repository.name,
     version: config.version,
   })
 
