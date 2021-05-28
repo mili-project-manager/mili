@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.2.0](https://www.github.com/mili-project-manager/mili/compare/v4.1.0...v4.2.0) (2021-05-28)
+
+
+### Features
+
+* enable progress bar for upgrade, update and check ([0e2311d](https://www.github.com/mili-project-manager/mili/commit/0e2311d77930b92f1dc30d415f350f81b12b7c55))
+
+
+### Bug Fixes
+
+* milirc.template missing 'npm:' prefix ([eb65842](https://www.github.com/mili-project-manager/mili/commit/eb658429180ff688c0abf53964aeee47283ea485))
+* missing extends.when() arguments ([2b9bd20](https://www.github.com/mili-project-manager/mili/commit/2b9bd20724f37a93f7ecd6c19f632224bec04146))
+
 ## [4.1.0](https://www.github.com/mili-project-manager/mili/compare/v4.0.1...v4.1.0) (2021-05-28)
 
 
