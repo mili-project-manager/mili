@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.4](https://www.github.com/mili-project-manager/mili/compare/v4.2.3...v4.2.4) (2021-05-28)
+
+
+### Bug Fixes
+
+* loop copy ([a624773](https://www.github.com/mili-project-manager/mili/commit/a62477321e5edf552f0e984ea5403a40fe0260ee))
+
 ### [4.2.3](https://www.github.com/mili-project-manager/mili/compare/v4.2.2...v4.2.3) (2021-05-28)
 
 
