@@ -58,7 +58,7 @@ async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): P
 
   for (const filename of files) {
     const filepath = path.join(tmpDir, filename)
-    if (await fs.pathExists(filepath)) return
+    if (await fs.pathExists(filepath)) return []
 
     if (options.showDiff) {
       errors.push(showRemoved(filename))
