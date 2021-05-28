@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://www.github.com/mili-project-manager/mili/compare/v4.0.0...v4.0.1) (2021-05-28)
+
+
+### Bug Fixes
+
+* bad temporary directory path ([3d7d9f1](https://www.github.com/mili-project-manager/mili/commit/3d7d9f159fc3dd08c5e660cc7d68f9200a31926f))
+* cannot run loader when run mili init ([1b4bda9](https://www.github.com/mili-project-manager/mili/commit/1b4bda9a304a498b8d92a4b27f30db9796a04d36))
+* cannot run without hooks config ([240e59b](https://www.github.com/mili-project-manager/mili/commit/240e59b6f197ef9e68a71f70a39e6549660240d5))
+* mili.extends cannot set as string ([58da479](https://www.github.com/mili-project-manager/mili/commit/58da4797e1befb17c15b168bdbbe55aa171e52e4))
+
+
+### Performance Improvements
+
+* increase the running speed and add the progress bar ([f6c9281](https://www.github.com/mili-project-manager/mili/commit/f6c928148265a49934b4cbf87665f05450ee1f63))
+
 ## [4.0.0](https://www.github.com/mili-project-manager/mili/compare/v3.10.2...v4.0.0) (2021-05-27)
 
 
