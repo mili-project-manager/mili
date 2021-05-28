@@ -1,10 +1,14 @@
 import * as fs from 'fs-extra'
-import { Compile } from '@/interface/handler'
+import { CompielOptions, Compile } from '@/interface/handler'
 import * as R from 'ramda'
 import * as path from 'path'
 
 
-export const compile: Compile = async function(dist, src, filepath, resource, options) {
+interface Options extends CompielOptions{
+  spaces: number | string
+}
+
+export const compile: Compile<Options> = async function(dist, src, filepath, resource, options) {
   const encoding = options.encoding
 
   const distfilepath = path.join(dist, filepath)
@@ -13,5 +17,5 @@ export const compile: Compile = async function(dist, src, filepath, resource, op
   const jsonInTemplate = await fs.readJSON(srcfilepath, { encoding })
 
   const json = R.mergeDeepRight(jsonInProject, jsonInTemplate)
-  await fs.writeJSON(srcfilepath, json)
+  await fs.writeJSON(srcfilepath, json, { spaces: options.spaces || 2 })
 }
