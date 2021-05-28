@@ -11,7 +11,7 @@ interface DiffOptions extends ShowDiffOptions {
   showDiff: boolean
 }
 
-async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): Promise<void> {
+async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
   const filepaths = await readdeepdir(tmpDir)
   const git = simpleGit(cwd)
 
@@ -39,10 +39,11 @@ async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): 
     }
   }
 
-  logger.error(errors.join('\n'))
+  if (errors.length) logger.error(errors.join('\n'))
+  return errors
 }
 
-async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): Promise<void> {
+async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
   const git = simpleGit(cwd)
 
   const files = await readdeepdir(cwd, {
@@ -66,10 +67,13 @@ async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): P
     }
   }
 
-  logger.error(errors.join('\n'))
+  if (errors.length) logger.error(errors.join('\n'))
+  return errors
 }
 
-export async function diff(cwd: string, tmpDir: string, options: DiffOptions): Promise<void> {
-  await diffModified(cwd, tmpDir, options)
-  await diffRemoved(cwd, tmpDir, options)
+export async function diff(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
+  return [
+    ...(await diffModified(cwd, tmpDir, options)),
+    ...(await diffRemoved(cwd, tmpDir, options)),
+  ]
 }

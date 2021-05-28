@@ -53,7 +53,9 @@ export async function check(options: Options): Promise<void> {
   const repository = parseTemplate(template, version)
   await render(tmpDir, repository, answers)
 
-  await diff(cwd, tmpDir, { fold, showDiff })
+  const errs = await diff(cwd, tmpDir, { fold, showDiff })
 
   await fs.remove(tmpDir)
+
+  if (errs.length) throw new Error('Check Failed')
 }

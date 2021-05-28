@@ -15,6 +15,7 @@ export async function copy(src: string, dist: string, showProgress = false): Pro
   if (showProgress) spinner.start()
 
   await fs.copy(src, dist, {
+    overwrite: true,
     filter: async srcFile => {
       const relativePath = path.relative(src, srcFile)
       if (showProgress) spinner.text = `Load Files: ${relativePath}`
