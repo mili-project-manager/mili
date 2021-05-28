@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://www.github.com/mili-project-manager/mili/compare/v4.0.1...v4.1.0) (2021-05-28)
+
+
+### Features
+
+* merge-json add spaces option ([4291ec0](https://www.github.com/mili-project-manager/mili/commit/4291ec0bd5ac5794b1e8d411b539dab90107b5a4))
+
 ### [4.0.1](https://www.github.com/mili-project-manager/mili/compare/v4.0.0...v4.0.1) (2021-05-28)
 
 
