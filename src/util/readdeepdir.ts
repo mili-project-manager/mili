@@ -19,7 +19,7 @@ export async function readdeepdir(dir: string, options: Options = {}): Promise<s
     const stat = await fs.lstat(filepath)
 
     if (stat.isDirectory()) {
-      const subfiles = await readdeepdir(filepath)
+      const subfiles = await readdeepdir(filepath, options)
       return subfiles.map(sub => path.join(filename, sub))
     }
 
