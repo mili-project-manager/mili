@@ -28,3 +28,4 @@ export type Compile = (dist: Path, src: Path, filepath: Path, resource: Map<stri
 - [`'merge-yaml'`](./merge-yaml.md)
 - [`'ignore'`](./ignore)
 - [`'delete'`]( ./delete.md )
+- [`'init'`](./init.md)
