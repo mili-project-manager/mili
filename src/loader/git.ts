@@ -30,7 +30,7 @@ interface GitResource extends GitHubResource {
 
 
 function parseRepo(url: string): GitHubResource['repository'] {
-  const githubSSHRegExp = /^(github:)([-a-zA-Z0-9@:%._+~#=]+)\/([-a-zA-Z0-9@:%._+~#=]+)\.git$/
+  const githubSSHRegExp = /^git@github.com:([-a-zA-Z0-9@:%._+~#=]+)\/([-a-zA-Z0-9@:%._+~#=]+)\.git$/
   const githubHttpRegExp = /https:\/\/github.com\/([-a-zA-Z0-9@:%._+~#=]+)\/([-a-zA-Z0-9@:%._+~#=]+)\.git$/
 
   let isGitHubRepo = false
