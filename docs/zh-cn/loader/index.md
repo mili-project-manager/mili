@@ -29,5 +29,6 @@ export type Exec<T = LoaderOptions, R = Record<string, any>> = (cwd: string, opt
 
 ## 内置`hadnler`
 
-- [`'npm'`](./npm.md)
-- [`'git'`](./git.md)
+- [`npm`](./npm.md)
+- [`git`](./git.md)
+- [`markdown-section`](./markdown-section.md)

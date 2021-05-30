@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": [
+    "key",
+    "filepath",
+    "sections"
+  ],
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "filepath": {
+      "type": "string"
+    },
+    "encoding": {
+      "type": "string"
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
