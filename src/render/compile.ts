@@ -19,7 +19,7 @@ export async function compile(cwd: string, templatePath: string, templates: Temp
 
   for (const filename of await readdeepdir(cacheDir)) {
     for (const template of templates) {
-      if (!micromatch.isMatch(filename, template.path)) continue
+      if (!micromatch.isMatch(filename, template.path, { dot: true })) continue
 
       let filepath = filename
       const encoding = template.encoding

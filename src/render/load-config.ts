@@ -133,7 +133,7 @@ export async function loadTemplateConfig(dir: string): Promise<Template[]> {
 
 
   config.push({
-    path: '.?**',
+    path: '**',
     encoding: 'utf8',
     handlers: ['overwrite'],
   })
