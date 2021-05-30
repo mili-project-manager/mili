@@ -14,9 +14,10 @@ import { compile } from './compile'
 
 const ajv = new AJV()
 
-export async function render(cwd: string, repository: Repository, answers: Answers, rootRepository: Repository = repository): Promise<void> {
+export async function render(cwd: string, repository: Repository, answers: Answers, stack: Repository[] = []): Promise<void> {
   const templatePath = await download(repository)
   const config = await loadConfig(templatePath)
+  stack.push({ ...repository, version: config.version })
 
   answers = await inquire(config.questions, answers)
 
@@ -32,7 +33,12 @@ export async function render(cwd: string, repository: Repository, answers: Answe
     let subAnwsers = R.clone(answers)
     if (extension.answers) subAnwsers = { ...subAnwsers, ...extension.answers }
 
-    await render(cwd, subRepository, subAnwsers, rootRepository)
+    await render(
+      cwd,
+      subRepository,
+      subAnwsers,
+      stack
+    )
   }
 
 
@@ -49,10 +55,7 @@ export async function render(cwd: string, repository: Repository, answers: Answe
   }
 
   resource.set('answers', answers)
-  resource.set('milirc', {
-    template: repository.type === 'npm' ? `npm:${repository.name}` : repository.name,
-    version: config.version,
-  })
+  resource.set('stack', stack)
 
   await compile(cwd, path.join(templatePath, 'templates'), config.templates, resource)
 }
