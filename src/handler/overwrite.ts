@@ -4,8 +4,9 @@ import * as path from 'path'
 
 
 export const compile: Compile = async function(dist, src, filepath) {
-  await fs.copyFile(
-    path.join(src, filepath),
-    path.join(dist, filepath),
-  )
+  const distfilepath = path.join(dist, filepath)
+  const srcfilepath = path.join(src, filepath)
+
+  await fs.ensureDir(path.dirname(distfilepath))
+  await fs.copyFile(srcfilepath, distfilepath)
 }
