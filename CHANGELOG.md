@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.4.1](https://www.github.com/mili-project-manager/mili/compare/v4.4.0...v4.4.1) (2021-05-30)
+
+
+### Bug Fixes
+
+* cannot recognize ssh repo ([8bbfc14](https://www.github.com/mili-project-manager/mili/commit/8bbfc149e7753d42d09224a5f1ae98820df53914))
+* migration not ignored ([a6ccd77](https://www.github.com/mili-project-manager/mili/commit/a6ccd77fe84b8db10d0128bce7e1896a0575f948))
+* mili update unable delete files ([8c007c1](https://www.github.com/mili-project-manager/mili/commit/8c007c15f6c47dd3db32c5e1cf3aac5851bd152b))
+* relative path not available ([58bdf92](https://www.github.com/mili-project-manager/mili/commit/58bdf92f5e2bf7ec08710b9e608da5161cb1d1d0))
+
+
+### Performance Improvements
+
+* not install deps for local repo ([8aa9c46](https://www.github.com/mili-project-manager/mili/commit/8aa9c4658c9234f7dfd57da0269c00311582db2a))
+
 ## [4.4.0](https://www.github.com/mili-project-manager/mili/compare/v4.3.0...v4.4.0) (2021-05-30)
 
 
