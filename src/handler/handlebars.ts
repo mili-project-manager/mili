@@ -9,6 +9,10 @@ Handlebars.registerHelper('isEmpty', function(value) {
   return R.isEmpty(value)
 })
 
+Handlebars.registerHelper('equals', function(lvalue, rvalue) {
+  return R.equals(lvalue, rvalue)
+})
+
 export const compile: Compile = async function(dist, src, filepath, resource, options) {
   const encoding = options.encoding
   const srcfilepath = path.join(src, filepath)
