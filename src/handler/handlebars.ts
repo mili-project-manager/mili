@@ -13,6 +13,11 @@ Handlebars.registerHelper('equals', function(lvalue, rvalue) {
   return R.equals(lvalue, rvalue)
 })
 
+Handlebars.registerHelper('head', function(arr) {
+  return R.head(arr)
+})
+
+
 export const compile: Compile = async function(dist, src, filepath, resource, options) {
   const encoding = options.encoding
   const srcfilepath = path.join(src, filepath)
