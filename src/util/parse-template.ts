@@ -47,7 +47,7 @@ export function parseTemplate(template: string, version = 'latest'): Repository 
   } else if (fs.pathExistsSync(template)) {
     return {
       type: 'fs',
-      name: path.resolve(template),
+      name: template,
       version: 'latest',
       storage: calcStorage(template, 'latest'),
     }
