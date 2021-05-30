@@ -10,7 +10,7 @@ export function migrate(cwd: string, repository: Repository, fromVersion: string
   if (!semver.valid(fromVersion)) throw new Error(`Invalid version ${fromVersion}`)
 
 
-  if (!fs.pathExists(path.join(repository.storage, 'migration'))) return
+  if (!fs.pathExistsSync(path.join(repository.storage, 'migration'))) return
 
   const files = fs.readdirSync(path.join(repository.storage, 'migration'))
   for (const file of files) {
