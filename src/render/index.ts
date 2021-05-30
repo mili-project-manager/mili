@@ -14,10 +14,22 @@ import { compile } from './compile'
 
 const ajv = new AJV()
 
-export async function render(cwd: string, repository: Repository, answers: Answers, stack: Repository[] = []): Promise<void> {
+
+export async function render(cwd: string, repository: Repository, answers: Answers, initResource: Record<string, any>): Promise<void> {
   const templatePath = await download(repository)
   const config = await loadConfig(templatePath)
-  stack.push({ ...repository, version: config.version })
+
+  if (!initResource.mili) {
+    initResource.mili = {
+      stack: [],
+    }
+  }
+
+  if (!initResource.mili.stack) {
+    initResource.mili.stack = []
+  }
+
+  initResource.mili.stack.push({ ...repository, version: config.version })
 
   answers = await inquire(config.questions, answers)
 
@@ -37,13 +49,13 @@ export async function render(cwd: string, repository: Repository, answers: Answe
       cwd,
       subRepository,
       subAnwsers,
-      stack
+      R.clone(initResource),
     )
   }
 
 
   logger.info(`compile template ${repository.name}...`)
-  const resource = new Map<string, any>()
+  const resource = new Map<string, any>(Object.entries(initResource))
 
   for (const loader of config.loaders) {
     const result = await execLoader(cwd, loader)
@@ -55,7 +67,6 @@ export async function render(cwd: string, repository: Repository, answers: Answe
   }
 
   resource.set('answers', answers)
-  resource.set('stack', stack)
 
   await compile(cwd, path.join(templatePath, 'templates'), config.templates, resource)
 }

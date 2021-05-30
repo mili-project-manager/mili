@@ -44,7 +44,8 @@ export async function upgrade(options: Options, version = 'latest'): Promise<voi
   await copy(cwd, tmpDir, true)
 
   const repository = parseTemplate(template, version)
-  await render(tmpDir, repository, answers)
+  const resource = { mili: { operation: 'upgrade' } }
+  await render(tmpDir, repository, answers, resource)
 
   await migrate(tmpDir, repository, fromVersion)
   await syncDir(tmpDir, cwd)

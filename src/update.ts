@@ -45,7 +45,8 @@ export async function update(options: Options): Promise<void> {
   await copy(cwd, tmpDir, true)
 
   const repository = parseTemplate(template, version)
-  await render(tmpDir, repository, answers)
+  const resource = { mili: { operation: 'update' } }
+  await render(tmpDir, repository, answers, resource)
 
   await migrate(tmpDir, repository, version)
   await syncDir(tmpDir, cwd)

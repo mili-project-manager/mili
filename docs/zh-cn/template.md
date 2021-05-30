@@ -119,9 +119,11 @@ Example:
 `mili`默认会在`resource`上挂载一部分数据：
 
 - `resource.answers`: `questions.json`中定义问题的回答结果
-- `resource.stack`: milirc模板调用栈
-  - `resource.stack[0].template`: 根模板名称
-  - `resource.stack[0].version`: 根模板的版本号
+- `resource.mili`: mili的运行时参数
+  - `resource.mili.operation`: mili的运行模式，以下字符串之一：'init', 'update', 'upgrade', 'check'
+  - `resource.mili.stack`: milirc模板调用栈
+    - `resource.mili.stack[0].template`: 根模板名称
+    - `resource.mili.stack[0].version`: 根模板的版本号
 
 在`mili.json`中配置`"loaders": ["npm", "git"]`将会从项目中加载的数据放入`resource`。
 

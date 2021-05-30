@@ -31,5 +31,6 @@ export async function init(options: Options): Promise<void> {
   const tmpDir = cwd
 
   const repository = parseTemplate(template, version)
-  await render(tmpDir, repository, {})
+  const resource = { mili: { operation: 'init' } }
+  await render(tmpDir, repository, {}, resource)
 }

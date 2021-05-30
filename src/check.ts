@@ -51,7 +51,8 @@ export async function check(options: Options): Promise<void> {
   await copy(cwd, tmpDir, true)
 
   const repository = parseTemplate(template, version)
-  await render(tmpDir, repository, answers)
+  const resource = { mili: { operation: 'check' } }
+  await render(tmpDir, repository, answers, resource)
 
   const errs = await diff(cwd, tmpDir, { fold, showDiff })
 
