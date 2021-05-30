@@ -82,7 +82,7 @@ export async function loadMiliConfig(dir: string): Promise<Omit<Config, 'questio
   })
 
   config.loaders = config.loaders.map(loader => {
-    if (buildInLoaders.includes(`${loader.name}.js`)) {
+    if (buildInLoaders.includes(`${loader.name}.js`) || buildInLoaders.includes(loader.name)) {
       return {
         name: path.join(__dirname, '../loader', loader.name),
         options: loader.options,
@@ -121,6 +121,8 @@ export async function loadHooksConfig(dir: string): Promise<Hook[]> {
 
 export async function loadQuestionsConfig(dir: string): Promise<Question[]> {
   const config = await readConfig(path.join(dir, 'questions'))
+  if (!config) return []
+
   validate(questionsSchema, config, 'questions')
   return config
 }
@@ -160,7 +162,7 @@ export async function loadTemplateConfig(dir: string): Promise<Template[]> {
 
 
     item.handlers = item.handlers.map(handler => {
-      if (buildInHanlders.includes(`${handler.name}.js`)) {
+      if (buildInHanlders.includes(`${handler.name}.js`) || buildInHanlders.includes(handler.name)) {
         return {
           name: path.join(__dirname, '../handler', handler.name),
           options: handler.options,
