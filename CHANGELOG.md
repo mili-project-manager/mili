@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.4.0](https://www.github.com/mili-project-manager/mili/compare/v4.3.0...v4.4.0) (2021-05-30)
+
+
+### Features
+
+* add init handler ([ed0e41d](https://www.github.com/mili-project-manager/mili/commit/ed0e41d4b2830ddc04e3e81a515a52a62d07c6e3))
+
+
+### Bug Fixes
+
+* cached files are not deleted ([cb998fb](https://www.github.com/mili-project-manager/mili/commit/cb998fbe55b4cf128d9c013616b7f8e0a6902baf))
+* glob cannot match the dotfiles ([f704102](https://www.github.com/mili-project-manager/mili/commit/f704102690763144f415177fe474070a91b1785d))
+
 ## [4.3.0](https://www.github.com/mili-project-manager/mili/compare/v4.2.5...v4.3.0) (2021-05-30)
 
 
