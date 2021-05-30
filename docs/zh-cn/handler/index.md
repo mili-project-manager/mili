@@ -23,9 +23,10 @@ export type Compile = (dist: Path, src: Path, filepath: Path, resource: Map<stri
 
 ## 内置`hadnler`
 
-- [`'handlebars'`](./handlebars.md)
-- [`'merge-json'`](./merge-json.md)
-- [`'merge-yaml'`](./merge-yaml.md)
-- [`'ignore'`](./ignore)
-- [`'delete'`]( ./delete.md )
-- [`'init'`](./init.md)
+- [`handlebars`](./handlebars.md)
+- [`merge-json`](./merge-json.md)
+- [`merge-yaml`](./merge-yaml.md)
+- [`ignore`](./ignore)
+- [`delete`]( ./delete.md )
+- [`init`](./init.md)
+- [`exist`](./exist.md)
