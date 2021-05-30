@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://www.github.com/mili-project-manager/mili/compare/v4.2.5...v4.3.0) (2021-05-30)
+
+
+### Features
+
+* add `eval` option to delete handler and ignore handler ([c4c062c](https://www.github.com/mili-project-manager/mili/commit/c4c062cd576db1a7bb9fb0cc76978c67d1a08bc9))
+* add exist handler ([8223c25](https://www.github.com/mili-project-manager/mili/commit/8223c256d6c625c8d9f11efadf78205f5d14b54d))
+* add markdown-section loader ([b07df94](https://www.github.com/mili-project-manager/mili/commit/b07df9412d4ff5b9d5c782b9b99be26286bb11de))
+* add repository stack to resource ([d85e58c](https://www.github.com/mili-project-manager/mili/commit/d85e58c3260dc29f87e3a6cc076c145dc2d9f509))
+* **handlebars:** add equals helper ([44efaa8](https://www.github.com/mili-project-manager/mili/commit/44efaa85682eea39e0681463c4949b04c0b12903))
+* **handlebars:** add head helper ([c7910f1](https://www.github.com/mili-project-manager/mili/commit/c7910f18250ff5bc8430d413a1d1e571df6763e7))
+* template.path can be an array ([89e4f1e](https://www.github.com/mili-project-manager/mili/commit/89e4f1e34a40a452a7609fc5307ed34cd6852da2))
+
+
+### Bug Fixes
+
+* unable auto create folder ([cc53099](https://www.github.com/mili-project-manager/mili/commit/cc53099429b6898aa91669f2cad27991b84c20a4))
+
 ### [4.2.5](https://www.github.com/mili-project-manager/mili/compare/v4.2.4...v4.2.5) (2021-05-28)
 
 
