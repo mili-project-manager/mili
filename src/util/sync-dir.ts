@@ -22,7 +22,7 @@ export async function syncDir(src: string, dist: string): Promise<void> {
   const promises = files.map(async filename => {
     const filepath = path.join(src, filename)
     if (await fs.pathExists(filepath)) return
-    await fs.remove(filepath)
+    await fs.remove(path.join(dist, filename))
   })
 
   await Promise.all(promises)
