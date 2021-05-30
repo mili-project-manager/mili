@@ -8,6 +8,7 @@ import * as configSchema from './schema/config.json'
 import * as hooksSchema from './schema/hooks.json'
 import * as questionsSchema from './schema/questions.json'
 import * as templatesSchema from './schema/templates.json'
+import * as R from 'ramda'
 import { Config } from './interface/config'
 import { Hook } from './interface/hook'
 import { Question } from './interface/question'
@@ -135,7 +136,7 @@ export async function loadTemplateConfig(dir: string): Promise<Template[]> {
     handlers: ['overwrite'],
   })
 
-  return config.map(item => {
+  return R.unnest(config.map(item => {
     if (!item.encoding) item.encoding = 'utf8'
     if (!item.handlers || !item.handlers.length) item.handlers = ['overwrite']
 
@@ -172,8 +173,16 @@ export async function loadTemplateConfig(dir: string): Promise<Template[]> {
       }
     })
 
+    if (Array.isArray(item.path)) {
+      return item.path.map(subpath => {
+        const handler = R.clone(item)
+        handler.path = subpath
+        return handler
+      })
+    }
+
     return item
-  })
+  }))
 }
 
 export async function loadConfig(dir: string): Promise<Config> {
