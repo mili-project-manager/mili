@@ -9,6 +9,7 @@
  options           | required | description
 :------------------|:---------|:--------------------
  schema            | 否       | 使用[ajv](https://ajv.js.org/guide/getting-started.html)校验`resource`是否符合`json schema`，若符合则不渲染。
+ eval              | 否       | 执行一段返回Boolean的NodeJS代码，可从上下文中获取`resource`
 
 ## 示例
 
@@ -20,7 +21,7 @@
     "path": "index.js",
     "handlers": [
       {
-        "name": "delete",
+        "name": "ignore",
         "options": {
           "schema": {
             "type": "object",
@@ -36,6 +37,24 @@
               }
             }
           }
+        }
+      }
+    ]
+  }
+]
+```
+
+### eval
+
+```json
+[
+  {
+    "path": "index.js",
+    "handlers": [
+      {
+        "name": "ignore",
+        "options": {
+          "eval": "resource.answers.confirm_question === true"
         }
       }
     ]

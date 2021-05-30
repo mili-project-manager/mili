@@ -9,10 +9,14 @@
  options           | required | description
 :------------------|:---------|:------------------------------------------------
  schema            | 否       | 使用[ajv](https://ajv.js.org/guide/getting-started.html)校验`resource`是否符合`json schema`，若符合则删除。
+ eval              | 否       | 执行一段返回Boolean的NodeJS代码，可从上下文中获取`resource`
 
 ## 示例
 
 如果`resource.answers.confirm_question`的值为`true`，则删除使用者项目目录的index.js文件
+
+
+### schema
 
 ```json
 [
@@ -36,6 +40,24 @@
               }
             }
           }
+        }
+      }
+    ]
+  }
+]
+```
+
+### eval
+
+```json
+[
+  {
+    "path": "index.js",
+    "handlers": [
+      {
+        "name": "delete",
+        "options": {
+          "eval": "resource.answers.confirm_question === true"
         }
       }
     ]
