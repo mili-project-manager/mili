@@ -57,7 +57,6 @@ export async function download(repository: Repository): Promise<Path> {
     logger.info(`copy ${repository.name} template from file system...`)
     await fs.emptyDir(repository.storage)
     await copy(repository.name, repository.storage)
-    await installDeps(repository.storage)
     return repository.storage
   }
 
