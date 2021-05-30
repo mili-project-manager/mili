@@ -14,7 +14,7 @@ import { compile } from './compile'
 
 const ajv = new AJV()
 
-export async function render(cwd: string, repository: Repository, answers: Answers): Promise<void> {
+export async function render(cwd: string, repository: Repository, answers: Answers, rootRepository: Repository = repository): Promise<void> {
   const templatePath = await download(repository)
   const config = await loadConfig(templatePath)
 
@@ -32,7 +32,7 @@ export async function render(cwd: string, repository: Repository, answers: Answe
     let subAnwsers = R.clone(answers)
     if (extension.answers) subAnwsers = { ...subAnwsers, ...extension.answers }
 
-    await render(cwd, subRepository, subAnwsers)
+    await render(cwd, subRepository, subAnwsers, rootRepository)
   }
 
 
