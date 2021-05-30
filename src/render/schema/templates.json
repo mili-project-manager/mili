@@ -7,8 +7,19 @@
     ],
     "properties": {
       "path": {
-        "type": "string",
-        "format": "uri-reference"
+        "oneOf": [
+          {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri-reference"
+            }
+          }
+        ]
       },
       "encoding": {
         "type": "string",
