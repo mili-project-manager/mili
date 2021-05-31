@@ -42,15 +42,17 @@ async function main(): Promise<void> {
     .description('initialize the project')
     .option('--force')
     .option('-v --version <version>', 'Set the template version')
+    .option('--registry <registry>', 'Set the npm registry')
     .option('--cwd <cwd>', 'Set the current work directory', absolutize)
     .action(async(repository, option) => {
-      const { force = false, cwd, version } = option
+      const { force = false, cwd, version, registry } = option
 
       if (cwd) fs.ensureDir(cwd)
 
       await init({
         cwd,
         template: repository,
+        registry,
         force,
         version,
       })
@@ -69,6 +71,7 @@ async function main(): Promise<void> {
       await upgrade({
         template: config.template,
         version: config.version,
+        registry: config.registry,
         cwd: options.cwd,
         force: options.force,
         answers: config.answers,
@@ -91,6 +94,7 @@ async function main(): Promise<void> {
       await update({
         template: config.template,
         version: config.version,
+        registry: config.registry,
         cwd,
         force,
         answers: config.answers,
@@ -122,6 +126,7 @@ async function main(): Promise<void> {
       await check({
         template: config.template,
         version: config.version,
+        registry: config.registry,
         answers: config.answers,
         cwd,
         showDiff: diff,

@@ -49,7 +49,8 @@ export async function download(repository: Repository): Promise<Path> {
       license: 'MIT',
     })
 
-    const command = `npm install --production ${repository.name}@${repository.version}`
+    let command = `npm install --production ${repository.name}@${repository.version}`
+    if (repository.registry) command += ` --registry ${repository.registry}`
     await exec(command, { cwd: repository.storage })
 
     return templatePath
@@ -60,5 +61,5 @@ export async function download(repository: Repository): Promise<Path> {
     return repository.storage
   }
 
-  throw new Error(`Unable download the repository ${repository.name}`)
+  throw new Error('Unable download the repository')
 }

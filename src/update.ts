@@ -16,6 +16,10 @@ interface Options {
    */
   version?: string
   /**
+   * The npm Registry
+   */
+  registry?: string
+  /**
    * @default process.cwd()
    */
   cwd?: string
@@ -35,6 +39,7 @@ export async function update(options: Options): Promise<void> {
   const {
     template,
     version = 'latest',
+    registry,
     cwd = process.cwd(),
     force = false,
     answers = {},
@@ -44,7 +49,7 @@ export async function update(options: Options): Promise<void> {
   const tmpDir = await createTmpDir()
   await copy(cwd, tmpDir, true)
 
-  const repository = parseTemplate(template, version)
+  const repository = parseTemplate(template, version, registry)
   const resource = { mili: { operation: 'update' } }
   await render(tmpDir, repository, answers, resource)
 

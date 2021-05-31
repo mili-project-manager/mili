@@ -1,4 +1,4 @@
-import { Repository } from '@/interface/repository'
+import { NpmRepository, Repository } from '@/interface/repository'
 import * as isSSH from 'is-ssh'
 import * as fs from 'fs-extra'
 import * as path from 'path'
@@ -11,17 +11,21 @@ function calcStorage(name, version): string {
 }
 
 
-export function parseTemplate(template: string, version = 'latest'): Repository {
+export function parseTemplate(template: string, version = 'latest', registry?: string): Repository {
   if (template.startsWith('npm:')) {
     const name = template.substr('npm:'.length)
     if (!validateNpmPackageName(name)) throw new Error(`Invalid npm package name ${name}`)
 
-    return {
+    const result: NpmRepository = {
       type: 'npm',
       name,
       version,
       storage: calcStorage(template, version),
     }
+
+    if (registry) result.registry = registry
+
+    return result
   } else if (isUrl(template)) {
     return {
       type: 'git',

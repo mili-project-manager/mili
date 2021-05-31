@@ -10,6 +10,10 @@ interface Options {
    */
   version?: string
   /**
+   * The npm Registry
+   */
+  registry?: string
+  /**
    * @default process.cwd()
    */
   cwd?: string
@@ -23,6 +27,7 @@ export async function init(options: Options): Promise<void> {
   const {
     template,
     version = 'latest',
+    registry,
     cwd = process.cwd(),
     force = false,
   } = options
@@ -30,7 +35,7 @@ export async function init(options: Options): Promise<void> {
   if (!force) await check(cwd)
   const tmpDir = cwd
 
-  const repository = parseTemplate(template, version)
+  const repository = parseTemplate(template, version, registry)
   const resource = { mili: { operation: 'init' } }
   await render(tmpDir, repository, {}, resource)
 }

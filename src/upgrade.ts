@@ -16,6 +16,10 @@ interface Options {
    */
   version?: string
   /**
+   * The npm Registry
+   */
+  registry?: string
+  /**
    * @default process.cwd()
    */
   cwd?: string
@@ -34,6 +38,7 @@ export async function upgrade(options: Options, version = 'latest'): Promise<voi
   const {
     template,
     version: fromVersion = 'latest',
+    registry,
     cwd = process.cwd(),
     force = false,
     answers = {},
@@ -43,7 +48,7 @@ export async function upgrade(options: Options, version = 'latest'): Promise<voi
   const tmpDir = await createTmpDir()
   await copy(cwd, tmpDir, true)
 
-  const repository = parseTemplate(template, version)
+  const repository = parseTemplate(template, version, registry)
   const resource = { mili: { operation: 'upgrade' } }
   await render(tmpDir, repository, answers, resource)
 
