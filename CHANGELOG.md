@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.5.0](https://www.github.com/mili-project-manager/mili/compare/v4.4.2...v4.5.0) (2021-05-31)
+
+
+### Features
+
+* enable set up npm registry ([3ef7a04](https://www.github.com/mili-project-manager/mili/commit/3ef7a040556100abf72e9d9d8834db5ececc36f6))
+
 ### [4.4.2](https://www.github.com/mili-project-manager/mili/compare/v4.4.1...v4.4.2) (2021-05-30)
 
 
