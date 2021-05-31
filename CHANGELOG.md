@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.6.0](https://www.github.com/mili-project-manager/mili/compare/v4.5.2...v4.6.0) (2021-05-31)
+
+
+### Features
+
+* add rename handler ([c3f45bc](https://www.github.com/mili-project-manager/mili/commit/c3f45bcab2c1adbecf4bfc5e6d5c0b48e9994bd6))
+
 ### [4.5.2](https://www.github.com/mili-project-manager/mili/compare/v4.5.1...v4.5.2) (2021-05-31)
 
 
