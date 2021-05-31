@@ -16,7 +16,7 @@ export const compile: Compile = async function(dist, src, filepath, resource, op
   let json = yamlInTemplate
 
   if (typeof yamlInTemplate === 'object' && yamlInTemplate && typeof yamlInProject === 'object' && yamlInProject) {
-    json = R.mergeDeepLeft(yamlInTemplate, yamlInProject)
+    json = R.mergeDeepRight(yamlInProject, yamlInTemplate)
   }
 
 
