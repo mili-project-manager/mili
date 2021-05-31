@@ -6,7 +6,7 @@ import { Path } from '@/interface/path'
 import { Repository } from '@/interface/repository'
 import { copy } from '@/util/copy'
 import * as logger from '@/util/logger'
-import { exec } from './exec'
+import { exec } from '@/util/exec'
 import { installDeps } from './install-deps'
 
 

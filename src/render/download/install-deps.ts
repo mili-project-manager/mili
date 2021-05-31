@@ -1,5 +1,5 @@
 import { Path } from '@/interface/path'
-import { exec } from './exec'
+import { exec } from '@/util/exec'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 

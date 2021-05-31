@@ -2,6 +2,7 @@ import * as fs from 'fs-extra'
 import simpleGit from 'simple-git'
 import * as ora from 'ora'
 import * as path from 'path'
+import { exec } from './exec'
 
 
 export async function copy(src: string, dist: string, showProgress = false): Promise<void> {
@@ -14,17 +15,23 @@ export async function copy(src: string, dist: string, showProgress = false): Pro
 
   if (showProgress) spinner.start()
 
-  await fs.copy(src, dist, {
-    overwrite: true,
-    filter: async srcFile => {
-      const relativePath = path.relative(src, srcFile)
-      if (showProgress) spinner.text = `Load Files: ${relativePath}`
+  const files = await fs.readdir(src)
+  const filepaths: string[] = []
+  for (const filepath of files) {
+    const srcfilepath = path.join(src, filepath)
+    const result = await git.checkIgnore(srcfilepath)
 
-      const result = await git.checkIgnore(srcFile)
+    if (result.length) continue
 
-      return !result.length
-    },
-  })
+    const stat = await fs.lstat(srcfilepath)
+
+    if (stat.isDirectory()) filepaths.push(`${filepath}/.`)
+    else filepaths.push(filepath)
+  }
+
+
+  const tarOutput = path.relative(src, dist)
+  await exec(`tar -cf ${tarOutput}.tar ${filepaths.join(' ')} && tar -xf ${dist}.tar -C ${dist}`, { cwd: src })
 
   if (showProgress) spinner.succeed('Load All Files')
 }

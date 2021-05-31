@@ -12,10 +12,18 @@ interface DiffOptions extends ShowDiffOptions {
 }
 
 async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
-  const filepaths = await readdeepdir(tmpDir)
+  const tmpDirGit = simpleGit(tmpDir)
+  const filepaths = await readdeepdir(tmpDir, {
+    filter: async filepath => {
+      const relativePath = path.relative(tmpDir, filepath)
+      if (relativePath === '.git') return false
+      const result = await tmpDirGit.checkIgnore(filepath)
+
+      return !result.length
+    },
+  })
+
   const git = simpleGit(cwd)
-
-
   async function isIgnore(filepath: string): Promise<boolean> {
     const result = await git.checkIgnore(filepath)
     return Boolean(result.length)
@@ -48,6 +56,11 @@ async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): P
 
   const files = await readdeepdir(cwd, {
     filter: async filepath => {
+      const relativePath = path.relative(cwd, filepath)
+
+      if (relativePath === '.git') {
+        return false
+      }
       const result = await git.checkIgnore(filepath)
 
       return !result.length
