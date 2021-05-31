@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.1](https://www.github.com/mili-project-manager/mili/compare/v4.5.0...v4.5.1) (2021-05-31)
+
+
+### Performance Improvements
+
+* increase copy speed ([fa8054e](https://www.github.com/mili-project-manager/mili/commit/fa8054ef6ca2e49a525a73f7e6692bb292740a6c))
+
 ## [4.5.0](https://www.github.com/mili-project-manager/mili/compare/v4.4.2...v4.5.0) (2021-05-31)
 
 
