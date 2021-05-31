@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.5.2](https://www.github.com/mili-project-manager/mili/compare/v4.5.1...v4.5.2) (2021-05-31)
+
+
+### Bug Fixes
+
+* yaml handler invalid inconsistency prompt ([d7df2c0](https://www.github.com/mili-project-manager/mili/commit/d7df2c0ddde54ad21c7fb48a4391475072fc0665))
+
 ### [4.5.1](https://www.github.com/mili-project-manager/mili/compare/v4.5.0...v4.5.1) (2021-05-31)
 
 
