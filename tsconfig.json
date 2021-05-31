@@ -11,17 +11,32 @@
     "baseUrl": "./",
     "noEmitOnError": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@root/*": ["./*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@root/*": [
+        "./*"
+      ]
     },
     "plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+      {
+        "transform": "typescript-transform-paths"
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true
+      }
     ]
   },
-  "exclude": ["node_modules"],
-  "files": ["index.ts"],
-  "include": ["src/**/*.ts"],
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+    "index.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ],
   "ts-node": {
     "compiler": "ttypescript"
   }

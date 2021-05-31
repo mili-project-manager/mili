@@ -1,7 +1,5 @@
 extends:
   - eslint:recommended
-  - plugin:@typescript-eslint/eslint-recommended
-  - plugin:@typescript-eslint/recommended
 plugins:
   - '@typescript-eslint'
 parserOptions:
@@ -14,9 +12,11 @@ env:
   es6: true
   node: true
 rules:
-  func-call-spacing: off
-  no-unused-vars: off
-  require-atomic-updates: off
+  func-call-spacing:
+    - error
+    - never
+  no-unused-vars: 'off'
+  require-atomic-updates: 'off'
   eqeqeq: error
   no-floating-decimal: error
   no-var: error
@@ -38,14 +38,14 @@ rules:
   no-useless-rename: error
   new-cap: error
   no-lonely-if: error
-  no-console: off
-  multiline-comment-style: off
+  no-console: 'off'
+  multiline-comment-style: error
   object-shorthand: error
   prefer-const: error
   prefer-spread: error
   prefer-template: error
   rest-spread-spacing: error
-  sort-imports: off
+  sort-imports: 'off'
   template-curly-spacing: error
   yield-star-spacing: error
   yoda:
@@ -55,7 +55,9 @@ rules:
     - error
     - multi-line
     - consistent
-  semi: off
+  semi:
+    - error
+    - never
   quotes:
     - error
     - single
@@ -90,7 +92,9 @@ rules:
   implicit-arrow-linebreak:
     - error
     - beside
-  indent: off
+  indent:
+    - error
+    - 2
   key-spacing:
     - error
     - afterColon: true
@@ -166,10 +170,56 @@ rules:
   '@typescript-eslint/func-call-spacing':
     - error
     - never
-  '@typescript-eslint/ban-ts-comment': off
+  '@typescript-eslint/ban-ts-comment': 'off'
   '@typescript-eslint/explicit-member-accessibility':
     - error
     - overrides:
-        accessors: off
-        constructors: off
+        accessors: 'off'
+        constructors: 'off'
         properties: no-public
+overrides:
+  - files:
+      - '**/*.ts'
+      - '**/*.tsx'
+    extends:
+      - eslint:recommended
+      - plugin:@typescript-eslint/recommended
+      - plugin:@typescript-eslint/recommended-requiring-type-checking
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      project:
+        - ./tsconfig.json
+        - ./tests/tsconfig.json
+    plugins:
+      - '@typescript-eslint'
+    rules:
+      '@typescript-eslint/no-floating-promises': error
+      semi: 'off'
+      '@typescript-eslint/semi':
+        - error
+        - never
+      indent: 'off'
+      '@typescript-eslint/indent':
+        - error
+        - 2
+      '@typescript-eslint/explicit-member-accessibility':
+        - error
+        - overrides:
+            accessors: 'off'
+            constructors: 'off'
+            properties: no-public
+      '@typescript-eslint/explicit-function-return-type':
+        - error
+        - allowHigherOrderFunctions: true
+          allowExpressions: true
+          allowTypedFunctionExpressions: true
+      '@typescript-eslint/member-delimiter-style':
+        - error
+        - multiline:
+            delimiter: none
+      no-unused-vars: 'off'
+      '@typescript-eslint/no-unused-vars': error
+      func-call-spacing: 'off'
+      '@typescript-eslint/func-call-spacing':
+        - error
+        - never

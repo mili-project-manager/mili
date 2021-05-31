@@ -1,4 +1,3 @@
 import test from 'ava'
 
-
-test.todo('write test here')
+test.todo('write your test here...')

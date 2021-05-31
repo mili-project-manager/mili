@@ -1,11 +1,6 @@
-mili:
-  version: 3.10.2
-template:
-  repository: 'npm:@mtpl/component'
-  version: 3.0.0
+template: npm:@mtpl/component
+version: 4.0.5
 answers:
-  ci: true
-  standardVersion: true
-  lint: true
+  travis: true
   lock: false
   module: commonjs

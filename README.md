@@ -78,11 +78,6 @@ Run `npx mili upgrade` command will auto modify code according to the diff.
 <!-- addition -->
 <!-- addition -->
 
-## Sponsor
-
-Support code development on patron.
-
-[![patron](https://c5.patreon.com/external/logo/become_a_patron_button@2x.png)](https://www.patreon.com/bePatron?u=22478507)
 
 ## Contributing & Development
 
