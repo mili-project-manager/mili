@@ -39,7 +39,9 @@ rules:
   new-cap: error
   no-lonely-if: error
   no-console: 'off'
-  multiline-comment-style: error
+  multiline-comment-style:
+    - error
+    - separate-lines
   object-shorthand: error
   prefer-const: error
   prefer-spread: error
@@ -182,7 +184,6 @@ overrides:
       - '**/*.ts'
       - '**/*.tsx'
     extends:
-      - eslint:recommended
       - plugin:@typescript-eslint/recommended
       - plugin:@typescript-eslint/recommended-requiring-type-checking
     parser: '@typescript-eslint/parser'
@@ -193,6 +194,12 @@ overrides:
     plugins:
       - '@typescript-eslint'
     rules:
+      '@typescript-eslint/no-unsafe-call': 'off'
+      '@typescript-eslint/no-unsafe-member-access': 'off'
+      '@typescript-eslint/no-unsafe-assignment': 'off'
+      new-cap:
+        - error
+        - capIsNew: false
       '@typescript-eslint/no-floating-promises': error
       semi: 'off'
       '@typescript-eslint/semi':

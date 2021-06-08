@@ -2,7 +2,7 @@
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](https://github.com/Val-istar-Guo/mili/blob/master/.github/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note we have a [code of conduct](https://github.com/mili-project-manager/mili/blob/master/.github/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 
 # Issue considerations

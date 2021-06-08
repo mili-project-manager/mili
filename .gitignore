@@ -84,6 +84,7 @@ out
 .nuxt
 dist
 lib
+es
 
 # Gatsby files
 .cache/

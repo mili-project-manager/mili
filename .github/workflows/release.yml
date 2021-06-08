@@ -3,7 +3,7 @@ on:
     branches:
       - master
       - main
-name: release
+name: Release
 jobs:
   release:
     runs-on: ubuntu-latest
