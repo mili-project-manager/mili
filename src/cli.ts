@@ -27,7 +27,7 @@ async function getConfig(cwd: string = process.cwd()): Promise<Milirc> {
   const config = result.config
   const valid = validate(config)
   if (!valid) throw new Error(ajv.errorsText(validate.errors, { dataVar: 'milirc' }))
-  return config
+  return config as Milirc
 }
 
 async function main(): Promise<void> {
@@ -40,14 +40,14 @@ async function main(): Promise<void> {
     .command('init <repository>')
     .usage('[options] <repository>')
     .description('initialize the project')
-    .option('--force')
+    .option('-f --force')
     .option('-v --version <version>', 'Set the template version')
     .option('--registry <registry>', 'Set the npm registry')
     .option('--cwd <cwd>', 'Set the current work directory', absolutize)
     .action(async(repository, option) => {
       const { force = false, cwd, version, registry } = option
 
-      if (cwd) fs.ensureDir(cwd)
+      if (cwd) await fs.ensureDir(cwd)
 
       await init({
         cwd,
@@ -62,7 +62,7 @@ async function main(): Promise<void> {
   program
     .command('upgrade')
     .description('upgrade the template')
-    .option('--force')
+    .option('-f --force')
     .option('--cwd [cwd]', 'Set the current work directory', absolutize)
     .option('-v --version <version>', 'Set the template version')
     .action(async options => {
@@ -81,7 +81,7 @@ async function main(): Promise<void> {
   program
     .command('update')
     .description('Update the project with the current version of the template')
-    .option('--force')
+    .option('-f --force')
     .option('--cwd [cwd]', 'Set the current work directory', absolutize)
     .action(async option => {
       const { force = false } = option
@@ -118,7 +118,7 @@ async function main(): Promise<void> {
     .action(async(files, options) => {
       const { cwd, diff, fold } = options
       if (cwd && !fs.pathExistsSync(cwd)) {
-        throw new Error(`No such directory: ${cwd}`)
+        throw new Error(`No such directory: ${cwd as string}`)
       }
 
       const config = await getConfig(options.cwd)
@@ -135,7 +135,7 @@ async function main(): Promise<void> {
     })
 
   program.on('command:*', function(operands) {
-    logger.error(`error: unknown command '${operands[0]}'`)
+    logger.error(`error: unknown command '${operands[0] as string}'`)
     process.exitCode = 1
   })
 
@@ -149,4 +149,4 @@ async function main(): Promise<void> {
   }
 }
 
-main()
+void main()
