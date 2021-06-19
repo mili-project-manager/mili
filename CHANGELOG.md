@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.7.0](https://www.github.com/mili-project-manager/mili/compare/v4.6.0...v4.7.0) (2021-06-19)
+
+
+### Features
+
+* cli add -f option ([77972f4](https://www.github.com/mili-project-manager/mili/commit/77972f4750bc4f238665d087a2a1e69e3be58192))
+
 ## [4.6.0](https://www.github.com/mili-project-manager/mili/compare/v4.5.2...v4.6.0) (2021-05-31)
 
 
