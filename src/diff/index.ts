@@ -5,6 +5,7 @@ import * as path from 'path'
 import * as chalk from 'chalk'
 import simpleGit from 'simple-git'
 import * as logger from '@/util/logger'
+import { exec } from '@/util/exec'
 
 
 interface DiffOptions extends ShowDiffOptions {
@@ -35,15 +36,22 @@ async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): 
     const srcfilepath = path.join(cwd, filepath)
 
     const existed = (await fs.pathExists(srcfilepath)) && !(await isIgnore(srcfilepath))
-    const oldBuffer = existed ? await fs.readFile(path.join(cwd, filepath)) : Buffer.from('')
-    const newBuffer = await fs.readFile(path.join(tmpDir, filepath))
 
-    if (oldBuffer.equals(newBuffer)) continue
 
-    if (options.showDiff) {
-      errors.push(showDiff(filepath, oldBuffer, newBuffer, options))
-    } else {
-      errors.push(chalk.yellow(`${filepath}: Not Match Template`))
+    const oldFilepath = path.join(cwd, filepath)
+    const newFilepath = path.join(tmpDir, filepath)
+
+    try {
+      await exec(`cmp --silent ${oldFilepath} ${newFilepath}`)
+      continue
+    } catch (e) {
+      if (options.showDiff) {
+        const oldBuffer = existed ? await fs.readFile(oldFilepath) : Buffer.from('')
+        const newBuffer = await fs.readFile(newFilepath)
+        errors.push(showDiff(filepath, oldBuffer, newBuffer, options))
+      } else {
+        errors.push(chalk.yellow(`${filepath}: Not Match Template`))
+      }
     }
   }
 
