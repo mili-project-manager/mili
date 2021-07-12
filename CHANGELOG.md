@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.1](https://www.github.com/mili-project-manager/mili/compare/v4.7.0...v4.7.1) (2021-07-12)
+
+
+### Performance Improvements
+
+* improve the running speed of the check command ([e9b5340](https://www.github.com/mili-project-manager/mili/commit/e9b53404be03eb5a86a583816de99205c69ad5be))
+
 ## [4.7.0](https://www.github.com/mili-project-manager/mili/compare/v4.6.0...v4.7.0) (2021-06-19)
 
 
