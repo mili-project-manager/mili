@@ -1,53 +1,72 @@
-import { readdeepdir } from '@/util/readdeepdir'
 import { showDiff, ShowDiffOptions, showRemoved } from './show-diff'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as chalk from 'chalk'
 import simpleGit from 'simple-git'
 import * as logger from '@/util/logger'
-import { exec } from '@/util/exec'
+import { compare, Difference } from 'dir-compare'
 
 
 interface DiffOptions extends ShowDiffOptions {
   showDiff: boolean
 }
 
-async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
-  const tmpDirGit = simpleGit(tmpDir)
-  const filepaths = await readdeepdir(tmpDir, {
-    filter: async filepath => {
-      const relativePath = path.relative(tmpDir, filepath)
-      if (relativePath === '.git') return false
-      const result = await tmpDirGit.checkIgnore(filepath)
 
-      return !result.length
-    },
+async function dircmp(cwd: string, tmpDir: string): Promise<Difference[]> {
+  const git = simpleGit(cwd)
+
+  const result = await compare(cwd, tmpDir, {
+    compareContent: true,
+    skipSymlinks: true,
+    skipSubdirs: true,
+    excludeFilter: '.git',
   })
 
-  const git = simpleGit(cwd)
-  async function isIgnore(filepath: string): Promise<boolean> {
-    const result = await git.checkIgnore(filepath)
-    return Boolean(result.length)
+  const diff: Difference[] = []
+
+  for (const item of result.diffSet || []) {
+    if (item.state === 'equal' && item.type1 !== 'directory' && item.type2 !== 'directory') continue
+    if (item.state !== 'equal' && item.path1 && item.name1) {
+      const list = await git.checkIgnore(path.join(item.path1, item.name1))
+      if (list.length) continue
+    }
+
+    if (item.type1 === 'directory' && item.type2 === 'directory') {
+      if (item.path1 && item.name1 && item.path2 && item.name2) {
+        const subdiff = await dircmp(path.join(item.path1, item.name1), path.join(item.path2, item.name2))
+
+        diff.push(...subdiff)
+      }
+      continue
+    }
+
+    diff.push(item)
   }
 
+  return diff
+}
+
+export async function diff(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
   const errors: string[] = []
+  const diff = await dircmp(cwd, tmpDir)
 
-  for (const filepath of filepaths) {
-    const srcfilepath = path.join(cwd, filepath)
+  for (const item of diff) {
+    if (item.type2 === 'missing') {
+      if (options.showDiff && item.name1) {
+        errors.push(showRemoved(item.name1))
+      } else {
+        const filepath = path.relative(cwd, path.join(item.path1 || '', item.name1 || ''))
+        errors.push(chalk.red(`${filepath}: Should be remove`))
+      }
+    } else {
+      const oldFilepath = path.join(item.path1 || '', item.name1 || '')
+      const newFilepath = path.join(item.path2 || '', item.name2 || '')
 
-    const existed = (await fs.pathExists(srcfilepath)) && !(await isIgnore(srcfilepath))
+      const oldBuffer = item.type1 === 'missing' ? Buffer.from('') : await fs.readFile(oldFilepath)
+      const newBuffer = await fs.readFile(newFilepath)
 
-
-    const oldFilepath = path.join(cwd, filepath)
-    const newFilepath = path.join(tmpDir, filepath)
-
-    try {
-      await exec(`cmp --silent ${oldFilepath} ${newFilepath}`)
-      continue
-    } catch (e) {
-      if (options.showDiff) {
-        const oldBuffer = existed ? await fs.readFile(oldFilepath) : Buffer.from('')
-        const newBuffer = await fs.readFile(newFilepath)
+      const filepath = path.relative(tmpDir, newFilepath)
+      if (showDiff) {
         errors.push(showDiff(filepath, oldBuffer, newBuffer, options))
       } else {
         errors.push(chalk.yellow(`${filepath}: Not Match Template`))
@@ -56,45 +75,6 @@ async function diffModified(cwd: string, tmpDir: string, options: DiffOptions): 
   }
 
   if (errors.length) logger.error(errors.join('\n'))
+
   return errors
-}
-
-async function diffRemoved(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
-  const git = simpleGit(cwd)
-
-  const files = await readdeepdir(cwd, {
-    filter: async filepath => {
-      const relativePath = path.relative(cwd, filepath)
-
-      if (relativePath === '.git') {
-        return false
-      }
-      const result = await git.checkIgnore(filepath)
-
-      return !result.length
-    },
-  })
-
-  const errors: string[] = []
-
-  for (const filename of files) {
-    const filepath = path.join(tmpDir, filename)
-    if (await fs.pathExists(filepath)) return []
-
-    if (options.showDiff) {
-      errors.push(showRemoved(filename))
-    } else {
-      errors.push(chalk.red(`${filepath}: Should be remove`))
-    }
-  }
-
-  if (errors.length) logger.error(errors.join('\n'))
-  return errors
-}
-
-export async function diff(cwd: string, tmpDir: string, options: DiffOptions): Promise<string[]> {
-  return [
-    ...(await diffModified(cwd, tmpDir, options)),
-    ...(await diffRemoved(cwd, tmpDir, options)),
-  ]
 }
