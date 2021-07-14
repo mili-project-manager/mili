@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.3](https://www.github.com/mili-project-manager/mili/compare/v4.7.2...v4.7.3) (2021-07-14)
+
+
+### Bug Fixes
+
+* relative path repository not work ([815f857](https://www.github.com/mili-project-manager/mili/commit/815f857544b19e9a77d6cafb365bc1d01c414822))
+
 ### [4.7.2](https://www.github.com/mili-project-manager/mili/compare/v4.7.1...v4.7.2) (2021-07-13)
 
 
