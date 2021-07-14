@@ -49,12 +49,31 @@ Example:
 {
   // 需要mili版本大于4.0.0才可以使用此模板
   "engines": [">4.0.0"],
-  // mili渲染此模板时，会先渲染"npm:@mtpl/code-style"模板，然后再执行此模板的渲染
-  "extends": ["npm:@mtpl/code-style"],
+  // mili渲染此模板时，会先渲染"npm:@mtpl/base"和"npm:@mtpl/code-style"模板，然后再执行此模板的渲染
+  "extends": [
+    "npm:@mtpl/base",
+    {
+      "template": "npm:@mtpl/code-style",
+      "answers": {
+        "framework": "node"
+      }
+    },
+  ],
   // 将会读取使用者项目的npm信息和git信息
   "loaders": ["npm", "git"]
 }
 ```
+
+### `extends` 字段结构
+
+
+ 属性名      | 是否必须 | 格式                    | 详细说明
+:-----------|:-------|:------------------------|:---------
+ `template` | 是     | `string`                | 模板地址
+ `version`  | 否     | `string`                | 模板版本。不设置此选项时，默认使用`latest`版本
+ `answers`  | 否     | `string`                | 模板的问题答案。设定后将不会再提示用户回答问题。
+
+
 
 ## `template.json` 与 `templates`
 
