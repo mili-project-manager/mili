@@ -30,7 +30,7 @@
     "ca": "git add -A && git-cz -av",
     "ci": "git-cz",
     "release": "standard-version",
-    "prepublishOnly": "npm test && npm run build && pinst --disable",
+    "prepublishOnly": "npm run build",
     "test": "ava",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "prereport": "rm -rf .nyc_output coverage",
@@ -48,7 +48,6 @@
     "copyfile:es": "copyfiles -e \"@(build|es|lib|node_modules|tests|doc)/**/*.!(ts)\" -e \"@(README.md|CHANGELOG.md|ava.config.js|backers.md)\" \"**/*.!(ts)\" es",
     "copyfile:lib": "copyfiles -e \"@(build|es|lib|node_modules|tests|doc)/**/*.!(ts)\" -e \"@(README.md|CHANGELOG.md|ava.config.js|backers.md)\" \"**/*.!(ts)\" lib",
     "prepare": "is-ci || husky install",
-    "postpublish": "pinst --enable && git push",
     "prewatch": "npm run copyfile:lib"
   },
   "devDependencies": {
@@ -66,9 +65,8 @@
     "husky": "^5.2.0",
     "is-ci": "^3.0.0",
     "lint-staged": "^11.0.0",
-    "mili": "^4.6.0",
+    "mili": "^4.7.2",
     "nyc": "^15.1.0",
-    "pinst": "^2.1.6",
     "sinon": "^10.0.0",
     "standard-version": "^9.3.0",
     "ts-node": "^9.1.1",

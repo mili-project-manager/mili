@@ -6,7 +6,7 @@ parserOptions:
   project:
     - ./tsconfig.json
     - ./tests/tsconfig.json
-  ecmaVersion: 6
+  ecmaVersion: 2017
   sourceType: module
 env:
   es6: true
@@ -15,12 +15,15 @@ rules:
   func-call-spacing:
     - error
     - never
-  no-unused-vars: 'off'
+  no-unused-vars: error
   require-atomic-updates: 'off'
   eqeqeq: error
   no-floating-decimal: error
   no-var: error
-  no-implicit-coercion: error
+  no-implicit-coercion:
+    - error
+    - allow:
+        - '!!'
   no-multi-spaces: error
   no-useless-return: error
   no-undef-init: error
