@@ -49,11 +49,11 @@ export async function update(options: Options): Promise<void> {
   const tmpDir = await createTmpDir()
   await copy(cwd, tmpDir, true)
 
-  const repository = parseTemplate(template, version, registry)
-  const resource = { mili: { operation: 'update' } }
+  const repository = parseTemplate(template, version, { registry, cwd })
+  const resource = { mili: { operation: 'update', registry } }
   await render(tmpDir, repository, answers, resource)
 
-  await migrate(tmpDir, repository, version)
+  migrate(tmpDir, repository, version)
   await syncDir(tmpDir, cwd)
   await fs.remove(tmpDir)
 }

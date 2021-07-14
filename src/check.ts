@@ -56,8 +56,8 @@ export async function check(options: Options): Promise<void> {
   const tmpDir = await createTmpDir()
   await copy(cwd, tmpDir, true)
 
-  const repository = parseTemplate(template, version, registry)
-  const resource = { mili: { operation: 'check' } }
+  const repository = parseTemplate(template, version, { registry, cwd })
+  const resource = { mili: { operation: 'check', registry } }
   await render(tmpDir, repository, answers, resource)
 
   const errs = await diff(cwd, tmpDir, { fold, showDiff })

@@ -48,11 +48,11 @@ export async function upgrade(options: Options, version = 'latest'): Promise<voi
   const tmpDir = await createTmpDir()
   await copy(cwd, tmpDir, true)
 
-  const repository = parseTemplate(template, version, registry)
-  const resource = { mili: { operation: 'upgrade' } }
+  const repository = parseTemplate(template, version, { registry, cwd })
+  const resource = { mili: { operation: 'upgrade', registry } }
   await render(tmpDir, repository, answers, resource)
 
-  await migrate(tmpDir, repository, fromVersion)
+  migrate(tmpDir, repository, fromVersion)
   await syncDir(tmpDir, cwd)
   await fs.remove(tmpDir)
 }

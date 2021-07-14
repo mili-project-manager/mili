@@ -16,6 +16,7 @@ export interface GitRepository extends BaseRepository {
 }
 export interface FsRepository extends BaseRepository {
   type: 'fs'
+  cwd: Readonly<string>
 }
 
 export type Repository = NpmRepository | GitRepository | FsRepository

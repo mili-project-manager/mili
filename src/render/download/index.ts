@@ -21,7 +21,7 @@ export async function hasCache(repository: Repository): Promise<boolean> {
   return false
 }
 
-export async function download(repository: Repository): Promise<Path> {
+export async function download(repository: Repository, cwd: string): Promise<Path> {
   if (repository.type === 'git') {
     if (await hasCache(repository)) return repository.storage
     await fs.ensureDir(repository.storage)
@@ -39,7 +39,7 @@ export async function download(repository: Repository): Promise<Path> {
   } else if (repository.type === 'npm') {
     logger.info(`install ${repository.name} template from npm...`)
     const templatePath = path.join(repository.storage, 'node_modules', repository.name)
-    if (hasCache(repository)) templatePath
+    if (await hasCache(repository)) templatePath
     await fs.ensureDir(repository.storage)
 
     await fs.emptyDir(repository.storage)
@@ -57,7 +57,7 @@ export async function download(repository: Repository): Promise<Path> {
   } else if (repository.type === 'fs') {
     logger.info(`copy ${repository.name} template from file system...`)
     await fs.emptyDir(repository.storage)
-    await copy(repository.name, repository.storage)
+    await copy(path.join(cwd, repository.name), repository.storage)
     return repository.storage
   }
 

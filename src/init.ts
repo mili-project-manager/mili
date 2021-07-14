@@ -35,7 +35,7 @@ export async function init(options: Options): Promise<void> {
   if (!force) await check(cwd)
   const tmpDir = cwd
 
-  const repository = parseTemplate(template, version, registry)
-  const resource = { mili: { operation: 'init' } }
+  const repository = parseTemplate(template, version, { registry, cwd })
+  const resource = { mili: { operation: 'init', registry } }
   await render(tmpDir, repository, {}, resource)
 }

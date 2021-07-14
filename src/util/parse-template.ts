@@ -11,7 +11,12 @@ function calcStorage(name, version): string {
 }
 
 
-export function parseTemplate(template: string, version = 'latest', registry?: string): Repository {
+interface Options {
+  cwd?: string
+  registry?: string
+}
+
+export function parseTemplate(template: string, version = 'latest', options: Options): Repository {
   if (template.startsWith('npm:')) {
     const name = template.substr('npm:'.length)
     if (!validateNpmPackageName(name)) throw new Error(`Invalid npm package name ${name}`)
@@ -23,7 +28,7 @@ export function parseTemplate(template: string, version = 'latest', registry?: s
       storage: calcStorage(template, version),
     }
 
-    if (registry) result.registry = registry
+    if (options.registry) result.registry = options.registry
 
     return result
   } else if (isUrl(template)) {
@@ -53,6 +58,7 @@ export function parseTemplate(template: string, version = 'latest', registry?: s
       type: 'fs',
       name: template,
       version: 'latest',
+      cwd: options.cwd || process.cwd(),
       storage: calcStorage(template, 'latest'),
     }
   }

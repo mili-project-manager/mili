@@ -16,7 +16,7 @@ const ajv = new AJV()
 
 
 export async function render(cwd: string, repository: Repository, answers: Answers, initResource: Record<string, any>): Promise<void> {
-  const templatePath = await download(repository)
+  const templatePath = await download(repository, cwd)
   const config = await loadConfig(templatePath)
 
   if (!initResource.mili) {
@@ -40,7 +40,10 @@ export async function render(cwd: string, repository: Repository, answers: Answe
       if (!valid) continue
     }
 
-    const subRepository = parseTemplate(extension.template, extension.version)
+    const subRepository = parseTemplate(extension.template, extension.version, {
+      registry: initResource.mili.registry,
+      cwd,
+    })
 
     let subAnwsers = R.clone(answers)
     if (extension.answers) subAnwsers = { ...subAnwsers, ...extension.answers }

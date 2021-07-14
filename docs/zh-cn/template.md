@@ -120,6 +120,7 @@ Example:
 
 - `resource.answers`: `questions.json`中定义问题的回答结果
 - `resource.mili`: mili的运行时参数
+  - `resource.mili.registry`: 使用的npm registry地址（undfined表示使用官方源）。
   - `resource.mili.operation`: mili的运行模式，以下字符串之一：'init', 'update', 'upgrade', 'check'
   - `resource.mili.stack`: milirc模板调用栈
     - `resource.mili.stack[0].template`: 根模板名称
