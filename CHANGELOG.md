@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.4](https://github.com/mili-project-manager/mili/compare/v4.7.3...v4.7.4) (2021-07-14)
+
 ### [4.7.3](https://www.github.com/mili-project-manager/mili/compare/v4.7.2...v4.7.3) (2021-07-14)
 
 
