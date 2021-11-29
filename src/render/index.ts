@@ -1,4 +1,4 @@
-import AJV from 'ajv'
+import AJV from 'ajv8'
 import * as R from 'ramda'
 import * as path from 'path'
 import { Answers } from '@/interface/answers'

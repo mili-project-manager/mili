@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import Ajv from 'ajv'
+import Ajv from 'ajv8'
 import { program } from 'commander'
 import * as path from 'path'
 import * as fs from 'fs-extra'

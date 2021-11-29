@@ -1,4 +1,4 @@
-import AJV from 'ajv'
+import AJV from 'ajv8'
 import ajvKeywords from 'ajv-keywords'
 import { Handler } from './interface/template'
 import { Path } from '@/interface/path'

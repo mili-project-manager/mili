@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import Ajv from 'ajv'
+import Ajv from 'ajv8'
 import { CompielOptions, Compile } from '@/interface/handler'
 import * as evalstr from 'eval'
 import { genEvalContent } from '@/util/gen-eval-content'

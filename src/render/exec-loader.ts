@@ -1,4 +1,4 @@
-import AJV from 'ajv'
+import AJV from 'ajv8'
 import ajvKeywords from 'ajv-keywords'
 import { Loader } from '@/render/interface/loader'
 import * as loaderSchema from './schema/loader.json'
