@@ -1,4 +1,4 @@
-import AJV from 'ajv'
+import AJV from 'ajv8'
 import ajvFormats from 'ajv-formats'
 import * as fs from 'fs-extra'
 import * as path from 'path'

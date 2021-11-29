@@ -2,7 +2,7 @@ import { Exec } from '@/interface/loader'
 import * as fs from 'fs-extra'
 import * as path from 'path'
 import * as schema from './schema.json'
-import Ajv from 'ajv'
+import Ajv from 'ajv8'
 
 
 const ajv = new Ajv()
