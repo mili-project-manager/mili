@@ -13,5 +13,8 @@ export async function execLoader(cwd: string, loader: Loader): Promise<Record<st
   const valid = validate(pkg)
   if (!valid) throw new Error(ajv.errorsText(validate.errors, { dataVar: 'loader' }))
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return pkg.exec(cwd, loader.options)
 }
