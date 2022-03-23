@@ -4,7 +4,6 @@ import { program } from 'commander'
 import * as path from 'path'
 import * as fs from 'fs-extra'
 import * as milircSchema from './schema/milirc.json'
-import * as chalk from 'chalk'
 import { cosmiconfig } from 'cosmiconfig'
 import { version } from '../package.json'
 import { init } from './init'
@@ -14,6 +13,7 @@ import { Milirc } from './interface/milirc'
 import { clean } from './clean'
 import { check } from './check'
 import * as logger from '@/util/logger'
+import { prettyError } from '@/util/pretty-error'
 
 
 const ajv = new Ajv()
@@ -27,7 +27,7 @@ async function getConfig(cwd: string = process.cwd()): Promise<Milirc> {
   const config = result.config
   const valid = validate(config)
   if (!valid) throw new Error(ajv.errorsText(validate.errors, { dataVar: 'milirc' }))
-  return config as Milirc
+  return config as unknown as Milirc
 }
 
 async function main(): Promise<void> {
@@ -143,8 +143,7 @@ async function main(): Promise<void> {
   try {
     await program.parseAsync(process.argv)
   } catch (e) {
-    logger.error(chalk.red(e.message))
-    console.log(e.stack)
+    logger.error(prettyError(e))
     process.exitCode = 1
   }
 }
