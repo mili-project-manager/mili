@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.7.5](https://www.github.com/mili-project-manager/mili/compare/v4.7.4...v4.7.5) (2022-03-23)
+
+
+### Performance Improvements
+
+* upgrade dependencies and fix build error ([d72cdc6](https://www.github.com/mili-project-manager/mili/commit/d72cdc645fffd889042d7e0503fac62db3b3a502))
+
 ### [4.7.4](https://www.github.com/mili-project-manager/mili/compare/v4.7.3...v4.7.4) (2021-11-29)
 
 
