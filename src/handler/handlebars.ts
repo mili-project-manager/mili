@@ -3,8 +3,10 @@ import { Compile } from '@/interface/handler'
 import * as path from 'path'
 import * as Handlebars from 'handlebars'
 import * as R from 'ramda'
+import * as HandlebarsRamdaHelpers from 'handlebars-ramda-helpers'
 
 
+HandlebarsRamdaHelpers.register(Handlebars)
 Handlebars.registerHelper('isEmpty', function(value) {
   return R.isEmpty(value)
 })
