@@ -1,8 +1,8 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: 'feat: '
-assignees: val-istar-guo
+title: 'Feature: '
+labels: enhancement
 
 ---
 <!-- Please delete unused section -->

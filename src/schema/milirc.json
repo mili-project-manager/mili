@@ -2,11 +2,11 @@
   "$id": "milirc.json",
   "type": "object",
   "properties": {
-    "template": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
+    "templates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
     "answers": {
       "type": "object",

@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../lib",
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+  },
+  "include": [
+    "../src/**/*.ts",
+    "../tests/**/*.ts"
+  ],
+}

@@ -38,14 +38,14 @@ function parseRepo(url: string): GitHubResource['repository'] {
   let gitHubRepoName: string | undefined
 
   if (isUrl(url)) {
-    const matched = url.match(githubHttpRegExp)
+    const matched = githubHttpRegExp.exec(url)
     if (matched) {
       isGitHubRepo = true
       gitHubOwner = matched[1]
       gitHubRepoName = matched[2]
     }
   } else {
-    const matched = url.match(githubSSHRegExp)
+    const matched = githubSSHRegExp.exec(url)
     if (matched) {
       isGitHubRepo = true
       gitHubOwner = matched[1]
@@ -79,7 +79,7 @@ export const exec: Exec<GitLoaderOptions, GitResource> = async function(cwd, opt
 
   if (options.remote) {
     const remote = remotes.find(remote => remote.name === options.remote)
-    if (!remote) throw new Error(`The remote ${remote} not existed.`)
+    if (!remote) throw new Error(`The remote ${options.remote} not existed.`)
     const url = remote.refs.push
 
     return {

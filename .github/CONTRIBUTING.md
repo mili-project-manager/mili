@@ -17,10 +17,3 @@ Please note we have a [code of conduct](https://github.com/mili-project-manager/
 * Complete testing of the modified code
 * Each commit message must follows the [Conventional Commits Specification](https://conventionalcommits.org/). This will be used for automatic generation of changelog.
 * No need to bump the version number, there will be someone responsible for the release.
-
-
-# Coding style
-
-* Use two Spaces for indenting
-* No semicolons
-* Use utf8 encoding

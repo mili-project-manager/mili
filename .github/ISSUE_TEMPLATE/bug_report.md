@@ -1,9 +1,8 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: 'bug: '
+title: 'Bug: '
 labels: bug
-assignees: val-istar-guo
 
 ---
 <!-- Please delete unused section -->
@@ -23,9 +22,6 @@ A clear and concise description of what you expected to happen.
 
 **Platform (please complete the following information):**
 
-<!-- '-' mean no value -->
-- Device: - <!-- e.g. [-, Mac, Windows, iPhone6] -->
-  + OS: - <!-- e.g. [-, iOS8.2] -->
 - Environment: NodeJS <!-- e.g. [-, nodejs, chrome, safari] -->
   + Version: <!-- e.g. [6.1.2] -->
 

@@ -1,0 +1,19 @@
+{
+  "all": true,
+  "check-coverage": false,
+  "include": [
+    "lib/src",
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.d.ts"
+  ],
+  "sourceMap": true,
+  "extension": [
+    ".ts",
+    ".js",
+    ".jsx",
+    ".tsx"
+  ]
+}

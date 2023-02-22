@@ -1,5 +1,5 @@
 template: npm:@mtpl/component
-version: 4.1.1
+version: 4.5.5
 answers:
   travis: true
   lock: false

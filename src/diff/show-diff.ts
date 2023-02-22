@@ -21,7 +21,7 @@ const createLineFormater = (maxOldLineNumber: number, maxNewLineNumber: number):
   const formatLineNumber = createLineNumberFormater(maxOldLineNumberLength, maxNewLineNumberLength)
 
   return (oldNumber, newNumber, tag, str, fold) => {
-    let lines = str.match(/((.*\n)|(.+$))/g) || []
+    let lines: string[] = str.match(/((.*\n)|(.+$))/g) || []
 
     lines = lines
       .map((line, i) => {
@@ -123,7 +123,7 @@ export function showDiff(
   filename: string,
   oldBuffer: Buffer,
   newBuffer: Buffer,
-  options: ShowDiffOptions = {}
+  options: ShowDiffOptions = {},
 ): string {
   let str = ''
 
