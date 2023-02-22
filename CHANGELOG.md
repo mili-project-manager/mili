@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.8.0](https://www.github.com/mili-project-manager/mili/compare/v4.7.5...v4.8.0) (2023-02-22)
+
+
+### Features
+
+* add ramda helper for handlebars ([eff77fd](https://www.github.com/mili-project-manager/mili/commit/eff77fda49acb32b6d4f937c393260dff969fd95))
+
+
+### Bug Fixes
+
+* cannot require nanoid@4 ([9d7c643](https://www.github.com/mili-project-manager/mili/commit/9d7c643ccb30a7c1e4a10690d3d7aae0b1cd35a2))
+
 ### [4.7.5](https://www.github.com/mili-project-manager/mili/compare/v4.7.4...v4.7.5) (2022-03-23)
 
 
